@@ -25,7 +25,8 @@
                 Width="80"
                 Height="100"
                 Margin="5"
-                BorderBrush="Black"
+                Background="White"
+                BorderBrush="Gray"
                 BorderThickness="1"
                 Cursor="Hand">
           <Border.Resources>
@@ -55,7 +56,10 @@
             </behaviors:EventTrigger>
           </behaviors:Interaction.Triggers>
           <Grid>
-            <Image Source="{Binding ComicImage.Image}" />
+            <Image Margin="2"
+                   Opacity="0.5"
+                   Source="{Binding ComicImage.Image}"
+                   Stretch="UniformToFill" />
             <TextBlock Margin="2"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
