@@ -1,0 +1,396 @@
+﻿<fluent:RibbonWindow x:Class="ComicLibrary.MainWindow"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+                     xmlns:controls="clr-namespace:ES.Tools.Controls;assembly=ES.Tools"
+                     xmlns:converters="clr-namespace:ES.Tools.Converters;assembly=ES.Tools"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:fluent="urn:fluent-ribbon"
+                     xmlns:local="clr-namespace:ComicLibrary"
+                     xmlns:localBehaviors="clr-namespace:ComicLibrary.View.Behaviors"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:vm="clr-namespace:ComicLibrary.ViewModel"
+                     Title="Comic Library"
+                     Width="800"
+                     Height="450"
+                     Icon="pack://application:,,,/ComicLibrary;component/Images/Icon.png"
+                     mc:Ignorable="d">
+  <Window.Resources>
+    <ResourceDictionary>
+      <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+      <converters:NegationConverter x:Key="NegationConverter" />
+
+      <DataTemplate DataType="{x:Type vm:LibraryViewModel}">
+        <Border x:Name="Border"
+                Width="80"
+                Height="100"
+                Margin="5"
+                BorderBrush="Black"
+                BorderThickness="1"
+                Cursor="Hand">
+          <Border.Resources>
+            <controls:BindingProxy x:Key="Proxy" Data="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}" />
+          </Border.Resources>
+          <Border.ContextMenu>
+            <ContextMenu>
+              <MenuItem Command="{Binding Data.ChangeLibraryImageCommand, Source={StaticResource Proxy}}"
+                        CommandParameter="{Binding}"
+                        Header="Change Image...">
+                <MenuItem.Icon>
+                  <controls:AutoGrayableImage Source="pack://application:,,,/ComicLibrary;component/Images/Photo.png" />
+                </MenuItem.Icon>
+              </MenuItem>
+              <MenuItem Command="{Binding Data.RemoveLibraryCommand, Source={StaticResource Proxy}}"
+                        CommandParameter="{Binding}"
+                        Header="Remove">
+                <MenuItem.Icon>
+                  <controls:AutoGrayableImage Source="pack://application:,,,/ComicLibrary;component/Images/Remove.png" />
+                </MenuItem.Icon>
+              </MenuItem>
+            </ContextMenu>
+          </Border.ContextMenu>
+          <behaviors:Interaction.Triggers>
+            <behaviors:EventTrigger EventName="MouseLeftButtonUp">
+              <behaviors:InvokeCommandAction Command="{Binding DataContext.LoadLibraryCommand, RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}" CommandParameter="{Binding}" />
+            </behaviors:EventTrigger>
+          </behaviors:Interaction.Triggers>
+          <Grid>
+            <Image Source="{Binding ComicImage.Image}" />
+            <TextBlock Margin="2"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Text="{Binding Name}"
+                       TextAlignment="Center"
+                       TextTrimming="CharacterEllipsis"
+                       TextWrapping="Wrap" />
+          </Grid>
+        </Border>
+      </DataTemplate>
+
+      <DataTemplate DataType="{x:Type vm:ActiveLibraryViewModel}">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+          </Grid.RowDefinitions>
+          <TextBlock FontWeight="Bold" Text="{Binding Name}" />
+          <DockPanel Grid.Row="1">
+            <Image Width="12"
+                   Height="12"
+                   Margin="2"
+                   VerticalAlignment="Center"
+                   DockPanel.Dock="Right"
+                   Source="pack://application:,,,/ComicLibrary;component/Images/Close.png">
+              <behaviors:Interaction.Triggers>
+                <behaviors:EventTrigger EventName="MouseLeftButtonUp">
+                  <behaviors:InvokeCommandAction Command="{Binding ClearSearchTextCommand}" />
+                </behaviors:EventTrigger>
+              </behaviors:Interaction.Triggers>
+            </Image>
+            <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=250}" />
+          </DockPanel>
+          <DataGrid Grid.Row="2"
+                    localBehaviors:ScrollIntoViewBehavior.SelectingItem="{Binding SelectedComic}"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    DataGridCell.Selected="DataGridCell_Selected"
+                    ItemsSource="{Binding Comics}"
+                    SelectedItem="{Binding SelectedComic}">
+            <DataGrid.Resources>
+              <controls:BindingProxy x:Key="Proxy" Data="{Binding}" />
+            </DataGrid.Resources>
+            <DataGrid.RowStyle>
+              <Style TargetType="DataGridRow">
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding CollectorsEdition}" Value="True">
+                    <Setter Property="Background" Value="LightCyan" />
+                  </DataTrigger>
+                  <DataTrigger Binding="{Binding LimitedEdition}" Value="True">
+                    <Setter Property="Background" Value="Cyan" />
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
+              <DataGridTextColumn Binding="{Binding Series}" Header="Series">
+                <DataGridTextColumn.ElementStyle>
+                  <Style TargetType="TextBlock">
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="Margin" Value="2,0" />
+                  </Style>
+                </DataGridTextColumn.ElementStyle>
+              </DataGridTextColumn>
+              <DataGridTextColumn Binding="{Binding Year}" Header="Year">
+                <DataGridTextColumn.ElementStyle>
+                  <Style TargetType="TextBlock">
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="Margin" Value="2,0" />
+                  </Style>
+                </DataGridTextColumn.ElementStyle>
+              </DataGridTextColumn>
+              <DataGridTextColumn Binding="{Binding IssueNumber}" Header="Issue">
+                <DataGridTextColumn.ElementStyle>
+                  <Style TargetType="TextBlock">
+                    <Setter Property="HorizontalAlignment" Value="Right" />
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="Margin" Value="2,0" />
+                  </Style>
+                </DataGridTextColumn.ElementStyle>
+              </DataGridTextColumn>
+              <DataGridTextColumn Binding="{Binding Title}" Header="Title">
+                <DataGridTextColumn.ElementStyle>
+                  <Style TargetType="TextBlock">
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="Margin" Value="2,0" />
+                  </Style>
+                </DataGridTextColumn.ElementStyle>
+              </DataGridTextColumn>
+              <DataGridComboBoxColumn Header="Condition"
+                                      ItemsSource="{Binding Data.Conditions, Source={StaticResource Proxy}}"
+                                      SelectedItemBinding="{Binding Condition}" />
+              <DataGridComboBoxColumn DisplayMemberPath="Name"
+                                      Header="Publisher"
+                                      ItemsSource="{Binding Data.Publishers, Source={StaticResource Proxy}}"
+                                      SelectedItemBinding="{Binding Publisher}" />
+              <DataGridComboBoxColumn DisplayMemberPath="Name"
+                                      Header="Country"
+                                      ItemsSource="{Binding Data.Countries, Source={StaticResource Proxy}}"
+                                      SelectedItemBinding="{Binding Country}" />
+              <DataGridTemplateColumn>
+                <DataGridTemplateColumn.CellTemplate>
+                  <DataTemplate>
+                    <Button Margin="-2"
+                            Padding="2,0"
+                            Command="{Binding EditComicCommand}"
+                            CommandParameter="{Binding}">
+                      <TextBlock>Edit</TextBlock>
+                    </Button>
+                  </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+              </DataGridTemplateColumn>
+            </DataGrid.Columns>
+          </DataGrid>
+        </Grid>
+      </DataTemplate>
+    </ResourceDictionary>
+  </Window.Resources>
+  <Window.DataContext>
+    <vm:MainViewModel />
+  </Window.DataContext>
+  <Grid>
+    <Grid IsEnabled="{Binding ShowLibrariesOverlay, Converter={StaticResource NegationConverter}}">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <fluent:Ribbon>
+        <fluent:Ribbon.Menu>
+          <fluent:Backstage>
+            <fluent:BackstageTabControl>
+              <fluent:BackstageTabItem Header="Options" Icon="pack://application:,,,/ComicLibrary;component/Images/Options.png">
+                <StackPanel Margin="5,10,5,5" VerticalAlignment="Top">
+                  <TextBlock FontSize="20" Text="Options" />
+                  <Grid Margin="0,5,0,0" HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto" />
+                      <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Margin="2"
+                               VerticalAlignment="Center"
+                               Text="Countries" />
+                    <Button Grid.Column="1"
+                            Margin="2"
+                            Padding="5,2"
+                            Command="{Binding EditCountriesCommand}">
+                      Edit
+                    </Button>
+                    <TextBlock Grid.Row="1"
+                               Margin="2"
+                               VerticalAlignment="Center"
+                               Text="Publishers" />
+                    <Button Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="2"
+                            Padding="5,2"
+                            Command="{Binding EditPublishersCommand}">
+                      Edit
+                    </Button>
+                  </Grid>
+                </StackPanel>
+              </fluent:BackstageTabItem>
+              <fluent:BackstageTabItem Header="Settings" Icon="pack://application:,,,/ComicLibrary;component/Images/Settings.png">
+                <StackPanel Margin="5,10,5,5" VerticalAlignment="Top">
+                  <TextBlock FontSize="20" Text="Settings" />
+                  <Grid Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto" />
+                      <ColumnDefinition />
+                      <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Margin="2" Text="Library Path:" />
+                    <TextBox Grid.Column="1"
+                             IsReadOnly="True"
+                             Text="{Binding LibrariesPath}" />
+                    <Button Grid.Column="2"
+                            Margin="2"
+                            Command="{Binding ChangeLibraryCommand}">
+                      ...
+                    </Button>
+                  </Grid>
+                </StackPanel>
+              </fluent:BackstageTabItem>
+              <fluent:Button Command="{Binding CloseCommand}"
+                             Header="Close"
+                             Icon="pack://application:,,,/ComicLibrary;component/Images/Close.png" />
+            </fluent:BackstageTabControl>
+          </fluent:Backstage>
+        </fluent:Ribbon.Menu>
+        <fluent:RibbonTabItem Header="Start" ReduceOrder="Comic, Comic, Comic, Comic, Library, Library, Library, Library, Libraries, Libraries, Libraries, Libraries">
+          <fluent:RibbonGroupBox Name="Libraries" Header="Libraries">
+            <fluent:ToggleButton Header="Manage"
+                                 IsChecked="{Binding ShowLibrariesOverlay}"
+                                 LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Folder.png"
+                                 SizeDefinition="Large">
+              <fluent:ToggleButton.ToolTip>
+                <fluent:ScreenTip Title="Manage Libraries" Text="Show the popup to edit the libraries" />
+              </fluent:ToggleButton.ToolTip>
+            </fluent:ToggleButton>
+          </fluent:RibbonGroupBox>
+          <fluent:RibbonGroupBox Name="Library"
+                                 DataContext="{Binding SelectedLibrary}"
+                                 Header="Current Library">
+            <fluent:Button Command="{Binding SaveLibraryCommand}"
+                           Header="Save"
+                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Save.png"
+                           SizeDefinition="Large">
+              <fluent:Button.ToolTip>
+                <fluent:ScreenTip Title="Save Library" Text="Saves the current library." />
+              </fluent:Button.ToolTip>
+            </fluent:Button>
+          </fluent:RibbonGroupBox>
+          <fluent:RibbonGroupBox Name="Comic"
+                                 DataContext="{Binding SelectedLibrary}"
+                                 Header="Comic">
+            <fluent:Button Command="{Binding AddComicCommand}"
+                           Header="Add"
+                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Add.png"
+                           SizeDefinition="Large">
+              <fluent:Button.ToolTip>
+                <fluent:ScreenTip Title="Add Comic" Text="Add a new comic." />
+              </fluent:Button.ToolTip>
+            </fluent:Button>
+            <fluent:Button Command="{Binding RemoveComicCommand}"
+                           Header="Remove"
+                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Remove.png"
+                           SizeDefinition="Large">
+              <fluent:Button.ToolTip>
+                <fluent:ScreenTip Title="Remove Comic" Text="Remove the selected comic." />
+              </fluent:Button.ToolTip>
+            </fluent:Button>
+          </fluent:RibbonGroupBox>
+        </fluent:RibbonTabItem>
+      </fluent:Ribbon>
+      <TabControl Grid.Row="1"
+                  ItemsSource="{Binding ActiveLibraries}"
+                  SelectedItem="{Binding SelectedLibrary}">
+        <TabControl.ItemTemplate>
+          <!--  this is the header template  -->
+          <DataTemplate>
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+              <TextBlock VerticalAlignment="Stretch" Text="{Binding Name}" />
+              <controls:AutoGrayableImage Grid.Column="1"
+                                          Width="12"
+                                          Height="12"
+                                          Margin="5,0,0,0"
+                                          Source="pack://application:,,,/ComicLibrary;component/Images/Close.png">
+                <behaviors:Interaction.Triggers>
+                  <behaviors:EventTrigger EventName="MouseLeftButtonDown">
+                    <behaviors:InvokeCommandAction Command="{Binding DataContext.CloseLibraryCommand, RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}" CommandParameter="{Binding}" />
+                  </behaviors:EventTrigger>
+                </behaviors:Interaction.Triggers>
+              </controls:AutoGrayableImage>
+            </Grid>
+          </DataTemplate>
+        </TabControl.ItemTemplate>
+      </TabControl>
+      <fluent:StatusBar Grid.Row="2" HorizontalAlignment="Stretch">
+        <fluent:StatusBarItem Title="Comics"
+                              Margin="5,0"
+                              HorizontalAlignment="Left">
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Comics: " />
+            <TextBlock Text="{Binding SelectedLibrary.Comics.Count, FallbackValue=0}" />
+          </StackPanel>
+        </fluent:StatusBarItem>
+      </fluent:StatusBar>
+    </Grid>
+
+    <Grid Visibility="{Binding ShowLibrariesOverlay, Converter={StaticResource VisibilityConverter}}">
+      <Border MinWidth="300"
+              MinHeight="200"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Background="White"
+              BorderBrush="Gray"
+              BorderThickness="1">
+        <Border.Effect>
+          <DropShadowEffect Direction="-45" Color="LightGray" />
+        </Border.Effect>
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+          </Grid.RowDefinitions>
+          <Border Background="LightGray">
+            <DockPanel>
+              <Image Width="16"
+                     Height="16"
+                     Margin="1"
+                     HorizontalAlignment="Right"
+                     DockPanel.Dock="Right"
+                     Source="pack://application:,,,/ComicLibrary;component/Images/CancelSmall.png">
+                <behaviors:Interaction.Triggers>
+                  <behaviors:EventTrigger EventName="MouseLeftButtonUp">
+                    <behaviors:InvokeCommandAction Command="{Binding CancelEditLibrariesCommand}" />
+                  </behaviors:EventTrigger>
+                </behaviors:Interaction.Triggers>
+              </Image>
+              <TextBlock Margin="1"
+                         VerticalAlignment="Center"
+                         Text="Libraries" />
+            </DockPanel>
+          </Border>
+          <DockPanel Grid.Row="1">
+            <Button Command="{Binding AddLibraryCommand}" DockPanel.Dock="Right">Add</Button>
+            <TextBox Text="{Binding LibraryName, UpdateSourceTrigger=PropertyChanged}" />
+          </DockPanel>
+          <ScrollViewer Grid.Row="2"
+                        HorizontalScrollBarVisibility="Visible"
+                        VerticalScrollBarVisibility="Disabled">
+            <ItemsControl ItemsSource="{Binding Libraries}">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+            </ItemsControl>
+          </ScrollViewer>
+        </Grid>
+      </Border>
+    </Grid>
+  </Grid>
+</fluent:RibbonWindow>

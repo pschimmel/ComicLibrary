@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+    <ApplicationIcon>Icon Large.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\Add.png" />
+    <None Remove="Images\CancelSmall.png" />
+    <None Remove="Images\Close.png" />
+    <None Remove="Images\Edit.png" />
+    <None Remove="Images\Folder.png" />
+    <None Remove="Images\Icon.png" />
+    <None Remove="Images\Logo.png" />
+    <None Remove="Images\Options.png" />
+    <None Remove="Images\Photo.png" />
+    <None Remove="Images\Remove.png" />
+    <None Remove="Images\Save.png" />
+    <None Remove="Images\Settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Icon Large.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ES.Tools" Version="0.6.30.123" />
+    <PackageReference Include="ES.Tools.Core" Version="0.6.30.123" />
+    <PackageReference Include="Fluent.Ribbon" Version="10.0.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Add.png" />
+    <Resource Include="Images\CancelSmall.png" />
+    <Resource Include="Images\Close.png" />
+    <Resource Include="Images\Edit.png" />
+    <Resource Include="Images\Folder.png" />
+    <Resource Include="Images\Icon.png" />
+    <Resource Include="Images\Options.png" />
+    <Resource Include="Images\Photo.png" />
+    <Resource Include="Images\Remove.png" />
+    <Resource Include="Images\Save.png" />
+    <Resource Include="Images\Settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SplashScreen Include="Images\Logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="View\EditComicDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\EditOptionDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if $(ConfigurationName) == Release (&#xD;&#xA;  if EXIST ..\postbuild.bat (&#xD;&#xA;    call ..\postbuild.bat $(OutDir)&#xD;&#xA;  )&#xD;&#xA;)" />
+  </Target>
+
+</Project>

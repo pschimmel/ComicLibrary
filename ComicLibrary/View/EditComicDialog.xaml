@@ -1,0 +1,212 @@
+﻿<Window x:Class="ComicLibrary.View.EditComicDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:ES.Tools.Controls;assembly=ES.Tools"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:ComicLibrary.View"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodel="clr-namespace:ComicLibrary.ViewModel"
+        Title="Comic"
+        Width="600"
+        Height="450"
+        d:DataContext="{d:DesignInstance Type=viewmodel:EditComicViewModel}"
+        mc:Ignorable="d">
+  <Window.Resources>
+    <Style TargetType="{x:Type TextBlock}">
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Margin" Value="2" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBox}">
+      <Setter Property="Height" Value="22" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Margin" Value="2" />
+    </Style>
+
+    <Style x:Key="MultiLineTextBox" TargetType="{x:Type TextBox}">
+      <Setter Property="Margin" Value="2" />
+      <Setter Property="AcceptsReturn" Value="True" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
+    </Style>
+
+    <Style TargetType="{x:Type ComboBox}">
+      <Setter Property="Height" Value="22" />
+      <Setter Property="Margin" Value="2" />
+    </Style>
+  </Window.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition />
+      <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+
+    <Border Grid.ColumnSpan="3"
+            Margin="2"
+            BorderBrush="LightGray"
+            BorderThickness="0,0,0,1">
+      <TextBlock Margin="3"
+                 FontSize="16"
+                 FontWeight="Bold"
+                 Text="{Binding Library}" />
+    </Border>
+
+    <TextBlock Grid.Row="1" Text="Series" />
+    <TextBox Grid.Row="1"
+             Grid.Column="1"
+             Text="{Binding Series}" />
+
+    <TextBlock Grid.Row="2" Text="Year" />
+    <TextBox Grid.Row="2"
+             Grid.Column="1"
+             Text="{Binding Year}" />
+
+    <TextBlock Grid.Row="3" Text="Issue #" />
+    <TextBox Grid.Row="3"
+             Grid.Column="1"
+             Text="{Binding IssueNumber}" />
+
+    <TextBlock Grid.Row="4" Text="Title" />
+    <TextBox Grid.Row="4"
+             Grid.Column="1"
+             Text="{Binding Title}" />
+
+    <TextBlock Grid.Row="5" Text="Condition" />
+    <ComboBox Grid.Row="5"
+              Grid.Column="1"
+              ItemsSource="{Binding Conditions}"
+              SelectedItem="{Binding Condition}" />
+
+    <TextBlock Grid.Row="6" Text="Publisher" />
+    <ComboBox Grid.Row="6"
+              Grid.Column="1"
+              DisplayMemberPath="Name"
+              ItemsSource="{Binding Publishers}"
+              SelectedItem="{Binding Publisher}" />
+
+    <TextBlock Grid.Row="7" Text="Country" />
+    <ComboBox Grid.Row="7"
+              Grid.Column="1"
+              DisplayMemberPath="Name"
+              ItemsSource="{Binding Countries}"
+              SelectedItem="{Binding Country}" />
+
+    <TextBlock Grid.Row="8"
+               VerticalAlignment="Top"
+               Text="Comment" />
+    <TextBox Grid.Row="8"
+             Grid.Column="1"
+             VerticalAlignment="Stretch"
+             AcceptsReturn="True"
+             Style="{StaticResource MultiLineTextBox}"
+             Text="{Binding Comment}"
+             TextWrapping="Wrap"
+             VerticalScrollBarVisibility="Visible" />
+
+    <StackPanel Grid.Row="9"
+                Grid.ColumnSpan="3"
+                Margin="2"
+                Orientation="Horizontal">
+      <CheckBox Margin="2"
+                Content="Collector's Edition"
+                IsChecked="{Binding CollectorsEdition}" />
+      <CheckBox Margin="2"
+                Content="Limited Edition"
+                IsChecked="{Binding LimitedEdition}" />
+    </StackPanel>
+
+    <TextBlock Grid.Row="1"
+               Grid.Column="2"
+               VerticalAlignment="Top"
+               Text="Images" />
+    <Border Grid.Row="2"
+            Grid.RowSpan="7"
+            Grid.Column="2"
+            Margin="2"
+            Background="White"
+            BorderBrush="LightGray"
+            BorderThickness="1">
+      <Border.ContextMenu>
+        <ContextMenu>
+          <MenuItem Command="{Binding AddImageCommand}" Header="Add Image...">
+            <MenuItem.Icon>
+              <controls:AutoGrayableImage Source="pack://application:,,,/ComicLibrary;component/Images/Photo.png" />
+            </MenuItem.Icon>
+          </MenuItem>
+        </ContextMenu>
+      </Border.ContextMenu>
+      <Border.Resources>
+        <controls:BindingProxy x:Key="Proxy" Data="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type local:EditComicDialog}}}" />
+      </Border.Resources>
+      <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible">
+        <ItemsControl ItemsSource="{Binding ComicImages}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <WrapPanel Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Border BorderBrush="Black" BorderThickness="1">
+                <Border.ContextMenu>
+                  <ContextMenu>
+                    <MenuItem Command="{Binding Data.AddImageCommand, Source={StaticResource Proxy}}" Header="Add Image...">
+                      <MenuItem.Icon>
+                        <controls:AutoGrayableImage Source="pack://application:,,,/ComicLibrary;component/Images/Add.png" />
+                      </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Command="{Binding Data.RemoveImageCommand, Source={StaticResource Proxy}}"
+                              CommandParameter="{Binding}"
+                              Header="Remove Image">
+                      <MenuItem.Icon>
+                        <controls:AutoGrayableImage Source="pack://application:,,,/ComicLibrary;component/Images/Remove.png" />
+                      </MenuItem.Icon>
+                    </MenuItem>
+                  </ContextMenu>
+                </Border.ContextMenu>
+                <Image Width="78"
+                       Height="120"
+                       Source="{Binding Image}"
+                       Stretch="UniformToFill" />
+              </Border>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+    </Border>
+
+    <StackPanel Grid.Row="10"
+                Grid.ColumnSpan="3"
+                Margin="2"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+      <Button MinWidth="50"
+              Padding="2"
+              Click="OKButton_Click"
+              IsDefault="True">
+        OK
+      </Button>
+      <Button MinWidth="50"
+              Margin="2,0,0,0"
+              Padding="2"
+              Click="CancelButton_Click"
+              IsCancel="True">
+        Cancel
+      </Button>
+    </StackPanel>
+  </Grid>
+</Window>

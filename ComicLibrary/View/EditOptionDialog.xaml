@@ -1,0 +1,73 @@
+﻿<Window x:Class="ComicLibrary.View.EditOptionDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:entities="clr-namespace:ComicLibrary.Model.Entities"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodel="clr-namespace:ComicLibrary.ViewModel"
+        Title="{Binding Header}"
+        Width="400"
+        Height="200"
+        d:DataContext="{d:DesignInstance Type=viewmodel:EditOptionViewModel}"
+        mc:Ignorable="d">
+  <Window.Resources>
+    <DataTemplate DataType="{x:Type entities:Country}">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock Margin="2"
+                   VerticalAlignment="Center"
+                   Text="Name" />
+        <TextBox Grid.Column="1"
+                 Margin="2"
+                 Text="{Binding Name}" />
+      </Grid>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type entities:Publisher}">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock Margin="2"
+                   VerticalAlignment="Center"
+                   Text="Name" />
+        <TextBox Grid.Column="1"
+                 Margin="2"
+                 Text="{Binding Name}" />
+      </Grid>
+    </DataTemplate>
+  </Window.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition />
+      <RowDefinition Height="Auto" />
+      <RowDefinition />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <ContentControl Grid.Row="1"
+                    Content="{Binding Option}"
+                    Focusable="False" />
+    <StackPanel Grid.Row="3"
+                Margin="2"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+      <Button MinWidth="50"
+              Padding="2"
+              Click="OKButton_Click"
+              IsDefault="True">
+        OK
+      </Button>
+      <Button MinWidth="50"
+              Margin="2,0,0,0"
+              Padding="2"
+              Click="CancelButton_Click"
+              IsCancel="True">
+        Cancel
+      </Button>
+    </StackPanel>
+  </Grid>
+</Window>

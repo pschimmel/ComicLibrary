@@ -1,0 +1,425 @@
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using ComicLibrary.Model;
+using ComicLibrary.Model.Config;
+using ComicLibrary.Model.Entities;
+using ES.Tools.Core.MVVM;
+using Microsoft.Win32;
+
+namespace ComicLibrary.ViewModel
+{
+  public class MainViewModel : ES.Tools.Core.MVVM.ViewModel
+  {
+    #region Fields
+
+    private bool _showLibrariesOverlay;
+    private ActiveLibraryViewModel _selectedLibrary;
+    private string _libraryName;
+    private ActionCommand _changeLibraryCommand;
+    private ActionCommand _editCountriesCommand;
+    private ActionCommand _editPublishersCommand;
+    private ActionCommand _closeCommand;
+    private ActionCommand _editLibrariesCommand;
+    private ActionCommand _cancelEditLibrariesCommand;
+    private ActionCommand<LibraryViewModel> _loadLibraryCommand;
+    private ActionCommand<ActiveLibraryViewModel> _closeLibraryCommand;
+    private ActionCommand _addLibraryCommand;
+    private ActionCommand<LibraryViewModel> _changeLibraryImageCommand;
+    private ActionCommand<LibraryViewModel> _removeLibraryCommand;
+
+    #endregion
+
+    #region Constructor
+
+    public MainViewModel()
+    {
+      ActiveLibraries = [];
+      Libraries = [];
+      _showLibrariesOverlay = true;
+      LoadLibraries();
+    }
+
+    #endregion
+
+    #region Properties
+
+    public string LibrariesPath
+    {
+      get => Settings.Instance.LibrariesPath;
+      set
+      {
+        Settings.Instance.LibrariesPath = value;
+        OnPropertyChanged(nameof(LibrariesPath));
+      }
+    }
+
+    public bool ShowLibrariesOverlay
+    {
+      get => _showLibrariesOverlay;
+      set
+      {
+        if (_showLibrariesOverlay != value)
+        {
+          _showLibrariesOverlay = value;
+          OnPropertyChanged(nameof(ShowLibrariesOverlay));
+
+          if (_showLibrariesOverlay)
+            LoadLibraries();
+
+          _addLibraryCommand.RaiseCanExecuteChanged();
+        }
+      }
+    }
+
+    public string LibraryName
+    {
+      get => _libraryName;
+      set
+      {
+        if (_showLibrariesOverlay && _libraryName != value)
+        {
+          _libraryName = value;
+          OnPropertyChanged(nameof(LibraryName));
+          _addLibraryCommand.RaiseCanExecuteChanged();
+        }
+      }
+    }
+
+    public ObservableCollection<LibraryViewModel> Libraries { get; }
+
+    public ObservableCollection<ActiveLibraryViewModel> ActiveLibraries { get; }
+
+    public ActiveLibraryViewModel SelectedLibrary
+    {
+      get => _selectedLibrary;
+      set
+      {
+        if (_selectedLibrary != value)
+        {
+          _selectedLibrary = value;
+          OnPropertyChanged(nameof(SelectedLibrary));
+        }
+      }
+    }
+
+    #endregion
+
+    #region Commands
+
+    #region Change Library
+
+    public ICommand ChangeLibraryCommand => _changeLibraryCommand ??= new ActionCommand(ChangeLibrary);
+
+    private void ChangeLibrary()
+    {
+      if (ActiveLibraries.Count > 0)
+      {
+        MessageBox.Show("Please close all open libraries in order to change the path.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        return;
+      }
+
+      using var dialog = new System.Windows.Forms.FolderBrowserDialog
+      {
+        Description = "Select a folder",
+        UseDescriptionForTitle = true,
+        SelectedPath = LibrariesPath,
+        ShowNewFolderButton = true
+      };
+
+      if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK && dialog.SelectedPath != LibrariesPath)
+      {
+        var result = MessageBox.Show("Would you like to move all XML files to the new location?", "Question", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+        if (result == MessageBoxResult.Cancel)
+          return;
+
+        else if (result == MessageBoxResult.Yes)
+        {
+          var directory = new DirectoryInfo(LibrariesPath);
+
+          if (directory.Exists)
+          {
+            foreach (var file in directory.GetFiles("*.xml"))
+            {
+              file.MoveTo(Path.Combine(dialog.SelectedPath, file.Name));
+            }
+          }
+        }
+
+        LibrariesPath = dialog.SelectedPath;
+        Settings.Save();
+      }
+    }
+
+    #endregion
+
+    #region Edit Countries
+
+    public ICommand EditCountriesCommand => _editCountriesCommand ??= new ActionCommand(EditCountries);
+
+    private void EditCountries()
+    {
+      if (ActiveLibraries.Count > 0)
+      {
+        MessageBox.Show("Please close all open libraries in order to modify options.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        return;
+      }
+
+      var optionsVM = new EditOptionsViewModel(Globals.Instance.Countries.OrderBy(x => x.Name), typeof(Country), "Countries", "Country");
+      var view = ViewFactory.Instance.CreateView(optionsVM);
+      if (view.ShowDialog() == true)
+      {
+        Globals.Instance.Countries = new HashSet<Country>(optionsVM.Options.OfType<Country>());
+        Globals.Save();
+      }
+    }
+
+    #endregion
+
+    #region Edit Publishers
+
+    public ICommand EditPublishersCommand => _editPublishersCommand ??= new ActionCommand(EditPublishers);
+
+    private void EditPublishers()
+    {
+      if (ActiveLibraries.Count > 0)
+      {
+        MessageBox.Show("Please close all open libraries in order to modify options.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        return;
+      }
+
+      var optionsVM = new EditOptionsViewModel(Globals.Instance.Publishers.OrderBy(x => x.Name), typeof(Publisher), "Publishers", "Publisher");
+      var view = ViewFactory.Instance.CreateView(optionsVM);
+      if (view.ShowDialog() == true)
+      {
+        Globals.Instance.Publishers = new HashSet<Publisher>(optionsVM.Options.OfType<Publisher>());
+        Globals.Save();
+      }
+    }
+
+    #endregion
+
+    #region Close
+
+    public ICommand CloseCommand => _closeCommand ??= new ActionCommand(Close, CanClose);
+
+    private bool CanClose()
+    {
+      return true;
+    }
+
+    private void Close()
+    {
+      Application.Current.MainWindow.Close();
+    }
+
+    #endregion
+
+    #region Edit Libraries
+
+    public ICommand EditLibrariesCommand => _editLibrariesCommand ??= new ActionCommand(EditLibraries, CanEditLibraries);
+
+    private bool CanEditLibraries()
+    {
+      return true;
+    }
+
+    private void EditLibraries()
+    {
+      ShowLibrariesOverlay = true;
+    }
+
+    #endregion
+
+    #region Cancel Edit Libraries
+
+    public ICommand CancelEditLibrariesCommand => _cancelEditLibrariesCommand ??= new ActionCommand(CancelEditLibraries, CanCancelEditLibraries);
+
+    private bool CanCancelEditLibraries()
+    {
+      return true;
+    }
+
+    private void CancelEditLibraries()
+    {
+      ShowLibrariesOverlay = false;
+    }
+
+    #endregion
+
+    #region Load Library
+
+    public ICommand LoadLibraryCommand => _loadLibraryCommand ??= new ActionCommand<LibraryViewModel>(LoadLibrary, CanLoadLibrary);
+
+    private bool CanLoadLibrary(LibraryViewModel libraryVM)
+    {
+      return ShowLibrariesOverlay;
+    }
+
+    private void LoadLibrary(LibraryViewModel libraryVM)
+    {
+      // If the library is already open, just switch to it
+      foreach (var activeLibrary in ActiveLibraries)
+      {
+        if (activeLibrary.Name == libraryVM.Name && activeLibrary.Path == libraryVM.GetFilePath())
+        {
+          SelectedLibrary = activeLibrary;
+          return;
+        }
+      }
+
+      var path = libraryVM.GetFilePath();
+      var newLibrary = new ActiveLibraryViewModel(FileHelper.LoadActiveLibrary(path), libraryVM);
+      ActiveLibraries.Add(newLibrary);
+      SelectedLibrary = newLibrary;
+      ShowLibrariesOverlay = false;
+    }
+
+    #endregion
+
+    #region Close Library
+
+    public ICommand CloseLibraryCommand => _closeLibraryCommand ??= new ActionCommand<ActiveLibraryViewModel>(CloseLibrary, CanCloseCommand);
+
+    private void CloseLibrary(ActiveLibraryViewModel libraryVM)
+    {
+      var result = MessageBox.Show("Would you like to save the changes?", "Question", MessageBoxButton.YesNoCancel);
+
+      if (result == MessageBoxResult.Cancel)
+        return;
+
+      if (result == MessageBoxResult.Yes)
+      {
+        var model = libraryVM.ToModel();
+        FileHelper.SaveActiveLibrary(model, libraryVM.Path);
+      }
+
+      ActiveLibraries.Remove(libraryVM);
+    }
+
+    private bool CanCloseCommand(ActiveLibraryViewModel libraryVM)
+    {
+      return libraryVM != null;
+    }
+
+    #endregion
+
+    #region Add Library
+
+    public ICommand AddLibraryCommand => _addLibraryCommand ??= new ActionCommand(AddLibrary, CanAddLibrary);
+
+    private bool CanAddLibrary()
+    {
+      return ShowLibrariesOverlay && !Libraries.Any(x => string.Equals(x.Name, LibraryName, StringComparison.InvariantCultureIgnoreCase));
+    }
+
+    private void AddLibrary()
+    {
+      var newLibrary = new Library
+      {
+        Name = LibraryName,
+        FileName = Library.GenerateFileName(LibraryName)
+      };
+
+      var newLibraryVM = new LibraryViewModel(newLibrary);
+      Libraries.Add(newLibraryVM);
+      SaveLibraries();
+    }
+
+    #endregion
+
+    #region Change Library Image
+
+    public ICommand ChangeLibraryImageCommand => _changeLibraryImageCommand ??= new ActionCommand<LibraryViewModel>(ChangeLibraryImage);
+
+    private void ChangeLibraryImage(LibraryViewModel vm)
+    {
+      var dialog = new OpenFileDialog
+      {
+        Filter = "Jpeg Image Files (*.jpg)|*.jpg|Portable Network Graphics Files (*.png)|*.png"
+      };
+
+      if (dialog.ShowDialog() == true && File.Exists(dialog.FileName))
+      {
+        vm.LoadImage(dialog.FileName);
+        SaveLibraries();
+      }
+    }
+
+    #endregion
+
+    #region Remove Library
+
+    public ICommand RemoveLibraryCommand => _removeLibraryCommand ??= new ActionCommand<LibraryViewModel>(RemoveLibrary);
+
+    private void RemoveLibrary(LibraryViewModel vm)
+    {
+      if (MessageBox.Show("Would you really like to remove the complete library? This cannot be undone.", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+      {
+        Libraries.Remove(vm);
+        var activeLibrary = ActiveLibraries.FirstOrDefault(x => x.Name == vm.Name);
+
+        if (activeLibrary != null)
+        {
+          ActiveLibraries.Remove(activeLibrary);
+          var backupPath = activeLibrary.Path + ".bak";
+          File.Move(activeLibrary.Path, backupPath, true);
+        }
+      }
+    }
+
+    #endregion
+
+    #endregion
+
+    #region Public Methods
+
+    public bool OnClosing()
+    {
+      if (ActiveLibraries.Any())
+      {
+        var result = MessageBox.Show("Would you like to save the changes?", "Question", MessageBoxButton.YesNoCancel);
+
+        if (result == MessageBoxResult.Cancel)
+          return false;
+
+        if (result == MessageBoxResult.Yes)
+        {
+          Parallel.ForEach(ActiveLibraries, library =>
+          {
+            var model = library.ToModel();
+            FileHelper.SaveActiveLibrary(model, library.Path);
+          });
+        }
+      }
+
+      return true;
+    }
+
+    #endregion
+
+    #region Private Methods
+
+    private void LoadLibraries()
+    {
+      var libraries = FileHelper.LoadLibraries();
+      Libraries.Clear();
+      foreach (var library in libraries)
+      {
+        var libraryVM = new LibraryViewModel(library);
+        Libraries.Add(libraryVM);
+      }
+    }
+
+    private void SaveLibraries()
+    {
+      FileHelper.SaveLibraries(Libraries.Select(x => x.ToModel()));
+    }
+
+    #endregion
+  }
+}
