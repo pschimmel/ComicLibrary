@@ -397,6 +397,9 @@ namespace ComicLibrary.ViewModel
         }
       }
 
+      // Save the updated comic counter
+      SaveLibraries();
+
       return true;
     }
 

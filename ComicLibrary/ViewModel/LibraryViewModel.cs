@@ -18,6 +18,12 @@ namespace ComicLibrary.ViewModel
 
     public string Name => _library.Name;
 
+    public int ComicCount
+    {
+      get => _library.ComicCount;
+      set => _library.ComicCount = value;
+    }
+
     public ComicImageViewModel ComicImage
     {
       get => _comicImage;

@@ -12,6 +12,7 @@ namespace ComicLibrary.ViewModel
   {
     #region Fields
 
+    private readonly LibraryViewModel _libraryTemplate;
     private ComicViewModel _selectedComic;
     private string _searchText;
     private ActionCommand _addComicCommand;
@@ -25,6 +26,7 @@ namespace ComicLibrary.ViewModel
 
     public ActiveLibraryViewModel(ActiveLibrary library, LibraryViewModel libraryTemplate)
     {
+      _libraryTemplate = libraryTemplate;
       Publishers =
       [
         new EmptyOptionItemViewModel<Publisher>(),
@@ -37,15 +39,14 @@ namespace ComicLibrary.ViewModel
       ];
       Conditions = Enum.GetValues(typeof(Condition)).Cast<Condition>().ToList();
       Comics = new ObservableCollection<ComicViewModel>(library.Comics.Select(x => new ComicViewModel(x, Name, Publishers, Countries)));
-      Path = libraryTemplate.GetFilePath();
-      Name = libraryTemplate.Name;
+      libraryTemplate.ComicCount = Comics.Count;
     }
 
     #endregion
 
     #region Properties
 
-    public string Name { get; }
+    public string Name => _libraryTemplate.Name;
 
     public List<IOptionItemViewModel<Publisher>> Publishers { get; }
 
@@ -69,7 +70,7 @@ namespace ComicLibrary.ViewModel
       }
     }
 
-    public string Path { get; }
+    public string Path => _libraryTemplate.GetFilePath();
 
     public string SearchText
     {
@@ -101,6 +102,7 @@ namespace ComicLibrary.ViewModel
       var comicVM = new ComicViewModel(comic, Name, Publishers, Countries);
       Comics.Add(comicVM);
       SelectedComic = comicVM;
+      _libraryTemplate.ComicCount = Comics.Count;
     }
 
     #endregion
@@ -113,6 +115,7 @@ namespace ComicLibrary.ViewModel
     {
       Comics.Remove(SelectedComic);
       SelectedComic = null;
+      _libraryTemplate.ComicCount = Comics.Count;
     }
 
     private bool CanRemoveComic()

@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 
-namespace ComicLibrary.Helpers
+namespace ComicLibrary.View.Helpers
 {
   public static class VisualTreeHelpers
   {

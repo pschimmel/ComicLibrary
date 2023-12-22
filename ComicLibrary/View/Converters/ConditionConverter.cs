@@ -12,6 +12,7 @@ namespace ComicLibrary.View.Converters
       {
         return condition switch
         {
+          Condition.None => "(None)",
           Condition.Excellent => "1 - Excellent",
           Condition.VeryGood => "2 - Very Good",
           Condition.Good => "3 - Good",

@@ -35,6 +35,7 @@ namespace ComicLibrary.Model
     private const string CollectorsEditionKey = "CollectorsEdition";
     private const string CommentKey = "Comment";
     private const string SaveDateKey = "SaveDate";
+    private const string ComicCountKey = "ComicCount";
 
     #endregion
 
@@ -150,6 +151,10 @@ namespace ComicLibrary.Model
               else if (categoryAttribute.Name == ImageKey)
               {
                 library.ImageAsString = categoryAttribute.InnerText;
+              }
+              else if (categoryAttribute.Name == ComicCountKey && int.TryParse(categoryAttribute.InnerText, out int comicCount))
+              {
+                library.ComicCount = comicCount;
               }
             }
 
@@ -347,6 +352,7 @@ namespace ComicLibrary.Model
                                   LibraryKey,
                                   (NameKey, library.Name),
                                   (FileNameKey, library.FileName),
+                                  (ComicCountKey, library.ComicCount.ToString()),
                                   (ImageKey, library.ImageAsString));
       }
 

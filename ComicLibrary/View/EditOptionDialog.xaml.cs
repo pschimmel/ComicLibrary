@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Threading;
-using ComicLibrary.Helpers;
+using ComicLibrary.View.Helpers;
 using ES.Tools.Core.MVVM;
 
 namespace ComicLibrary.View

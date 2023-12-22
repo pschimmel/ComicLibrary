@@ -8,6 +8,7 @@
                      xmlns:fluent="urn:fluent-ribbon"
                      xmlns:local="clr-namespace:ComicLibrary"
                      xmlns:localBehaviors="clr-namespace:ComicLibrary.View.Behaviors"
+                     xmlns:localConverters="clr-namespace:ComicLibrary.View.Converters"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:vm="clr-namespace:ComicLibrary.ViewModel"
                      Title="Comic Library"
@@ -19,6 +20,7 @@
     <ResourceDictionary>
       <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
       <converters:NegationConverter x:Key="NegationConverter" />
+      <localConverters:ConditionConverter x:Key="ConditionConverter" />
 
       <DataTemplate DataType="{x:Type vm:LibraryViewModel}">
         <Border x:Name="Border"
@@ -28,7 +30,8 @@
                 Background="White"
                 BorderBrush="Gray"
                 BorderThickness="1"
-                Cursor="Hand">
+                Cursor="Hand"
+                ToolTip="{Binding Name}">
           <Border.Resources>
             <controls:BindingProxy x:Key="Proxy" Data="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}" />
           </Border.Resources>
@@ -57,9 +60,8 @@
           </behaviors:Interaction.Triggers>
           <Grid>
             <Image Margin="2"
-                   Opacity="0.5"
                    Source="{Binding ComicImage.Image}"
-                   Stretch="UniformToFill" />
+                   Stretch="Uniform" />
             <TextBlock Margin="2"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
@@ -68,7 +70,19 @@
                        Text="{Binding Name}"
                        TextAlignment="Center"
                        TextTrimming="CharacterEllipsis"
-                       TextWrapping="Wrap" />
+                       TextWrapping="Wrap">
+              <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                  <Setter Property="Visibility" Value="Collapsed" />
+                  <Style.Triggers>
+                    <DataTrigger Binding="{Binding ComicImage}" Value="{x:Null}">
+                      <Setter Property="Visibility" Value="Visible" />
+                    </DataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </TextBlock.Style>
+            </TextBlock>
+            <TextBlock Text="{Binding ComicCount}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="2,0" FontWeight="Bold"/>
           </Grid>
         </Border>
       </DataTemplate>
@@ -153,9 +167,24 @@
                   </Style>
                 </DataGridTextColumn.ElementStyle>
               </DataGridTextColumn>
-              <DataGridComboBoxColumn Header="Condition"
-                                      ItemsSource="{Binding Data.Conditions, Source={StaticResource Proxy}}"
-                                      SelectedItemBinding="{Binding Condition}" />
+              <DataGridTemplateColumn>
+                <DataGridTemplateColumn.CellTemplate>
+                  <DataTemplate>
+                    <TextBlock Margin="2,0" Text="{Binding Condition, Converter={StaticResource ConditionConverter}}" />
+                  </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+                <DataGridTemplateColumn.CellEditingTemplate>
+                  <DataTemplate>
+                    <ComboBox ItemsSource="{Binding Data.Conditions, Source={StaticResource Proxy}}" SelectedItem="{Binding Condition}">
+                      <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                          <TextBlock Margin="2,0" Text="{Binding Converter={StaticResource ConditionConverter}}" />
+                        </DataTemplate>
+                      </ComboBox.ItemTemplate>
+                    </ComboBox>
+                  </DataTemplate>
+                </DataGridTemplateColumn.CellEditingTemplate>
+              </DataGridTemplateColumn>
               <DataGridComboBoxColumn DisplayMemberPath="Name"
                                       Header="Publisher"
                                       ItemsSource="{Binding Data.Publishers, Source={StaticResource Proxy}}"

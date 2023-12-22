@@ -3,9 +3,11 @@ using ComicLibrary.Model.Config;
 
 namespace ComicLibrary.Model.Entities
 {
-  public class Library : IComparable, IComparable<Library>
+  public class Library
   {
     public string Name { get; set; }
+
+    public int ComicCount { get; set; }
 
     public string FileName { get; set; }
 
@@ -13,26 +15,30 @@ namespace ComicLibrary.Model.Entities
 
     internal static string GenerateFileName(string libraryName)
     {
-      string filePath = Path.Combine(Settings.Instance.LibrariesPath, Path.ChangeExtension(libraryName, "xml"));
+      string fileName = GetValidFileName(libraryName);
+
+      string filePath = Path.Combine(Settings.Instance.LibrariesPath, Path.ChangeExtension(fileName, "xml"));
       int i = 0;
 
       while (File.Exists(filePath))
       {
-        filePath = Path.Combine(Settings.Instance.LibrariesPath, Path.ChangeExtension(libraryName + "_" + i, "xml"));
+        filePath = Path.Combine(Settings.Instance.LibrariesPath, Path.ChangeExtension(fileName + "_" + i, "xml"));
         i++;
       }
 
       return Path.GetFileName(filePath);
     }
 
-    public int CompareTo(object obj)
+    private static string GetValidFileName(string libraryName)
     {
-      return obj is not Library other ? -1 : CompareTo(other);
-    }
+      string fileName = libraryName;
 
-    public int CompareTo(Library other)
-    {
-      return string.Compare(Name, other.Name);
+      foreach (char c in Path.GetInvalidFileNameChars())
+      {
+        fileName = fileName.Replace(c, '_');
+      }
+
+      return fileName;
     }
   }
 }
