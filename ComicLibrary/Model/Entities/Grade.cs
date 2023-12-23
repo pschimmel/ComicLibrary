@@ -8,12 +8,12 @@ namespace ComicLibrary.Model.Entities
   /// </summary>
   public class Grade : IComparable, IComparable<Grade>
   {
-    private Grade(double number, string name, string description, bool isBasic = false)
+    private Grade(double number, string name, string description, bool isMain = false)
     {
       Number = number;
       Name = name;
       Description = description;
-      IsBasicGrade = isBasic;
+      IsMainGrade = isMain;
     }
 
     public double Number { get; }
@@ -22,7 +22,7 @@ namespace ComicLibrary.Model.Entities
 
     public string Description { get; }
 
-    public bool IsBasicGrade { get; }
+    public bool IsMainGrade { get; }
 
     public override bool Equals(object obj)
     {

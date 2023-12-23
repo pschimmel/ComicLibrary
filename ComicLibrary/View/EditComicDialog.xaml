@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:ComicLibrary.View"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:toolsUI="clr-namespace:ES.Tools.UI;assembly=ES.Tools"
         xmlns:viewmodel="clr-namespace:ComicLibrary.ViewModel"
         Title="Comic"
         Width="600"
@@ -12,28 +13,33 @@
         d:DataContext="{d:DesignInstance Type=viewmodel:EditComicViewModel}"
         mc:Ignorable="d">
   <Window.Resources>
-    <Style TargetType="{x:Type TextBlock}">
-      <Setter Property="VerticalAlignment" Value="Center" />
-      <Setter Property="Margin" Value="2" />
-    </Style>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <toolsUI:SharedResourceDictionary Source="pack://application:,,,/ComicLibrary;Component/View/CommonResources.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <Style TargetType="{x:Type TextBlock}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="2" />
+      </Style>
 
-    <Style TargetType="{x:Type TextBox}">
-      <Setter Property="Height" Value="22" />
-      <Setter Property="VerticalContentAlignment" Value="Center" />
-      <Setter Property="Margin" Value="2" />
-    </Style>
+      <Style TargetType="{x:Type TextBox}">
+        <Setter Property="Height" Value="22" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Margin" Value="2" />
+      </Style>
 
-    <Style x:Key="MultiLineTextBox" TargetType="{x:Type TextBox}">
-      <Setter Property="Margin" Value="2" />
-      <Setter Property="AcceptsReturn" Value="True" />
-      <Setter Property="TextWrapping" Value="Wrap" />
-      <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
-    </Style>
+      <Style x:Key="MultiLineTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="Margin" Value="2" />
+        <Setter Property="AcceptsReturn" Value="True" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
+      </Style>
 
-    <Style TargetType="{x:Type ComboBox}">
-      <Setter Property="Height" Value="22" />
-      <Setter Property="Margin" Value="2" />
-    </Style>
+      <Style TargetType="{x:Type ComboBox}">
+        <Setter Property="Height" Value="22" />
+        <Setter Property="Margin" Value="2" />
+      </Style>
+    </ResourceDictionary>
   </Window.Resources>
   <Grid>
     <Grid.RowDefinitions>
@@ -93,10 +99,9 @@
               DockPanel.Dock="Right">
         ...
       </Button>
-      <TextBlock DockPanel.Dock="Left"
-                 FontWeight="Black"
-                 Text="{Binding Condition.Number}" />
-      <TextBlock Text="{Binding Condition.Name}" />
+      <ContentControl Margin="2"
+                      Content="{Binding Condition}"
+                      ContentTemplate="{StaticResource ConditionTemplate}" />
     </DockPanel>
 
     <TextBlock Grid.Row="6" Text="Publisher" />

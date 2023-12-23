@@ -9,7 +9,7 @@
                      xmlns:local="clr-namespace:ComicLibrary"
                      xmlns:localBehaviors="clr-namespace:ComicLibrary.View.Behaviors"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                     xmlns:vm="clr-namespace:ComicLibrary.ViewModel"
+                     xmlns:vm="clr-namespace:ComicLibrary.ViewModel" xmlns:toolsUI="clr-namespace:ES.Tools.UI;assembly=ES.Tools"
                      Title="Comic Library"
                      Width="800"
                      Height="450"
@@ -17,36 +17,12 @@
                      mc:Ignorable="d">
   <Window.Resources>
     <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <toolsUI:SharedResourceDictionary Source="pack://application:,,,/ComicLibrary;Component/View/CommonResources.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+
       <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
       <converters:NegationConverter x:Key="NegationConverter" />
-
-      <DataTemplate x:Key="ConditionTemplate">
-        <Grid>
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" SharedSizeGroup="Number" />
-            <ColumnDefinition />
-          </Grid.ColumnDefinitions>
-          <TextBlock Margin="2,0"
-                     HorizontalAlignment="Right"
-                     FontWeight="Black"
-                     Text="{Binding Number, StringFormat=0.0}">
-            <TextBlock.Style>
-              <Style TargetType="TextBlock">
-                <Setter Property="Visibility" Value="Visible" />
-                <Style.Triggers>
-                  <DataTrigger Binding="{Binding Number}" Value="-1.0">
-                    <Setter Property="Visibility" Value="Collapsed" />
-                  </DataTrigger>
-                </Style.Triggers>
-              </Style>
-            </TextBlock.Style>
-          </TextBlock>
-          <TextBlock Grid.Column="1"
-                     Margin="2,0"
-                     Text="{Binding Name}" />
-        </Grid>
-      </DataTemplate>
-
 
       <DataTemplate DataType="{x:Type vm:LibraryViewModel}">
         <Border x:Name="Border"

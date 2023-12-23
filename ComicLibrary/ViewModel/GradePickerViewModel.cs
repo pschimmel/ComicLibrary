@@ -11,7 +11,7 @@ namespace ComicLibrary.ViewModel
     public GradePickerViewModel(Grade grade)
     {
       grade ??= Grade.Unrated;
-      Grades = Grade.Grades.ToList().Select(x => new GradeViewModel(x, x.Equals(grade)));
+      Grades = Grade.Grades.ToList().Select(x => new GradeViewModel(x, x.Equals(grade))).ToArray();
     }
 
     #endregion
