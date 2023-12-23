@@ -12,8 +12,8 @@ namespace ComicLibrary.ViewModel
 
     private readonly Comic _comic;
     private readonly string _libraryName;
-    private readonly List<IOptionItemViewModel<Publisher>> _publishers;
-    private readonly List<IOptionItemViewModel<Country>> _countries;
+    private readonly IEnumerable<IOptionItemViewModel<Publisher>> _publishers;
+    private readonly IEnumerable<IOptionItemViewModel<Country>> _countries;
     private ActionCommand _editComicCommand;
 
     #endregion
@@ -22,8 +22,8 @@ namespace ComicLibrary.ViewModel
 
     public ComicViewModel(Comic comic,
                           string libraryName,
-                          List<IOptionItemViewModel<Publisher>> publishers,
-                          List<IOptionItemViewModel<Country>> countries)
+                          IEnumerable<IOptionItemViewModel<Publisher>> publishers,
+                          IEnumerable<IOptionItemViewModel<Country>> countries)
     {
       _libraryName = libraryName;
       _comic = comic;
@@ -66,7 +66,7 @@ namespace ComicLibrary.ViewModel
       set => _comic.Title = value;
     }
 
-    public Condition Condition
+    public Grade Condition
     {
       get => _comic.Condition;
       set => _comic.Condition = value;

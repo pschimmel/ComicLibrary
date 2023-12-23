@@ -16,6 +16,7 @@ namespace ComicLibrary.ViewModel
 
     private ActionCommand _addImageCommand;
     private ActionCommand<ComicImageViewModel> _removeImageCommand;
+    private ActionCommand _selectGradeCommand;
     private readonly Comic _comic;
 
     #endregion
@@ -29,12 +30,13 @@ namespace ComicLibrary.ViewModel
         new EmptyOptionItemViewModel<Publisher>(),
         .. Globals.Instance.Publishers.OrderBy(x => x.Name).Select(x => new OptionItemViewModel<Publisher>(x))
       ];
+
       Countries =
       [
         new EmptyOptionItemViewModel<Country>(),
         .. Globals.Instance.Countries.OrderBy(x => x.Name).Select(x => new OptionItemViewModel<Country>(x))
       ];
-      Conditions = Enum.GetValues(typeof(Condition)).Cast<Condition>().ToList();
+
       _comic = comic;
       Series = comic.Series;
       Year = comic.Year;
@@ -70,7 +72,7 @@ namespace ComicLibrary.ViewModel
 
     public string Comment { get; set; }
 
-    public Condition Condition { get; set; }
+    public Grade Condition { get; set; }
 
     public IOptionItemViewModel<Publisher> Publisher { get; set; }
 
@@ -80,17 +82,32 @@ namespace ComicLibrary.ViewModel
 
     public bool LimitedEdition { get; set; }
 
-    public List<IOptionItemViewModel<Publisher>> Publishers { get; }
+    public IEnumerable<IOptionItemViewModel<Publisher>> Publishers { get; }
 
-    public List<IOptionItemViewModel<Country>> Countries { get; }
-
-    public List<Condition> Conditions { get; }
+    public IEnumerable<IOptionItemViewModel<Country>> Countries { get; }
 
     public ObservableCollection<ComicImageViewModel> ComicImages { get; } = [];
 
     #endregion
 
     #region Commands
+
+    #region Select Grade
+
+    public ICommand SelectGradeCommand => _selectGradeCommand ??= new ActionCommand(SelectGrade);
+
+    private void SelectGrade()
+    {
+      var vm = new GradePickerViewModel(Condition);
+      var view = ViewFactory.Instance.CreateView(vm);
+      if (view.ShowDialog() == true)
+      {
+        Condition = vm.SelectedGrade;
+        OnPropertyChanged(nameof(Condition));
+      }
+    }
+
+    #endregion
 
     #region Add Image
 

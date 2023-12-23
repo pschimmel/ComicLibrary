@@ -8,7 +8,9 @@ namespace ComicLibrary.Model.Entities
     private int? _issueNumber;
 
     public Comic()
-    { }
+    {
+      Condition = Grade.Unrated;
+    }
 
     public Comic(Comic selectedComic)
     {
@@ -38,7 +40,7 @@ namespace ComicLibrary.Model.Entities
 
     public string Title { get; set; }
 
-    public Condition Condition { get; set; }
+    public Grade Condition { get; set; }
 
     public int? Year
     {

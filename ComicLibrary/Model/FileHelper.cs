@@ -223,9 +223,12 @@ namespace ComicLibrary.Model
               {
                 comic.Year = year;
               }
-              else if (comicChildNode.Name == ConditionKey)
+              else if (comicChildNode.Name == ConditionKey && double.TryParse(comicChildNode.InnerText, CultureInfo.InvariantCulture, out double gradingNumber))
               {
-                comic.Condition = Enum.Parse<Condition>(comicChildNode.InnerText);
+                var grading = Grade.Grades.FirstOrDefault(x => x.Number == gradingNumber);
+
+                if (grading != null)
+                  comic.Condition = grading;
               }
               else if (comicChildNode.Name == TitleKey)
               {
@@ -401,7 +404,7 @@ namespace ComicLibrary.Model
                                                   (YearKey, comic.Year?.ToString(CultureInfo.InvariantCulture)),
                                                   (IssueNumberKey, comic.IssueNumber?.ToString(CultureInfo.InvariantCulture)),
                                                   (CommentKey, comic.Comment),
-                                                  (ConditionKey, comic.Condition.ToString()),
+                                                  (ConditionKey, comic.Condition.Number.ToString(CultureInfo.InvariantCulture)),
                                                   (CountryKey, comic.Country?.ID.ToString()),
                                                   (PublisherKey, comic.Publisher?.ID.ToString()),
                                                   (CollectorsEditionKey, comic.CollectorsEdition == true ? true.ToString() : ""),

@@ -8,7 +8,6 @@
                      xmlns:fluent="urn:fluent-ribbon"
                      xmlns:local="clr-namespace:ComicLibrary"
                      xmlns:localBehaviors="clr-namespace:ComicLibrary.View.Behaviors"
-                     xmlns:localConverters="clr-namespace:ComicLibrary.View.Converters"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:vm="clr-namespace:ComicLibrary.ViewModel"
                      Title="Comic Library"
@@ -20,7 +19,34 @@
     <ResourceDictionary>
       <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
       <converters:NegationConverter x:Key="NegationConverter" />
-      <localConverters:ConditionConverter x:Key="ConditionConverter" />
+
+      <DataTemplate x:Key="ConditionTemplate">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" SharedSizeGroup="Number" />
+            <ColumnDefinition />
+          </Grid.ColumnDefinitions>
+          <TextBlock Margin="2,0"
+                     HorizontalAlignment="Right"
+                     FontWeight="Black"
+                     Text="{Binding Number, StringFormat=0.0}">
+            <TextBlock.Style>
+              <Style TargetType="TextBlock">
+                <Setter Property="Visibility" Value="Visible" />
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding Number}" Value="-1.0">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </TextBlock.Style>
+          </TextBlock>
+          <TextBlock Grid.Column="1"
+                     Margin="2,0"
+                     Text="{Binding Name}" />
+        </Grid>
+      </DataTemplate>
+
 
       <DataTemplate DataType="{x:Type vm:LibraryViewModel}">
         <Border x:Name="Border"
@@ -82,7 +108,11 @@
                 </Style>
               </TextBlock.Style>
             </TextBlock>
-            <TextBlock Text="{Binding ComicCount}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="2,0" FontWeight="Bold"/>
+            <TextBlock Margin="2,0"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Bottom"
+                       FontWeight="Bold"
+                       Text="{Binding ComicCount}" />
           </Grid>
         </Border>
       </DataTemplate>
@@ -167,21 +197,18 @@
                   </Style>
                 </DataGridTextColumn.ElementStyle>
               </DataGridTextColumn>
-              <DataGridTemplateColumn>
+              <DataGridTemplateColumn Header="Condition">
                 <DataGridTemplateColumn.CellTemplate>
                   <DataTemplate>
-                    <TextBlock Margin="2,0" Text="{Binding Condition, Converter={StaticResource ConditionConverter}}" />
+                    <ContentControl Content="{Binding Condition}" ContentTemplate="{StaticResource ConditionTemplate}" />
                   </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
                 <DataGridTemplateColumn.CellEditingTemplate>
                   <DataTemplate>
-                    <ComboBox ItemsSource="{Binding Data.Conditions, Source={StaticResource Proxy}}" SelectedItem="{Binding Condition}">
-                      <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                          <TextBlock Margin="2,0" Text="{Binding Converter={StaticResource ConditionConverter}}" />
-                        </DataTemplate>
-                      </ComboBox.ItemTemplate>
-                    </ComboBox>
+                    <ComboBox Grid.IsSharedSizeScope="True"
+                              ItemTemplate="{StaticResource ConditionTemplate}"
+                              ItemsSource="{Binding Data.Conditions, Source={StaticResource Proxy}}"
+                              SelectedItem="{Binding Condition}" />
                   </DataTemplate>
                 </DataGridTemplateColumn.CellEditingTemplate>
               </DataGridTemplateColumn>

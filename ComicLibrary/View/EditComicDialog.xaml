@@ -5,15 +5,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:ComicLibrary.View"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewmodel="clr-namespace:ComicLibrary.ViewModel" xmlns:localConverters="clr-namespace:ComicLibrary.View.Converters"
+        xmlns:viewmodel="clr-namespace:ComicLibrary.ViewModel"
         Title="Comic"
         Width="600"
         Height="450"
         d:DataContext="{d:DesignInstance Type=viewmodel:EditComicViewModel}"
         mc:Ignorable="d">
   <Window.Resources>
-    <localConverters:ConditionConverter x:Key="ConditionConverter" />
-
     <Style TargetType="{x:Type TextBlock}">
       <Setter Property="VerticalAlignment" Value="Center" />
       <Setter Property="Margin" Value="2" />
@@ -88,16 +86,18 @@
              Text="{Binding Title}" />
 
     <TextBlock Grid.Row="5" Text="Condition" />
-    <ComboBox Grid.Row="5"
-              Grid.Column="1"
-              ItemsSource="{Binding Conditions}"
-              SelectedItem="{Binding Condition}">
-      <ComboBox.ItemTemplate>
-        <DataTemplate>
-          <TextBlock Margin="2,0" Text="{Binding Converter={StaticResource ConditionConverter}}" />
-        </DataTemplate>
-      </ComboBox.ItemTemplate>
-    </ComboBox>
+    <DockPanel Grid.Row="5" Grid.Column="1">
+      <Button Margin="2"
+              Padding="5,0"
+              Command="{Binding SelectGradeCommand}"
+              DockPanel.Dock="Right">
+        ...
+      </Button>
+      <TextBlock DockPanel.Dock="Left"
+                 FontWeight="Black"
+                 Text="{Binding Condition.Number}" />
+      <TextBlock Text="{Binding Condition.Name}" />
+    </DockPanel>
 
     <TextBlock Grid.Row="6" Text="Publisher" />
     <ComboBox Grid.Row="6"

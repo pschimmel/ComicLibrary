@@ -27,6 +27,7 @@ namespace ComicLibrary.ViewModel
     public ActiveLibraryViewModel(ActiveLibrary library, LibraryViewModel libraryTemplate)
     {
       _libraryTemplate = libraryTemplate;
+      Conditions = Grade.Grades;
       Publishers =
       [
         new EmptyOptionItemViewModel<Publisher>(),
@@ -37,7 +38,6 @@ namespace ComicLibrary.ViewModel
         new EmptyOptionItemViewModel<Country>(),
         .. Globals.Instance.Countries.OrderBy(x => x.Name).Select(x => new OptionItemViewModel<Country>(x))
       ];
-      Conditions = Enum.GetValues(typeof(Condition)).Cast<Condition>().ToList();
       Comics = new ObservableCollection<ComicViewModel>(library.Comics.Select(x => new ComicViewModel(x, Name, Publishers, Countries)));
       libraryTemplate.ComicCount = Comics.Count;
     }
@@ -48,11 +48,11 @@ namespace ComicLibrary.ViewModel
 
     public string Name => _libraryTemplate.Name;
 
-    public List<IOptionItemViewModel<Publisher>> Publishers { get; }
+    public IEnumerable<IOptionItemViewModel<Publisher>> Publishers { get; }
 
-    public List<IOptionItemViewModel<Country>> Countries { get; }
+    public IEnumerable<IOptionItemViewModel<Country>> Countries { get; }
 
-    public List<Condition> Conditions { get; }
+    public IEnumerable<Grade> Conditions { get; }
 
     public ObservableCollection<ComicViewModel> Comics { get; }
 
