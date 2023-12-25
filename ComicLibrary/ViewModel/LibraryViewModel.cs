@@ -13,7 +13,7 @@ namespace ComicLibrary.ViewModel
     public LibraryViewModel(Library library)
     {
       _library = library;
-      _comicImage = new ComicImageViewModel(_library.ImageAsString);
+      _comicImage = string.IsNullOrWhiteSpace(_library.ImageAsString) ? null : new ComicImageViewModel(_library.ImageAsString);
     }
 
     public string Name => _library.Name;
