@@ -268,6 +268,7 @@ namespace ComicLibrary.ViewModel
         if (activeLibrary.Name == libraryVM.Name && activeLibrary.Path == libraryVM.GetFilePath())
         {
           SelectedLibrary = activeLibrary;
+          ShowLibrariesOverlay = false;
           return;
         }
       }
