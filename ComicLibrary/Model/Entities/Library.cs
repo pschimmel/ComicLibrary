@@ -40,5 +40,26 @@ namespace ComicLibrary.Model.Entities
 
       return fileName;
     }
+
+    public override int GetHashCode()
+    {
+      return new
+      {
+        Name,
+        FileName
+      }.GetHashCode();
+    }
+
+    public override bool Equals(object obj)
+    {
+      return obj is Library other
+        && Equals(Name, other.Name)
+        && Equals(FileName, other.FileName);
+    }
+
+    public override string ToString()
+    {
+      return Name;
+    }
   }
 }

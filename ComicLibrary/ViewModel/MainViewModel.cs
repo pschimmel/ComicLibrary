@@ -410,11 +410,23 @@ namespace ComicLibrary.ViewModel
     private void LoadLibraries()
     {
       var libraries = FileHelper.LoadLibraries();
-      Libraries.Clear();
-      foreach (var library in libraries)
+
+      // Add missing libraries
+      foreach (var storedlibrary in libraries)
       {
-        var libraryVM = new LibraryViewModel(library);
-        Libraries.Add(libraryVM);
+        if (!Libraries.Any(x => Equals(x.ToModel(), storedlibrary)))
+        {
+          Libraries.Add(new LibraryViewModel(storedlibrary));
+        }
+      }
+
+      // Remove libraries not stored anymore
+      foreach (var currentLibrary in Libraries.ToArray())
+      {
+        if (!libraries.Any(x => Equals(x, currentLibrary.ToModel())))
+        {
+          Libraries.Remove(currentLibrary);
+        }
       }
     }
 

@@ -21,7 +21,14 @@ namespace ComicLibrary.ViewModel
     public int ComicCount
     {
       get => _library.ComicCount;
-      set => _library.ComicCount = value;
+      set
+      {
+        if (_library.ComicCount != value)
+        {
+          _library.ComicCount = value;
+          OnPropertyChanged(nameof(ComicCount));
+        }
+      }
     }
 
     public ComicImageViewModel ComicImage
