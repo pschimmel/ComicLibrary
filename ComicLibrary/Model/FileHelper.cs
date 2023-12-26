@@ -394,7 +394,7 @@ namespace ComicLibrary.Model
         var comicsNode = xml.CreateElement(ComicsKey);
         libraryNode.AppendChild(comicsNode);
 
-        foreach (var comic in library.Comics.OrderBy(x => x.Publisher).ThenBy(x => x.Series).ThenBy(x => x.Year).ThenBy(x => x.IssueNumber))
+        foreach (var comic in library.Comics.OrderBy(x => x.Series).ThenBy(x => x.IssueNumber))
         {
           var comicNode = AppendChildWithChildren(comicsNode,
                                                   ComicKey,
