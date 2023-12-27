@@ -22,7 +22,7 @@ namespace ComicLibrary.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace ComicLibrary.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ComicLibrary.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace ComicLibrary.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,9 +61,99 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Comic.
+        /// </summary>
+        public static string AddComic {
+            get {
+                return ResourceManager.GetString("AddComic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a new comic..
+        /// </summary>
+        public static string AddComicTooltip {
+            get {
+                return ResourceManager.GetString("AddComicTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Image.
+        /// </summary>
+        public static string AddImage {
+            get {
+                return ResourceManager.GetString("AddImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Option.
+        /// </summary>
+        public static string AddOption {
+            get {
+                return ResourceManager.GetString("AddOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot load file &apos;{0}&apos;..
+        /// </summary>
+        public static string CannotLoadFileMessage {
+            get {
+                return ResourceManager.GetString("CannotLoadFileMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot save file &apos;{0}&apos;..
+        /// </summary>
+        public static string CannotSaveFileMessage {
+            get {
+                return ResourceManager.GetString("CannotSaveFileMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Image.
+        /// </summary>
+        public static string ChangeImage {
+            get {
+                return ResourceManager.GetString("ChangeImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please close all open libraries in order to change the path..
         /// </summary>
-        internal static string CloseLibrariesToChangePathMessage {
+        public static string CloseLibrariesToChangePathMessage {
             get {
                 return ResourceManager.GetString("CloseLibrariesToChangePathMessage", resourceCulture);
             }
@@ -72,16 +162,61 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Please close all open libraries in order to modify options..
         /// </summary>
-        internal static string CloseLibrariesToModifyOptionsMessage {
+        public static string CloseLibrariesToModifyOptionsMessage {
             get {
                 return ResourceManager.GetString("CloseLibrariesToModifyOptionsMessage", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Collector&apos;s Edition.
+        /// </summary>
+        public static string CollectorsEdition {
+            get {
+                return ResourceManager.GetString("CollectorsEdition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comic.
+        /// </summary>
+        public static string Comic {
+            get {
+                return ResourceManager.GetString("Comic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comics.
+        /// </summary>
+        public static string Comics {
+            get {
+                return ResourceManager.GetString("Comics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comment.
+        /// </summary>
+        public static string Comment {
+            get {
+                return ResourceManager.GetString("Comment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Condition.
+        /// </summary>
+        public static string Condition {
+            get {
+                return ResourceManager.GetString("Condition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Countries.
         /// </summary>
-        internal static string Countries {
+        public static string Countries {
             get {
                 return ResourceManager.GetString("Countries", resourceCulture);
             }
@@ -90,16 +225,43 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Country.
         /// </summary>
-        internal static string Country {
+        public static string Country {
             get {
                 return ResourceManager.GetString("Country", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current Library.
+        /// </summary>
+        public static string CurrentLibrary {
+            get {
+                return ResourceManager.GetString("CurrentLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Option.
+        /// </summary>
+        public static string EditOption {
+            get {
+                return ResourceManager.GetString("EditOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
-        internal static string Error {
+        public static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
             }
@@ -108,7 +270,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to A very poorly handled collectible with a heavy accumulation of major defects..
         /// </summary>
-        internal static string FairDescription {
+        public static string FairDescription {
             get {
                 return ResourceManager.GetString("FairDescription", resourceCulture);
             }
@@ -117,7 +279,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to A collectible that shows extensive evidence of handling with a heavy accumulation of major defects..
         /// </summary>
-        internal static string FairGoodDescription {
+        public static string FairGoodDescription {
             get {
                 return ResourceManager.GetString("FairGoodDescription", resourceCulture);
             }
@@ -126,7 +288,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to A slightly above-average collectible with a major defect and some smaller defects, or a significant accumulation of small defects..
         /// </summary>
-        internal static string FineDescription {
+        public static string FineDescription {
             get {
                 return ResourceManager.GetString("FineDescription", resourceCulture);
             }
@@ -135,7 +297,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to A slightly above-average collectible with several moderate defects..
         /// </summary>
-        internal static string FineMinusDescription {
+        public static string FineMinusDescription {
             get {
                 return ResourceManager.GetString("FineMinusDescription", resourceCulture);
             }
@@ -144,7 +306,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to An above-average collectible with a major defect and some smaller defects, or a significant accumulation of small defects..
         /// </summary>
-        internal static string FinePlusDescription {
+        public static string FinePlusDescription {
             get {
                 return ResourceManager.GetString("FinePlusDescription", resourceCulture);
             }
@@ -153,7 +315,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to An above-average collectible with a major defect or an accumulation of small defects..
         /// </summary>
-        internal static string FineVeryFineDescription {
+        public static string FineVeryFineDescription {
             get {
                 return ResourceManager.GetString("FineVeryFineDescription", resourceCulture);
             }
@@ -162,7 +324,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The highest grade assigned. The collectible must have no evidence of any manufacturing or handling defects..
         /// </summary>
-        internal static string GemMintDescription {
+        public static string GemMintDescription {
             get {
                 return ResourceManager.GetString("GemMintDescription", resourceCulture);
             }
@@ -171,7 +333,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to A collectible that shows extensive evidence of handling with numerous moderate-to-major defects..
         /// </summary>
-        internal static string GoodDescription {
+        public static string GoodDescription {
             get {
                 return ResourceManager.GetString("GoodDescription", resourceCulture);
             }
@@ -180,7 +342,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to A collectible that shows extensive evidence of handling with numerous major defects..
         /// </summary>
-        internal static string GoodMinusDescription {
+        public static string GoodMinusDescription {
             get {
                 return ResourceManager.GetString("GoodMinusDescription", resourceCulture);
             }
@@ -189,7 +351,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to A collectible that shows extensive evidence of handling with multiple moderate-to-major defects..
         /// </summary>
-        internal static string GoodPlusDescription {
+        public static string GoodPlusDescription {
             get {
                 return ResourceManager.GetString("GoodPlusDescription", resourceCulture);
             }
@@ -198,25 +360,106 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to A collectible that shows significant evidence of handling with several moderate-to-major defects..
         /// </summary>
-        internal static string GoodVeryGoodDescription {
+        public static string GoodVeryGoodDescription {
             get {
                 return ResourceManager.GetString("GoodVeryGoodDescription", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Grading.
+        /// </summary>
+        public static string Grading {
+            get {
+                return ResourceManager.GetString("Grading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Images.
+        /// </summary>
+        public static string Images {
+            get {
+                return ResourceManager.GetString("Images", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Number.
+        /// </summary>
+        public static string IssueNumber {
+            get {
+                return ResourceManager.GetString("IssueNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jpeg Image Files (*.jpg).
         /// </summary>
-        internal static string JpegFiles {
+        public static string JpegFiles {
             get {
                 return ResourceManager.GetString("JpegFiles", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Libraries.
+        /// </summary>
+        public static string Libraries {
+            get {
+                return ResourceManager.GetString("Libraries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Libraries Path.
+        /// </summary>
+        public static string LibrariesPath {
+            get {
+                return ResourceManager.GetString("LibrariesPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Limited Edition.
+        /// </summary>
+        public static string LimitedEdition {
+            get {
+                return ResourceManager.GetString("LimitedEdition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage.
+        /// </summary>
+        public static string Manage {
+            get {
+                return ResourceManager.GetString("Manage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Libraries.
+        /// </summary>
+        public static string ManageLibraries {
+            get {
+                return ResourceManager.GetString("ManageLibraries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show the popup to edit the libraries..
+        /// </summary>
+        public static string ManageLibrariesTooltip {
+            get {
+                return ResourceManager.GetString("ManageLibrariesTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The collectible is nearly indistinguishable from a 10.0 but will have a very minor manufacturing defect. It will not have any evidence of handling defects..
         /// </summary>
-        internal static string MintDescription {
+        public static string MintDescription {
             get {
                 return ResourceManager.GetString("MintDescription", resourceCulture);
             }
@@ -225,7 +468,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Would you like to move all XML files to the new location?.
         /// </summary>
-        internal static string MoveXMLFilesQuestion {
+        public static string MoveXMLFilesQuestion {
             get {
                 return ResourceManager.GetString("MoveXMLFilesQuestion", resourceCulture);
             }
@@ -234,7 +477,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to A very well-preserved collectible with minor wear and small manufacturing or handling defects..
         /// </summary>
-        internal static string NearMintDescription {
+        public static string NearMintDescription {
             get {
                 return ResourceManager.GetString("NearMintDescription", resourceCulture);
             }
@@ -243,7 +486,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to A nearly perfect collectible with negligible handling or manufacturing defects..
         /// </summary>
-        internal static string NearMintMintDescription {
+        public static string NearMintMintDescription {
             get {
                 return ResourceManager.GetString("NearMintMintDescription", resourceCulture);
             }
@@ -252,7 +495,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to A very well-preserved collectible with some wear and small manufacturing or handling defects..
         /// </summary>
-        internal static string NearMintMinusDescription {
+        public static string NearMintMinusDescription {
             get {
                 return ResourceManager.GetString("NearMintMinusDescription", resourceCulture);
             }
@@ -261,16 +504,34 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to A very well-preserved collectible with several minor manufacturing or handling defects..
         /// </summary>
-        internal static string NearMintPlusDescription {
+        public static string NearMintPlusDescription {
             get {
                 return ResourceManager.GetString("NearMintPlusDescription", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        public static string Options {
+            get {
+                return ResourceManager.GetString("Options", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Portable Network Graphics Files (*.png).
         /// </summary>
-        internal static string PngFiles {
+        public static string PngFiles {
             get {
                 return ResourceManager.GetString("PngFiles", resourceCulture);
             }
@@ -279,7 +540,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to A heavily defaced collectible with a number major defects. Some pieces will also be missing..
         /// </summary>
-        internal static string PoorDescription {
+        public static string PoorDescription {
             get {
                 return ResourceManager.GetString("PoorDescription", resourceCulture);
             }
@@ -288,7 +549,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Publisher.
         /// </summary>
-        internal static string Publisher {
+        public static string Publisher {
             get {
                 return ResourceManager.GetString("Publisher", resourceCulture);
             }
@@ -297,7 +558,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Publishers.
         /// </summary>
-        internal static string Publishers {
+        public static string Publishers {
             get {
                 return ResourceManager.GetString("Publishers", resourceCulture);
             }
@@ -306,61 +567,169 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Question.
         /// </summary>
-        internal static string Question {
+        public static string Question {
             get {
                 return ResourceManager.GetString("Question", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Comic.
+        /// </summary>
+        public static string RemoveComic {
+            get {
+                return ResourceManager.GetString("RemoveComic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Would you really like to remove the selected comic?.
         /// </summary>
-        internal static string RemoveComicQuestion {
+        public static string RemoveComicQuestion {
             get {
                 return ResourceManager.GetString("RemoveComicQuestion", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove the selected comic..
+        /// </summary>
+        public static string RemoveComicTooltip {
+            get {
+                return ResourceManager.GetString("RemoveComicTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Image.
+        /// </summary>
+        public static string RemoveImage {
+            get {
+                return ResourceManager.GetString("RemoveImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Would you really like to remove the complete library? This cannot be undone..
         /// </summary>
-        internal static string RemoveLibraryQuestion {
+        public static string RemoveLibraryQuestion {
             get {
                 return ResourceManager.GetString("RemoveLibraryQuestion", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove Option.
+        /// </summary>
+        public static string RemoveOption {
+            get {
+                return ResourceManager.GetString("RemoveOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Would you really like to remove the selected option? This cannot be undone and it will remove the property in all assigned comics..
         /// </summary>
-        internal static string RemoveOptionQuestion {
+        public static string RemoveOptionQuestion {
             get {
                 return ResourceManager.GetString("RemoveOptionQuestion", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Would you like to save the changes?.
         /// </summary>
-        internal static string SaveChangesQuestion {
+        public static string SaveChangesQuestion {
             get {
                 return ResourceManager.GetString("SaveChangesQuestion", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save Library.
+        /// </summary>
+        public static string SaveLibrary {
+            get {
+                return ResourceManager.GetString("SaveLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saves the current library..
+        /// </summary>
+        public static string SaveLibraryTooltip {
+            get {
+                return ResourceManager.GetString("SaveLibraryTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select a folder..
         /// </summary>
-        internal static string SelectAFolderMessage {
+        public static string SelectAFolderMessage {
             get {
                 return ResourceManager.GetString("SelectAFolderMessage", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Series.
+        /// </summary>
+        public static string Series {
+            get {
+                return ResourceManager.GetString("Series", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        public static string Start {
+            get {
+                return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not rated yet..
         /// </summary>
-        internal static string UnratedDescription {
+        public static string UnratedDescription {
             get {
                 return ResourceManager.GetString("UnratedDescription", resourceCulture);
             }
@@ -369,7 +738,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to An attractive collectible with a moderate defect or an accumulation of small defects..
         /// </summary>
-        internal static string VeryFineDescription {
+        public static string VeryFineDescription {
             get {
                 return ResourceManager.GetString("VeryFineDescription", resourceCulture);
             }
@@ -378,7 +747,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to An above-average collectible with a moderate defect or an accumulation of small defects..
         /// </summary>
-        internal static string VeryFineMinusDescription {
+        public static string VeryFineMinusDescription {
             get {
                 return ResourceManager.GetString("VeryFineMinusDescription", resourceCulture);
             }
@@ -387,7 +756,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to A very well-preserved collectible with good eye appeal. There will be a number of minor handling and/or manufacturing defects..
         /// </summary>
-        internal static string VeryFineNearMintDescription {
+        public static string VeryFineNearMintDescription {
             get {
                 return ResourceManager.GetString("VeryFineNearMintDescription", resourceCulture);
             }
@@ -396,7 +765,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to An attractive collectible with a moderate defect or a number of small defects..
         /// </summary>
-        internal static string VeryFinePlusDescription {
+        public static string VeryFinePlusDescription {
             get {
                 return ResourceManager.GetString("VeryFinePlusDescription", resourceCulture);
             }
@@ -405,7 +774,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to A below-average collectible with multiple moderate defects..
         /// </summary>
-        internal static string VeryGoodDescription {
+        public static string VeryGoodDescription {
             get {
                 return ResourceManager.GetString("VeryGoodDescription", resourceCulture);
             }
@@ -414,7 +783,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to An average collectible with several moderate defects..
         /// </summary>
-        internal static string VeryGoodFineDescription {
+        public static string VeryGoodFineDescription {
             get {
                 return ResourceManager.GetString("VeryGoodFineDescription", resourceCulture);
             }
@@ -423,7 +792,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to A below-average collectible with several major defects or an accumulation of multiple moderate defects..
         /// </summary>
-        internal static string VeryGoodMinusDescription {
+        public static string VeryGoodMinusDescription {
             get {
                 return ResourceManager.GetString("VeryGoodMinusDescription", resourceCulture);
             }
@@ -432,7 +801,7 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to A slightly below-average collectible with multiple moderate defects..
         /// </summary>
-        internal static string VeryGoodPlusDescription {
+        public static string VeryGoodPlusDescription {
             get {
                 return ResourceManager.GetString("VeryGoodPlusDescription", resourceCulture);
             }
@@ -441,9 +810,18 @@ namespace ComicLibrary.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Warning.
         /// </summary>
-        internal static string Warning {
+        public static string Warning {
             get {
                 return ResourceManager.GetString("Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year.
+        /// </summary>
+        public static string Year {
+            get {
+                return ResourceManager.GetString("Year", resourceCulture);
             }
         }
     }

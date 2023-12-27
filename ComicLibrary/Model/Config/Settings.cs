@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Windows;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -6,7 +7,7 @@ namespace ComicLibrary.Model.Config
 {
   internal class Settings
   {
-    private const string ApplicationName = "ComicLibrary";
+    private const string ApplicationName = "Comic Library";
     private static readonly Lazy<Settings> _lazyConfiguration = new(Load());
     private const string _configFileName = $"{ApplicationName}.Config.json";
     private const string _librariesFileName = $"Libraries.xml";
@@ -35,8 +36,15 @@ namespace ComicLibrary.Model.Config
 
       if (File.Exists(configFilePath))
       {
-        string configAsString = File.ReadAllText(configFilePath);
-        return JsonConvert.DeserializeObject<Settings>(configAsString);
+        try
+        {
+          string configAsString = File.ReadAllText(configFilePath);
+          return JsonConvert.DeserializeObject<Settings>(configAsString);
+        }
+        catch (Exception ex)
+        {
+          MessageBox.Show(string.Format(Properties.Resources.CannotLoadFileMessage, configFilePath) + Environment.NewLine + ex.Message);
+        }
       }
 
       return new Settings();
@@ -45,8 +53,16 @@ namespace ComicLibrary.Model.Config
     public static void Save()
     {
       string configFilePath = Path.Combine(ApplicationPath, _configFileName);
-      string configAsString = JsonConvert.SerializeObject(Instance, Formatting.Indented, new StringEnumConverter());
-      File.WriteAllText(configFilePath, configAsString);
+
+      try
+      {
+        string configAsString = JsonConvert.SerializeObject(Instance, Formatting.Indented, new StringEnumConverter());
+        File.WriteAllText(configFilePath, configAsString);
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(string.Format(Properties.Resources.CannotSaveFileMessage, configFilePath) + Environment.NewLine + ex.Message);
+      }
     }
   }
 }

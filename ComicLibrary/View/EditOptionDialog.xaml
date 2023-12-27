@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:entities="clr-namespace:ComicLibrary.Model.Entities"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:properties="clr-namespace:ComicLibrary.Properties"
         xmlns:viewmodel="clr-namespace:ComicLibrary.ViewModel"
         Title="{Binding Header}"
         Width="400"
@@ -58,16 +59,14 @@
       <Button MinWidth="50"
               Padding="2"
               Click="OKButton_Click"
-              IsDefault="True">
-        OK
-      </Button>
+              Content="{x:Static properties:Resources.OK}"
+              IsDefault="True" />
       <Button MinWidth="50"
               Margin="2,0,0,0"
               Padding="2"
               Click="CancelButton_Click"
-              IsCancel="True">
-        Cancel
-      </Button>
+              Content="{x:Static properties:Resources.Cancel}"
+              IsCancel="True" />
     </StackPanel>
   </Grid>
 </Window>

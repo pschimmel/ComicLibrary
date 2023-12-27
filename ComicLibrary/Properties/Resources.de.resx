@@ -117,17 +117,71 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="AddComic" xml:space="preserve">
+    <value>Comic hinzufügen</value>
+  </data>
+  <data name="AddComicTooltip" xml:space="preserve">
+    <value>Ein neues Comic hinzufügen.</value>
+  </data>
+  <data name="AddImage" xml:space="preserve">
+    <value>Bild hinzufügen</value>
+  </data>
+  <data name="AddOption" xml:space="preserve">
+    <value>Option hinzufügen</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="CannotLoadFileMessage" xml:space="preserve">
+    <value>Kann Datei '{0}' nicht speichern.</value>
+  </data>
+  <data name="CannotSaveFileMessage" xml:space="preserve">
+    <value>Kann Datei '{0}' nicht laden.</value>
+  </data>
+  <data name="ChangeImage" xml:space="preserve">
+    <value>Bild ändern</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
   <data name="CloseLibrariesToChangePathMessage" xml:space="preserve">
     <value>Bitte schließen Sie alle Bibliotheken um den Pfad zu ändern.</value>
   </data>
   <data name="CloseLibrariesToModifyOptionsMessage" xml:space="preserve">
     <value>Bitte schließen Sie alle Bibliotheken um die Optionen zu ändern.</value>
   </data>
+  <data name="CollectorsEdition" xml:space="preserve">
+    <value>Sammlerausgabe</value>
+  </data>
+  <data name="Comic" xml:space="preserve">
+    <value>Comic</value>
+  </data>
+  <data name="Comics" xml:space="preserve">
+    <value>Comics</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Kommentar</value>
+  </data>
+  <data name="Condition" xml:space="preserve">
+    <value>Zustand</value>
+  </data>
   <data name="Countries" xml:space="preserve">
     <value>Länder</value>
   </data>
   <data name="Country" xml:space="preserve">
     <value>Land</value>
+  </data>
+  <data name="CurrentLibrary" xml:space="preserve">
+    <value>Aktuelle Bibliothek</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="EditOption" xml:space="preserve">
+    <value>Option bearbeiten</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Fehler</value>
@@ -165,8 +219,35 @@
   <data name="GoodVeryGoodDescription" xml:space="preserve">
     <value>Ein Exemplar welches Anzeichen von Abnutzung zeigt und wenige mittlere bis große Mängeln hat.</value>
   </data>
+  <data name="Grading" xml:space="preserve">
+    <value>Einstufung</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Bilder</value>
+  </data>
+  <data name="IssueNumber" xml:space="preserve">
+    <value>Heft Nummer</value>
+  </data>
   <data name="JpegFiles" xml:space="preserve">
     <value>Jpeg Bilddateien (*.jpg)</value>
+  </data>
+  <data name="Libraries" xml:space="preserve">
+    <value>Bibliotheken</value>
+  </data>
+  <data name="LibrariesPath" xml:space="preserve">
+    <value>Pfad zu den Bibliotheken</value>
+  </data>
+  <data name="LimitedEdition" xml:space="preserve">
+    <value>Limited Edition</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Manage</value>
+  </data>
+  <data name="ManageLibraries" xml:space="preserve">
+    <value>Bibliotheken bearbeiten</value>
+  </data>
+  <data name="ManageLibrariesTooltip" xml:space="preserve">
+    <value>Zeigt das Popup um die Bibliotheken zu bearbeiten.</value>
   </data>
   <data name="MintDescription" xml:space="preserve">
     <value>Das Exemplar ist fast nicht von einer 10.0 unterscheidbar, hat jedoch sehr geringe Herstellungsmängeln. Es gibt keinerlei Anzeichen von Handhabungsmängeln.</value>
@@ -186,6 +267,12 @@
   <data name="NearMintPlusDescription" xml:space="preserve">
     <value>Ein sehr gut erhaltenes Exemplar mit mehreren minimalen Herstellungs- oder handhabungsmängeln.</value>
   </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Optionen</value>
+  </data>
   <data name="PngFiles" xml:space="preserve">
     <value>Portable Network Graphics-Dateien (*.png)</value>
   </data>
@@ -201,20 +288,56 @@
   <data name="Question" xml:space="preserve">
     <value>Frage</value>
   </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="RemoveComic" xml:space="preserve">
+    <value>Comic entfernen</value>
+  </data>
   <data name="RemoveComicQuestion" xml:space="preserve">
     <value>Möchten Sie wirklich das ausgewählte Comic löschen?</value>
+  </data>
+  <data name="RemoveComicTooltip" xml:space="preserve">
+    <value>Das ausgewählte Comic entfernen.</value>
+  </data>
+  <data name="RemoveImage" xml:space="preserve">
+    <value>Bild entfernen</value>
   </data>
   <data name="RemoveLibraryQuestion" xml:space="preserve">
     <value>Möchten Sie wirklich die Bibliothek löschen? Dies kann nicht rückgängig gemacht werden.</value>
   </data>
+  <data name="RemoveOption" xml:space="preserve">
+    <value>Option entfernen</value>
+  </data>
   <data name="RemoveOptionQuestion" xml:space="preserve">
     <value>Möchten Sie wirklich die ausgewählte Option entfernen? Dies kann nicht rückgängig gemacht werden und wird die Zuordnung in allen zugeordneten Comics entfernen.</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Speichern</value>
   </data>
   <data name="SaveChangesQuestion" xml:space="preserve">
     <value>Möchten Sie die Änderungen speichern?</value>
   </data>
+  <data name="SaveLibrary" xml:space="preserve">
+    <value>Bibliothek speichern</value>
+  </data>
+  <data name="SaveLibraryTooltip" xml:space="preserve">
+    <value>Speichert die aktuelle Bibliothek.</value>
+  </data>
   <data name="SelectAFolderMessage" xml:space="preserve">
     <value>Bitte wählen Sie einen Order.</value>
+  </data>
+  <data name="Series" xml:space="preserve">
+    <value>Reihe</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Titel</value>
   </data>
   <data name="UnratedDescription" xml:space="preserve">
     <value>Noch nicht bewerted.</value>
@@ -245,5 +368,8 @@
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warnung</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Jahr</value>
   </data>
 </root>

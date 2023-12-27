@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Xml;
 using ComicLibrary.Model.Config;
 using ComicLibrary.Model.Entities;
@@ -50,68 +51,75 @@ namespace ComicLibrary.Model
       if (!File.Exists(filePath))
         return globals;
 
-      var xml = new XmlDocument();
-      xml.Load(filePath);
-
-      if (xml.FirstChild.Name == GlobalsKey)
+      try
       {
-        var globalsNode = xml.FirstChild;
+        var xml = new XmlDocument();
+        xml.Load(filePath);
 
-        foreach (XmlNode globalsChildNode in globalsNode.ChildNodes)
+        if (xml.FirstChild.Name == GlobalsKey)
         {
-          if (globalsChildNode.Name == CountriesKey)
+          var globalsNode = xml.FirstChild;
+
+          foreach (XmlNode globalsChildNode in globalsNode.ChildNodes)
           {
-            var countriesNode = globalsChildNode;
-            foreach (XmlNode countryNode in countriesNode.ChildNodes)
+            if (globalsChildNode.Name == CountriesKey)
             {
-              if (countryNode.Name == CountryKey)
+              var countriesNode = globalsChildNode;
+              foreach (XmlNode countryNode in countriesNode.ChildNodes)
               {
-                var country = new Country();
-
-                foreach (XmlAttribute countryAttribute in countryNode.Attributes)
+                if (countryNode.Name == CountryKey)
                 {
-                  if (countryAttribute.Name == IDKey)
-                  {
-                    country.ID = new Guid(countryAttribute.InnerText);
-                  }
-                  else if (countryAttribute.Name == NameKey)
-                  {
-                    country.Name = countryAttribute.InnerText;
-                  }
-                }
+                  var country = new Country();
 
-                if (!string.IsNullOrWhiteSpace(country.Name) && country.ID != Guid.Empty)
-                  globals.Countries.Add(country);
+                  foreach (XmlAttribute countryAttribute in countryNode.Attributes)
+                  {
+                    if (countryAttribute.Name == IDKey)
+                    {
+                      country.ID = new Guid(countryAttribute.InnerText);
+                    }
+                    else if (countryAttribute.Name == NameKey)
+                    {
+                      country.Name = countryAttribute.InnerText;
+                    }
+                  }
+
+                  if (!string.IsNullOrWhiteSpace(country.Name) && country.ID != Guid.Empty)
+                    globals.Countries.Add(country);
+                }
               }
             }
-          }
-          else if (globalsChildNode.Name == PublishersKey)
-          {
-            var publishersNode = globalsChildNode;
-            foreach (XmlNode publisherNode in publishersNode.ChildNodes)
+            else if (globalsChildNode.Name == PublishersKey)
             {
-              if (publisherNode.Name == PublisherKey)
+              var publishersNode = globalsChildNode;
+              foreach (XmlNode publisherNode in publishersNode.ChildNodes)
               {
-                var publisher = new Publisher();
-
-                foreach (XmlAttribute publisherAttribute in publisherNode.Attributes)
+                if (publisherNode.Name == PublisherKey)
                 {
-                  if (publisherAttribute.Name == IDKey)
-                  {
-                    publisher.ID = new Guid(publisherAttribute.InnerText);
-                  }
-                  else if (publisherAttribute.Name == NameKey)
-                  {
-                    publisher.Name = publisherAttribute.InnerText;
-                  }
-                }
+                  var publisher = new Publisher();
 
-                if (!string.IsNullOrWhiteSpace(publisher.Name) && publisher.ID != Guid.Empty)
-                  globals.Publishers.Add(publisher);
+                  foreach (XmlAttribute publisherAttribute in publisherNode.Attributes)
+                  {
+                    if (publisherAttribute.Name == IDKey)
+                    {
+                      publisher.ID = new Guid(publisherAttribute.InnerText);
+                    }
+                    else if (publisherAttribute.Name == NameKey)
+                    {
+                      publisher.Name = publisherAttribute.InnerText;
+                    }
+                  }
+
+                  if (!string.IsNullOrWhiteSpace(publisher.Name) && publisher.ID != Guid.Empty)
+                    globals.Publishers.Add(publisher);
+                }
               }
             }
           }
         }
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(string.Format(Properties.Resources.CannotLoadFileMessage, filePath) + Environment.NewLine + ex.Message);
       }
 
       return globals;
@@ -125,43 +133,50 @@ namespace ComicLibrary.Model
       if (!File.Exists(filePath))
         return libraries;
 
-      var xml = new XmlDocument();
-      xml.Load(filePath);
-
-      if (xml.FirstChild.Name == LibrariesKey)
+      try
       {
-        var librariesNode = xml.FirstChild;
+        var xml = new XmlDocument();
+        xml.Load(filePath);
 
-        foreach (XmlNode libraryNode in librariesNode.ChildNodes)
+        if (xml.FirstChild.Name == LibrariesKey)
         {
-          if (libraryNode.Name == LibraryKey)
+          var librariesNode = xml.FirstChild;
+
+          foreach (XmlNode libraryNode in librariesNode.ChildNodes)
           {
-            var library = new Library();
-
-            foreach (XmlAttribute categoryAttribute in libraryNode.Attributes)
+            if (libraryNode.Name == LibraryKey)
             {
-              if (categoryAttribute.Name == NameKey)
-              {
-                library.Name = categoryAttribute.InnerText;
-              }
-              else if (categoryAttribute.Name == FileNameKey)
-              {
-                library.FileName = categoryAttribute.InnerText;
-              }
-              else if (categoryAttribute.Name == ImageKey)
-              {
-                library.ImageAsString = categoryAttribute.InnerText;
-              }
-              else if (categoryAttribute.Name == ComicCountKey && int.TryParse(categoryAttribute.InnerText, out int comicCount))
-              {
-                library.ComicCount = comicCount;
-              }
-            }
+              var library = new Library();
 
-            if (!string.IsNullOrWhiteSpace(library.FileName) && !string.IsNullOrWhiteSpace(library.Name))
-              libraries.Add(library);
+              foreach (XmlAttribute categoryAttribute in libraryNode.Attributes)
+              {
+                if (categoryAttribute.Name == NameKey)
+                {
+                  library.Name = categoryAttribute.InnerText;
+                }
+                else if (categoryAttribute.Name == FileNameKey)
+                {
+                  library.FileName = categoryAttribute.InnerText;
+                }
+                else if (categoryAttribute.Name == ImageKey)
+                {
+                  library.ImageAsString = categoryAttribute.InnerText;
+                }
+                else if (categoryAttribute.Name == ComicCountKey && int.TryParse(categoryAttribute.InnerText, out int comicCount))
+                {
+                  library.ComicCount = comicCount;
+                }
+              }
+
+              if (!string.IsNullOrWhiteSpace(library.FileName) && !string.IsNullOrWhiteSpace(library.Name))
+                libraries.Add(library);
+            }
           }
         }
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(string.Format(Properties.Resources.CannotLoadFileMessage, filePath) + Environment.NewLine + ex.Message);
       }
 
       return libraries;
@@ -172,11 +187,20 @@ namespace ComicLibrary.Model
       if (!File.Exists(filePath))
         return new ActiveLibrary();
 
-      var xml = new XmlDocument();
-      xml.Load(filePath);
       var library = new ActiveLibrary();
 
-      ReadLibrary(library, xml);
+      try
+      {
+        var xml = new XmlDocument();
+        xml.Load(filePath);
+
+        ReadLibrary(library, xml);
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(string.Format(Properties.Resources.CannotLoadFileMessage, filePath) + Environment.NewLine + ex.Message);
+      }
+
       return library;
     }
 
@@ -290,47 +314,62 @@ namespace ComicLibrary.Model
       if (File.Exists(filePath))
       {
         string backupPath = filePath + ".bak";
-        File.Copy(filePath, backupPath, true);
-      }
 
-      var xml = new XmlDocument();
-      xml.CreateXmlDeclaration("1.0", "iso-8859-1", "yes");
-
-      var globalsNode = xml.CreateElement(GlobalsKey);
-      var childAttribute = xml.CreateAttribute(SaveDateKey);
-      childAttribute.InnerText = DateTime.Now.ToString("o"); // Uses ISO 8601 format
-      globalsNode.Attributes.Append(childAttribute);
-      xml.AppendChild(globalsNode);
-
-      if (globals.Countries.Count != 0)
-      {
-        var countriesNode = xml.CreateElement(CountriesKey);
-        globalsNode.AppendChild(countriesNode);
-
-        foreach (var country in globals.Countries.OrderBy(x => x.Name))
+        try
         {
-          AppendChildWithAttributes(countriesNode,
-                                    CountryKey,
-                                    (IDKey, country.ID.ToString()),
-                                    (NameKey, country.Name));
+          File.Copy(filePath, backupPath, true);
+        }
+        catch (Exception ex)
+        {
+          MessageBox.Show(string.Format(Properties.Resources.CannotSaveFileMessage, backupPath) + Environment.NewLine + ex.Message);
         }
       }
 
-      if (globals.Publishers.Count != 0)
+      try
       {
-        var publishersNode = xml.CreateElement(PublishersKey);
-        globalsNode.AppendChild(publishersNode);
+        var xml = new XmlDocument();
+        xml.CreateXmlDeclaration("1.0", "iso-8859-1", "yes");
 
-        foreach (var publisher in globals.Publishers.OrderBy(x => x.Name))
+        var globalsNode = xml.CreateElement(GlobalsKey);
+        var childAttribute = xml.CreateAttribute(SaveDateKey);
+        childAttribute.InnerText = DateTime.Now.ToString("o"); // Uses ISO 8601 format
+        globalsNode.Attributes.Append(childAttribute);
+        xml.AppendChild(globalsNode);
+
+        if (globals.Countries.Count != 0)
         {
-          AppendChildWithAttributes(publishersNode,
-                                    PublisherKey,
-                                    (IDKey, publisher.ID.ToString()),
-                                    (NameKey, publisher.Name));
-        }
-      }
+          var countriesNode = xml.CreateElement(CountriesKey);
+          globalsNode.AppendChild(countriesNode);
 
-      xml.Save(filePath);
+          foreach (var country in globals.Countries.OrderBy(x => x.Name))
+          {
+            AppendChildWithAttributes(countriesNode,
+                                      CountryKey,
+                                      (IDKey, country.ID.ToString()),
+                                      (NameKey, country.Name));
+          }
+        }
+
+        if (globals.Publishers.Count != 0)
+        {
+          var publishersNode = xml.CreateElement(PublishersKey);
+          globalsNode.AppendChild(publishersNode);
+
+          foreach (var publisher in globals.Publishers.OrderBy(x => x.Name))
+          {
+            AppendChildWithAttributes(publishersNode,
+                                      PublisherKey,
+                                      (IDKey, publisher.ID.ToString()),
+                                      (NameKey, publisher.Name));
+          }
+        }
+
+        xml.Save(filePath);
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(string.Format(Properties.Resources.CannotSaveFileMessage, filePath) + Environment.NewLine + ex.Message);
+      }
     }
 
     public static void SaveLibraries(IEnumerable<Library> libraries, string filePath = null)
@@ -367,13 +406,28 @@ namespace ComicLibrary.Model
       if (File.Exists(filePath))
       {
         string backupPath = filePath + ".bak";
-        File.Copy(filePath, backupPath, true);
+
+        try
+        {
+          File.Copy(filePath, backupPath, true);
+        }
+        catch (Exception ex)
+        {
+          MessageBox.Show(string.Format(Properties.Resources.CannotSaveFileMessage, backupPath) + Environment.NewLine + ex.Message);
+        }
       }
 
-      var xml = new XmlDocument();
-      xml.CreateXmlDeclaration("1.0", "iso-8859-1", "yes");
-      WriteLibrary(library, xml);
-      xml.Save(filePath);
+      try
+      {
+        var xml = new XmlDocument();
+        xml.CreateXmlDeclaration("1.0", "iso-8859-1", "yes");
+        WriteLibrary(library, xml);
+        xml.Save(filePath);
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(string.Format(Properties.Resources.CannotSaveFileMessage, filePath) + Environment.NewLine + ex.Message);
+      }
     }
 
     private static void WriteLibrary(ActiveLibrary library, XmlDocument xml)
