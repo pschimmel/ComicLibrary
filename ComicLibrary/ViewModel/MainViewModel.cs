@@ -119,13 +119,13 @@ namespace ComicLibrary.ViewModel
     {
       if (ActiveLibraries.Count > 0)
       {
-        MessageBox.Show("Please close all open libraries in order to change the path.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show(Properties.Resources.CloseLibrariesToChangePathMessage, Properties.Resources.Error, MessageBoxButton.OK, MessageBoxImage.Error);
         return;
       }
 
       using var dialog = new System.Windows.Forms.FolderBrowserDialog
       {
-        Description = "Select a folder",
+        Description = Properties.Resources.SelectAFolderMessage,
         UseDescriptionForTitle = true,
         SelectedPath = LibrariesPath,
         ShowNewFolderButton = true
@@ -133,7 +133,7 @@ namespace ComicLibrary.ViewModel
 
       if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK && dialog.SelectedPath != LibrariesPath)
       {
-        var result = MessageBox.Show("Would you like to move all XML files to the new location?", "Question", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+        var result = MessageBox.Show(Properties.Resources.MoveXMLFilesQuestion, Properties.Resources.Question, MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
         if (result == MessageBoxResult.Cancel)
           return;
 
@@ -165,11 +165,11 @@ namespace ComicLibrary.ViewModel
     {
       if (ActiveLibraries.Count > 0)
       {
-        MessageBox.Show("Please close all open libraries in order to modify options.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show(Properties.Resources.CloseLibrariesToModifyOptionsMessage, Properties.Resources.Error, MessageBoxButton.OK, MessageBoxImage.Error);
         return;
       }
 
-      var optionsVM = new EditOptionsViewModel(Globals.Instance.Countries.OrderBy(x => x.Name), typeof(Country), "Countries", "Country");
+      var optionsVM = new EditOptionsViewModel(Globals.Instance.Countries.OrderBy(x => x.Name), typeof(Country), Properties.Resources.Countries, Properties.Resources.Country);
       var view = ViewFactory.Instance.CreateView(optionsVM);
       if (view.ShowDialog() == true)
       {
@@ -188,11 +188,11 @@ namespace ComicLibrary.ViewModel
     {
       if (ActiveLibraries.Count > 0)
       {
-        MessageBox.Show("Please close all open libraries in order to modify options.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show(Properties.Resources.CloseLibrariesToModifyOptionsMessage, Properties.Resources.Error, MessageBoxButton.OK, MessageBoxImage.Error);
         return;
       }
 
-      var optionsVM = new EditOptionsViewModel(Globals.Instance.Publishers.OrderBy(x => x.Name), typeof(Publisher), "Publishers", "Publisher");
+      var optionsVM = new EditOptionsViewModel(Globals.Instance.Publishers.OrderBy(x => x.Name), typeof(Publisher), Properties.Resources.Publishers, Properties.Resources.Publisher);
       var view = ViewFactory.Instance.CreateView(optionsVM);
       if (view.ShowDialog() == true)
       {
@@ -288,7 +288,7 @@ namespace ComicLibrary.ViewModel
 
     private void CloseLibrary(ActiveLibraryViewModel libraryVM)
     {
-      var result = MessageBox.Show("Would you like to save the changes?", "Question", MessageBoxButton.YesNoCancel);
+      var result = MessageBox.Show(Properties.Resources.SaveChangesQuestion, Properties.Resources.Question, MessageBoxButton.YesNoCancel);
 
       if (result == MessageBoxResult.Cancel)
         return;
@@ -341,7 +341,7 @@ namespace ComicLibrary.ViewModel
     {
       var dialog = new OpenFileDialog
       {
-        Filter = "Jpeg Image Files (*.jpg)|*.jpg|Portable Network Graphics Files (*.png)|*.png"
+        Filter = $"{Properties.Resources.JpegFiles}|*.jpg|{Properties.Resources.PngFiles}|*.png"
       };
 
       if (dialog.ShowDialog() == true && File.Exists(dialog.FileName))
@@ -359,7 +359,7 @@ namespace ComicLibrary.ViewModel
 
     private void RemoveLibrary(LibraryViewModel vm)
     {
-      if (MessageBox.Show("Would you really like to remove the complete library? This cannot be undone.", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+      if (MessageBox.Show(Properties.Resources.RemoveLibraryQuestion, Properties.Resources.Warning, MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
       {
         Libraries.Remove(vm);
         var activeLibrary = ActiveLibraries.FirstOrDefault(x => x.Name == vm.Name);
@@ -383,7 +383,7 @@ namespace ComicLibrary.ViewModel
     {
       if (ActiveLibraries.Any())
       {
-        var result = MessageBox.Show("Would you like to save the changes?", "Question", MessageBoxButton.YesNoCancel);
+        var result = MessageBox.Show(Properties.Resources.SaveChangesQuestion, Properties.Resources.Question, MessageBoxButton.YesNoCancel);
 
         if (result == MessageBoxResult.Cancel)
           return false;

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,132 +118,132 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CloseLibrariesToChangePathMessage" xml:space="preserve">
-    <value>Please close all open libraries in order to change the path.</value>
+    <value>Bitte schließen Sie alle Bibliotheken um den Pfad zu ändern.</value>
   </data>
   <data name="CloseLibrariesToModifyOptionsMessage" xml:space="preserve">
-    <value>Please close all open libraries in order to modify options.</value>
+    <value>Bitte schließen Sie alle Bibliotheken um die Optionen zu ändern.</value>
   </data>
   <data name="Countries" xml:space="preserve">
-    <value>Countries</value>
+    <value>Länder</value>
   </data>
   <data name="Country" xml:space="preserve">
-    <value>Country</value>
+    <value>Land</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>Error</value>
+    <value>Fehler</value>
   </data>
   <data name="FairDescription" xml:space="preserve">
-    <value>A very poorly handled collectible with a heavy accumulation of major defects.</value>
+    <value>Ein sehr schlecht behandeltes Exemplar mit einer großen Ansammlung großer Mängel.</value>
   </data>
   <data name="FairGoodDescription" xml:space="preserve">
-    <value>A collectible that shows extensive evidence of handling with a heavy accumulation of major defects.</value>
+    <value>Ein Exemplar welches Anzeichen von intensiver Abnutzung zeigt und eine große Ansammlung großer Mängel hat.</value>
   </data>
   <data name="FineDescription" xml:space="preserve">
-    <value>A slightly above-average collectible with a major defect and some smaller defects, or a significant accumulation of small defects.</value>
+    <value>Ein leicht überdurchschnittliches Exemplar mit einem großen Mangel und einigen kleinen Mängeln oder  einer erheblichen Zahl kleiner Mängel.</value>
   </data>
   <data name="FineMinusDescription" xml:space="preserve">
-    <value>A slightly above-average collectible with several moderate defects.</value>
+    <value>Ein leicht überdurchschnittliches Exemplar mit mehreren mittleren Mängeln.</value>
   </data>
   <data name="FinePlusDescription" xml:space="preserve">
-    <value>An above-average collectible with a major defect and some smaller defects, or a significant accumulation of small defects.</value>
+    <value>Ein überdurchschnittliches Exemplar mit einem mittleren Mangel und mehreren kleinen Mängeln oder einer erheblichen Zahl kleiner Mängel.</value>
   </data>
   <data name="FineVeryFineDescription" xml:space="preserve">
-    <value>An above-average collectible with a major defect or an accumulation of small defects.</value>
+    <value>Ein überdurchschnittliches Exemplar mit einem größeren Mangel oder mehreren kleinen Mängeln.</value>
   </data>
   <data name="GemMintDescription" xml:space="preserve">
-    <value>The highest grade assigned. The collectible must have no evidence of any manufacturing or handling defects.</value>
+    <value>Die höchstmögliche Bewertung. Das Exemplar darf keinerlei Anzeichen von Herstellungs- oder Handhabungsmängeln aufweisen.</value>
   </data>
   <data name="GoodDescription" xml:space="preserve">
-    <value>A collectible that shows extensive evidence of handling with numerous moderate-to-major defects.</value>
+    <value>Ein Exemplar welches Anzeichen von intensiver Abnutzung zeigt und zahlreiche mittlere bis große Mängel hat.</value>
   </data>
   <data name="GoodMinusDescription" xml:space="preserve">
-    <value>A collectible that shows extensive evidence of handling with numerous major defects.</value>
+    <value>Ein Exemplar welches Anzeichen von intensiver Abnutzung zeigt und zahlreiche große Mängel hat.</value>
   </data>
   <data name="GoodPlusDescription" xml:space="preserve">
-    <value>A collectible that shows extensive evidence of handling with multiple moderate-to-major defects.</value>
+    <value>Ein Exemplar welches Anzeichen von intensiver Abnutzung zeigt und mehrere mittlere bis große Mängel hat.</value>
   </data>
   <data name="GoodVeryGoodDescription" xml:space="preserve">
-    <value>A collectible that shows significant evidence of handling with several moderate-to-major defects.</value>
+    <value>Ein Exemplar welches Anzeichen von Abnutzung zeigt und wenige mittlere bis große Mängeln hat.</value>
   </data>
   <data name="JpegFiles" xml:space="preserve">
-    <value>Jpeg Image Files (*.jpg)</value>
+    <value>Jpeg Bilddateien (*.jpg)</value>
   </data>
   <data name="MintDescription" xml:space="preserve">
-    <value>The collectible is nearly indistinguishable from a 10.0 but will have a very minor manufacturing defect. It will not have any evidence of handling defects.</value>
+    <value>Das Exemplar ist fast nicht von einer 10.0 unterscheidbar, hat jedoch sehr geringe Herstellungsmängeln. Es gibt keinerlei Anzeichen von Handhabungsmängeln.</value>
   </data>
   <data name="MoveXMLFilesQuestion" xml:space="preserve">
-    <value>Would you like to move all XML files to the new location?</value>
+    <value>Möchten sie alle XML-Dateien an den neuen Ort verschieben?</value>
   </data>
   <data name="NearMintDescription" xml:space="preserve">
-    <value>A very well-preserved collectible with minor wear and small manufacturing or handling defects.</value>
+    <value>Ein sehr gut erhaltenes Exemplar mit geringen Abnutzungs- und kleinen Herstellungs- oder handhabungsmängeln.</value>
   </data>
   <data name="NearMintMintDescription" xml:space="preserve">
-    <value>A nearly perfect collectible with negligible handling or manufacturing defects.</value>
+    <value>Ein fast perfektes Exemplar mit vernachlässigbaren Handhabungs- oder Herstellungsmängeln.</value>
   </data>
   <data name="NearMintMinusDescription" xml:space="preserve">
-    <value>A very well-preserved collectible with some wear and small manufacturing or handling defects.</value>
+    <value>Ein sehr gut erhaltenes Exemplar mit einigen Abnutzungs- und kleinen Herstellungs- oder handhabungsmängeln.</value>
   </data>
   <data name="NearMintPlusDescription" xml:space="preserve">
-    <value>A very well-preserved collectible with several minor manufacturing or handling defects.</value>
+    <value>Ein sehr gut erhaltenes Exemplar mit mehreren minimalen Herstellungs- oder handhabungsmängeln.</value>
   </data>
   <data name="PngFiles" xml:space="preserve">
-    <value>Portable Network Graphics Files (*.png)</value>
+    <value>Portable Network Graphics-Dateien (*.png)</value>
   </data>
   <data name="PoorDescription" xml:space="preserve">
-    <value>A heavily defaced collectible with a number major defects. Some pieces will also be missing.</value>
+    <value>Ein hochgradig mangelhaftes Exemplar mit einer großen Zahl großer Mängel. Einige Teile können fehlen.</value>
   </data>
   <data name="Publisher" xml:space="preserve">
-    <value>Publisher</value>
+    <value>Verlag</value>
   </data>
   <data name="Publishers" xml:space="preserve">
-    <value>Publishers</value>
+    <value>Verlage</value>
   </data>
   <data name="Question" xml:space="preserve">
-    <value>Question</value>
+    <value>Frage</value>
   </data>
   <data name="RemoveComicQuestion" xml:space="preserve">
-    <value>Would you really like to remove the selected comic?</value>
+    <value>Möchten Sie wirklich das ausgewählte Comic löschen?</value>
   </data>
   <data name="RemoveLibraryQuestion" xml:space="preserve">
-    <value>Would you really like to remove the complete library? This cannot be undone.</value>
+    <value>Möchten Sie wirklich die Bibliothek löschen? Dies kann nicht rückgängig gemacht werden.</value>
   </data>
   <data name="RemoveOptionQuestion" xml:space="preserve">
-    <value>Would you really like to remove the selected option? This cannot be undone and it will remove the property in all assigned comics.</value>
+    <value>Möchten Sie wirklich die ausgewählte Option entfernen? Dies kann nicht rückgängig gemacht werden und wird die Zuordnung in allen zugeordneten Comics entfernen.</value>
   </data>
   <data name="SaveChangesQuestion" xml:space="preserve">
-    <value>Would you like to save the changes?</value>
+    <value>Möchten Sie die Änderungen speichern?</value>
   </data>
   <data name="SelectAFolderMessage" xml:space="preserve">
-    <value>Please select a folder.</value>
+    <value>Bitte wählen Sie einen Order.</value>
   </data>
   <data name="UnratedDescription" xml:space="preserve">
-    <value>Not rated yet.</value>
+    <value>Noch nicht bewerted.</value>
   </data>
   <data name="VeryFineDescription" xml:space="preserve">
-    <value>An attractive collectible with a moderate defect or an accumulation of small defects.</value>
+    <value>Ein attraktives Exemplar mit einem mittleren Mangel oder einer Annsammlung kleinen Mängeln.</value>
   </data>
   <data name="VeryFineMinusDescription" xml:space="preserve">
-    <value>An above-average collectible with a moderate defect or an accumulation of small defects.</value>
+    <value>Ein überdurchschnittliches Exemplar mit einem mittleren Mangel oder mehreren kleinen Mängeln.</value>
   </data>
   <data name="VeryFineNearMintDescription" xml:space="preserve">
-    <value>A very well-preserved collectible with good eye appeal. There will be a number of minor handling and/or manufacturing defects.</value>
+    <value>Ein sehr gut erhaltenes Exemplar guter optischer Wirkung. Es gibt eine Zahl geringer, kleiner Herstellungs- oder handhabungsmängeln.</value>
   </data>
   <data name="VeryFinePlusDescription" xml:space="preserve">
-    <value>An attractive collectible with a moderate defect or a number of small defects.</value>
+    <value>Ein attraktives Exemplar mit einem mittleren Mangel oder mehreren kleinen Mängeln.</value>
   </data>
   <data name="VeryGoodDescription" xml:space="preserve">
-    <value>A below-average collectible with multiple moderate defects.</value>
+    <value>Ein unterdurchschnittliches Exemplar mit mehreren mittleren Mängeln.</value>
   </data>
   <data name="VeryGoodFineDescription" xml:space="preserve">
-    <value>An average collectible with several moderate defects.</value>
+    <value>Ein durchschnittliches Exemplar mit mehreren mittleren Mängeln.</value>
   </data>
   <data name="VeryGoodMinusDescription" xml:space="preserve">
-    <value>A below-average collectible with several major defects or an accumulation of multiple moderate defects.</value>
+    <value>Ein unterdurchschnittliches Exemplar mit mehreren größeren Mängeln oder einer Anzahl mittleren Mängeln.</value>
   </data>
   <data name="VeryGoodPlusDescription" xml:space="preserve">
-    <value>A slightly below-average collectible with multiple moderate defects.</value>
+    <value>Ein leicht unterdurchschnittliches Exemplar mit mehreren mittleren Mängeln.</value>
   </data>
   <data name="Warning" xml:space="preserve">
-    <value>Warning</value>
+    <value>Warnung</value>
   </data>
 </root>

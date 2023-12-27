@@ -117,7 +117,7 @@ namespace ComicLibrary.ViewModel
     {
       var dialog = new OpenFileDialog
       {
-        Filter = "Jpeg Image Files (*.jpg)|*.jpg|Portable Network Graphics Files (*.png)|*.png"
+        Filter = $"{Properties.Resources.JpegFiles}|*.jpg|{Properties.Resources.PngFiles}|*.png"
       };
 
       if (dialog.ShowDialog() == true && File.Exists(dialog.FileName))

@@ -79,7 +79,7 @@ namespace ComicLibrary.ViewModel
 
     private void RemoveOption()
     {
-      if (MessageBox.Show("Would you really like to remove the selected option? This cannot be undone and it will remove the property in all assigned comics.", "Warning", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
+      if (MessageBox.Show(Properties.Resources.RemoveOptionQuestion, Properties.Resources.Warning, MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
       {
         Options.Remove(SelectedOption);
       }

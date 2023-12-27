@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using ComicLibrary.Model;
 using ComicLibrary.Model.Entities;
@@ -113,9 +114,12 @@ namespace ComicLibrary.ViewModel
 
     private void RemoveComic()
     {
-      Comics.Remove(SelectedComic);
-      SelectedComic = null;
-      _libraryTemplate.ComicCount = Comics.Count;
+      if (MessageBox.Show(Properties.Resources.RemoveComicQuestion, Properties.Resources.Question, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+      {
+        Comics.Remove(SelectedComic);
+        SelectedComic = null;
+        _libraryTemplate.ComicCount = Comics.Count;
+      }
     }
 
     private bool CanRemoveComic()

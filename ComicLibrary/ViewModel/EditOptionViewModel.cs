@@ -2,8 +2,7 @@
 
 namespace ComicLibrary.ViewModel
 {
-  public class EditOptionViewModel
-    : ES.Tools.Core.MVVM.ViewModel
+  public class EditOptionViewModel : ES.Tools.Core.MVVM.ViewModel
   {
     public EditOptionViewModel(IOption option, string header)
     {
