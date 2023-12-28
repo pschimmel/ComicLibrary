@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Windows.Media.Imaging;
 using ComicLibrary.Model.Config;
 using ComicLibrary.Model.Entities;
@@ -56,10 +57,22 @@ namespace ComicLibrary.ViewModel
     {
       if (File.Exists(filePath))
       {
-        bool isPng = Path.GetExtension(filePath).Equals(".png", StringComparison.CurrentCultureIgnoreCase);
-        var bitmap = new BitmapImage(new Uri(filePath, UriKind.Absolute));
-        ComicImage = new ComicImageViewModel(ImageHelpers.ToArray(bitmap, isPng));
+        try
+        {
+          bool isPng = Path.GetExtension(filePath).Equals(".png", StringComparison.CurrentCultureIgnoreCase);
+          var bitmap = new BitmapImage(new Uri(filePath, UriKind.Absolute));
+          ComicImage = new ComicImageViewModel(ImageHelpers.ToArray(bitmap, isPng));
+        }
+        catch (Exception ex)
+        {
+          Debug.Fail("Cannot read image: " + ex.Message);
+        }
       }
+    }
+
+    public void ClearImage()
+    {
+      ComicImage = null;
     }
   }
 }

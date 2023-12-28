@@ -303,6 +303,9 @@
   <data name="RemoveImage" xml:space="preserve">
     <value>Remove Image</value>
   </data>
+  <data name="RemoveLibrary" xml:space="preserve">
+    <value>Remove Library</value>
+  </data>
   <data name="RemoveLibraryQuestion" xml:space="preserve">
     <value>Would you really like to remove the complete library? This cannot be undone.</value>
   </data>

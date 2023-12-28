@@ -303,6 +303,9 @@
   <data name="RemoveImage" xml:space="preserve">
     <value>Bild entfernen</value>
   </data>
+  <data name="RemoveLibrary" xml:space="preserve">
+    <value>Bibliothek entfernen</value>
+  </data>
   <data name="RemoveLibraryQuestion" xml:space="preserve">
     <value>Möchten Sie wirklich die Bibliothek löschen? Dies kann nicht rückgängig gemacht werden.</value>
   </data>

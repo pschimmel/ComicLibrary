@@ -236,19 +236,9 @@ namespace ComicLibrary.ViewModel
       var view = Comics.GetView();
       view.Filter = string.IsNullOrWhiteSpace(SearchText) || SearchText.Length > 2
                     ? null
-                    : x =>
-                    {
-                      if (x is not ComicViewModel c)
-                        return false;
-
-                      if (!string.IsNullOrWhiteSpace(c.Series))
-                        return c.Series.Contains(SearchText, StringComparison.InvariantCultureIgnoreCase);
-
-                      if (!string.IsNullOrWhiteSpace(c.Title))
-                        return c.Title.Contains(SearchText, StringComparison.InvariantCultureIgnoreCase);
-
-                      return false;
-                    };
+                    : x => x is ComicViewModel c
+                           && ((!string.IsNullOrWhiteSpace(c.Series) && c.Series.Contains(SearchText, StringComparison.InvariantCultureIgnoreCase)) ||
+                               (!string.IsNullOrWhiteSpace(c.Title)) && c.Title.Contains(SearchText, StringComparison.InvariantCultureIgnoreCase));
     }
 
     #endregion

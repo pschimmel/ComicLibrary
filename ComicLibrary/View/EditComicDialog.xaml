@@ -75,22 +75,22 @@
     <TextBlock Grid.Row="1" Text="{x:Static properties:Resources.Series}" />
     <TextBox Grid.Row="1"
              Grid.Column="1"
-             Text="{Binding Series}" />
+             Text="{Binding Series, UpdateSourceTrigger=PropertyChanged}" />
 
     <TextBlock Grid.Row="2" Text="{x:Static properties:Resources.Year}" />
     <TextBox Grid.Row="2"
              Grid.Column="1"
-             Text="{Binding Year}" />
+             Text="{Binding Year, UpdateSourceTrigger=PropertyChanged}" />
 
     <TextBlock Grid.Row="3" Text="{x:Static properties:Resources.IssueNumber}" />
     <TextBox Grid.Row="3"
              Grid.Column="1"
-             Text="{Binding IssueNumber}" />
+             Text="{Binding IssueNumber, UpdateSourceTrigger=PropertyChanged}" />
 
     <TextBlock Grid.Row="4" Text="{x:Static properties:Resources.Title}" />
     <TextBox Grid.Row="4"
              Grid.Column="1"
-             Text="{Binding Title}" />
+             Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
 
     <TextBlock Grid.Row="5" Text="{x:Static properties:Resources.Condition}" />
     <DockPanel Grid.Row="5" Grid.Column="1">
@@ -110,14 +110,14 @@
               Grid.Column="1"
               DisplayMemberPath="Name"
               ItemsSource="{Binding Publishers}"
-              SelectedItem="{Binding Publisher}" />
+              SelectedItem="{Binding Publisher, UpdateSourceTrigger=PropertyChanged}" />
 
     <TextBlock Grid.Row="7" Text="{x:Static properties:Resources.Country}" />
     <ComboBox Grid.Row="7"
               Grid.Column="1"
               DisplayMemberPath="Name"
               ItemsSource="{Binding Countries}"
-              SelectedItem="{Binding Country}" />
+              SelectedItem="{Binding Country, UpdateSourceTrigger=PropertyChanged}" />
 
     <TextBlock Grid.Row="8"
                VerticalAlignment="Top"
@@ -127,7 +127,7 @@
              VerticalAlignment="Stretch"
              AcceptsReturn="True"
              Style="{StaticResource MultiLineTextBox}"
-             Text="{Binding Comment}"
+             Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}"
              TextWrapping="Wrap"
              VerticalScrollBarVisibility="Visible" />
 
@@ -137,10 +137,10 @@
                 Orientation="Horizontal">
       <CheckBox Margin="2"
                 Content="{x:Static properties:Resources.CollectorsEdition}"
-                IsChecked="{Binding CollectorsEdition}" />
+                IsChecked="{Binding CollectorsEdition, UpdateSourceTrigger=PropertyChanged}" />
       <CheckBox Margin="2"
                 Content="{x:Static properties:Resources.LimitedEdition}"
-                IsChecked="{Binding LimitedEdition}" />
+                IsChecked="{Binding LimitedEdition, UpdateSourceTrigger=PropertyChanged}" />
     </StackPanel>
 
     <TextBlock Grid.Row="1"

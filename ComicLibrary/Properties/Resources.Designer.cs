@@ -619,6 +619,15 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove Library.
+        /// </summary>
+        public static string RemoveLibrary {
+            get {
+                return ResourceManager.GetString("RemoveLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Would you really like to remove the complete library? This cannot be undone..
         /// </summary>
         public static string RemoveLibraryQuestion {

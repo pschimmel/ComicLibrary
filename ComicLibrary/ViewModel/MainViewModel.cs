@@ -30,6 +30,7 @@ namespace ComicLibrary.ViewModel
     private ActionCommand<ActiveLibraryViewModel> _closeLibraryCommand;
     private ActionCommand _addLibraryCommand;
     private ActionCommand<LibraryViewModel> _changeLibraryImageCommand;
+    private ActionCommand<LibraryViewModel> _removeLibraryImageCommand;
     private ActionCommand<LibraryViewModel> _removeLibraryCommand;
 
     #endregion
@@ -352,6 +353,17 @@ namespace ComicLibrary.ViewModel
         vm.LoadImage(dialog.FileName);
         SaveLibraries();
       }
+    }
+
+    #endregion
+
+    #region Remove Library Image
+
+    public ICommand RemoveLibraryImageCommand => _removeLibraryImageCommand ??= new ActionCommand<LibraryViewModel>(RemoveLibraryImage);
+
+    private void RemoveLibraryImage(LibraryViewModel vm)
+    {
+      vm.ClearImage();
     }
 
     #endregion

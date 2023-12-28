@@ -1,0 +1,212 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+                    xmlns:controls="clr-namespace:ES.Tools.Controls;assembly=ES.Tools"
+                    xmlns:localBehaviors="clr-namespace:ComicLibrary.View.Behaviors"
+                    xmlns:properties="clr-namespace:ComicLibrary.Properties"
+                    xmlns:toolsUI="clr-namespace:ES.Tools.UI;assembly=ES.Tools"
+                    xmlns:vm="clr-namespace:ComicLibrary.ViewModel">
+  <ResourceDictionary.MergedDictionaries>
+    <toolsUI:SharedResourceDictionary Source="pack://application:,,,/ComicLibrary;Component/View/CommonResources.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+
+  <DataTemplate DataType="{x:Type vm:LibraryViewModel}">
+    <Border x:Name="Border"
+            Width="80"
+            Height="100"
+            Margin="5"
+            Background="White"
+            BorderBrush="Gray"
+            BorderThickness="1"
+            Cursor="Hand"
+            ToolTip="{Binding Name}">
+      <Border.Resources>
+        <controls:BindingProxy x:Key="Proxy" Data="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+      </Border.Resources>
+      <Border.ContextMenu>
+        <ContextMenu>
+          <MenuItem Command="{Binding Data.ChangeLibraryImageCommand, Source={StaticResource Proxy}}"
+                    CommandParameter="{Binding}"
+                    Header="{x:Static properties:Resources.ChangeImage}">
+            <MenuItem.Icon>
+              <controls:AutoGrayableImage Source="pack://application:,,,/ComicLibrary;component/Images/Photo.png" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <MenuItem Command="{Binding Data.RemoveLibraryImageCommand, Source={StaticResource Proxy}}"
+                    CommandParameter="{Binding}"
+                    Header="{x:Static properties:Resources.RemoveImage}">
+            <MenuItem.Icon>
+              <controls:AutoGrayableImage Source="pack://application:,,,/ComicLibrary;component/Images/RemovePhoto.png" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <Separator/>
+          <MenuItem Command="{Binding Data.RemoveLibraryCommand, Source={StaticResource Proxy}}"
+                    CommandParameter="{Binding}"
+                    Header="{x:Static properties:Resources.RemoveLibrary}">
+            <MenuItem.Icon>
+              <controls:AutoGrayableImage Source="pack://application:,,,/ComicLibrary;component/Images/Remove.png" />
+            </MenuItem.Icon>
+          </MenuItem>
+        </ContextMenu>
+      </Border.ContextMenu>
+      <behaviors:Interaction.Triggers>
+        <behaviors:EventTrigger EventName="MouseLeftButtonUp">
+          <behaviors:InvokeCommandAction Command="{Binding DataContext.LoadLibraryCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}" />
+        </behaviors:EventTrigger>
+      </behaviors:Interaction.Triggers>
+      <Grid>
+        <Image Margin="2"
+               Source="{Binding ComicImage.Image}"
+               Stretch="Uniform" />
+        <TextBlock Margin="2"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="14"
+                   FontWeight="Bold"
+                   Text="{Binding Name}"
+                   TextAlignment="Center"
+                   TextTrimming="CharacterEllipsis"
+                   TextWrapping="Wrap">
+          <TextBlock.Style>
+            <Style TargetType="TextBlock">
+              <Setter Property="Visibility" Value="Collapsed" />
+              <Style.Triggers>
+                <DataTrigger Binding="{Binding ComicImage}" Value="{x:Null}">
+                  <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+              </Style.Triggers>
+            </Style>
+          </TextBlock.Style>
+        </TextBlock>
+        <TextBlock Margin="2,0"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   FontWeight="Bold"
+                   Text="{Binding ComicCount}" />
+      </Grid>
+    </Border>
+  </DataTemplate>
+
+  <DataTemplate DataType="{x:Type vm:ActiveLibraryViewModel}">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition />
+      </Grid.RowDefinitions>
+      <TextBlock FontWeight="Bold" Text="{Binding Name}" />
+      <DockPanel Grid.Row="1">
+        <Image Width="12"
+               Height="12"
+               Margin="2"
+               VerticalAlignment="Center"
+               DockPanel.Dock="Right"
+               Source="pack://application:,,,/ComicLibrary;component/Images/Close.png">
+          <behaviors:Interaction.Triggers>
+            <behaviors:EventTrigger EventName="MouseLeftButtonUp">
+              <behaviors:InvokeCommandAction Command="{Binding ClearSearchTextCommand}" />
+            </behaviors:EventTrigger>
+          </behaviors:Interaction.Triggers>
+        </Image>
+        <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=250}" />
+      </DockPanel>
+      <DataGrid Grid.Row="2"
+                localBehaviors:ScrollIntoViewBehavior.SelectingItem="{Binding SelectedComic}"
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                ItemsSource="{Binding Comics}"
+                SelectedItem="{Binding SelectedComic}">
+        <behaviors:Interaction.Behaviors>
+          <localBehaviors:SingleClickEditingBehavior />
+        </behaviors:Interaction.Behaviors>
+        <DataGrid.Resources>
+          <controls:BindingProxy x:Key="Proxy" Data="{Binding}" />
+        </DataGrid.Resources>
+        <DataGrid.RowStyle>
+          <Style TargetType="DataGridRow">
+            <Style.Triggers>
+              <DataTrigger Binding="{Binding CollectorsEdition}" Value="True">
+                <Setter Property="Background" Value="LightCyan" />
+              </DataTrigger>
+              <DataTrigger Binding="{Binding LimitedEdition}" Value="True">
+                <Setter Property="Background" Value="Cyan" />
+              </DataTrigger>
+            </Style.Triggers>
+          </Style>
+        </DataGrid.RowStyle>
+        <DataGrid.Columns>
+          <DataGridTextColumn Binding="{Binding Series, UpdateSourceTrigger=PropertyChanged}" Header="{x:Static properties:Resources.Series}">
+            <DataGridTextColumn.ElementStyle>
+              <Style TargetType="TextBlock">
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="Margin" Value="2,0" />
+              </Style>
+            </DataGridTextColumn.ElementStyle>
+          </DataGridTextColumn>
+          <DataGridTextColumn Binding="{Binding Year, UpdateSourceTrigger=PropertyChanged}" Header="{x:Static properties:Resources.Year}">
+            <DataGridTextColumn.ElementStyle>
+              <Style TargetType="TextBlock">
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="Margin" Value="2,0" />
+              </Style>
+            </DataGridTextColumn.ElementStyle>
+          </DataGridTextColumn>
+          <DataGridTextColumn Binding="{Binding IssueNumber, UpdateSourceTrigger=PropertyChanged}" Header="{x:Static properties:Resources.IssueNumber}">
+            <DataGridTextColumn.ElementStyle>
+              <Style TargetType="TextBlock">
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="Margin" Value="2,0" />
+              </Style>
+            </DataGridTextColumn.ElementStyle>
+          </DataGridTextColumn>
+          <DataGridTextColumn Binding="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Header="{x:Static properties:Resources.Title}">
+            <DataGridTextColumn.ElementStyle>
+              <Style TargetType="TextBlock">
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="Margin" Value="2,0" />
+              </Style>
+            </DataGridTextColumn.ElementStyle>
+          </DataGridTextColumn>
+          <DataGridTemplateColumn Header="{x:Static properties:Resources.Condition}">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <ContentControl Content="{Binding Condition}" ContentTemplate="{StaticResource ConditionTemplate}" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+            <DataGridTemplateColumn.CellEditingTemplate>
+              <DataTemplate>
+                <ComboBox Grid.IsSharedSizeScope="True"
+                          ItemTemplate="{StaticResource ConditionTemplate}"
+                          ItemsSource="{Binding Data.Conditions, Source={StaticResource Proxy}}"
+                          SelectedItem="{Binding Condition, UpdateSourceTrigger=PropertyChanged}" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellEditingTemplate>
+          </DataGridTemplateColumn>
+          <DataGridComboBoxColumn DisplayMemberPath="Name"
+                                  Header="{x:Static properties:Resources.Publisher}"
+                                  ItemsSource="{Binding Data.Publishers, Source={StaticResource Proxy}}"
+                                  SelectedItemBinding="{Binding Publisher, UpdateSourceTrigger=PropertyChanged}" />
+          <DataGridComboBoxColumn DisplayMemberPath="Name"
+                                  Header="{x:Static properties:Resources.Country}"
+                                  ItemsSource="{Binding Data.Countries, Source={StaticResource Proxy}}"
+                                  SelectedItemBinding="{Binding Country, UpdateSourceTrigger=PropertyChanged}" />
+          <DataGridTemplateColumn>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <Button Margin="-2"
+                        Padding="2,0"
+                        Command="{Binding EditComicCommand}"
+                        CommandParameter="{Binding}">
+                  <TextBlock Text="{x:Static properties:Resources.Edit}" />
+                </Button>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+        </DataGrid.Columns>
+      </DataGrid>
+    </Grid>
+  </DataTemplate>
+
+</ResourceDictionary>

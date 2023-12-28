@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Windows.Controls;
 using ComicLibrary.ViewModel;
 
 namespace ComicLibrary
@@ -25,17 +24,6 @@ namespace ComicLibrary
 
       if (VM.OnClosing() == false)
         e.Cancel = true;
-    }
-
-    private void DataGridCell_Selected(object sender, System.Windows.RoutedEventArgs e)
-    {
-      // Lookup for the source to be DataGridCell
-      if (e.OriginalSource.GetType() == typeof(DataGridCell))
-      {
-        // Starts the Edit on the row;
-        DataGrid dataGrid = (DataGrid)sender;
-        dataGrid.BeginEdit(e);
-      }
     }
   }
 }

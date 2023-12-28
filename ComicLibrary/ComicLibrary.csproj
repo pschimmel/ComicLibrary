@@ -20,6 +20,7 @@
     <None Remove="Images\Options.png" />
     <None Remove="Images\Photo.png" />
     <None Remove="Images\Remove.png" />
+    <None Remove="Images\RemovePhoto.png" />
     <None Remove="Images\Save.png" />
     <None Remove="Images\Settings.png" />
   </ItemGroup>
@@ -43,6 +44,7 @@
     <Resource Include="Images\Folder.png" />
     <Resource Include="Images\Icon.png" />
     <Resource Include="Images\Options.png" />
+    <Resource Include="Images\RemovePhoto.png" />
     <Resource Include="Images\Photo.png" />
     <Resource Include="Images\Remove.png" />
     <Resource Include="Images\Save.png" />
