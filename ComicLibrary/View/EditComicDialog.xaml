@@ -97,9 +97,9 @@
       <Button Margin="2"
               Padding="5,0"
               Command="{Binding SelectGradeCommand}"
-              DockPanel.Dock="Right">
-        ...
-      </Button>
+              Content="..."
+              DockPanel.Dock="Right"
+              ToolTip="{x:Static properties:Resources.Grading}" />
       <ContentControl Margin="2"
                       Content="{Binding Condition}"
                       ContentTemplate="{StaticResource ConditionTemplate}" />

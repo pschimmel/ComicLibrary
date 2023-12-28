@@ -19,11 +19,14 @@ namespace ComicLibrary.View.Behaviors
 
     static void OnSelectingItemChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
     {
-      if (sender is not DataGrid grid || grid.SelectedItem == null)
+      if (sender is not DataGrid grid)
         return;
 
       grid.Dispatcher.InvokeAsync(() =>
       {
+        if (grid.SelectedItem == null)
+          return;
+
         grid.UpdateLayout();
         grid.ScrollIntoView(grid.SelectedItem, null);
       });

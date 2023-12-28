@@ -15,6 +15,7 @@ namespace ComicLibrary.ViewModel
     private readonly IEnumerable<IOptionItemViewModel<Publisher>> _publishers;
     private readonly IEnumerable<IOptionItemViewModel<Country>> _countries;
     private ActionCommand _editComicCommand;
+    private bool _isDirty;
 
     #endregion
 
@@ -36,6 +37,7 @@ namespace ComicLibrary.ViewModel
       Condition = comic.Condition;
       Publisher = _publishers.FirstOrDefault(x => x.Option == comic.Publisher);
       Country = _countries.FirstOrDefault(x => x.Option == comic.Country);
+      _isDirty = false;
     }
 
     #endregion
@@ -45,31 +47,71 @@ namespace ComicLibrary.ViewModel
     public string Series
     {
       get => _comic.Series;
-      set => _comic.Series = value;
+      set
+      {
+        if (_comic.Series != value)
+        {
+          _comic.Series = value;
+          OnPropertyChanged(nameof(Series));
+          IsDirty = true;
+        }
+      }
     }
 
     public int? Year
     {
       get => _comic.Year;
-      set => _comic.Year = value;
+      set
+      {
+        if (_comic.Year != value)
+        {
+          _comic.Year = value;
+          OnPropertyChanged(nameof(Year));
+          IsDirty = true;
+        }
+      }
     }
 
     public int? IssueNumber
     {
       get => _comic.IssueNumber;
-      set => _comic.IssueNumber = value;
+      set
+      {
+        if (_comic.IssueNumber != value)
+        {
+          _comic.IssueNumber = value;
+          OnPropertyChanged(nameof(IssueNumber));
+          IsDirty = true;
+        }
+      }
     }
 
     public string Title
     {
       get => _comic.Title;
-      set => _comic.Title = value;
+      set
+      {
+        if (_comic.Title != value)
+        {
+          _comic.Title = value;
+          OnPropertyChanged(nameof(Title));
+          IsDirty = true;
+        }
+      }
     }
 
     public Grade Condition
     {
       get => _comic.Condition;
-      set => _comic.Condition = value;
+      set
+      {
+        if (_comic.Condition != value)
+        {
+          _comic.Condition = value;
+          OnPropertyChanged(nameof(Condition));
+          IsDirty = true;
+        }
+      }
     }
 
     public bool CollectorsEdition => _comic.CollectorsEdition;
@@ -79,16 +121,45 @@ namespace ComicLibrary.ViewModel
     public IOptionItemViewModel<Publisher> Publisher
     {
       get => _publishers.FirstOrDefault(x => x.Option == _comic.Publisher) ?? _publishers.Single(x => x.IsEmpty);
-      set => _comic.Publisher = value.Option;
+      set
+      {
+        if (_comic.Publisher != value.Option)
+        {
+          _comic.Publisher = value.Option;
+          OnPropertyChanged(nameof(Publisher));
+          IsDirty = true;
+        }
+      }
     }
 
     public IOptionItemViewModel<Country> Country
     {
       get => _countries.FirstOrDefault(x => x.Option == _comic.Country) ?? _countries.Single(x => x.IsEmpty);
-      set => _comic.Country = value.Option;
+      set
+      {
+        if (_comic.Country != value.Option)
+        {
+          _comic.Country = value.Option;
+          OnPropertyChanged(nameof(Country));
+          IsDirty = true;
+        }
+      }
     }
 
     public int ImagesCount => _comic.ImagesAsString.Count;
+
+    public bool IsDirty
+    {
+      get => _isDirty;
+      set
+      {
+        if (_isDirty != value)
+        {
+          _isDirty = value;
+          OnPropertyChanged(nameof(IsDirty));
+        }
+      }
+    }
 
     #endregion
 
@@ -103,7 +174,10 @@ namespace ComicLibrary.ViewModel
       var vm = new EditComicViewModel(_comic, _libraryName);
       var view = ViewFactory.Instance.CreateView(vm);
       if (view.ShowDialog() == true)
+      {
         Refresh();
+        IsDirty = true;
+      }
     }
 
     #endregion

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -20,6 +22,7 @@ namespace ComicLibrary.ViewModel
     private ActionCommand _removeComicCommand;
     private ActionCommand _saveLibraryCommand;
     private ActionCommand _clearSearchTextCommand;
+    private bool _isDirty;
 
     #endregion
 
@@ -29,18 +32,29 @@ namespace ComicLibrary.ViewModel
     {
       _libraryTemplate = libraryTemplate;
       Conditions = Grade.Grades;
+
       Publishers =
       [
         new EmptyOptionItemViewModel<Publisher>(),
         .. Globals.Instance.Publishers.OrderBy(x => x.Name).Select(x => new OptionItemViewModel<Publisher>(x))
       ];
+
       Countries =
       [
         new EmptyOptionItemViewModel<Country>(),
         .. Globals.Instance.Countries.OrderBy(x => x.Name).Select(x => new OptionItemViewModel<Country>(x))
       ];
-      Comics = new ObservableCollection<ComicViewModel>(library.Comics.Select(x => new ComicViewModel(x, Name, Publishers, Countries)));
+
+      Comics = [];
+      Comics.CollectionChanged += Comics_CollectionChanged;
+
+      foreach (var comic in library.Comics)
+      {
+        Comics.Add(new ComicViewModel(comic, Name, Publishers, Countries));
+      }
+
       libraryTemplate.ComicCount = Comics.Count;
+      _isDirty = false;
     }
 
     #endregion
@@ -89,6 +103,8 @@ namespace ComicLibrary.ViewModel
       }
     }
 
+    public bool IsDirty => _isDirty || Comics.Any(x => x.IsDirty);
+
     #endregion
 
     #region Commands
@@ -131,11 +147,21 @@ namespace ComicLibrary.ViewModel
 
     #region Save Library 
 
-    public ICommand SaveLibraryCommand => _saveLibraryCommand ??= new ActionCommand(SaveLibrary);
+    public ICommand SaveLibraryCommand => _saveLibraryCommand ??= new ActionCommand(SaveLibrary, CanSaveLibrary);
 
     private void SaveLibrary()
     {
       FileHelper.SaveActiveLibrary(ToModel(), Path);
+
+      foreach (var comic in Comics)
+      {
+        comic.IsDirty = false;
+      }
+    }
+
+    private bool CanSaveLibrary()
+    {
+      return IsDirty;
     }
 
     #endregion
@@ -167,6 +193,43 @@ namespace ComicLibrary.ViewModel
     #endregion
 
     #region Private Methods
+
+    private void Comics_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    {
+      if (e.Action == NotifyCollectionChangedAction.Reset)
+      {
+        foreach (var oldItem in Comics)
+        {
+          oldItem.PropertyChanged += Comic_PropertyChanged;
+        }
+      }
+      else
+      {
+        if (e.NewItems != null)
+        {
+          foreach (var newItem in e.NewItems.OfType<ComicViewModel>())
+          {
+            newItem.PropertyChanged += Comic_PropertyChanged;
+          }
+        }
+        if (e.OldItems != null)
+        {
+          foreach (var oldItem in e.OldItems.OfType<ComicViewModel>())
+          {
+            oldItem.PropertyChanged -= Comic_PropertyChanged;
+          }
+        }
+      }
+
+      _isDirty = true;
+      OnPropertyChanged(nameof(IsDirty));
+    }
+
+    private void Comic_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+      if (e.PropertyName == nameof(ComicViewModel.IsDirty))
+        OnPropertyChanged(nameof(IsDirty));
+    }
 
     private void ApplyFilter()
     {

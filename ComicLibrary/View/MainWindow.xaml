@@ -303,6 +303,16 @@
           <fluent:RibbonGroupBox Name="Library"
                                  DataContext="{Binding SelectedLibrary}"
                                  Header="{x:Static properties:Resources.CurrentLibrary}">
+            <fluent:RibbonGroupBox.Style>
+              <Style TargetType="{x:Type fluent:RibbonGroupBox}">
+                <Setter Property="IsEnabled" Value="True" />
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                    <Setter Property="IsEnabled" Value="False" />
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </fluent:RibbonGroupBox.Style>
             <fluent:Button Command="{Binding SaveLibraryCommand}"
                            Header="{x:Static properties:Resources.Save}"
                            LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Save.png"
@@ -315,6 +325,16 @@
           <fluent:RibbonGroupBox Name="Comic"
                                  DataContext="{Binding SelectedLibrary}"
                                  Header="{x:Static properties:Resources.Comic}">
+            <fluent:RibbonGroupBox.Style>
+              <Style TargetType="{x:Type fluent:RibbonGroupBox}">
+                <Setter Property="IsEnabled" Value="True" />
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                    <Setter Property="IsEnabled" Value="False" />
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </fluent:RibbonGroupBox.Style>
             <fluent:Button Command="{Binding AddComicCommand}"
                            Header="{x:Static properties:Resources.Add}"
                            LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Add.png"

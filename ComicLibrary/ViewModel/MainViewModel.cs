@@ -288,15 +288,18 @@ namespace ComicLibrary.ViewModel
 
     private void CloseLibrary(ActiveLibraryViewModel libraryVM)
     {
-      var result = MessageBox.Show(Properties.Resources.SaveChangesQuestion, Properties.Resources.Question, MessageBoxButton.YesNoCancel);
-
-      if (result == MessageBoxResult.Cancel)
-        return;
-
-      if (result == MessageBoxResult.Yes)
+      if (libraryVM.IsDirty)
       {
-        var model = libraryVM.ToModel();
-        FileHelper.SaveActiveLibrary(model, libraryVM.Path);
+        var result = MessageBox.Show(Properties.Resources.SaveChangesQuestion, Properties.Resources.Question, MessageBoxButton.YesNoCancel);
+
+        if (result == MessageBoxResult.Cancel)
+          return;
+
+        if (result == MessageBoxResult.Yes)
+        {
+          var model = libraryVM.ToModel();
+          FileHelper.SaveActiveLibrary(model, libraryVM.Path);
+        }
       }
 
       ActiveLibraries.Remove(libraryVM);
@@ -381,7 +384,7 @@ namespace ComicLibrary.ViewModel
 
     public bool OnClosing()
     {
-      if (ActiveLibraries.Any())
+      if (ActiveLibraries.Any(x => x.IsDirty))
       {
         var result = MessageBox.Show(Properties.Resources.SaveChangesQuestion, Properties.Resources.Question, MessageBoxButton.YesNoCancel);
 
@@ -390,7 +393,7 @@ namespace ComicLibrary.ViewModel
 
         if (result == MessageBoxResult.Yes)
         {
-          Parallel.ForEach(ActiveLibraries, library =>
+          Parallel.ForEach(ActiveLibraries.Where(x => x.IsDirty), library =>
           {
             var model = library.ToModel();
             FileHelper.SaveActiveLibrary(model, library.Path);
