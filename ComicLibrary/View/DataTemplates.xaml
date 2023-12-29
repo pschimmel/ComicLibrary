@@ -39,7 +39,14 @@
               <controls:AutoGrayableImage Source="pack://application:,,,/ComicLibrary;component/Images/RemovePhoto.png" />
             </MenuItem.Icon>
           </MenuItem>
-          <Separator/>
+          <MenuItem Command="{Binding Data.ExportLibraryImageCommand, Source={StaticResource Proxy}}"
+                    CommandParameter="{Binding}"
+                    Header="{x:Static properties:Resources.ExportImage}">
+            <MenuItem.Icon>
+              <controls:AutoGrayableImage Source="pack://application:,,,/ComicLibrary;component/Images/ExportPhoto.png" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <Separator />
           <MenuItem Command="{Binding Data.RemoveLibraryCommand, Source={StaticResource Proxy}}"
                     CommandParameter="{Binding}"
                     Header="{x:Static properties:Resources.RemoveLibrary}">

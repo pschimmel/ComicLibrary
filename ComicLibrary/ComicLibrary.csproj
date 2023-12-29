@@ -14,6 +14,7 @@
     <None Remove="Images\CancelSmall.png" />
     <None Remove="Images\Close.png" />
     <None Remove="Images\Edit.png" />
+    <None Remove="Images\ExportPhoto.png" />
     <None Remove="Images\Folder.png" />
     <None Remove="Images\Icon.png" />
     <None Remove="Images\Logo.png" />
@@ -44,6 +45,7 @@
     <Resource Include="Images\Folder.png" />
     <Resource Include="Images\Icon.png" />
     <Resource Include="Images\Options.png" />
+    <Resource Include="Images\ExportPhoto.png" />
     <Resource Include="Images\RemovePhoto.png" />
     <Resource Include="Images\Photo.png" />
     <Resource Include="Images\Remove.png" />

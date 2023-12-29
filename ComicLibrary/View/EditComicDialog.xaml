@@ -190,6 +190,13 @@
                         <controls:AutoGrayableImage Source="pack://application:,,,/ComicLibrary;component/Images/Remove.png" />
                       </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Command="{Binding Data.ExportImageCommand, Source={StaticResource Proxy}}"
+                              CommandParameter="{Binding}"
+                              Header="{x:Static properties:Resources.ExportImage}">
+                      <MenuItem.Icon>
+                        <controls:AutoGrayableImage Source="pack://application:,,,/ComicLibrary;component/Images/ExportPhoto.png" />
+                      </MenuItem.Icon>
+                    </MenuItem>
                   </ContextMenu>
                 </Border.ContextMenu>
                 <Image Width="78"

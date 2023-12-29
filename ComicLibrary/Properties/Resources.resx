@@ -186,6 +186,9 @@
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="ExportImage" xml:space="preserve">
+    <value>Export Image</value>
+  </data>
   <data name="FairDescription" xml:space="preserve">
     <value>A very poorly handled collectible with a heavy accumulation of major defects.</value>
   </data>

@@ -48,8 +48,6 @@ Source: "..\ComicLibrary\bin\Release\net8.0-windows\*.json"; DestDir: "{app}"; F
 Source: "..\ComicLibrary\bin\Release\net8.0-windows\*.config"; DestDir: "{app}"; Flags: IgnoreVersion sortfilesbyextension replacesameversion; 
 Source: "..\License.txt"; DestDir: "{app}"; Flags: IgnoreVersion replacesameversion; 
 
-[InstallDelete]
-
 [Tasks]
 Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:AdditionalIcons}; 
 
@@ -68,9 +66,5 @@ Name: "german"; MessagesFile: "compiler:Languages\German.isl"; LicenseFile: "..\
 Name: "italian"; MessagesFile: "compiler:Languages\Italian.isl"; LicenseFile: "..\License.txt";
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"; LicenseFile: "..\License.txt"; 
 
-[PreCompile]
-
 [ThirdParty]
 UseRelativePaths=True
-
-[Registry]

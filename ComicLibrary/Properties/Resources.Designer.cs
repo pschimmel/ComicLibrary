@@ -268,6 +268,15 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export Image.
+        /// </summary>
+        public static string ExportImage {
+            get {
+                return ResourceManager.GetString("ExportImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A very poorly handled collectible with a heavy accumulation of major defects..
         /// </summary>
         public static string FairDescription {

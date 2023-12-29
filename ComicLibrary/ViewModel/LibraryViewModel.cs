@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using System.IO;
-using System.Windows.Media.Imaging;
 using ComicLibrary.Model.Config;
 using ComicLibrary.Model.Entities;
 
@@ -59,9 +58,11 @@ namespace ComicLibrary.ViewModel
       {
         try
         {
-          bool isPng = Path.GetExtension(filePath).Equals(".png", StringComparison.CurrentCultureIgnoreCase);
-          var bitmap = new BitmapImage(new Uri(filePath, UriKind.Absolute));
-          ComicImage = new ComicImageViewModel(ImageHelpers.ToArray(bitmap, isPng));
+          var imageAsByteArray = ImageHelpers.LoadImage(filePath);
+          if (imageAsByteArray != null)
+          {
+            ComicImage = new ComicImageViewModel(imageAsByteArray);
+          }
         }
         catch (Exception ex)
         {

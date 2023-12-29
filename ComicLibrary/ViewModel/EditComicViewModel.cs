@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using ComicLibrary.Model;
 using ComicLibrary.Model.Entities;
 using ES.Tools.Core.MVVM;
 using Microsoft.Win32;
@@ -16,6 +17,7 @@ namespace ComicLibrary.ViewModel
 
     private ActionCommand _addImageCommand;
     private ActionCommand<ComicImageViewModel> _removeImageCommand;
+    private ActionCommand<ComicImageViewModel> _exportImageCommand;
     private ActionCommand _selectGradeCommand;
     private readonly Comic _comic;
 
@@ -117,14 +119,17 @@ namespace ComicLibrary.ViewModel
     {
       var dialog = new OpenFileDialog
       {
-        Filter = $"{Properties.Resources.JpegFiles}|*.jpg|{Properties.Resources.PngFiles}|*.png"
+        Filter = $"{Properties.Resources.JpegFiles}|*.jpg|{Properties.Resources.PngFiles}|*.png",
+        CheckFileExists = true
       };
 
       if (dialog.ShowDialog() == true && File.Exists(dialog.FileName))
       {
-        bool isPng = Path.GetExtension(dialog.FileName).Equals(".png", StringComparison.CurrentCultureIgnoreCase);
-        var bitmap = new BitmapImage(new Uri(dialog.FileName, UriKind.Absolute));
-        ComicImages.Add(new ComicImageViewModel(ImageHelpers.ToArray(bitmap, isPng)));
+        var imageAsByteArray = ImageHelpers.LoadImage(dialog.FileName);
+        if (imageAsByteArray != null)
+        {
+          ComicImages.Add(new ComicImageViewModel(imageAsByteArray));
+        }
       }
     }
 
@@ -137,6 +142,31 @@ namespace ComicLibrary.ViewModel
     private void RemoveImage(ComicImageViewModel vm)
     {
       ComicImages.Remove(vm);
+    }
+
+    #endregion
+
+    #region Export Image
+
+    public ICommand ExportImageCommand => _exportImageCommand ??= new ActionCommand<ComicImageViewModel>(ExportImage, CanExportImage);
+
+    private void ExportImage(ComicImageViewModel vm)
+    {
+      var dialog = new SaveFileDialog
+      {
+        Filter = $"{Properties.Resources.JpegFiles}|*.jpg|{Properties.Resources.PngFiles}|*.png",
+        FileName = FileHelper.GetValidFileName(Path.ChangeExtension(Title, "jpg"))
+      };
+
+      if (dialog.ShowDialog() == true)
+      {
+        ImageHelpers.SaveImage((BitmapSource)vm.Image, FileHelper.GetValidFileName(dialog.FileName), Path.GetExtension(dialog.FileName) == ".png");
+      }
+    }
+
+    private bool CanExportImage(ComicImageViewModel vm)
+    {
+      return vm?.Image != null;
     }
 
     #endregion

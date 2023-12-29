@@ -15,7 +15,7 @@ namespace ComicLibrary.Model.Entities
 
     internal static string GenerateFileName(string libraryName)
     {
-      string fileName = GetValidFileName(libraryName);
+      string fileName = FileHelper.GetValidFileName(libraryName);
 
       string filePath = Path.Combine(Settings.Instance.LibrariesPath, Path.ChangeExtension(fileName, "xml"));
       int i = 0;
@@ -27,18 +27,6 @@ namespace ComicLibrary.Model.Entities
       }
 
       return Path.GetFileName(filePath);
-    }
-
-    private static string GetValidFileName(string libraryName)
-    {
-      string fileName = libraryName;
-
-      foreach (char c in Path.GetInvalidFileNameChars())
-      {
-        fileName = fileName.Replace(c, '_');
-      }
-
-      return fileName;
     }
 
     public override int GetHashCode()

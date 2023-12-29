@@ -16,7 +16,7 @@ namespace ComicLibrary.ViewModel
       _imageAsBytes = imageAsBytes;
     }
 
-    public ImageSource Image => ImageHelpers.ToImage(_imageAsBytes);
+    public ImageSource Image => ImageHelpers.ByteArrayToImage(_imageAsBytes);
 
     public override string ToString()
     {

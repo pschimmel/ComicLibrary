@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using ComicLibrary.Model;
 using ComicLibrary.Model.Config;
 using ComicLibrary.Model.Entities;
@@ -31,6 +32,7 @@ namespace ComicLibrary.ViewModel
     private ActionCommand _addLibraryCommand;
     private ActionCommand<LibraryViewModel> _changeLibraryImageCommand;
     private ActionCommand<LibraryViewModel> _removeLibraryImageCommand;
+    private ActionCommand<LibraryViewModel> _exportLibraryImageCommand;
     private ActionCommand<LibraryViewModel> _removeLibraryCommand;
 
     #endregion
@@ -345,7 +347,8 @@ namespace ComicLibrary.ViewModel
     {
       var dialog = new OpenFileDialog
       {
-        Filter = $"{Properties.Resources.JpegFiles}|*.jpg|{Properties.Resources.PngFiles}|*.png"
+        Filter = $"{Properties.Resources.JpegFiles}|*.jpg|{Properties.Resources.PngFiles}|*.png",
+        CheckFileExists = true
       };
 
       if (dialog.ShowDialog() == true && File.Exists(dialog.FileName))
@@ -364,6 +367,31 @@ namespace ComicLibrary.ViewModel
     private void RemoveLibraryImage(LibraryViewModel vm)
     {
       vm.ClearImage();
+    }
+
+    #endregion
+
+    #region Export Library Image
+
+    public ICommand ExportLibraryImageCommand => _exportLibraryImageCommand ??= new ActionCommand<LibraryViewModel>(ExportLibraryImage, CanExportLibraryImage);
+
+    private void ExportLibraryImage(LibraryViewModel vm)
+    {
+      var dialog = new SaveFileDialog
+      {
+        Filter = $"{Properties.Resources.JpegFiles}|*.jpg|{Properties.Resources.PngFiles}|*.png",
+        FileName = FileHelper.GetValidFileName(Path.ChangeExtension(vm.Name, "jpg"))
+      };
+
+      if (dialog.ShowDialog() == true)
+      {
+        ImageHelpers.SaveImage((BitmapSource)vm.ComicImage.Image, FileHelper.GetValidFileName(dialog.FileName), Path.GetExtension(dialog.FileName) == ".png");
+      }
+    }
+
+    private static bool CanExportLibraryImage(LibraryViewModel vm)
+    {
+      return vm.ComicImage?.Image != null;
     }
 
     #endregion

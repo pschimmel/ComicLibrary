@@ -517,6 +517,18 @@ namespace ComicLibrary.Model
       return parentElement.AppendChild(child);
     }
 
+    public static string GetValidFileName(string libraryName)
+    {
+      string fileName = libraryName;
+
+      foreach (char c in Path.GetInvalidFileNameChars())
+      {
+        fileName = fileName.Replace(c, '_');
+      }
+
+      return fileName;
+    }
+
     #endregion
   }
 }
