@@ -157,6 +157,9 @@ namespace ComicLibrary.ViewModel
       {
         comic.IsDirty = false;
       }
+
+      _isDirty = false;
+      OnPropertyChanged(nameof(IsDirty));
     }
 
     private bool CanSaveLibrary()
