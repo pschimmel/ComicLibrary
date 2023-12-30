@@ -391,7 +391,7 @@ namespace ComicLibrary.ViewModel
 
     private static bool CanExportLibraryImage(LibraryViewModel vm)
     {
-      return vm.ComicImage?.Image != null;
+      return vm?.ComicImage?.Image != null;
     }
 
     #endregion
