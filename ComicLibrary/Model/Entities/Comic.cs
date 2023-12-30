@@ -4,8 +4,8 @@ namespace ComicLibrary.Model.Entities
 {
   public class Comic : Entity
   {
-    private int? _year;
-    private int? _issueNumber;
+    private readonly int? _year;
+    private readonly int? _issueNumber;
 
     public Comic()
     {
@@ -28,29 +28,13 @@ namespace ComicLibrary.Model.Entities
 
     public string Series { get; set; }
 
-    public int? IssueNumber
-    {
-      get => _issueNumber;
-      set
-      {
-        if (!value.HasValue || value >= 0)
-          _issueNumber = value;
-      }
-    }
+    public int? IssueNumber { get; set; }
 
     public string Title { get; set; }
 
     public Grade Condition { get; set; }
 
-    public int? Year
-    {
-      get => _year;
-      set
-      {
-        if (!value.HasValue || (value > 1800 && value < DateTime.Now.Year + 10))
-          _year = value;
-      }
-    }
+    public int? Year { get; set; }
 
     public Country Country { get; set; }
 
