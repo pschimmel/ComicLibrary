@@ -4,8 +4,6 @@ namespace ComicLibrary.Model.Entities
 {
   public class Comic : Entity
   {
-    private readonly int? _year;
-    private readonly int? _issueNumber;
     private static readonly Grade DefaultCondition = Grade.Unrated;
 
     public Comic()

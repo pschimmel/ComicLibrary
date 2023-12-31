@@ -341,7 +341,7 @@ namespace ComicLibrary.Model
           var countriesNode = xml.CreateElement(CountriesKey);
           globalsNode.AppendChild(countriesNode);
 
-          foreach (var country in globals.Countries.OrderBy(x => x.Name))
+          foreach (var country in globals.Countries.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.ID != Guid.Empty).OrderBy(x => x.Name))
           {
             AppendChildWithAttributes(countriesNode,
                                       CountryKey,
@@ -355,7 +355,7 @@ namespace ComicLibrary.Model
           var publishersNode = xml.CreateElement(PublishersKey);
           globalsNode.AppendChild(publishersNode);
 
-          foreach (var publisher in globals.Publishers.OrderBy(x => x.Name))
+          foreach (var publisher in globals.Publishers.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.ID != Guid.Empty).OrderBy(x => x.Name))
           {
             AppendChildWithAttributes(publishersNode,
                                       PublisherKey,
@@ -388,7 +388,7 @@ namespace ComicLibrary.Model
       var librariesNode = xml.CreateElement(LibrariesKey);
       xml.AppendChild(librariesNode);
 
-      foreach (var library in libraries.OrderBy(x => x.Name))
+      foreach (var library in libraries.Where(x => !string.IsNullOrWhiteSpace(x.Name)).OrderBy(x => x.Name))
       {
         AppendChildWithAttributes(librariesNode,
                                   LibraryKey,
@@ -448,7 +448,7 @@ namespace ComicLibrary.Model
         var comicsNode = xml.CreateElement(ComicsKey);
         libraryNode.AppendChild(comicsNode);
 
-        foreach (var comic in library.Comics.OrderBy(x => x.Series).ThenBy(x => x.IssueNumber))
+        foreach (var comic in library.Comics.Where(x => !string.IsNullOrWhiteSpace(x.Series) && x.ID != Guid.Empty).OrderBy(x => x.Series).ThenBy(x => x.IssueNumber))
         {
           var comicNode = AppendChildWithChildren(comicsNode,
                                                   ComicKey,
