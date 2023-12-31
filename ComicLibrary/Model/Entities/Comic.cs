@@ -6,13 +6,15 @@ namespace ComicLibrary.Model.Entities
   {
     private readonly int? _year;
     private readonly int? _issueNumber;
+    private static readonly Grade DefaultCondition = Grade.Unrated;
 
     public Comic()
     {
-      Condition = Grade.Unrated;
+      Condition = DefaultCondition;
     }
 
     public Comic(Comic selectedComic)
+      : this()
     {
       if (selectedComic != null)
       {

@@ -287,7 +287,7 @@ namespace ComicLibrary.ViewModel
 
     #region Close Library
 
-    public ICommand CloseLibraryCommand => _closeLibraryCommand ??= new ActionCommand<ActiveLibraryViewModel>(CloseLibrary, CanCloseCommand);
+    public ICommand CloseLibraryCommand => _closeLibraryCommand ??= new ActionCommand<ActiveLibraryViewModel>(CloseLibrary, CanCloseLibraryCommand);
 
     private void CloseLibrary(ActiveLibraryViewModel libraryVM)
     {
@@ -306,9 +306,12 @@ namespace ComicLibrary.ViewModel
       }
 
       ActiveLibraries.Remove(libraryVM);
+
+      if (ActiveLibraries.Count == 0)
+        ShowLibrariesOverlay = true;
     }
 
-    private bool CanCloseCommand(ActiveLibraryViewModel libraryVM)
+    private bool CanCloseLibraryCommand(ActiveLibraryViewModel libraryVM)
     {
       return libraryVM != null;
     }

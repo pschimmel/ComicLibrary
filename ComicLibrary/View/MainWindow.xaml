@@ -207,7 +207,7 @@
 
     <Grid Visibility="{Binding ShowLibrariesOverlay, Converter={StaticResource VisibilityConverter}}">
       <Border MinWidth="300"
-              MinHeight="200"
+              MinHeight="100"
               HorizontalAlignment="Center"
               VerticalAlignment="Center"
               Background="White"
@@ -248,12 +248,12 @@
             <TextBox Text="{Binding LibraryName, UpdateSourceTrigger=PropertyChanged}" />
           </DockPanel>
           <ScrollViewer Grid.Row="2"
-                        HorizontalScrollBarVisibility="Visible"
-                        VerticalScrollBarVisibility="Disabled">
+                        HorizontalScrollBarVisibility="Disabled"
+                        VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding Libraries}">
               <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                  <StackPanel Orientation="Horizontal" />
+                  <WrapPanel Orientation="Horizontal" />
                 </ItemsPanelTemplate>
               </ItemsControl.ItemsPanel>
             </ItemsControl>
