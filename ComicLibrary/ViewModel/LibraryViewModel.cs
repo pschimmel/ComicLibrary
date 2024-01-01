@@ -5,7 +5,7 @@ using ComicLibrary.Model.Entities;
 
 namespace ComicLibrary.ViewModel
 {
-  public class LibraryViewModel : ES.Tools.Core.MVVM.ViewModel
+  public class LibraryViewModel : ES.Tools.Core.MVVM.ViewModel, ILibraryViewModel
   {
     private readonly Library _library;
     private ComicImageViewModel _comicImage;

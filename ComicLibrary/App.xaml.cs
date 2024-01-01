@@ -14,6 +14,7 @@ namespace ComicLibrary
     {
       base.OnStartup(e);
 
+      ViewFactory.Instance.Register<GetNameViewModel, GetNameDialog>();
       ViewFactory.Instance.Register<EditComicViewModel, EditComicDialog>();
       ViewFactory.Instance.Register<EditOptionsViewModel, EditOptionsDialog>();
       ViewFactory.Instance.Register<EditOptionViewModel, EditOptionDialog>();

@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First initial release.
 
-## [1.0.1] - 2023-12-29
+## [1.0.1] - 
 
 ### Fixed
 
@@ -25,3 +25,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Changed Libraries popup to use a wrap panel.
 - Added changelog.
+- Changed way how new libraries are created.

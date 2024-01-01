@@ -183,6 +183,9 @@
   <data name="EditOption" xml:space="preserve">
     <value>Option bearbeiten</value>
   </data>
+  <data name="EnterNameOfLibrary" xml:space="preserve">
+    <value>Bitte geben Sie den Namen der neuen Bibliothek an</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Fehler</value>
   </data>
@@ -257,6 +260,9 @@
   </data>
   <data name="MoveXMLFilesQuestion" xml:space="preserve">
     <value>Möchten sie alle XML-Dateien an den neuen Ort verschieben?</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="NearMintDescription" xml:space="preserve">
     <value>Ein sehr gut erhaltenes Exemplar mit geringen Abnutzungs- und kleinen Herstellungs- oder handhabungsmängeln.</value>

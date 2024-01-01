@@ -20,7 +20,6 @@ namespace ComicLibrary.ViewModel
 
     private bool _showLibrariesOverlay;
     private ActiveLibraryViewModel _selectedLibrary;
-    private string _libraryName;
     private ActionCommand _changeLibraryCommand;
     private ActionCommand _editCountriesCommand;
     private ActionCommand _editPublishersCommand;
@@ -43,8 +42,7 @@ namespace ComicLibrary.ViewModel
     {
       ActiveLibraries = [];
       Libraries = [];
-      _showLibrariesOverlay = true;
-      LoadLibraries();
+      ShowLibrariesOverlay = true;
     }
 
     #endregion
@@ -73,27 +71,11 @@ namespace ComicLibrary.ViewModel
 
           if (_showLibrariesOverlay)
             LoadLibraries();
-
-          _addLibraryCommand.RaiseCanExecuteChanged();
         }
       }
     }
 
-    public string LibraryName
-    {
-      get => _libraryName;
-      set
-      {
-        if (_showLibrariesOverlay && _libraryName != value)
-        {
-          _libraryName = value;
-          OnPropertyChanged(nameof(LibraryName));
-          _addLibraryCommand.RaiseCanExecuteChanged();
-        }
-      }
-    }
-
-    public ObservableCollection<LibraryViewModel> Libraries { get; }
+    public ObservableCollection<ILibraryViewModel> Libraries { get; }
 
     public ObservableCollection<ActiveLibraryViewModel> ActiveLibraries { get; }
 
@@ -320,24 +302,27 @@ namespace ComicLibrary.ViewModel
 
     #region Add Library
 
-    public ICommand AddLibraryCommand => _addLibraryCommand ??= new ActionCommand(AddLibrary, CanAddLibrary);
-
-    private bool CanAddLibrary()
-    {
-      return ShowLibrariesOverlay && !Libraries.Any(x => string.Equals(x.Name, LibraryName, StringComparison.InvariantCultureIgnoreCase));
-    }
+    public ICommand AddLibraryCommand => _addLibraryCommand ??= new ActionCommand(AddLibrary);
 
     private void AddLibrary()
     {
-      var newLibrary = new Library
-      {
-        Name = LibraryName,
-        FileName = Library.GenerateFileName(LibraryName)
-      };
+      bool libraryNameOK(string name) => !string.IsNullOrWhiteSpace(name) && !Libraries.Any(x => string.Equals(x.Name, name, StringComparison.InvariantCultureIgnoreCase));
+      var vm = new GetNameViewModel(Properties.Resources.EnterNameOfLibrary, Properties.Resources.Name, null, libraryNameOK);
+      var view = ViewFactory.Instance.CreateView(vm);
 
-      var newLibraryVM = new LibraryViewModel(newLibrary);
-      Libraries.Add(newLibraryVM);
-      SaveLibraries();
+      if (view.ShowDialog() == true && !string.IsNullOrWhiteSpace(vm.Name))
+      {
+
+        var newLibrary = new Library
+        {
+          Name = vm.Name,
+          FileName = Library.GenerateFileName(vm.Name)
+        };
+
+        var newLibraryVM = new LibraryViewModel(newLibrary);
+        Libraries.Insert(Libraries.Count - 2, newLibraryVM);
+        SaveLibraries();
+      }
     }
 
     #endregion
@@ -461,25 +446,31 @@ namespace ComicLibrary.ViewModel
       // Add missing libraries
       foreach (var storedlibrary in libraries)
       {
-        if (!Libraries.Any(x => Equals(x.ToModel(), storedlibrary)))
+        if (!Libraries.OfType<LibraryViewModel>().Any(x => Equals(x.ToModel(), storedlibrary)))
         {
           Libraries.Add(new LibraryViewModel(storedlibrary));
         }
       }
 
       // Remove libraries not stored anymore
-      foreach (var currentLibrary in Libraries.ToArray())
+      foreach (var currentLibrary in Libraries.OfType<LibraryViewModel>().ToArray())
       {
         if (!libraries.Any(x => Equals(x, currentLibrary.ToModel())))
         {
           Libraries.Remove(currentLibrary);
         }
       }
+
+      var addLibrary = Libraries.OfType<AddLibraryViewModel>().FirstOrDefault() ?? new AddLibraryViewModel();
+
+      // Make the entry to create a library the last entry
+      Libraries.Remove(addLibrary);
+      Libraries.Add(addLibrary);
     }
 
     private void SaveLibraries()
     {
-      FileHelper.SaveLibraries(Libraries.Select(x => x.ToModel()));
+      FileHelper.SaveLibraries(Libraries.OfType<LibraryViewModel>().Select(x => x.ToModel()));
     }
 
     #endregion

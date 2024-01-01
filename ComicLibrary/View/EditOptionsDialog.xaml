@@ -12,6 +12,7 @@
         Width="250"
         Height="250"
         d:DataContext="{d:DesignInstance Type=viewmodel:EditOptionsViewModel}"
+        WindowStartupLocation="CenterOwner"
         mc:Ignorable="d">
   <Window.Resources>
     <DataTemplate DataType="{x:Type entities:Country}">

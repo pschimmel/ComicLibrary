@@ -183,6 +183,9 @@
   <data name="EditOption" xml:space="preserve">
     <value>Edit Option</value>
   </data>
+  <data name="EnterNameOfLibrary" xml:space="preserve">
+    <value>Enter name of new library</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
@@ -257,6 +260,9 @@
   </data>
   <data name="MoveXMLFilesQuestion" xml:space="preserve">
     <value>Would you like to move all XML files to the new location?</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="NearMintDescription" xml:space="preserve">
     <value>A very well-preserved collectible with minor wear and small manufacturing or handling defects.</value>

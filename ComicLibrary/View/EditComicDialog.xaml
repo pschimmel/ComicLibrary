@@ -12,6 +12,7 @@
         Width="600"
         Height="450"
         d:DataContext="{d:DesignInstance Type=viewmodel:EditComicViewModel}"
+        WindowStartupLocation="CenterOwner"
         mc:Ignorable="d">
   <Window.Resources>
     <ResourceDictionary>

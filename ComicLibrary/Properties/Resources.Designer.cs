@@ -259,6 +259,15 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter name of new library.
+        /// </summary>
+        public static string EnterNameOfLibrary {
+            get {
+                return ResourceManager.GetString("EnterNameOfLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string Error {
@@ -480,6 +489,15 @@ namespace ComicLibrary.Properties {
         public static string MoveXMLFilesQuestion {
             get {
                 return ResourceManager.GetString("MoveXMLFilesQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         
