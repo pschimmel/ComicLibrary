@@ -7,6 +7,8 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <ApplicationIcon>Icon Large.ico</ApplicationIcon>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
