@@ -12,9 +12,9 @@
                      xmlns:toolsUI="clr-namespace:ES.Tools.UI;assembly=ES.Tools"
                      xmlns:vm="clr-namespace:ComicLibrary.ViewModel"
                      Title="Comic Library"
-                     Width="800"
-                     Height="450"
                      Icon="pack://application:,,,/ComicLibrary;component/Images/Icon.png"
+                     WindowStartupLocation="CenterScreen"
+                     WindowState="Maximized"
                      mc:Ignorable="d">
   <Window.Resources>
     <ResourceDictionary>
@@ -85,10 +85,12 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Margin="2" Text="{x:Static properties:Resources.LibrariesPath}" />
                     <TextBox Grid.Column="1"
+                             Margin="2"
                              IsReadOnly="True"
                              Text="{Binding LibrariesPath}" />
                     <Button Grid.Column="2"
                             Margin="2"
+                            Padding="2,0"
                             Command="{Binding ChangeLibraryCommand}"
                             Content="..." />
                   </Grid>
