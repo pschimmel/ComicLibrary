@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A8596F3D-B687-4556-851D-1CE5CB3B1D22}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		CHANGELOG.md = CHANGELOG.md
 		postbuild.bat = postbuild.bat
 		README.md = README.md
 	EndProjectSection
@@ -27,7 +28,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_SortFileContentOnSave = True
 		SolutionGuid = {50AA08DA-11F3-4B6D-837F-B7EFA7EDD859}
+		RESX_SortFileContentOnSave = True
 	EndGlobalSection
 EndGlobal

@@ -237,11 +237,15 @@ namespace ComicLibrary.ViewModel
     private void ApplyFilter()
     {
       var view = Comics.GetView();
-      view.Filter = string.IsNullOrWhiteSpace(SearchText) || SearchText.Length > 2
+      view.Filter = string.IsNullOrWhiteSpace(SearchText) || SearchText.Length < 3
                     ? null
-                    : x => x is ComicViewModel c
-                           && ((!string.IsNullOrWhiteSpace(c.Series) && c.Series.Contains(SearchText, StringComparison.InvariantCultureIgnoreCase)) ||
-                               (!string.IsNullOrWhiteSpace(c.Title)) && c.Title.Contains(SearchText, StringComparison.InvariantCultureIgnoreCase));
+                    : x => x is ComicViewModel c && MatchesFilter(c, SearchText);
+    }
+
+    private static bool MatchesFilter(ComicViewModel c, string searchText)
+    {
+      return (!string.IsNullOrWhiteSpace(c.Series) && c.Series.Contains(searchText, StringComparison.InvariantCultureIgnoreCase)) ||
+             (!string.IsNullOrWhiteSpace(c.Title)) && c.Title.Contains(searchText, StringComparison.InvariantCultureIgnoreCase);
     }
 
     #endregion
