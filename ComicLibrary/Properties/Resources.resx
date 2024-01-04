@@ -168,6 +168,9 @@
   <data name="Condition" xml:space="preserve">
     <value>Condition</value>
   </data>
+  <data name="CopyDataFromSelectedComic" xml:space="preserve">
+    <value>When adding a new comic, copy data from selected comic.</value>
+  </data>
   <data name="Countries" xml:space="preserve">
     <value>Countries</value>
   </data>

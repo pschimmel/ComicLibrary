@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ComicLibrary.Model.Config;
 
 namespace ComicLibrary.Model.Entities
 {
@@ -11,16 +12,20 @@ namespace ComicLibrary.Model.Entities
       Condition = DefaultCondition;
     }
 
-    public Comic(Comic selectedComic)
+    public Comic(Comic selectedComic, bool? copyData = null)
       : this()
     {
-      if (selectedComic != null)
+      copyData ??= Settings.Instance.CopyDataFromSelectedComic;
+
+      if (selectedComic != null && copyData == true)
       {
         Series = selectedComic.Series;
         Publisher = selectedComic.Publisher;
         Year = selectedComic.Year;
         Condition = selectedComic.Condition;
         Country = selectedComic.Country;
+        IssueNumber = selectedComic.IssueNumber;
+        Title = selectedComic.Title;
       }
     }
 
@@ -48,11 +53,7 @@ namespace ComicLibrary.Model.Entities
 
     public Comic Copy()
     {
-      return new Comic(this)
-      {
-        IssueNumber = IssueNumber,
-        Title = Title
-      };
+      return new Comic(this, true);
     }
   }
 }

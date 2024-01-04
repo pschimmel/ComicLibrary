@@ -168,6 +168,9 @@
   <data name="Condition" xml:space="preserve">
     <value>Zustand</value>
   </data>
+  <data name="CopyDataFromSelectedComic" xml:space="preserve">
+    <value>Kopiere Daten von ausgewähltem Comic in neues Comic.</value>
+  </data>
   <data name="Countries" xml:space="preserve">
     <value>Länder</value>
   </data>

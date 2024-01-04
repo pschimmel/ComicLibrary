@@ -26,3 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed Libraries popup to use a wrap panel.
 - Added changelog.
 - Changed way how new libraries are created.
+
+## [1.0.2] - 
+
+### Added
+
+- Added command for moving a comic to another library.
+- Added option to copy properties of selected comic when adding a new one.

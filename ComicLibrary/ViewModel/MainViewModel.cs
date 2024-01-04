@@ -20,7 +20,7 @@ namespace ComicLibrary.ViewModel
 
     private bool _showLibrariesOverlay;
     private ActiveLibraryViewModel _selectedLibrary;
-    private ActionCommand _changeLibraryCommand;
+    private ActionCommand _changeLibraryPathCommand;
     private ActionCommand _editCountriesCommand;
     private ActionCommand _editPublishersCommand;
     private ActionCommand _closeCommand;
@@ -92,15 +92,29 @@ namespace ComicLibrary.ViewModel
       }
     }
 
+    public bool CopyDataFromSelectedComic
+    {
+      get => Settings.Instance.CopyDataFromSelectedComic;
+      set
+      {
+        if (Settings.Instance.CopyDataFromSelectedComic != value)
+        {
+          Settings.Instance.CopyDataFromSelectedComic = value;
+          OnPropertyChanged(nameof(CopyDataFromSelectedComic));
+          Settings.Save();
+        }
+      }
+    }
+
     #endregion
 
     #region Commands
 
-    #region Change Library
+    #region Change Library Path
 
-    public ICommand ChangeLibraryCommand => _changeLibraryCommand ??= new ActionCommand(ChangeLibrary);
+    public ICommand ChangeLibraryPathCommand => _changeLibraryPathCommand ??= new ActionCommand(ChangeLibraryPath);
 
-    private void ChangeLibrary()
+    private void ChangeLibraryPath()
     {
       if (ActiveLibraries.Count > 0)
       {

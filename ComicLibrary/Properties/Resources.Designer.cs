@@ -214,6 +214,15 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to When adding a new comic, copy data from selected comic..
+        /// </summary>
+        public static string CopyDataFromSelectedComic {
+            get {
+                return ResourceManager.GetString("CopyDataFromSelectedComic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Countries.
         /// </summary>
         public static string Countries {
