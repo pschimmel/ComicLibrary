@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using ComicLibrary.Model;
+using ComicLibrary.Model.Config;
 using ComicLibrary.Model.Entities;
 using ES.Tools.Core.MVVM;
 
@@ -22,6 +23,7 @@ namespace ComicLibrary.ViewModel
     private ActionCommand _removeComicCommand;
     private ActionCommand _saveLibraryCommand;
     private ActionCommand _clearSearchTextCommand;
+    private ActionCommand _moveToLibraryCommand;
     private bool _isDirty;
 
     #endregion
@@ -176,6 +178,36 @@ namespace ComicLibrary.ViewModel
     private void ClearSearchText()
     {
       SearchText = "";
+    }
+
+    #endregion
+
+    #region Move to Library
+
+    public ICommand MoveToLibraryCommand => _moveToLibraryCommand ??= new ActionCommand(MoveToLibrary, CanMoveToLibrary);
+
+    private void MoveToLibrary()
+    {
+      var libraries = FileHelper.LoadLibraries();
+      var vm = new MoveToLibraryViewModel(libraries.Where(x => x.Name != _libraryTemplate.Name));
+      var view = ViewFactory.Instance.CreateView(vm);
+      if (view.ShowDialog() == true && vm.SelectedLibrary != null)
+      {
+        var targetLibrary = FileHelper.LoadActiveLibrary(System.IO.Path.Combine(Settings.Instance.LibrariesPath, vm.SelectedLibrary.FileName));
+        var newComic = SelectedComic.ToModel().Copy();
+        targetLibrary.Comics.Add(newComic);
+        vm.SelectedLibrary.ComicCount++;
+        Comics.Remove(SelectedComic);
+        SelectedComic = null;
+        _libraryTemplate.ComicCount--;
+        FileHelper.SaveActiveLibrary(targetLibrary, System.IO.Path.Combine(Settings.Instance.LibrariesPath, vm.SelectedLibrary.FileName));
+        FileHelper.SaveLibraries(libraries); // This is to update the comic count
+      }
+    }
+
+    private bool CanMoveToLibrary()
+    {
+      return SelectedComic != null;
     }
 
     #endregion

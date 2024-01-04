@@ -124,7 +124,7 @@
     <value>Comic hinzufügen</value>
   </data>
   <data name="AddComicTooltip" xml:space="preserve">
-    <value>Ein neues Comic hinzufügen.</value>
+    <value>Fügt ein neues Comic hinzu.</value>
   </data>
   <data name="AddImage" xml:space="preserve">
     <value>Bild hinzufügen</value>
@@ -243,6 +243,9 @@
   <data name="LibrariesPath" xml:space="preserve">
     <value>Pfad zu den Bibliotheken</value>
   </data>
+  <data name="Library" xml:space="preserve">
+    <value>Bibliothek</value>
+  </data>
   <data name="LimitedEdition" xml:space="preserve">
     <value>Limited Edition</value>
   </data>
@@ -257,6 +260,12 @@
   </data>
   <data name="MintDescription" xml:space="preserve">
     <value>Das Exemplar ist fast nicht von einer 10.0 unterscheidbar, hat jedoch sehr geringe Herstellungsmängeln. Es gibt keinerlei Anzeichen von Handhabungsmängeln.</value>
+  </data>
+  <data name="MoveToLibrary" xml:space="preserve">
+    <value>In Bibliothek verschieben</value>
+  </data>
+  <data name="MoveToLibraryTooltip" xml:space="preserve">
+    <value>Verschiebt das ausgewählte Comics in eine andere Bibliothek.</value>
   </data>
   <data name="MoveXMLFilesQuestion" xml:space="preserve">
     <value>Möchten sie alle XML-Dateien an den neuen Ort verschieben?</value>
@@ -307,7 +316,7 @@
     <value>Möchten Sie wirklich das ausgewählte Comic löschen?</value>
   </data>
   <data name="RemoveComicTooltip" xml:space="preserve">
-    <value>Das ausgewählte Comic entfernen.</value>
+    <value>Entfernt das ausgewählte Comic.</value>
   </data>
   <data name="RemoveImage" xml:space="preserve">
     <value>Bild entfernen</value>

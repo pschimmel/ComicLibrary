@@ -45,5 +45,14 @@ namespace ComicLibrary.Model.Entities
     public bool CollectorsEdition { get; set; }
 
     public string Comment { get; set; }
+
+    public Comic Copy()
+    {
+      return new Comic(this)
+      {
+        IssueNumber = IssueNumber,
+        Title = Title
+      };
+    }
   }
 }

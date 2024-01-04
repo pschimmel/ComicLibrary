@@ -12,6 +12,8 @@
                      xmlns:toolsUI="clr-namespace:ES.Tools.UI;assembly=ES.Tools"
                      xmlns:vm="clr-namespace:ComicLibrary.ViewModel"
                      Title="Comic Library"
+                     d:DesignHeight="400"
+                     d:DesignWidth="600"
                      Icon="pack://application:,,,/ComicLibrary;component/Images/Icon.png"
                      WindowStartupLocation="CenterScreen"
                      WindowState="Maximized"
@@ -150,18 +152,23 @@
             </fluent:RibbonGroupBox.Style>
             <fluent:Button Command="{Binding AddComicCommand}"
                            Header="{x:Static properties:Resources.Add}"
-                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Add.png"
-                           SizeDefinition="Large">
+                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Add.png">
               <fluent:Button.ToolTip>
                 <fluent:ScreenTip Title="{x:Static properties:Resources.AddComic}" Text="{x:Static properties:Resources.AddComicTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
             <fluent:Button Command="{Binding RemoveComicCommand}"
                            Header="{x:Static properties:Resources.Remove}"
-                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Remove.png"
-                           SizeDefinition="Large">
+                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Remove.png">
               <fluent:Button.ToolTip>
                 <fluent:ScreenTip Title="{x:Static properties:Resources.RemoveComic}" Text="{x:Static properties:Resources.RemoveComicTooltip}" />
+              </fluent:Button.ToolTip>
+            </fluent:Button>
+            <fluent:Button Command="{Binding MoveToLibraryCommand}"
+                           Header="{x:Static properties:Resources.MoveToLibrary}"
+                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/MoveToFolder.png">
+              <fluent:Button.ToolTip>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.MoveToLibrary}" Text="{x:Static properties:Resources.MoveToLibraryTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
           </fluent:RibbonGroupBox>

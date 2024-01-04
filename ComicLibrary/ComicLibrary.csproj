@@ -20,6 +20,7 @@
     <None Remove="Images\Folder.png" />
     <None Remove="Images\Icon.png" />
     <None Remove="Images\Logo.png" />
+    <None Remove="Images\MoveToFolder.png" />
     <None Remove="Images\Options.png" />
     <None Remove="Images\Photo.png" />
     <None Remove="Images\Remove.png" />
@@ -44,6 +45,7 @@
     <Resource Include="Images\CancelSmall.png" />
     <Resource Include="Images\Close.png" />
     <Resource Include="Images\Edit.png" />
+    <Resource Include="Images\MoveToFolder.png" />
     <Resource Include="Images\Folder.png" />
     <Resource Include="Images\Icon.png" />
     <Resource Include="Images\Options.png" />
@@ -68,6 +70,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="View\MoveToLibraryDialog.xaml.cs">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\GetNameDialog.xaml.cs">
       <SubType>Code</SubType>

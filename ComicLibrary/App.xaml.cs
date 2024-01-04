@@ -19,6 +19,7 @@ namespace ComicLibrary
       ViewFactory.Instance.Register<EditOptionsViewModel, EditOptionsDialog>();
       ViewFactory.Instance.Register<EditOptionViewModel, EditOptionDialog>();
       ViewFactory.Instance.Register<GradePickerViewModel, GradePickerDialog>();
+      ViewFactory.Instance.Register<MoveToLibraryViewModel, MoveToLibraryDialog>();
     }
   }
 }

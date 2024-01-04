@@ -79,7 +79,7 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add a new comic..
+        ///   Looks up a localized string similar to Adds a new comic..
         /// </summary>
         public static string AddComicTooltip {
             get {
@@ -439,6 +439,15 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Library.
+        /// </summary>
+        public static string Library {
+            get {
+                return ResourceManager.GetString("Library", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Limited Edition.
         /// </summary>
         public static string LimitedEdition {
@@ -466,7 +475,7 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show the popup to edit the libraries..
+        ///   Looks up a localized string similar to Shows the popup to manage the libraries..
         /// </summary>
         public static string ManageLibrariesTooltip {
             get {
@@ -480,6 +489,24 @@ namespace ComicLibrary.Properties {
         public static string MintDescription {
             get {
                 return ResourceManager.GetString("MintDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move to Library.
+        /// </summary>
+        public static string MoveToLibrary {
+            get {
+                return ResourceManager.GetString("MoveToLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Moves the selected comic into a different library..
+        /// </summary>
+        public static string MoveToLibraryTooltip {
+            get {
+                return ResourceManager.GetString("MoveToLibraryTooltip", resourceCulture);
             }
         }
         
@@ -628,7 +655,7 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove the selected comic..
+        ///   Looks up a localized string similar to Removes the selected comic..
         /// </summary>
         public static string RemoveComicTooltip {
             get {

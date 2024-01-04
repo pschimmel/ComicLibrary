@@ -7,14 +7,24 @@ namespace ComicLibrary.ViewModel
 {
   public class LibraryViewModel : ES.Tools.Core.MVVM.ViewModel, ILibraryViewModel
   {
+    #region Fields
+
     private readonly Library _library;
     private ComicImageViewModel _comicImage;
+
+    #endregion
+
+    #region Constructor
 
     public LibraryViewModel(Library library)
     {
       _library = library;
       _comicImage = string.IsNullOrWhiteSpace(_library.ImageAsString) ? null : new ComicImageViewModel(_library.ImageAsString);
     }
+
+    #endregion
+
+    #region Properties
 
     public string Name => _library.Name;
 
@@ -40,6 +50,10 @@ namespace ComicLibrary.ViewModel
         OnPropertyChanged(nameof(ComicImage));
       }
     }
+
+    #endregion
+
+    #region Public Methods
 
     public string GetFilePath()
     {
@@ -75,5 +89,7 @@ namespace ComicLibrary.ViewModel
     {
       ComicImage = null;
     }
+
+    #endregion
   }
 }

@@ -124,7 +124,7 @@
     <value>Add Comic</value>
   </data>
   <data name="AddComicTooltip" xml:space="preserve">
-    <value>Add a new comic.</value>
+    <value>Adds a new comic.</value>
   </data>
   <data name="AddImage" xml:space="preserve">
     <value>Add Image</value>
@@ -243,6 +243,9 @@
   <data name="LibrariesPath" xml:space="preserve">
     <value>Libraries Path</value>
   </data>
+  <data name="Library" xml:space="preserve">
+    <value>Library</value>
+  </data>
   <data name="LimitedEdition" xml:space="preserve">
     <value>Limited Edition</value>
   </data>
@@ -253,10 +256,16 @@
     <value>Manage Libraries</value>
   </data>
   <data name="ManageLibrariesTooltip" xml:space="preserve">
-    <value>Show the popup to edit the libraries.</value>
+    <value>Shows the popup to manage the libraries.</value>
   </data>
   <data name="MintDescription" xml:space="preserve">
     <value>The collectible is nearly indistinguishable from a 10.0 but will have a very minor manufacturing defect. It will not have any evidence of handling defects.</value>
+  </data>
+  <data name="MoveToLibrary" xml:space="preserve">
+    <value>Move to Library</value>
+  </data>
+  <data name="MoveToLibraryTooltip" xml:space="preserve">
+    <value>Moves the selected comic into a different library.</value>
   </data>
   <data name="MoveXMLFilesQuestion" xml:space="preserve">
     <value>Would you like to move all XML files to the new location?</value>
@@ -307,7 +316,7 @@
     <value>Would you really like to remove the selected comic?</value>
   </data>
   <data name="RemoveComicTooltip" xml:space="preserve">
-    <value>Remove the selected comic.</value>
+    <value>Removes the selected comic.</value>
   </data>
   <data name="RemoveImage" xml:space="preserve">
     <value>Remove Image</value>
