@@ -177,6 +177,9 @@
   <data name="Country" xml:space="preserve">
     <value>Country</value>
   </data>
+  <data name="CreateBackupWhenSaving" xml:space="preserve">
+    <value>Automatically create a backup when saving a file.</value>
+  </data>
   <data name="CurrentLibrary" xml:space="preserve">
     <value>Current Library</value>
   </data>

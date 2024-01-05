@@ -106,6 +106,20 @@ namespace ComicLibrary.ViewModel
       }
     }
 
+    public bool CreateBackupWhenSaving
+    {
+      get => Settings.Instance.CreateBackupWhenSaving;
+      set
+      {
+        if (Settings.Instance.CreateBackupWhenSaving != value)
+        {
+          Settings.Instance.CreateBackupWhenSaving = value;
+          OnPropertyChanged(nameof(CreateBackupWhenSaving));
+          Settings.Save();
+        }
+      }
+    }
+
     #endregion
 
     #region Commands
@@ -412,8 +426,11 @@ namespace ComicLibrary.ViewModel
         if (activeLibrary != null)
         {
           ActiveLibraries.Remove(activeLibrary);
-          var backupPath = activeLibrary.Path + ".bak";
-          File.Move(activeLibrary.Path, backupPath, true);
+          if (Settings.Instance.CreateBackupWhenSaving)
+          {
+            var backupPath = activeLibrary.Path + ".bak";
+            File.Move(activeLibrary.Path, backupPath, true);
+          }
         }
       }
     }

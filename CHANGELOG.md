@@ -33,3 +33,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added command for moving a comic to another library.
 - Added option to copy properties of selected comic when adding a new one.
+- Added option to automatically create a backup when saving files.

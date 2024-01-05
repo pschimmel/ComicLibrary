@@ -241,6 +241,15 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Automatically create a backup when saving a file..
+        /// </summary>
+        public static string CreateBackupWhenSaving {
+            get {
+                return ResourceManager.GetString("CreateBackupWhenSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current Library.
         /// </summary>
         public static string CurrentLibrary {

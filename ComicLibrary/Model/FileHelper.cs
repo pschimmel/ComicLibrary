@@ -311,7 +311,7 @@ namespace ComicLibrary.Model
     {
       filePath ??= Settings.Instance.GlobalsFilePath;
 
-      if (File.Exists(filePath))
+      if (File.Exists(filePath) && Settings.Instance.CreateBackupWhenSaving)
       {
         string backupPath = filePath + ".bak";
 
@@ -376,7 +376,7 @@ namespace ComicLibrary.Model
     {
       filePath ??= Settings.Instance.LibrariesFilePath;
 
-      if (File.Exists(filePath))
+      if (File.Exists(filePath) && Settings.Instance.CreateBackupWhenSaving)
       {
         string backupPath = filePath + ".bak";
         File.Copy(filePath, backupPath, true);
@@ -403,7 +403,7 @@ namespace ComicLibrary.Model
 
     public static void SaveActiveLibrary(ActiveLibrary library, string filePath)
     {
-      if (File.Exists(filePath))
+      if (File.Exists(filePath) && Settings.Instance.CreateBackupWhenSaving)
       {
         string backupPath = filePath + ".bak";
 

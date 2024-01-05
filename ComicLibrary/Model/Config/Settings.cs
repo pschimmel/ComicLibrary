@@ -28,6 +28,8 @@ namespace ComicLibrary.Model.Config
 
     public bool CopyDataFromSelectedComic { get; set; } = true;
 
+    public bool CreateBackupWhenSaving { get; set; } = true;
+
     public string LibrariesFilePath => Path.Combine(LibrariesPath, _librariesFileName);
 
     public string GlobalsFilePath => Path.Combine(LibrariesPath, _globalsFileName);
