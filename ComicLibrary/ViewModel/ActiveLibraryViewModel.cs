@@ -24,6 +24,7 @@ namespace ComicLibrary.ViewModel
     private ActionCommand _saveLibraryCommand;
     private ActionCommand _clearSearchTextCommand;
     private ActionCommand _moveToLibraryCommand;
+    private ActionCommand _renameSeriesCommand;
     private bool _isDirty;
 
     #endregion
@@ -206,6 +207,36 @@ namespace ComicLibrary.ViewModel
     }
 
     private bool CanMoveToLibrary()
+    {
+      return SelectedComic != null;
+    }
+
+    #endregion
+
+    #region Rename Series
+
+    public ICommand RenameSeriesCommand => _renameSeriesCommand ??= new ActionCommand(RenameSeries, CanRenameSeries);
+
+    private void RenameSeries()
+    {
+      var libraries = FileHelper.LoadLibraries();
+      var vm = new GetNameViewModel(Properties.Resources.RenameSeries, Properties.Resources.Series, SelectedComic.Series, s => !string.IsNullOrWhiteSpace(s));
+      var view = ViewFactory.Instance.CreateView(vm);
+
+      if (view.ShowDialog() == true && !string.IsNullOrWhiteSpace(vm.Name))
+      {
+        var oldName = SelectedComic.Series;
+        foreach (var c in Comics.ToList())
+        {
+          if (string.Equals(oldName, c.Series, StringComparison.InvariantCultureIgnoreCase))
+          {
+            c.Series = vm.Name;
+          }
+        }
+      }
+    }
+
+    private bool CanRenameSeries()
     {
       return SelectedComic != null;
     }

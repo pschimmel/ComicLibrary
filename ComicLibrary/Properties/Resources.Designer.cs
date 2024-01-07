@@ -727,6 +727,24 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rename Series.
+        /// </summary>
+        public static string RenameSeries {
+            get {
+                return ResourceManager.GetString("RenameSeries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Renames the series of the selected comic..
+        /// </summary>
+        public static string RenameSeriesTooltip {
+            get {
+                return ResourceManager.GetString("RenameSeriesTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Save {

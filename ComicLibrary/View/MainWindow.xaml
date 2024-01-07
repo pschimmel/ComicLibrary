@@ -114,8 +114,10 @@
             </fluent:BackstageTabControl>
           </fluent:Backstage>
         </fluent:Ribbon.Menu>
-        <fluent:RibbonTabItem Header="{x:Static properties:Resources.Start}" ReduceOrder="Comic, Comic, Comic, Comic, Library, Library, Library, Library, Libraries, Libraries, Libraries, Libraries">
-          <fluent:RibbonGroupBox Name="Libraries" Header="{x:Static properties:Resources.Libraries}">
+        <fluent:RibbonTabItem Header="{x:Static properties:Resources.Start}" ReduceOrder="Libraries, Libraries, Libraries, Libraries, Library, Library, Library, Library, Comic, Comic, Comic, Comic">
+          <fluent:RibbonGroupBox Name="Libraries"
+                                 Header="{x:Static properties:Resources.Libraries}"
+                                 Icon="pack://application:,,,/ComicLibrary;component/Images/Folder.png">
             <fluent:ToggleButton Header="{x:Static properties:Resources.Manage}"
                                  IsChecked="{Binding ShowLibrariesOverlay}"
                                  LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Folder.png"
@@ -127,7 +129,8 @@
           </fluent:RibbonGroupBox>
           <fluent:RibbonGroupBox Name="Library"
                                  DataContext="{Binding SelectedLibrary}"
-                                 Header="{x:Static properties:Resources.CurrentLibrary}">
+                                 Header="{x:Static properties:Resources.CurrentLibrary}"
+                                 Icon="pack://application:,,,/ComicLibrary;component/Images/CurrentFolder.png">
             <fluent:RibbonGroupBox.Style>
               <Style TargetType="{x:Type fluent:RibbonGroupBox}">
                 <Setter Property="IsEnabled" Value="True" />
@@ -141,15 +144,23 @@
             <fluent:Button Command="{Binding SaveLibraryCommand}"
                            Header="{x:Static properties:Resources.Save}"
                            LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Save.png"
-                           SizeDefinition="Large">
+                           SizeDefinition="Large Large Large">
               <fluent:Button.ToolTip>
                 <fluent:ScreenTip Title="{x:Static properties:Resources.SaveLibrary}" Text="{x:Static properties:Resources.SaveLibraryTooltip}" />
+              </fluent:Button.ToolTip>
+            </fluent:Button>
+            <fluent:Button Command="{Binding RenameSeriesCommand}"
+                           Header="{x:Static properties:Resources.RenameSeries}"
+                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Rename.png">
+              <fluent:Button.ToolTip>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.RenameSeries}" Text="{x:Static properties:Resources.RenameSeriesTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
           </fluent:RibbonGroupBox>
           <fluent:RibbonGroupBox Name="Comic"
                                  DataContext="{Binding SelectedLibrary}"
-                                 Header="{x:Static properties:Resources.Comic}">
+                                 Header="{x:Static properties:Resources.Comic}"
+                                 Icon="pack://application:,,,/ComicLibrary;component/Images/Comic.png">
             <fluent:RibbonGroupBox.Style>
               <Style TargetType="{x:Type fluent:RibbonGroupBox}">
                 <Setter Property="IsEnabled" Value="True" />

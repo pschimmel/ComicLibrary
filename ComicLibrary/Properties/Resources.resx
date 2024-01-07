@@ -339,6 +339,12 @@
   <data name="RemoveOptionQuestion" xml:space="preserve">
     <value>Would you really like to remove the selected option? This cannot be undone and it will remove the property in all assigned comics.</value>
   </data>
+  <data name="RenameSeries" xml:space="preserve">
+    <value>Rename Series</value>
+  </data>
+  <data name="RenameSeriesTooltip" xml:space="preserve">
+    <value>Renames the series of the selected comic.</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>

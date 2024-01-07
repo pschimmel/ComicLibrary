@@ -339,6 +339,12 @@
   <data name="RemoveOptionQuestion" xml:space="preserve">
     <value>Möchten Sie wirklich die ausgewählte Option entfernen? Dies kann nicht rückgängig gemacht werden und wird die Zuordnung in allen zugeordneten Comics entfernen.</value>
   </data>
+  <data name="RenameSeries" xml:space="preserve">
+    <value>Reihe umbenennen</value>
+  </data>
+  <data name="RenameSeriesTooltip" xml:space="preserve">
+    <value>Benennt die Reihe des ausgewählten Comics um.</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Speichern</value>
   </data>

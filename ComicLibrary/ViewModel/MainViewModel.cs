@@ -401,7 +401,8 @@ namespace ComicLibrary.ViewModel
 
       if (dialog.ShowDialog() == true)
       {
-        ImageHelpers.SaveImage((BitmapSource)vm.ComicImage.Image, FileHelper.GetValidFileName(dialog.FileName), Path.GetExtension(dialog.FileName) == ".png");
+        var filePath = Path.Combine(Path.GetDirectoryName(dialog.FileName), FileHelper.GetValidFileName(Path.GetFileName(dialog.FileName)));
+        ImageHelpers.SaveImage((BitmapSource)vm.ComicImage.Image, filePath, Path.GetExtension(dialog.FileName) == ".png");
       }
     }
 
