@@ -80,11 +80,11 @@
                                Margin="5"
                                VerticalAlignment="Center"
                                Text="{x:Static properties:Resources.Currency}" />
-                    <TextBlock Grid.Row="2"
-                               Grid.Column="1"
-                               Margin="5"
-                               Padding="5,2"
-                               Text="{Binding CurrencySymbol, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox Grid.Row="2"
+                             Grid.Column="1"
+                             Margin="5"
+                             Padding="5,2"
+                             Text="{Binding CurrencySymbol, UpdateSourceTrigger=PropertyChanged}" />
                   </Grid>
                 </StackPanel>
               </fluent:BackstageTabItem>
