@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.IO.Packaging;
+using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Xps.Packaging;
 using ComicLibrary.ViewModel.Helpers;
@@ -24,7 +25,14 @@ namespace ComicLibrary.ViewModel
       document.AddHeader1(library.Name);
 
       // Add comics as table
-      var table = document.AddTable();
+      var table = document.AddTable(
+        new GridLength(2, GridUnitType.Star), // Series
+        new GridLength(1, GridUnitType.Star), // Year
+        new GridLength(1, GridUnitType.Star), // IssueNumber
+        new GridLength(2, GridUnitType.Star), // Title
+        new GridLength(1, GridUnitType.Star)  // Condition
+      );
+
       table.AddHeaderRow(Properties.Resources.Series,
                          Properties.Resources.Year,
                          Properties.Resources.IssueNumber,
