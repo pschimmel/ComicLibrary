@@ -250,6 +250,15 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Currency.
+        /// </summary>
+        public static string Currency {
+            get {
+                return ResourceManager.GetString("Currency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current Library.
         /// </summary>
         public static string CurrentLibrary {
@@ -291,6 +300,15 @@ namespace ComicLibrary.Properties {
         public static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estimated value.
+        /// </summary>
+        public static string EstimatedValue {
+            get {
+                return ResourceManager.GetString("EstimatedValue", resourceCulture);
             }
         }
         
@@ -651,6 +669,15 @@ namespace ComicLibrary.Properties {
         public static string Publishers {
             get {
                 return ResourceManager.GetString("Publishers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purchase price.
+        /// </summary>
+        public static string PurchasePrice {
+            get {
+                return ResourceManager.GetString("PurchasePrice", resourceCulture);
             }
         }
         

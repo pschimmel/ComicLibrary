@@ -179,7 +179,7 @@
               </Style>
             </DataGridTextColumn.ElementStyle>
           </DataGridTextColumn>
-          <DataGridTextColumn Binding="{Binding Year, UpdateSourceTrigger=PropertyChanged}" Header="{x:Static properties:Resources.Year}">
+          <DataGridTextColumn Binding="{Binding Year, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}" Header="{x:Static properties:Resources.Year}">
             <DataGridTextColumn.ElementStyle>
               <Style TargetType="TextBlock">
                 <Setter Property="TextTrimming" Value="CharacterEllipsis" />
@@ -187,7 +187,7 @@
               </Style>
             </DataGridTextColumn.ElementStyle>
           </DataGridTextColumn>
-          <DataGridTextColumn Binding="{Binding IssueNumber, UpdateSourceTrigger=PropertyChanged}" Header="{x:Static properties:Resources.IssueNumber}">
+          <DataGridTextColumn Binding="{Binding IssueNumber, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}" Header="{x:Static properties:Resources.IssueNumber}">
             <DataGridTextColumn.ElementStyle>
               <Style TargetType="TextBlock">
                 <Setter Property="HorizontalAlignment" Value="Right" />

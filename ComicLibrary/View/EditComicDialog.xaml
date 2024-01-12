@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:ComicLibrary.View"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:modelConfig="clr-namespace:ComicLibrary.Model.Config"
         xmlns:properties="clr-namespace:ComicLibrary.Properties"
         xmlns:toolsUI="clr-namespace:ES.Tools.UI;assembly=ES.Tools"
         xmlns:viewmodel="clr-namespace:ComicLibrary.ViewModel"
@@ -56,6 +57,8 @@
       <RowDefinition />
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="Auto" />
@@ -81,12 +84,14 @@
     <TextBlock Grid.Row="2" Text="{x:Static properties:Resources.Year}" />
     <TextBox Grid.Row="2"
              Grid.Column="1"
-             Text="{Binding Year, UpdateSourceTrigger=PropertyChanged}" />
+             HorizontalContentAlignment="Right"
+             Text="{Binding Year, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}" />
 
     <TextBlock Grid.Row="3" Text="{x:Static properties:Resources.IssueNumber}" />
     <TextBox Grid.Row="3"
              Grid.Column="1"
-             Text="{Binding IssueNumber, UpdateSourceTrigger=PropertyChanged}" />
+             HorizontalContentAlignment="Right"
+             Text="{Binding IssueNumber, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}" />
 
     <TextBlock Grid.Row="4" Text="{x:Static properties:Resources.Title}" />
     <TextBox Grid.Row="4"
@@ -132,7 +137,23 @@
              TextWrapping="Wrap"
              VerticalScrollBarVisibility="Visible" />
 
-    <StackPanel Grid.Row="9"
+    <TextBlock Grid.Row="9"
+               VerticalAlignment="Top"
+               Text="{x:Static properties:Resources.PurchasePrice}" />
+    <DockPanel Grid.Row="9" Grid.Column="1">
+      <TextBlock DockPanel.Dock="Right" Text="{Binding Currency}" />
+      <TextBox HorizontalContentAlignment="Right" Text="{Binding PurchasePrice, StringFormat=F2, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}" />
+    </DockPanel>
+
+    <TextBlock Grid.Row="10"
+               VerticalAlignment="Top"
+               Text="{x:Static properties:Resources.EstimatedValue}" />
+    <DockPanel Grid.Row="10" Grid.Column="1">
+      <TextBlock DockPanel.Dock="Right" Text="{Binding Currency}" />
+      <TextBox HorizontalContentAlignment="Right" Text="{Binding EstimatedValue, StringFormat=F2, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}" />
+    </DockPanel>
+
+    <StackPanel Grid.Row="11"
                 Grid.ColumnSpan="3"
                 Margin="2"
                 Orientation="Horizontal">
@@ -149,7 +170,7 @@
                VerticalAlignment="Top"
                Text="{x:Static properties:Resources.Images}" />
     <Border Grid.Row="2"
-            Grid.RowSpan="7"
+            Grid.RowSpan="9"
             Grid.Column="2"
             Margin="2"
             Background="White"
@@ -211,7 +232,7 @@
       </ScrollViewer>
     </Border>
 
-    <StackPanel Grid.Row="10"
+    <StackPanel Grid.Row="12"
                 Grid.ColumnSpan="3"
                 Margin="2"
                 HorizontalAlignment="Right"

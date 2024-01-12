@@ -180,6 +180,9 @@
   <data name="CreateBackupWhenSaving" xml:space="preserve">
     <value>Automatisch ein Backup beim Speichern anlegen.</value>
   </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Währung</value>
+  </data>
   <data name="CurrentLibrary" xml:space="preserve">
     <value>Aktuelle Bibliothek</value>
   </data>
@@ -194,6 +197,9 @@
   </data>
   <data name="Error" xml:space="preserve">
     <value>Fehler</value>
+  </data>
+  <data name="EstimatedValue" xml:space="preserve">
+    <value>Schätzpreis</value>
   </data>
   <data name="ExportImage" xml:space="preserve">
     <value>Bild exportieren</value>
@@ -314,6 +320,9 @@
   </data>
   <data name="Publishers" xml:space="preserve">
     <value>Verlage</value>
+  </data>
+  <data name="PurchasePrice" xml:space="preserve">
+    <value>Kaufpreis</value>
   </data>
   <data name="Question" xml:space="preserve">
     <value>Frage</value>

@@ -75,6 +75,16 @@ namespace ComicLibrary.ViewModel
       }
     }
 
+    public string CurrencySymbol
+    {
+      get => Settings.Instance.CurrencySymbol;
+      set
+      {
+        Settings.Instance.CurrencySymbol = value;
+        OnPropertyChanged(nameof(CurrencySymbol));
+      }
+    }
+
     public ObservableCollection<ILibraryViewModel> Libraries { get; }
 
     public ObservableCollection<ActiveLibraryViewModel> ActiveLibraries { get; }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using ComicLibrary.Model;
+using ComicLibrary.Model.Config;
 using ComicLibrary.Model.Entities;
 using ES.Tools.Core.MVVM;
 using Microsoft.Win32;
@@ -47,6 +48,8 @@ namespace ComicLibrary.ViewModel
       Condition = comic.Condition;
       Publisher = Publishers.FirstOrDefault(x => x.Option == comic.Publisher);
       Country = Countries.FirstOrDefault(x => x.Option == comic.Country);
+      PurchasePrice = comic.PurchasePrice;
+      EstimatedValue = comic.EstimatedValue;
       Comment = comic.Comment;
       LimitedEdition = comic.LimitedEdition;
       CollectorsEdition = comic.CollectorsEdition;
@@ -73,6 +76,12 @@ namespace ComicLibrary.ViewModel
     public int? IssueNumber { get; set; }
 
     public string Comment { get; set; }
+
+    public double? PurchasePrice { get; set; }
+
+    public double? EstimatedValue { get; set; }
+
+    public static string Currency => Settings.Instance.CurrencySymbol;
 
     public Grade Condition { get; set; }
 
@@ -186,6 +195,8 @@ namespace ComicLibrary.ViewModel
       _comic.Condition = Condition;
       _comic.Country = Country.Option;
       _comic.Comment = Comment;
+      _comic.PurchasePrice = PurchasePrice;
+      _comic.EstimatedValue = EstimatedValue;
       _comic.CollectorsEdition = CollectorsEdition;
       _comic.LimitedEdition = LimitedEdition;
 
