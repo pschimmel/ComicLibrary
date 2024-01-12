@@ -36,7 +36,11 @@ namespace ComicLibrary.Model
     private const string CollectorsEditionKey = "CollectorsEdition";
     private const string CommentKey = "Comment";
     private const string SaveDateKey = "SaveDate";
+    private const string CurrencyKey = "Currency";
     private const string ComicCountKey = "ComicCount";
+    private const string GradingTypeKey = "GradingType";
+    private const string PurchasePriceKey = "PurchasePrice";
+    private const string EstimatedValueKey = "EstimatedValue";
 
     #endregion
 
@@ -249,6 +253,8 @@ namespace ComicLibrary.Model
               }
               else if (comicChildNode.Name == ConditionKey && double.TryParse(comicChildNode.InnerText, CultureInfo.InvariantCulture, out double gradingNumber))
               {
+                // CGC is currently the only grading service supported 
+                // If we ever want to add something else, it must be added here
                 var grading = Grade.Grades.FirstOrDefault(x => x.Number == gradingNumber);
 
                 if (grading != null)
@@ -281,6 +287,14 @@ namespace ComicLibrary.Model
               else if (comicChildNode.Name == CollectorsEditionKey && bool.TryParse(comicChildNode.InnerText, out bool collectorsEdition))
               {
                 comic.CollectorsEdition = collectorsEdition;
+              }
+              else if (comicChildNode.Name == PurchasePriceKey && double.TryParse(comicChildNode.InnerText, CultureInfo.InvariantCulture, out double price))
+              {
+                comic.PurchasePrice = price;
+              }
+              else if (comicChildNode.Name == EstimatedValueKey && double.TryParse(comicChildNode.InnerText, CultureInfo.InvariantCulture, out double estimate))
+              {
+                comic.EstimatedValue = estimate;
               }
               else if (comicChildNode.Name == ImagesKey)
               {
@@ -433,10 +447,10 @@ namespace ComicLibrary.Model
     private static void WriteLibrary(ActiveLibrary library, XmlDocument xml)
     {
       var libraryNode = xml.CreateElement(LibraryKey);
-      var childAttribute = xml.CreateAttribute(SaveDateKey);
-      childAttribute.InnerText = DateTime.Now.ToString("o"); // Uses ISO 8601 format
-      libraryNode.Attributes.Append(childAttribute);
-      xml.AppendChild(libraryNode);
+
+      AppendAttributes(libraryNode, (SaveDateKey, DateTime.Now.ToString("o")), // Uses ISO 8601 format
+                                    (CurrencyKey, Settings.Instance.CurrencySymbol));
+
       WriteComics(library, libraryNode);
     }
 
@@ -458,11 +472,20 @@ namespace ComicLibrary.Model
                                                   (YearKey, comic.Year?.ToString(CultureInfo.InvariantCulture)),
                                                   (IssueNumberKey, comic.IssueNumber?.ToString(CultureInfo.InvariantCulture)),
                                                   (CommentKey, comic.Comment),
-                                                  (ConditionKey, comic.Condition.Number.ToString(CultureInfo.InvariantCulture)),
                                                   (CountryKey, comic.Country?.ID.ToString()),
                                                   (PublisherKey, comic.Publisher?.ID.ToString()),
                                                   (CollectorsEditionKey, comic.CollectorsEdition == true ? true.ToString() : ""),
-                                                  (LimitedEditionKey, comic.LimitedEdition == true ? true.ToString() : ""));
+                                                  (LimitedEditionKey, comic.LimitedEdition == true ? true.ToString() : ""),
+                                                  (PurchasePriceKey, comic.PurchasePrice.HasValue ? string.Format(CultureInfo.InvariantCulture, "{0:F2}", comic.PurchasePrice.Value) : null),
+                                                  (EstimatedValueKey, comic.EstimatedValue.HasValue ? string.Format(CultureInfo.InvariantCulture, "{0:F2}", comic.EstimatedValue.Value) : null));
+
+          var gradingNode = xml.CreateElement(ConditionKey);
+          gradingNode.InnerText = comic.Condition.Number.ToString(CultureInfo.InvariantCulture);
+          var gradingAttribute = xml.CreateAttribute(GradingTypeKey);
+          gradingAttribute.InnerText = "CGC";
+          gradingNode.Attributes.Append(gradingAttribute);
+          comicNode.AppendChild(gradingNode);
+
           if (comic.ImagesAsString.Count > 0)
           {
             var imagesNode = xml.CreateElement(ImagesKey);
@@ -486,17 +509,27 @@ namespace ComicLibrary.Model
       var xml = parentElement.OwnerDocument;
       var child = xml.CreateElement(name);
 
-      foreach (var (Key, Value) in attributes)
-      {
-        if (!string.IsNullOrWhiteSpace(Value))
-        {
-          var childAttribute = xml.CreateAttribute(Key);
-          childAttribute.InnerText = Value;
-          child.Attributes.Append(childAttribute);
-        }
-      }
+      AppendAttributes(child, attributes);
 
       return parentElement.AppendChild(child);
+    }
+
+    private static void AppendAttributes(XmlElement element, params (string Key, string Value)[] attributes)
+    {
+      if (attributes != null)
+      {
+        var xml = element.OwnerDocument;
+
+        foreach (var (Key, Value) in attributes)
+        {
+          if (!string.IsNullOrWhiteSpace(Value))
+          {
+            var childAttribute = xml.CreateAttribute(Key);
+            childAttribute.InnerText = Value;
+            element.Attributes.Append(childAttribute);
+          }
+        }
+      }
     }
 
     public static XmlNode AppendChildWithChildren(this XmlElement parentElement, string name, params (string Key, string Value)[] children)

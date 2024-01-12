@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added option to copy properties of selected comic when adding a new one.
 - Added option to automatically create a backup when saving files.
 - Added command for renaming a series.
+- Added report to print list of comics.
 
 ### Fixed
 

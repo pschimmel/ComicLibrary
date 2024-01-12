@@ -149,6 +149,14 @@
                 <fluent:ScreenTip Title="{x:Static properties:Resources.SaveLibrary}" Text="{x:Static properties:Resources.SaveLibraryTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
+            <fluent:Button Command="{Binding PrintReportCommand}"
+                           Header="{x:Static properties:Resources.PrintReport}"
+                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Report.png"
+                           SizeDefinition="Large Large Large">
+              <fluent:Button.ToolTip>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.PrintReport}" Text="{x:Static properties:Resources.PrintReportTooltip}" />
+              </fluent:Button.ToolTip>
+            </fluent:Button>
             <fluent:Button Command="{Binding RenameSeriesCommand}"
                            Header="{x:Static properties:Resources.RenameSeries}"
                            LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Rename.png">

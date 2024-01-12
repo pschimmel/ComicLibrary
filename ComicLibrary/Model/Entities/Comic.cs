@@ -51,6 +51,10 @@ namespace ComicLibrary.Model.Entities
 
     public string Comment { get; set; }
 
+    public double? PurchasePrice { get; set; }
+
+    public double? EstimatedValue { get; set; }
+
     public Comic Copy()
     {
       return new Comic(this, true);

@@ -303,6 +303,12 @@
   <data name="PoorDescription" xml:space="preserve">
     <value>A heavily defaced collectible with a number major defects. Some pieces will also be missing.</value>
   </data>
+  <data name="PrintReport" xml:space="preserve">
+    <value>Print Report</value>
+  </data>
+  <data name="PrintReportTooltip" xml:space="preserve">
+    <value>Print a report with all comics in the current library.</value>
+  </data>
   <data name="Publisher" xml:space="preserve">
     <value>Publisher</value>
   </data>
@@ -344,6 +350,9 @@
   </data>
   <data name="RenameSeriesTooltip" xml:space="preserve">
     <value>Renames the series of the selected comic.</value>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>Report</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>

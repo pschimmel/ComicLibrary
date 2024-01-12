@@ -25,6 +25,7 @@ namespace ComicLibrary.ViewModel
     private ActionCommand _clearSearchTextCommand;
     private ActionCommand _moveToLibraryCommand;
     private ActionCommand _renameSeriesCommand;
+    private ActionCommand _printReportCommand;
     private bool _isDirty;
 
     #endregion
@@ -239,6 +240,19 @@ namespace ComicLibrary.ViewModel
     private bool CanRenameSeries()
     {
       return SelectedComic != null;
+    }
+
+    #endregion
+
+    #region Print Report
+
+    public ICommand PrintReportCommand => _printReportCommand ??= new ActionCommand(PrintReport);
+
+    private void PrintReport()
+    {
+      var vm = new PrintActiveLibraryViewModel(this);
+      var view = ViewFactory.Instance.CreateView(vm);
+      view.ShowDialog();
     }
 
     #endregion

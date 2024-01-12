@@ -30,6 +30,8 @@ namespace ComicLibrary.Model.Config
 
     public bool CreateBackupWhenSaving { get; set; } = true;
 
+    public string CurrencySymbol { get; set; } = "€";
+
     public string LibrariesFilePath => Path.Combine(LibrariesPath, _librariesFileName);
 
     public string GlobalsFilePath => Path.Combine(LibrariesPath, _globalsFileName);

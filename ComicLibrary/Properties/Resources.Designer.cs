@@ -619,6 +619,24 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Print Report.
+        /// </summary>
+        public static string PrintReport {
+            get {
+                return ResourceManager.GetString("PrintReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Print a report with all comics in the current library..
+        /// </summary>
+        public static string PrintReportTooltip {
+            get {
+                return ResourceManager.GetString("PrintReportTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Publisher.
         /// </summary>
         public static string Publisher {
@@ -741,6 +759,15 @@ namespace ComicLibrary.Properties {
         public static string RenameSeriesTooltip {
             get {
                 return ResourceManager.GetString("RenameSeriesTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report.
+        /// </summary>
+        public static string Report {
+            get {
+                return ResourceManager.GetString("Report", resourceCulture);
             }
         }
         

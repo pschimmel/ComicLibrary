@@ -28,6 +28,7 @@
     <None Remove="Images\Remove.png" />
     <None Remove="Images\RemovePhoto.png" />
     <None Remove="Images\Rename.png" />
+    <None Remove="Images\Report.png" />
     <None Remove="Images\Save.png" />
     <None Remove="Images\Settings.png" />
   </ItemGroup>
@@ -46,6 +47,7 @@
   <ItemGroup>
     <Resource Include="Images\Add.png" />
     <Resource Include="Images\CancelSmall.png" />
+    <Resource Include="Images\Report.png" />
     <Resource Include="Images\Close.png" />
     <Resource Include="Images\Comic.png" />
     <Resource Include="Images\Edit.png" />
@@ -76,6 +78,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="View\PrintActiveLibraryDialog.xaml.cs">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\MoveToLibraryDialog.xaml.cs">
       <SubType>Code</SubType>
