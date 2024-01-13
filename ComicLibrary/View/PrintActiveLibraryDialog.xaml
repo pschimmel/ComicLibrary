@@ -28,6 +28,7 @@
     <DocumentViewer Document="{Binding Document}" />
     <Button Grid.Row="1"
             MinWidth="50"
+            Margin="2"
             Padding="2"
             HorizontalAlignment="Right"
             Click="OKButton_Click"

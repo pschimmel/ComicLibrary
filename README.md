@@ -7,3 +7,6 @@ Manage your collection of comics in a simple XML based database.
 
 ## Edit Library
 ![Library](Docu/Library.png)
+
+## Report
+![Library](Docu/Report.png)
