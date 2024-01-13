@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 
@@ -64,6 +65,14 @@ namespace ComicLibrary.ViewModel.Helpers
     /// </summary>
     public static void AddHeaderRow(this Table table, params string[] cellContents)
     {
+      table.AddHeaderRow(cellContents.ToList().Select(x => new CellContent(x)).ToArray());
+    }
+
+    /// <summary>
+    /// Add header row to table.
+    /// </summary>
+    public static void AddHeaderRow(this Table table, params CellContent[] cellContents)
+    {
       static void formatter(TableRow row)
       {
         // Global formatting for the title row.
@@ -81,6 +90,14 @@ namespace ComicLibrary.ViewModel.Helpers
     /// </summary>
     public static void AddRow(this Table table, params string[] cellContents)
     {
+      table.AddRow(cellContents.ToList().Select(x => new CellContent(x)).ToArray());
+    }
+
+    /// <summary>
+    /// Add standard table row to table.
+    /// </summary>
+    public static void AddRow(this Table table, params CellContent[] cellContents)
+    {
       static void formatter(TableRow row)
       {
         row.FontSize = DefaultFontSize;
@@ -90,7 +107,7 @@ namespace ComicLibrary.ViewModel.Helpers
       table.AddRow(formatter, cellContents);
     }
 
-    private static void AddRow(this Table table, Action<TableRow> formatter, params string[] cellContents)
+    private static void AddRow(this Table table, Action<TableRow> formatter, params CellContent[] cellContents)
     {
       if (cellContents.Length != table.Columns.Count)
         throw new ArgumentException("The number of cells does not match the number of columns.");
@@ -107,12 +124,12 @@ namespace ComicLibrary.ViewModel.Helpers
       // Add the header row with content.
       foreach (var cellContent in cellContents)
       {
-        var p = new Paragraph(new Run(cellContent))
+        var p = new Paragraph(new Run(cellContent.Text))
         {
-          TextAlignment = TextAlignment.Left
+          TextAlignment = cellContent.Alignment
         };
 
-        row.Cells.Add(new TableCell(p));
+        row.Cells.Add(new TableCell(p) { ColumnSpan = cellContent.ColumnSpan });
       }
     }
   }

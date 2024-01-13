@@ -3,6 +3,7 @@ using System.IO.Packaging;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Xps.Packaging;
+using ComicLibrary.Model.Config;
 using ComicLibrary.ViewModel.Helpers;
 
 namespace ComicLibrary.ViewModel
@@ -26,26 +27,29 @@ namespace ComicLibrary.ViewModel
 
       // Add comics as table
       var table = document.AddTable(
-        new GridLength(2, GridUnitType.Star), // Series
+        new GridLength(3, GridUnitType.Star), // Series
         new GridLength(1, GridUnitType.Star), // Year
         new GridLength(1, GridUnitType.Star), // IssueNumber
-        new GridLength(2, GridUnitType.Star), // Title
-        new GridLength(1, GridUnitType.Star)  // Condition
+        new GridLength(3, GridUnitType.Star), // Title
+        new GridLength(2, GridUnitType.Star), // Condition
+        new GridLength(1, GridUnitType.Star)  // Price
       );
 
       table.AddHeaderRow(Properties.Resources.Series,
                          Properties.Resources.Year,
                          Properties.Resources.IssueNumber,
                          Properties.Resources.Title,
-                         Properties.Resources.Condition);
+                         Properties.Resources.Condition,
+                         Properties.Resources.PurchasePrice);
 
       foreach (var comic in library.Comics)
       {
-        table.AddRow(comic.Series,
-                     comic.Year?.ToString() ?? "",
-                     comic.IssueNumber?.ToString() ?? "",
-                     comic.Title,
-                     comic.Condition.Name);
+        table.AddRow(new CellContent(comic.Series),
+                     new CellContent(comic.Year?.ToString(), TextAlignment.Right),
+                     new CellContent(comic.IssueNumber?.ToString(), TextAlignment.Right),
+                     new CellContent(comic.Title),
+                     new CellContent(comic.Condition.Name),
+                     new CellContent(comic.PurchasePrice.HasValue ? $"{Settings.Instance.CurrencySymbol} {comic.PurchasePrice.Value:F2}" : null, TextAlignment.Right));
       }
 
       return document;

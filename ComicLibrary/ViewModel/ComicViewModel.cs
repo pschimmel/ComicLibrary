@@ -118,6 +118,8 @@ namespace ComicLibrary.ViewModel
 
     public bool LimitedEdition => _comic.LimitedEdition;
 
+    public double? PurchasePrice => _comic.PurchasePrice;
+
     public IOptionItemViewModel<Publisher> Publisher
     {
       get => _publishers.FirstOrDefault(x => x.Option == _comic.Publisher) ?? _publishers.Single(x => x.IsEmpty);

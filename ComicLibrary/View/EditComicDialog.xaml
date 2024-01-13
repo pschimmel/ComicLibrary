@@ -142,7 +142,7 @@
                Text="{x:Static properties:Resources.PurchasePrice}" />
     <DockPanel Grid.Row="9" Grid.Column="1">
       <TextBlock DockPanel.Dock="Right" Text="{Binding Currency}" />
-      <TextBox HorizontalContentAlignment="Right" Text="{Binding PurchasePrice, StringFormat=F2, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}" />
+      <TextBox HorizontalContentAlignment="Right" Text="{Binding PurchasePrice, StringFormat=F2, TargetNullValue=''}" />
     </DockPanel>
 
     <TextBlock Grid.Row="10"
@@ -150,7 +150,7 @@
                Text="{x:Static properties:Resources.EstimatedValue}" />
     <DockPanel Grid.Row="10" Grid.Column="1">
       <TextBlock DockPanel.Dock="Right" Text="{Binding Currency}" />
-      <TextBox HorizontalContentAlignment="Right" Text="{Binding EstimatedValue, StringFormat=F2, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}" />
+      <TextBox HorizontalContentAlignment="Right" Text="{Binding EstimatedValue, StringFormat=F2, TargetNullValue=''}" />
     </DockPanel>
 
     <StackPanel Grid.Row="11"

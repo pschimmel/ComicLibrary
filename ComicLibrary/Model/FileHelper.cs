@@ -447,10 +447,10 @@ namespace ComicLibrary.Model
     private static void WriteLibrary(ActiveLibrary library, XmlDocument xml)
     {
       var libraryNode = xml.CreateElement(LibraryKey);
+      xml.AppendChild(libraryNode);
 
       AppendAttributes(libraryNode, (SaveDateKey, DateTime.Now.ToString("o")), // Uses ISO 8601 format
                                     (CurrencyKey, Settings.Instance.CurrencySymbol));
-
       WriteComics(library, libraryNode);
     }
 
