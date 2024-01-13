@@ -240,14 +240,63 @@
           </DataTemplate>
         </TabControl.ItemTemplate>
       </TabControl>
+
       <fluent:StatusBar Grid.Row="2" HorizontalAlignment="Stretch">
-        <fluent:StatusBarItem Title="{x:Static properties:Resources.Comics}"
-                              Margin="5,0"
-                              HorizontalAlignment="Left">
+        <fluent:StatusBarItem Title="{x:Static properties:Resources.TotalPrice}" HorizontalAlignment="Right">
           <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{Binding SelectedLibrary.Comics.Count, FallbackValue=0}" />
+            <TextBlock FontWeight="Bold" Text="{Binding SelectedLibrary.TotalPrice, StringFormat=F2, FallbackValue=0}" />
+            <TextBlock Text=" " />
+            <TextBlock Text="{Binding CurrencySymbol}" />
+            <TextBlock Text=" " />
+            <TextBlock Text="{x:Static properties:Resources.TotalPrice}" />
+          </StackPanel>
+        </fluent:StatusBarItem>
+
+        <Separator HorizontalAlignment="Right" />
+
+        <fluent:StatusBarItem Title="{x:Static properties:Resources.TotalValue}" HorizontalAlignment="Right">
+          <StackPanel Orientation="Horizontal">
+            <TextBlock FontWeight="Bold" Text="{Binding SelectedLibrary.TotalValue, StringFormat=F2, FallbackValue=0}" />
+            <TextBlock Text=" " />
+            <TextBlock Text="{Binding CurrencySymbol}" />
+            <TextBlock Text=" " />
+            <TextBlock Text="{x:Static properties:Resources.TotalValue}" />
+          </StackPanel>
+        </fluent:StatusBarItem>
+
+        <Separator HorizontalAlignment="Right" />
+
+        <fluent:StatusBarItem Title="{x:Static properties:Resources.Comics}"
+                              Margin="0,0,10,0"
+                              HorizontalAlignment="Right">
+          <StackPanel Orientation="Horizontal">
+            <TextBlock FontWeight="Bold" Text="{Binding SelectedLibrary.Comics.Count, FallbackValue=0}" />
             <TextBlock Text=" " />
             <TextBlock Text="{x:Static properties:Resources.Comics}" />
+          </StackPanel>
+        </fluent:StatusBarItem>
+
+        <fluent:StatusBarItem Title="{x:Static properties:Resources.PurchasePrice}"
+                              Margin="10,0,0,0"
+                              HorizontalAlignment="Left">
+          <StackPanel Orientation="Horizontal">
+            <TextBlock FontWeight="Bold" Text="{Binding SelectedLibrary.SelectedComic.PurchasePrice, TargetNullValue=0, StringFormat=F2, FallbackValue=0}" />
+            <TextBlock Text=" " />
+            <TextBlock Text="{Binding CurrencySymbol}" />
+            <TextBlock Text=" " />
+            <TextBlock Text="{x:Static properties:Resources.PurchasePrice}" />
+          </StackPanel>
+        </fluent:StatusBarItem>
+
+        <Separator HorizontalAlignment="Left" />
+
+        <fluent:StatusBarItem Title="{x:Static properties:Resources.EstimatedValue}" HorizontalAlignment="Left">
+          <StackPanel Orientation="Horizontal">
+            <TextBlock FontWeight="Bold" Text="{Binding SelectedLibrary.SelectedComic.EstimatedValue, TargetNullValue=0, StringFormat=F2, FallbackValue=0}" />
+            <TextBlock Text=" " />
+            <TextBlock Text="{Binding CurrencySymbol}" />
+            <TextBlock Text=" " />
+            <TextBlock Text="{x:Static properties:Resources.EstimatedValue}" />
           </StackPanel>
         </fluent:StatusBarItem>
       </fluent:StatusBar>

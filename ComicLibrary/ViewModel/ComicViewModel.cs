@@ -120,6 +120,8 @@ namespace ComicLibrary.ViewModel
 
     public double? PurchasePrice => _comic.PurchasePrice;
 
+    public double? EstimatedValue => _comic.EstimatedValue;
+
     public IOptionItemViewModel<Publisher> Publisher
     {
       get => _publishers.FirstOrDefault(x => x.Option == _comic.Publisher) ?? _publishers.Single(x => x.IsEmpty);
@@ -209,6 +211,9 @@ namespace ComicLibrary.ViewModel
       OnPropertyChanged(nameof(CollectorsEdition));
       OnPropertyChanged(nameof(LimitedEdition));
       OnPropertyChanged(nameof(ImagesCount));
+      OnPropertyChanged(nameof(PurchasePrice));
+      OnPropertyChanged(nameof(EstimatedValue));
+
     }
 
     #endregion

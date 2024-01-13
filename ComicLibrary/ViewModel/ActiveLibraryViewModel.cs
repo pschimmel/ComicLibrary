@@ -109,6 +109,26 @@ namespace ComicLibrary.ViewModel
 
     public bool IsDirty => _isDirty || Comics.Any(x => x.IsDirty);
 
+    public double TotalPrice
+    {
+      get
+      {
+        var view = Comics.GetView();
+        return view.OfType<ComicViewModel>()
+                   .Sum(x => x.PurchasePrice ?? 0);
+      }
+    }
+
+    public double TotalValue
+    {
+      get
+      {
+        var view = Comics.GetView();
+        return view.OfType<ComicViewModel>()
+                   .Sum(x => x.EstimatedValue ?? 0);
+      }
+    }
+
     #endregion
 
     #region Commands
@@ -303,12 +323,24 @@ namespace ComicLibrary.ViewModel
 
       _isDirty = true;
       OnPropertyChanged(nameof(IsDirty));
+      OnPropertyChanged(nameof(TotalPrice));
+      OnPropertyChanged(nameof(TotalValue));
     }
 
     private void Comic_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-      if (e.PropertyName == nameof(ComicViewModel.IsDirty))
-        OnPropertyChanged(nameof(IsDirty));
+      switch (e.PropertyName)
+      {
+        case nameof(ComicViewModel.IsDirty):
+          OnPropertyChanged(nameof(IsDirty));
+          break;
+        case nameof(ComicViewModel.PurchasePrice):
+          OnPropertyChanged(nameof(TotalPrice));
+          break;
+        case nameof(ComicViewModel.EstimatedValue):
+          OnPropertyChanged(nameof(TotalValue));
+          break;
+      }
     }
 
     private void ApplyFilter()
@@ -317,6 +349,8 @@ namespace ComicLibrary.ViewModel
       view.Filter = string.IsNullOrWhiteSpace(SearchText) || SearchText.Length < 3
                     ? null
                     : x => x is ComicViewModel c && MatchesFilter(c, SearchText);
+      OnPropertyChanged(nameof(TotalPrice));
+      OnPropertyChanged(nameof(TotalValue));
     }
 
     private static bool MatchesFilter(ComicViewModel c, string searchText)
