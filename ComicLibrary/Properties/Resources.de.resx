@@ -136,10 +136,10 @@
     <value>Abbrechen</value>
   </data>
   <data name="CannotLoadFileMessage" xml:space="preserve">
-    <value>Kann Datei '{0}' nicht speichern.</value>
+    <value>Datei '{0}' konnte nicht geladen werden.</value>
   </data>
   <data name="CannotSaveFileMessage" xml:space="preserve">
-    <value>Kann Datei '{0}' nicht laden.</value>
+    <value>Datei '{0}' konnte nicht gespeichert werden.</value>
   </data>
   <data name="ChangeImage" xml:space="preserve">
     <value>Bild ändern</value>
@@ -199,7 +199,7 @@
     <value>Fehler</value>
   </data>
   <data name="EstimatedValue" xml:space="preserve">
-    <value>Schätzpreis</value>
+    <value>Schätzwert</value>
   </data>
   <data name="ExportImage" xml:space="preserve">
     <value>Bild exportieren</value>
