@@ -40,6 +40,12 @@ namespace ComicLibrary.ViewModel
         .. Globals.Instance.Countries.OrderBy(x => x.Name).Select(x => new OptionItemViewModel<Country>(x))
       ];
 
+      Languages =
+      [
+        new EmptyOptionItemViewModel<Language>(),
+        .. Globals.Instance.Languages.OrderBy(x => x.Name).Select(x => new OptionItemViewModel<Language>(x))
+      ];
+
       _comic = comic;
       Series = comic.Series;
       Year = comic.Year;
@@ -89,6 +95,8 @@ namespace ComicLibrary.ViewModel
 
     public IOptionItemViewModel<Country> Country { get; set; }
 
+    public IOptionItemViewModel<Language> Language { get; set; }
+
     public bool CollectorsEdition { get; set; }
 
     public bool LimitedEdition { get; set; }
@@ -96,6 +104,8 @@ namespace ComicLibrary.ViewModel
     public IEnumerable<IOptionItemViewModel<Publisher>> Publishers { get; }
 
     public IEnumerable<IOptionItemViewModel<Country>> Countries { get; }
+
+    public IEnumerable<IOptionItemViewModel<Language>> Languages { get; }
 
     public ObservableCollection<ComicImageViewModel> ComicImages { get; } = [];
 

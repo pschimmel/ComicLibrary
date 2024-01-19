@@ -14,6 +14,7 @@ namespace ComicLibrary.ViewModel
     private readonly string _libraryName;
     private readonly IEnumerable<IOptionItemViewModel<Publisher>> _publishers;
     private readonly IEnumerable<IOptionItemViewModel<Country>> _countries;
+    private readonly IEnumerable<IOptionItemViewModel<Language>> _languages;
     private ActionCommand _editComicCommand;
     private bool _isDirty;
 
@@ -24,12 +25,14 @@ namespace ComicLibrary.ViewModel
     public ComicViewModel(Comic comic,
                           string libraryName,
                           IEnumerable<IOptionItemViewModel<Publisher>> publishers,
-                          IEnumerable<IOptionItemViewModel<Country>> countries)
+                          IEnumerable<IOptionItemViewModel<Country>> countries,
+                          IEnumerable<IOptionItemViewModel<Language>> languages)
     {
       _libraryName = libraryName;
       _comic = comic;
       _publishers = publishers;
       _countries = countries;
+      _languages = languages;
       Series = comic.Series;
       Year = comic.Year;
       IssueNumber = comic.IssueNumber;
@@ -145,6 +148,20 @@ namespace ComicLibrary.ViewModel
         {
           _comic.Country = value.Option;
           OnPropertyChanged(nameof(Country));
+          IsDirty = true;
+        }
+      }
+    }
+
+    public IOptionItemViewModel<Language> Language
+    {
+      get => _languages.FirstOrDefault(x => x.Option == _comic.Language) ?? _languages.Single(x => x.IsEmpty);
+      set
+      {
+        if (_comic.Language != value.Option)
+        {
+          _comic.Language = value.Option;
+          OnPropertyChanged(nameof(Language));
           IsDirty = true;
         }
       }

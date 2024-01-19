@@ -22,6 +22,7 @@ namespace ComicLibrary.ViewModel
     private ActiveLibraryViewModel _selectedLibrary;
     private ActionCommand _changeLibraryPathCommand;
     private ActionCommand _editCountriesCommand;
+    private ActionCommand _editLanguagesCommand;
     private ActionCommand _editPublishersCommand;
     private ActionCommand _closeCommand;
     private ActionCommand _editLibrariesCommand;
@@ -197,6 +198,29 @@ namespace ComicLibrary.ViewModel
       if (view.ShowDialog() == true)
       {
         Globals.Instance.Countries = new HashSet<Country>(optionsVM.Options.OfType<Country>());
+        Globals.Save();
+      }
+    }
+
+    #endregion
+
+    #region Edit Languages
+
+    public ICommand EditLanguagesCommand => _editLanguagesCommand ??= new ActionCommand(EditLanguages);
+
+    private void EditLanguages()
+    {
+      if (ActiveLibraries.Count > 0)
+      {
+        MessageBox.Show(Properties.Resources.CloseLibrariesToModifyOptionsMessage, Properties.Resources.Error, MessageBoxButton.OK, MessageBoxImage.Error);
+        return;
+      }
+
+      var optionsVM = new EditOptionsViewModel(Globals.Instance.Languages.OrderBy(x => x.Name), typeof(Language), Properties.Resources.Languages, Properties.Resources.Language);
+      var view = ViewFactory.Instance.CreateView(optionsVM);
+      if (view.ShowDialog() == true)
+      {
+        Globals.Instance.Languages = new HashSet<Language>(optionsVM.Options.OfType<Language>());
         Globals.Save();
       }
     }

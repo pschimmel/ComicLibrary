@@ -12,6 +12,8 @@ namespace ComicLibrary.Model.Entities
 
     public HashSet<Country> Countries { get; set; } = [];
 
+    public HashSet<Language> Languages { get; set; } = [];
+
     public static Globals Load()
     {
       return FileHelper.LoadGlobals();

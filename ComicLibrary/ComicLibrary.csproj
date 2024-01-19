@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <LangVersion>12.0</LangVersion>
     <UseWindowsForms>true</UseWindowsForms>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <ApplicationIcon>Icon Large.ico</ApplicationIcon>
@@ -38,8 +39,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ES.Tools" Version="0.6.30.123" />
-    <PackageReference Include="ES.Tools.Core" Version="0.6.30.123" />
+    <PackageReference Include="ES.Tools" Version="0.6.40.125" />
+    <PackageReference Include="ES.Tools.Core" Version="0.6.40.125" />
     <PackageReference Include="Fluent.Ribbon" Version="10.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using ComicLibrary.View;
 using ComicLibrary.ViewModel;
 using ES.Tools.Core.MVVM;
@@ -14,6 +15,10 @@ namespace ComicLibrary
     {
       base.OnStartup(e);
 
+      // Automatically select all text when a TextBox is focused.
+      EventManager.RegisterClassHandler(typeof(TextBox), UIElement.GotFocusEvent, new RoutedEventHandler(TextBox_GotFocus));
+
+      // Register combination of VMs and Views in the ViewFactory.
       ViewFactory.Instance.Register<GetNameViewModel, GetNameDialog>();
       ViewFactory.Instance.Register<EditComicViewModel, EditComicDialog>();
       ViewFactory.Instance.Register<EditOptionsViewModel, EditOptionsDialog>();
@@ -21,6 +26,11 @@ namespace ComicLibrary
       ViewFactory.Instance.Register<GradePickerViewModel, GradePickerDialog>();
       ViewFactory.Instance.Register<MoveToLibraryViewModel, MoveToLibraryDialog>();
       ViewFactory.Instance.Register<PrintActiveLibraryViewModel, PrintActiveLibraryDialog>();
+    }
+
+    private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+    {
+      (sender as TextBox).SelectAll();
     }
   }
 }

@@ -49,12 +49,18 @@ namespace ComicLibrary.ViewModel
         .. Globals.Instance.Countries.OrderBy(x => x.Name).Select(x => new OptionItemViewModel<Country>(x))
       ];
 
+      Languages =
+      [
+        new EmptyOptionItemViewModel<Language>(),
+        .. Globals.Instance.Languages.OrderBy(x => x.Name).Select(x => new OptionItemViewModel<Language>(x))
+      ];
+
       Comics = [];
       Comics.CollectionChanged += Comics_CollectionChanged;
 
       foreach (var comic in library.Comics)
       {
-        Comics.Add(new ComicViewModel(comic, Name, Publishers, Countries));
+        Comics.Add(new ComicViewModel(comic, Name, Publishers, Countries, Languages));
       }
 
       libraryTemplate.ComicCount = Comics.Count;
@@ -70,6 +76,8 @@ namespace ComicLibrary.ViewModel
     public IEnumerable<IOptionItemViewModel<Publisher>> Publishers { get; }
 
     public IEnumerable<IOptionItemViewModel<Country>> Countries { get; }
+
+    public IEnumerable<IOptionItemViewModel<Language>> Languages { get; }
 
     public IEnumerable<Grade> Conditions { get; }
 
@@ -140,7 +148,7 @@ namespace ComicLibrary.ViewModel
     private void AddComic()
     {
       var comic = new Comic(SelectedComic?.ToModel());
-      var comicVM = new ComicViewModel(comic, Name, Publishers, Countries);
+      var comicVM = new ComicViewModel(comic, Name, Publishers, Countries, Languages);
       Comics.Add(comicVM);
       SelectedComic = comicVM;
       _libraryTemplate.ComicCount = Comics.Count;

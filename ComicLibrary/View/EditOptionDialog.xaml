@@ -2,9 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:entities="clr-namespace:ComicLibrary.Model.Entities"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:properties="clr-namespace:ComicLibrary.Properties"
+        xmlns:toolsUI="clr-namespace:ES.Tools.UI;assembly=ES.Tools"
         xmlns:viewmodel="clr-namespace:ComicLibrary.ViewModel"
         Title="{Binding Header}"
         Width="400"
@@ -13,35 +13,11 @@
         WindowStartupLocation="CenterOwner"
         mc:Ignorable="d">
   <Window.Resources>
-    <DataTemplate DataType="{x:Type entities:Country}">
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto" />
-          <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <TextBlock Margin="2"
-                   VerticalAlignment="Center"
-                   Text="Name" />
-        <TextBox Grid.Column="1"
-                 Margin="2"
-                 Text="{Binding Name}" />
-      </Grid>
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type entities:Publisher}">
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto" />
-          <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <TextBlock Margin="2"
-                   VerticalAlignment="Center"
-                   Text="Name" />
-        <TextBox Grid.Column="1"
-                 Margin="2"
-                 Text="{Binding Name}" />
-      </Grid>
-    </DataTemplate>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <toolsUI:SharedResourceDictionary Source="pack://application:,,,/ComicLibrary;Component/View/DataTemplates.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
   </Window.Resources>
   <Grid>
     <Grid.RowDefinitions>

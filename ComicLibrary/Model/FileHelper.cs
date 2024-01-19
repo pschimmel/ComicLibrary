@@ -20,6 +20,8 @@ namespace ComicLibrary.Model
     private const string PublisherKey = "Publisher";
     private const string CountriesKey = "Countries";
     private const string CountryKey = "Country";
+    private const string LanguagesKey = "Languages";
+    private const string LanguageKey = "Language";
     private const string IDKey = "ID";
     private const string NameKey = "Name";
     private const string TitleKey = "Title";
@@ -89,6 +91,32 @@ namespace ComicLibrary.Model
 
                   if (!string.IsNullOrWhiteSpace(country.Name) && country.ID != Guid.Empty)
                     globals.Countries.Add(country);
+                }
+              }
+            }
+            else if (globalsChildNode.Name == LanguagesKey)
+            {
+              var languagesNode = globalsChildNode;
+              foreach (XmlNode languageNode in languagesNode.ChildNodes)
+              {
+                if (languageNode.Name == LanguageKey)
+                {
+                  var language = new Language();
+
+                  foreach (XmlAttribute languageAttribute in languageNode.Attributes)
+                  {
+                    if (languageAttribute.Name == IDKey)
+                    {
+                      language.ID = new Guid(languageAttribute.InnerText);
+                    }
+                    else if (languageAttribute.Name == NameKey)
+                    {
+                      language.Name = languageAttribute.InnerText;
+                    }
+                  }
+
+                  if (!string.IsNullOrWhiteSpace(language.Name) && language.ID != Guid.Empty)
+                    globals.Languages.Add(language);
                 }
               }
             }
@@ -191,6 +219,7 @@ namespace ComicLibrary.Model
       if (!File.Exists(filePath))
         return new ActiveLibrary();
 
+      //  EventService.Instance.Publish("StartProgress", 0.0);
       var library = new ActiveLibrary();
 
       try
@@ -205,6 +234,7 @@ namespace ComicLibrary.Model
         MessageBox.Show(string.Format(Properties.Resources.CannotLoadFileMessage, filePath) + Environment.NewLine + ex.Message);
       }
 
+      // EventService.Instance.Publish("EndProgress", 100.0);
       return library;
     }
 
@@ -230,6 +260,7 @@ namespace ComicLibrary.Model
       if (libraryNode.ChildNodes.Count > 0 && libraryNode.ChildNodes[0].Name == ComicsKey)
       {
         var comicsNode = libraryNode.ChildNodes[0];
+        int counter = 0;
 
         foreach (XmlNode comicNode in comicsNode.ChildNodes)
         {
@@ -276,6 +307,10 @@ namespace ComicLibrary.Model
               {
                 comic.Country = Globals.Instance.Countries.FirstOrDefault(x => x.ID == countryID);
               }
+              else if (comicChildNode.Name == LanguageKey && Guid.TryParse(comicChildNode.InnerText, out Guid languageID))
+              {
+                comic.Language = Globals.Instance.Languages.FirstOrDefault(x => x.ID == languageID);
+              }
               else if (comicChildNode.Name == PublisherKey && Guid.TryParse(comicChildNode.InnerText, out Guid publisherID))
               {
                 comic.Publisher = Globals.Instance.Publishers.FirstOrDefault(x => x.ID == publisherID);
@@ -313,6 +348,10 @@ namespace ComicLibrary.Model
               library.Comics.Add(comic);
             }
           }
+
+          counter++;
+
+          // EventService.Instance.Publish("Progress", counter / comicsNode.ChildNodes.Count * 100.0);
         }
       }
     }
@@ -361,6 +400,20 @@ namespace ComicLibrary.Model
                                       CountryKey,
                                       (IDKey, country.ID.ToString()),
                                       (NameKey, country.Name));
+          }
+        }
+
+        if (globals.Languages.Count != 0)
+        {
+          var languegesNode = xml.CreateElement(LanguagesKey);
+          globalsNode.AppendChild(languegesNode);
+
+          foreach (var language in globals.Languages.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.ID != Guid.Empty).OrderBy(x => x.Name))
+          {
+            AppendChildWithAttributes(languegesNode,
+                                      LanguageKey,
+                                      (IDKey, language.ID.ToString()),
+                                      (NameKey, language.Name));
           }
         }
 
@@ -473,6 +526,7 @@ namespace ComicLibrary.Model
                                                   (IssueNumberKey, comic.IssueNumber?.ToString(CultureInfo.InvariantCulture)),
                                                   (CommentKey, comic.Comment),
                                                   (CountryKey, comic.Country?.ID.ToString()),
+                                                  (LanguageKey, comic.Language?.ID.ToString()),
                                                   (PublisherKey, comic.Publisher?.ID.ToString()),
                                                   (CollectorsEditionKey, comic.CollectorsEdition == true ? true.ToString() : ""),
                                                   (LimitedEditionKey, comic.LimitedEdition == true ? true.ToString() : ""),

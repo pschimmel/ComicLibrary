@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
                     xmlns:controls="clr-namespace:ES.Tools.Controls;assembly=ES.Tools"
+                    xmlns:entities="clr-namespace:ComicLibrary.Model.Entities"
                     xmlns:localBehaviors="clr-namespace:ComicLibrary.View.Behaviors"
                     xmlns:properties="clr-namespace:ComicLibrary.Properties"
                     xmlns:toolsUI="clr-namespace:ES.Tools.UI;assembly=ES.Tools"
@@ -153,13 +154,13 @@
                 ItemsSource="{Binding Comics}"
                 SelectedItem="{Binding SelectedComic}">
         <behaviors:Interaction.Behaviors>
-          <localBehaviors:SingleClickEditingBehavior />
+          <localBehaviors:SingleClickEditBehavior />
         </behaviors:Interaction.Behaviors>
         <DataGrid.Resources>
           <controls:BindingProxy x:Key="Proxy" Data="{Binding}" />
         </DataGrid.Resources>
         <DataGrid.RowStyle>
-          <Style TargetType="DataGridRow">
+          <Style TargetType="{x:Type DataGridRow}">
             <Style.Triggers>
               <DataTrigger Binding="{Binding CollectorsEdition}" Value="True">
                 <Setter Property="Background" Value="LightCyan" />
@@ -227,6 +228,10 @@
                                   Header="{x:Static properties:Resources.Country}"
                                   ItemsSource="{Binding Data.Countries, Source={StaticResource Proxy}}"
                                   SelectedItemBinding="{Binding Country, UpdateSourceTrigger=PropertyChanged}" />
+          <DataGridComboBoxColumn DisplayMemberPath="Name"
+                                  Header="{x:Static properties:Resources.Language}"
+                                  ItemsSource="{Binding Data.Languages, Source={StaticResource Proxy}}"
+                                  SelectedItemBinding="{Binding Language, UpdateSourceTrigger=PropertyChanged}" />
           <DataGridTemplateColumn>
             <DataGridTemplateColumn.CellTemplate>
               <DataTemplate>
@@ -241,6 +246,51 @@
           </DataGridTemplateColumn>
         </DataGrid.Columns>
       </DataGrid>
+    </Grid>
+  </DataTemplate>
+
+  <DataTemplate DataType="{x:Type entities:Country}">
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+      <TextBlock Margin="2"
+                 VerticalAlignment="Center"
+                 Text="Name" />
+      <TextBox Grid.Column="1"
+               Margin="2"
+               Text="{Binding Name}" />
+    </Grid>
+  </DataTemplate>
+
+  <DataTemplate DataType="{x:Type entities:Language}">
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+      <TextBlock Margin="2"
+                 VerticalAlignment="Center"
+                 Text="Name" />
+      <TextBox Grid.Column="1"
+               Margin="2"
+               Text="{Binding Name}" />
+    </Grid>
+  </DataTemplate>
+
+  <DataTemplate DataType="{x:Type entities:Publisher}">
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+      <TextBlock Margin="2"
+                 VerticalAlignment="Center"
+                 Text="Name" />
+      <TextBox Grid.Column="1"
+               Margin="2"
+               Text="{Binding Name}" />
     </Grid>
   </DataTemplate>
 </ResourceDictionary>

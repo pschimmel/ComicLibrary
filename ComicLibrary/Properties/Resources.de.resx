@@ -249,6 +249,12 @@
   <data name="JpegFiles" xml:space="preserve">
     <value>Jpeg Bilddateien (*.jpg)</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="Languages" xml:space="preserve">
+    <value>Sprachen</value>
+  </data>
   <data name="Libraries" xml:space="preserve">
     <value>Bibliotheken</value>
   </data>

@@ -43,6 +43,8 @@ namespace ComicLibrary.Model.Entities
 
     public Country Country { get; set; }
 
+    public Language Language { get; set; }
+
     public List<string> ImagesAsString { get; } = [];
 
     public bool LimitedEdition { get; set; }
