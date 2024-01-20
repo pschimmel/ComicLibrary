@@ -24,8 +24,13 @@ namespace ComicLibrary.Model.Entities
         Year = selectedComic.Year;
         Condition = selectedComic.Condition;
         Country = selectedComic.Country;
+        Language = selectedComic.Language;
         IssueNumber = selectedComic.IssueNumber;
         Title = selectedComic.Title;
+        PurchasePrice = selectedComic.PurchasePrice;
+        EstimatedValue = selectedComic.EstimatedValue;
+        Comment = selectedComic.Comment;
+        ImagesAsString = new List<string>(selectedComic.ImagesAsString);
       }
     }
 
