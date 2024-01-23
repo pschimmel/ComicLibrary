@@ -52,8 +52,9 @@ namespace ComicLibrary.ViewModel
       IssueNumber = comic.IssueNumber;
       Title = comic.Title;
       Condition = comic.Condition;
-      Publisher = Publishers.FirstOrDefault(x => x.Option == comic.Publisher);
-      Country = Countries.FirstOrDefault(x => x.Option == comic.Country);
+      Publisher = Publishers.FirstOrDefault(x => x.Option == comic.Publisher) ?? Publishers.First();
+      Country = Countries.FirstOrDefault(x => x.Option == comic.Country) ?? Countries.First();
+      Language = Languages.FirstOrDefault(x => x.Option == comic.Language) ?? Languages.First();
       PurchasePrice = comic.PurchasePrice;
       EstimatedValue = comic.EstimatedValue;
       Comment = comic.Comment;
@@ -204,6 +205,7 @@ namespace ComicLibrary.ViewModel
       _comic.Publisher = Publisher.Option;
       _comic.Condition = Condition;
       _comic.Country = Country.Option;
+      _comic.Language = Language.Option;
       _comic.Comment = Comment;
       _comic.PurchasePrice = PurchasePrice;
       _comic.EstimatedValue = EstimatedValue;
@@ -211,7 +213,6 @@ namespace ComicLibrary.ViewModel
       _comic.LimitedEdition = LimitedEdition;
 
       _comic.ImagesAsString.Clear();
-
       foreach (var image in ComicImages)
       {
         _comic.ImagesAsString.Add(image.ToString());
