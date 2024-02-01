@@ -655,7 +655,16 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Print List.
+        ///   Looks up a localized string similar to Print.
+        /// </summary>
+        public static string Print {
+            get {
+                return ResourceManager.GetString("Print", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List.
         /// </summary>
         public static string PrintList {
             get {
@@ -673,7 +682,7 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Print Report.
+        ///   Looks up a localized string similar to Report.
         /// </summary>
         public static string PrintReport {
             get {

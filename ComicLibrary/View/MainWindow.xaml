@@ -25,6 +25,15 @@
         <toolsUI:SharedResourceDictionary Source="pack://application:,,,/ComicLibrary;Component/View/DataTemplates.xaml" />
       </ResourceDictionary.MergedDictionaries>
 
+      <Style x:Key="LibraryGroupBoxStyle" TargetType="{x:Type fluent:RibbonGroupBox}">
+        <Setter Property="IsEnabled" Value="True" />
+        <Style.Triggers>
+          <DataTrigger Binding="{Binding}" Value="{x:Null}">
+            <Setter Property="IsEnabled" Value="False" />
+          </DataTrigger>
+        </Style.Triggers>
+      </Style>
+
       <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
       <converters:NegationConverter x:Key="NegationConverter" />
     </ResourceDictionary>
@@ -135,7 +144,7 @@
             </fluent:BackstageTabControl>
           </fluent:Backstage>
         </fluent:Ribbon.Menu>
-        <fluent:RibbonTabItem Header="{x:Static properties:Resources.Start}" ReduceOrder="Libraries, Libraries, Libraries, Libraries, Library, Library, Library, Library, Comic, Comic, Comic, Comic">
+        <fluent:RibbonTabItem Header="{x:Static properties:Resources.Start}" ReduceOrder="Libraries, Libraries, Libraries, Library, Library, Library, Comic, Comic, Comic, Print, Print, Print, Libraries, Library, Comic, Print">
           <fluent:RibbonGroupBox Name="Libraries"
                                  Header="{x:Static properties:Resources.Libraries}"
                                  Icon="pack://application:,,,/ComicLibrary;component/Images/Folder.png">
@@ -151,38 +160,13 @@
           <fluent:RibbonGroupBox Name="Library"
                                  DataContext="{Binding SelectedLibrary}"
                                  Header="{x:Static properties:Resources.CurrentLibrary}"
-                                 Icon="pack://application:,,,/ComicLibrary;component/Images/CurrentFolder.png">
-            <fluent:RibbonGroupBox.Style>
-              <Style TargetType="{x:Type fluent:RibbonGroupBox}">
-                <Setter Property="IsEnabled" Value="True" />
-                <Style.Triggers>
-                  <DataTrigger Binding="{Binding}" Value="{x:Null}">
-                    <Setter Property="IsEnabled" Value="False" />
-                  </DataTrigger>
-                </Style.Triggers>
-              </Style>
-            </fluent:RibbonGroupBox.Style>
+                                 Icon="pack://application:,,,/ComicLibrary;component/Images/CurrentFolder.png"
+                                 Style="{StaticResource LibraryGroupBoxStyle}">
             <fluent:Button Command="{Binding SaveLibraryCommand}"
                            Header="{x:Static properties:Resources.Save}"
-                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Save.png"
-                           SizeDefinition="Large Large Large">
+                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Save.png">
               <fluent:Button.ToolTip>
                 <fluent:ScreenTip Title="{x:Static properties:Resources.SaveLibrary}" Text="{x:Static properties:Resources.SaveLibraryTooltip}" />
-              </fluent:Button.ToolTip>
-            </fluent:Button>
-            <fluent:Button Command="{Binding PrintReportCommand}"
-                           Header="{x:Static properties:Resources.PrintReport}"
-                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Report.png">
-              <fluent:Button.ToolTip>
-                <fluent:ScreenTip Title="{x:Static properties:Resources.PrintReport}" Text="{x:Static properties:Resources.PrintReportTooltip}" />
-              </fluent:Button.ToolTip>
-            </fluent:Button>
-            <fluent:Button Command="{Binding PrintListCommand}"
-                           Header="{x:Static properties:Resources.PrintList}"
-                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/List.png"
-                      >
-              <fluent:Button.ToolTip>
-                <fluent:ScreenTip Title="{x:Static properties:Resources.PrintList}" Text="{x:Static properties:Resources.PrintListTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
             <fluent:Button Command="{Binding RenameSeriesCommand}"
@@ -196,17 +180,8 @@
           <fluent:RibbonGroupBox Name="Comic"
                                  DataContext="{Binding SelectedLibrary}"
                                  Header="{x:Static properties:Resources.Comic}"
-                                 Icon="pack://application:,,,/ComicLibrary;component/Images/Comic.png">
-            <fluent:RibbonGroupBox.Style>
-              <Style TargetType="{x:Type fluent:RibbonGroupBox}">
-                <Setter Property="IsEnabled" Value="True" />
-                <Style.Triggers>
-                  <DataTrigger Binding="{Binding}" Value="{x:Null}">
-                    <Setter Property="IsEnabled" Value="False" />
-                  </DataTrigger>
-                </Style.Triggers>
-              </Style>
-            </fluent:RibbonGroupBox.Style>
+                                 Icon="pack://application:,,,/ComicLibrary;component/Images/Comic.png"
+                                 Style="{StaticResource LibraryGroupBoxStyle}">
             <fluent:Button Command="{Binding AddComicCommand}"
                            Header="{x:Static properties:Resources.Add}"
                            LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Add.png">
@@ -226,6 +201,26 @@
                            LargeIcon="pack://application:,,,/ComicLibrary;component/Images/MoveToFolder.png">
               <fluent:Button.ToolTip>
                 <fluent:ScreenTip Title="{x:Static properties:Resources.MoveToLibrary}" Text="{x:Static properties:Resources.MoveToLibraryTooltip}" />
+              </fluent:Button.ToolTip>
+            </fluent:Button>
+          </fluent:RibbonGroupBox>
+          <fluent:RibbonGroupBox Name="Print"
+                                 DataContext="{Binding SelectedLibrary}"
+                                 Header="{x:Static properties:Resources.Print}"
+                                 Icon="pack://application:,,,/ComicLibrary;component/Images/Print.png"
+                                 Style="{StaticResource LibraryGroupBoxStyle}">
+            <fluent:Button Command="{Binding PrintReportCommand}"
+                           Header="{x:Static properties:Resources.PrintReport}"
+                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Report.png">
+              <fluent:Button.ToolTip>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.PrintReport}" Text="{x:Static properties:Resources.PrintReportTooltip}" />
+              </fluent:Button.ToolTip>
+            </fluent:Button>
+            <fluent:Button Command="{Binding PrintListCommand}"
+                           Header="{x:Static properties:Resources.PrintList}"
+                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/List.png">
+              <fluent:Button.ToolTip>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.PrintList}" Text="{x:Static properties:Resources.PrintListTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
           </fluent:RibbonGroupBox>

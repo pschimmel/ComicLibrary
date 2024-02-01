@@ -27,6 +27,7 @@
     <None Remove="Images\MoveToFolder.png" />
     <None Remove="Images\Options.png" />
     <None Remove="Images\Photo.png" />
+    <None Remove="Images\Print.png" />
     <None Remove="Images\Remove.png" />
     <None Remove="Images\RemovePhoto.png" />
     <None Remove="Images\Rename.png" />
@@ -50,6 +51,7 @@
     <Resource Include="Images\Add.png" />
     <Resource Include="Images\CancelSmall.png" />
     <Resource Include="Images\List.png" />
+    <Resource Include="Images\Print.png" />
     <Resource Include="Images\Report.png" />
     <Resource Include="Images\Close.png" />
     <Resource Include="Images\Comic.png" />

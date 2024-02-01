@@ -14,11 +14,8 @@ namespace ComicLibrary.ViewModel
   {
     public enum ReportType { Report, List }
 
-    private ReportType _type;
-
     public PrintActiveLibraryViewModel(ActiveLibraryViewModel library, ReportType type)
     {
-      _type = type;
       FlowDocument flowDocument = type == ReportType.Report ? CreateReport(library) : CreateList(library);
       Document = PrepareReport(flowDocument);
     }

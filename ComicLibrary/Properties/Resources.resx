@@ -315,14 +315,17 @@
   <data name="PoorDescription" xml:space="preserve">
     <value>A heavily defaced collectible with a number major defects. Some pieces will also be missing.</value>
   </data>
+  <data name="Print" xml:space="preserve">
+    <value>Print</value>
+  </data>
   <data name="PrintList" xml:space="preserve">
-    <value>Print List</value>
+    <value>List</value>
   </data>
   <data name="PrintListTooltip" xml:space="preserve">
     <value>Prints a list of the issue numbers in the current library, grouped by series.</value>
   </data>
   <data name="PrintReport" xml:space="preserve">
-    <value>Print Report</value>
+    <value>Report</value>
   </data>
   <data name="PrintReportTooltip" xml:space="preserve">
     <value>Prints a report with all comics in the current library.</value>
