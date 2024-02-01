@@ -172,10 +172,17 @@
             </fluent:Button>
             <fluent:Button Command="{Binding PrintReportCommand}"
                            Header="{x:Static properties:Resources.PrintReport}"
-                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Report.png"
-                           SizeDefinition="Large Large Large">
+                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Report.png">
               <fluent:Button.ToolTip>
                 <fluent:ScreenTip Title="{x:Static properties:Resources.PrintReport}" Text="{x:Static properties:Resources.PrintReportTooltip}" />
+              </fluent:Button.ToolTip>
+            </fluent:Button>
+            <fluent:Button Command="{Binding PrintListCommand}"
+                           Header="{x:Static properties:Resources.PrintList}"
+                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/List.png"
+                      >
+              <fluent:Button.ToolTip>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.PrintList}" Text="{x:Static properties:Resources.PrintListTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
             <fluent:Button Command="{Binding RenameSeriesCommand}"

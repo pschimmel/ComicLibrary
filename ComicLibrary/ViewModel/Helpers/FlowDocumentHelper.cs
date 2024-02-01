@@ -12,9 +12,12 @@ namespace ComicLibrary.ViewModel.Helpers
     public const double DefaultFontSize = 12.0;
     public static readonly FontFamily DefaultFontFamily = new("Arial");
 
+    /// <summary>
+    /// Adds a large header 
+    /// </summary>
     public static void AddHeader1(this FlowDocument doc, string header)
     {
-      var p = new Paragraph(new Run(header))
+      var p = new Paragraph(new Bold(new Run(header)))
       {
         FontSize = Header1Size,
         TextAlignment = TextAlignment.Left,
@@ -24,12 +27,30 @@ namespace ComicLibrary.ViewModel.Helpers
       doc.Blocks.Add(p);
     }
 
+    /// <summary>
+    /// Adds a smaller header 
+    /// </summary>
     public static void AddHeader2(this FlowDocument doc, string header)
     {
-      var p = new Paragraph(new Run(header))
+      var p = new Paragraph(new Bold(new Run(header)))
       {
         FontSize = Header2Size,
         TextAlignment = TextAlignment.Left,
+        FontFamily = DefaultFontFamily
+      };
+
+      doc.Blocks.Add(p);
+    }
+
+    /// <summary>
+    /// Adds a text 
+    /// </summary>
+    public static void AddParagraph(this FlowDocument doc, string header)
+    {
+      var p = new Paragraph(new Run(header))
+      {
+        FontSize = DefaultFontSize,
+        TextAlignment = TextAlignment.Justify,
         FontFamily = DefaultFontFamily
       };
 

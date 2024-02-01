@@ -655,6 +655,24 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Print List.
+        /// </summary>
+        public static string PrintList {
+            get {
+                return ResourceManager.GetString("PrintList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prints a list of the issue numbers in the current library, grouped by series..
+        /// </summary>
+        public static string PrintListTooltip {
+            get {
+                return ResourceManager.GetString("PrintListTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Print Report.
         /// </summary>
         public static string PrintReport {
@@ -664,7 +682,7 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Print a report with all comics in the current library..
+        ///   Looks up a localized string similar to Prints a report with all comics in the current library..
         /// </summary>
         public static string PrintReportTooltip {
             get {

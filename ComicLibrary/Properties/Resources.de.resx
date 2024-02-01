@@ -315,6 +315,12 @@
   <data name="PoorDescription" xml:space="preserve">
     <value>Ein hochgradig mangelhaftes Exemplar mit einer großen Zahl großer Mängel. Einige Teile können fehlen.</value>
   </data>
+  <data name="PrintList" xml:space="preserve">
+    <value>Liste drucken</value>
+  </data>
+  <data name="PrintListTooltip" xml:space="preserve">
+    <value>Druckt eine Liste der Ausgaben in der aktuellen Bibliothek, gruppiert nach Reihe.</value>
+  </data>
   <data name="PrintReport" xml:space="preserve">
     <value>Bericht drucken</value>
   </data>

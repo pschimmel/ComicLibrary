@@ -26,6 +26,7 @@ namespace ComicLibrary.ViewModel
     private ActionCommand _moveToLibraryCommand;
     private ActionCommand _renameSeriesCommand;
     private ActionCommand _printReportCommand;
+    private ActionCommand _printListCommand;
     private bool _isDirty;
 
     #endregion
@@ -278,7 +279,20 @@ namespace ComicLibrary.ViewModel
 
     private void PrintReport()
     {
-      var vm = new PrintActiveLibraryViewModel(this);
+      var vm = new PrintActiveLibraryViewModel(this, PrintActiveLibraryViewModel.ReportType.Report);
+      var view = ViewFactory.Instance.CreateView(vm);
+      view.ShowDialog();
+    }
+
+    #endregion
+
+    #region Print List
+
+    public ICommand PrintListCommand => _printListCommand ??= new ActionCommand(PrintList);
+
+    private void PrintList()
+    {
+      var vm = new PrintActiveLibraryViewModel(this, PrintActiveLibraryViewModel.ReportType.List);
       var view = ViewFactory.Instance.CreateView(vm);
       view.ShowDialog();
     }

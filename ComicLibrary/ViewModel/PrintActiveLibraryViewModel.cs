@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.IO.Packaging;
+using System.Linq;
 using System.Printing;
 using System.Windows;
 using System.Windows.Documents;
@@ -11,15 +12,20 @@ namespace ComicLibrary.ViewModel
 {
   public class PrintActiveLibraryViewModel : ES.Tools.Core.MVVM.ViewModel
   {
-    public PrintActiveLibraryViewModel(ActiveLibraryViewModel library)
+    public enum ReportType { Report, List }
+
+    private ReportType _type;
+
+    public PrintActiveLibraryViewModel(ActiveLibraryViewModel library, ReportType type)
     {
-      FlowDocument flowDocument = CreateFlowDocument(library);
+      _type = type;
+      FlowDocument flowDocument = type == ReportType.Report ? CreateReport(library) : CreateList(library);
       Document = PrepareReport(flowDocument);
     }
 
     public IDocumentPaginatorSource Document { get; }
 
-    private static FlowDocument CreateFlowDocument(ActiveLibraryViewModel library)
+    private static FlowDocument CreateReport(ActiveLibraryViewModel library)
     {
       var document = new FlowDocument();
 
@@ -51,6 +57,32 @@ namespace ComicLibrary.ViewModel
                      new CellContent(comic.Title),
                      new CellContent(comic.Condition.Name),
                      new CellContent(comic.PurchasePrice.HasValue ? $"{Settings.Instance.CurrencySymbol} {comic.PurchasePrice.Value:F2}" : null, TextAlignment.Right));
+      }
+
+      return document;
+    }
+
+    private static FlowDocument CreateList(ActiveLibraryViewModel library)
+    {
+      var document = new FlowDocument();
+
+      // Add header
+      document.AddHeader1(library.Name);
+
+      // Add series 
+      var series = library.Comics.Where(x => x.IssueNumber.HasValue && !string.IsNullOrWhiteSpace(x.Series))
+                                 .Select(x => x.Series)
+                                 .Distinct()
+                                 .Order();
+
+      foreach (var serie in series)
+      {
+        document.AddHeader2(serie);
+        var listOfIssues = library.Comics.Where(x => x.IssueNumber.HasValue && x.Series == serie)
+                                         .Select(x => x.IssueNumber.Value)
+                                         .Order();
+        var issues = string.Join(", ", listOfIssues);
+        document.AddParagraph(issues);
       }
 
       return document;
