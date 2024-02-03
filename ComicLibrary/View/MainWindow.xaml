@@ -1,17 +1,16 @@
 ﻿<fluent:RibbonWindow x:Class="ComicLibrary.MainWindow"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                     xmlns:avalonDock="https://github.com/Dirkster99/AvalonDock"
-                     xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
-                     xmlns:controls="clr-namespace:ES.Tools.Controls;assembly=ES.Tools"
-                     xmlns:converters="clr-namespace:ES.Tools.Converters;assembly=ES.Tools"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                     xmlns:fluent="urn:fluent-ribbon"
-                     xmlns:local="clr-namespace:ComicLibrary"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:properties="clr-namespace:ComicLibrary.Properties"
-                     xmlns:toolsUI="clr-namespace:ES.Tools.UI;assembly=ES.Tools"
                      xmlns:vm="clr-namespace:ComicLibrary.ViewModel"
+                     xmlns:esConverters="clr-namespace:ES.Tools.Converters;assembly=ES.Tools"
+                     xmlns:toolsUI="clr-namespace:ES.Tools.UI;assembly=ES.Tools"
+                     xmlns:avalonDock="https://github.com/Dirkster99/AvalonDock"
+                     xmlns:converters="clr-namespace:ComicLibrary.View.Converters"
+                     xmlns:fluent="urn:fluent-ribbon"
                      Title="Comic Library"
                      d:DesignHeight="400"
                      d:DesignWidth="600"
@@ -35,8 +34,9 @@
         </Style.Triggers>
       </Style>
 
-      <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-      <converters:NegationConverter x:Key="NegationConverter" />
+      <esConverters:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+      <esConverters:NegationConverter x:Key="NegationConverter" />
+      <converters:ActiveDocumentConverter x:Key="ActiveDocumentConverter"/>
     </ResourceDictionary>
   </Window.Resources>
   <Window.DataContext>
@@ -260,6 +260,7 @@
       <avalonDock:DockingManager x:Name="dockingManager"
                                  Grid.Row="1"
                                  Background="White"
+                                 ActiveContent="{Binding SelectedLibrary, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}"
                                  DocumentsSource="{Binding ActiveLibraries}">
         <avalonDock:DockingManager.Theme>
           <avalonDock:MetroTheme />
