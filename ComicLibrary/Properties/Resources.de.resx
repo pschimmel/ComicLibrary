@@ -153,6 +153,12 @@
   <data name="CloseLibrariesToModifyOptionsMessage" xml:space="preserve">
     <value>Bitte schließen Sie alle Bibliotheken um die Optionen zu ändern.</value>
   </data>
+  <data name="CloseLibrary" xml:space="preserve">
+    <value>Bibliothek schließen</value>
+  </data>
+  <data name="CloseLibraryTooltip" xml:space="preserve">
+    <value>Schließt die aktuelle Bibliothek.</value>
+  </data>
   <data name="CollectorsEdition" xml:space="preserve">
     <value>Sammlerausgabe</value>
   </data>

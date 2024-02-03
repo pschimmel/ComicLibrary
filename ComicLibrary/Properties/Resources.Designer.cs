@@ -169,6 +169,24 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close Library.
+        /// </summary>
+        public static string CloseLibrary {
+            get {
+                return ResourceManager.GetString("CloseLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Closes the current library..
+        /// </summary>
+        public static string CloseLibraryTooltip {
+            get {
+                return ResourceManager.GetString("CloseLibraryTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Collector&apos;s Edition.
         /// </summary>
         public static string CollectorsEdition {
