@@ -41,6 +41,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dirkster.AvalonDock" Version="4.72.1" />
+    <PackageReference Include="Dirkster.AvalonDock.Themes.Metro" Version="4.72.1" />
     <PackageReference Include="ES.Tools" Version="0.6.40.125" />
     <PackageReference Include="ES.Tools.Core" Version="0.6.40.125" />
     <PackageReference Include="Fluent.Ribbon" Version="10.0.4" />

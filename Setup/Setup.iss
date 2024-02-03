@@ -44,6 +44,7 @@ WizardStyle=modern
 [Files]
 Source: "..\ComicLibrary\bin\Release\net8.0-windows\*.exe"; DestDir: "{app}"; Flags: IgnoreVersion sortfilesbyextension replacesameversion; 
 Source: "..\ComicLibrary\bin\Release\net8.0-windows\*.dll"; DestDir: "{app}"; Flags: IgnoreVersion sortfilesbyextension replacesameversion; 
+Source: "..\ComicLibrary\bin\Release\net8.0-windows\de\*.dll"; DestDir: "{app}\de"; Flags: IgnoreVersion sortfilesbyextension replacesameversion; 
 Source: "..\ComicLibrary\bin\Release\net8.0-windows\*.json"; DestDir: "{app}"; Flags: IgnoreVersion sortfilesbyextension replacesameversion; 
 Source: "..\ComicLibrary\bin\Release\net8.0-windows\*.config"; DestDir: "{app}"; Flags: IgnoreVersion sortfilesbyextension replacesameversion; 
 Source: "..\License.txt"; DestDir: "{app}"; Flags: IgnoreVersion replacesameversion; 

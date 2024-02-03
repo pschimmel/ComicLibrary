@@ -127,10 +127,8 @@
     <Grid>
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
-        <RowDefinition Height="Auto" />
         <RowDefinition />
       </Grid.RowDefinitions>
-      <TextBlock FontWeight="Bold" Text="{Binding Name}" />
       <DockPanel Grid.Row="1">
         <Image Width="12"
                Height="12"
@@ -163,10 +161,10 @@
           <Style TargetType="{x:Type DataGridRow}">
             <Style.Triggers>
               <DataTrigger Binding="{Binding CollectorsEdition}" Value="True">
-                <Setter Property="Background" Value="LightCyan" />
+                <Setter Property="Background" Value="Yellow" />
               </DataTrigger>
               <DataTrigger Binding="{Binding LimitedEdition}" Value="True">
-                <Setter Property="Background" Value="Cyan" />
+                <Setter Property="Background" Value="Orange" />
               </DataTrigger>
             </Style.Triggers>
           </Style>

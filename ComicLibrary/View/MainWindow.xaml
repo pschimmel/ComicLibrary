@@ -1,6 +1,7 @@
 ﻿<fluent:RibbonWindow x:Class="ComicLibrary.MainWindow"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:avalonDock="https://github.com/Dirkster99/AvalonDock"
                      xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
                      xmlns:controls="clr-namespace:ES.Tools.Controls;assembly=ES.Tools"
                      xmlns:converters="clr-namespace:ES.Tools.Converters;assembly=ES.Tools"
@@ -226,11 +227,13 @@
           </fluent:RibbonGroupBox>
         </fluent:RibbonTabItem>
       </fluent:Ribbon>
-      <TabControl Grid.Row="1"
+      <!--<TabControl Grid.Row="1"
                   ItemsSource="{Binding ActiveLibraries}"
                   SelectedItem="{Binding SelectedLibrary}">
         <TabControl.ItemTemplate>
-          <!--  this is the header template  -->
+      -->
+      <!--  this is the header template  -->
+      <!--
           <DataTemplate>
             <Grid>
               <Grid.ColumnDefinitions>
@@ -252,7 +255,23 @@
             </Grid>
           </DataTemplate>
         </TabControl.ItemTemplate>
-      </TabControl>
+      </TabControl>-->
+
+      <avalonDock:DockingManager x:Name="dockingManager"
+                                 Grid.Row="1"
+                                 Background="White"
+                                 DocumentsSource="{Binding ActiveLibraries}">
+        <avalonDock:DockingManager.Theme>
+          <avalonDock:MetroTheme />
+        </avalonDock:DockingManager.Theme>
+        <avalonDock:DockingManager.LayoutItemContainerStyle>
+          <Style TargetType="{x:Type avalonDock:LayoutItem}">
+            <Setter Property="Title" Value="{Binding Model.Name}" />
+            <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
+            <Setter Property="CanClose" Value="{Binding Model.CanClose}" />
+          </Style>
+        </avalonDock:DockingManager.LayoutItemContainerStyle>
+      </avalonDock:DockingManager>
 
       <fluent:StatusBar Grid.Row="2" HorizontalAlignment="Stretch">
         <fluent:StatusBarItem Title="{x:Static properties:Resources.TotalPrice}" HorizontalAlignment="Right">

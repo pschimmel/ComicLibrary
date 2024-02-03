@@ -230,7 +230,6 @@ namespace ComicLibrary.ViewModel
       OnPropertyChanged(nameof(ImagesCount));
       OnPropertyChanged(nameof(PurchasePrice));
       OnPropertyChanged(nameof(EstimatedValue));
-
     }
 
     #endregion

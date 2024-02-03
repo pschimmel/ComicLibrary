@@ -14,6 +14,12 @@ namespace ComicLibrary.ViewModel
 {
   public class ActiveLibraryViewModel : ES.Tools.Core.MVVM.ViewModel
   {
+    #region Events
+
+    public event EventHandler ClosingRequested;
+
+    #endregion
+
     #region Fields
 
     private readonly LibraryViewModel _libraryTemplate;
@@ -27,6 +33,7 @@ namespace ComicLibrary.ViewModel
     private ActionCommand _renameSeriesCommand;
     private ActionCommand _printReportCommand;
     private ActionCommand _printListCommand;
+    private ActionCommand _closeCommand;
     private bool _isDirty;
 
     #endregion
@@ -73,6 +80,8 @@ namespace ComicLibrary.ViewModel
     #region Properties
 
     public string Name => _libraryTemplate.Name;
+
+    public ComicImageViewModel ComicImage => _libraryTemplate.ComicImage;
 
     public IEnumerable<IOptionItemViewModel<Publisher>> Publishers { get; }
 
@@ -296,6 +305,33 @@ namespace ComicLibrary.ViewModel
       var view = ViewFactory.Instance.CreateView(vm);
       view.ShowDialog();
     }
+
+    #endregion
+
+    #region Close Library
+
+    public ICommand CloseCommand => _closeCommand ??= new ActionCommand(Close, () => CanClose);
+
+    private void Close()
+    {
+      if (IsDirty)
+      {
+        var result = MessageBox.Show(Properties.Resources.SaveChangesQuestion, Properties.Resources.Question, MessageBoxButton.YesNoCancel);
+
+        if (result == MessageBoxResult.Cancel)
+          return;
+
+        if (result == MessageBoxResult.Yes)
+        {
+          var model = ToModel();
+          FileHelper.SaveActiveLibrary(model, Path);
+        }
+      }
+
+      ClosingRequested?.Invoke(this, EventArgs.Empty);
+    }
+
+    public static bool CanClose => true; // Needs to be public for AvalonDock binding
 
     #endregion
 

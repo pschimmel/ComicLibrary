@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,7 +29,6 @@ namespace ComicLibrary.ViewModel
     private ActionCommand _editLibrariesCommand;
     private ActionCommand _cancelEditLibrariesCommand;
     private ActionCommand<LibraryViewModel> _loadLibraryCommand;
-    private ActionCommand<ActiveLibraryViewModel> _closeLibraryCommand;
     private ActionCommand _addLibraryCommand;
     private ActionCommand<LibraryViewModel> _changeLibraryImageCommand;
     private ActionCommand<LibraryViewModel> _removeLibraryImageCommand;
@@ -42,6 +42,7 @@ namespace ComicLibrary.ViewModel
     public MainViewModel()
     {
       ActiveLibraries = [];
+      ActiveLibraries.CollectionChanged += ActiveLibraries_CollectionChanged;
       Libraries = [];
       ShowLibrariesOverlay = true;
     }
@@ -329,39 +330,6 @@ namespace ComicLibrary.ViewModel
 
     #endregion
 
-    #region Close Library
-
-    public ICommand CloseLibraryCommand => _closeLibraryCommand ??= new ActionCommand<ActiveLibraryViewModel>(CloseLibrary, CanCloseLibraryCommand);
-
-    private void CloseLibrary(ActiveLibraryViewModel libraryVM)
-    {
-      if (libraryVM.IsDirty)
-      {
-        var result = MessageBox.Show(Properties.Resources.SaveChangesQuestion, Properties.Resources.Question, MessageBoxButton.YesNoCancel);
-
-        if (result == MessageBoxResult.Cancel)
-          return;
-
-        if (result == MessageBoxResult.Yes)
-        {
-          var model = libraryVM.ToModel();
-          FileHelper.SaveActiveLibrary(model, libraryVM.Path);
-        }
-      }
-
-      ActiveLibraries.Remove(libraryVM);
-
-      if (ActiveLibraries.Count == 0)
-        ShowLibrariesOverlay = true;
-    }
-
-    private bool CanCloseLibraryCommand(ActiveLibraryViewModel libraryVM)
-    {
-      return libraryVM != null;
-    }
-
-    #endregion
-
     #region Add Library
 
     public ICommand AddLibraryCommand => _addLibraryCommand ??= new ActionCommand(AddLibrary);
@@ -537,6 +505,27 @@ namespace ComicLibrary.ViewModel
     private void SaveLibraries()
     {
       FileHelper.SaveLibraries(Libraries.OfType<LibraryViewModel>().Select(x => x.ToModel()));
+    }
+
+    private void ActiveLibraries_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    {
+      foreach (var newLibrary in e.NewItems?.OfType<ActiveLibraryViewModel>() ?? Enumerable.Empty<ActiveLibraryViewModel>())
+      {
+        newLibrary.ClosingRequested += Library_ClosingRequested;
+      }
+
+      foreach (var oldLibrary in e.OldItems?.OfType<ActiveLibraryViewModel>() ?? Enumerable.Empty<ActiveLibraryViewModel>())
+      {
+        oldLibrary.ClosingRequested -= Library_ClosingRequested;
+      }
+
+      if (ActiveLibraries.Count == 0)
+        ShowLibrariesOverlay = true;
+    }
+
+    private void Library_ClosingRequested(object sender, EventArgs e)
+    {
+      ActiveLibraries.Remove(sender as ActiveLibraryViewModel);
     }
 
     #endregion
