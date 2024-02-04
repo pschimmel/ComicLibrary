@@ -159,7 +159,26 @@ namespace ComicLibrary.ViewModel
     {
       var comic = new Comic(SelectedComic?.ToModel());
       var comicVM = new ComicViewModel(comic, Name, Publishers, Countries, Languages);
-      Comics.Add(comicVM);
+
+      if (SelectedComic != null)
+      {
+        var view = Comics.GetView();
+        int index = view.OfType<ComicViewModel>().ToList().IndexOf(SelectedComic);
+
+        if (index + 1 < Comics.Count - 1)
+        {
+          Comics.Insert(index, comicVM);
+        }
+        else
+        {
+          Comics.Add(comicVM);
+        }
+      }
+      else
+      {
+        Comics.Add(comicVM);
+      }
+
       SelectedComic = comicVM;
       _libraryTemplate.ComicCount = Comics.Count;
     }
