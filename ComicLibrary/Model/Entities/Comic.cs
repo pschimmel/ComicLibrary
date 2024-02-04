@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using ComicLibrary.Model.Config;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace ComicLibrary.Model.Entities
 {
@@ -65,6 +67,16 @@ namespace ComicLibrary.Model.Entities
     public Comic Copy()
     {
       return new Comic(this, true);
+    }
+
+    public string ToClipboardString()
+    {
+      return JsonConvert.SerializeObject(this, Formatting.Indented, new StringEnumConverter());
+    }
+
+    public static Comic FromClipboardString(string comicAsString)
+    {
+      return string.IsNullOrWhiteSpace(comicAsString) ? null : JsonConvert.DeserializeObject<Comic>(comicAsString);
     }
   }
 }

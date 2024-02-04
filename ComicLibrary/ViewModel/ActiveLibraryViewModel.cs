@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Linq;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using ComicLibrary.Model;
@@ -34,6 +34,9 @@ namespace ComicLibrary.ViewModel
     private ActionCommand _printReportCommand;
     private ActionCommand _printListCommand;
     private ActionCommand _closeCommand;
+    private ActionCommand _cutCommand;
+    private ActionCommand _copyCommand;
+    private ActionCommand _pasteCommand;
     private bool _isDirty;
 
     #endregion
@@ -167,7 +170,7 @@ namespace ComicLibrary.ViewModel
 
         if (index + 1 < Comics.Count - 1)
         {
-          Comics.Insert(index, comicVM);
+          Comics.Insert(index + 1, comicVM);
         }
         else
         {
@@ -351,6 +354,98 @@ namespace ComicLibrary.ViewModel
     }
 
     public static bool CanClose => true; // Needs to be public for AvalonDock binding
+
+    #endregion
+
+    #region Cut
+
+    public ICommand CutCommand => _cutCommand ??= new ActionCommand(Cut, CanCut);
+
+    private void Cut()
+    {
+      if (SelectedComic != null)
+      {
+        Copy();
+        RemoveComic();
+      }
+    }
+
+    private bool CanCut()
+    {
+      return SelectedComic != null;
+    }
+
+    #endregion
+
+    #region Copy
+
+    public ICommand CopyCommand => _copyCommand ??= new ActionCommand(Copy, CanCopy);
+
+    private void Copy()
+    {
+      if (SelectedComic != null)
+      {
+        Clipboard.SetData("Comic", SelectedComic.ToModel().ToClipboardString());
+      }
+    }
+
+    private bool CanCopy()
+    {
+      return SelectedComic != null;
+    }
+
+    #endregion
+
+    #region Paste
+
+    public ICommand PasteCommand => _pasteCommand ??= new ActionCommand(Paste, CanPaste);
+
+    private void Paste()
+    {
+      Comic comic = null;
+
+      try
+      {
+        var clipboardString = (string)Clipboard.GetData("Comic");
+        comic = Comic.FromClipboardString(clipboardString);
+      }
+      catch (Exception ex)
+      {
+        Debug.Fail("Error pasting from Clipboard: " + Environment.NewLine + ex.Message);
+      }
+
+      if (comic == null)
+        return;
+
+      var comicVM = new ComicViewModel(comic, Name, Publishers, Countries, Languages);
+
+      if (SelectedComic != null)
+      {
+        var view = Comics.GetView();
+        int index = view.OfType<ComicViewModel>().ToList().IndexOf(SelectedComic);
+
+        if (index + 1 < Comics.Count - 1)
+        {
+          Comics.Insert(index + 1, comicVM);
+        }
+        else
+        {
+          Comics.Add(comicVM);
+        }
+      }
+      else
+      {
+        Comics.Add(comicVM);
+      }
+
+      SelectedComic = comicVM;
+      _libraryTemplate.ComicCount = Comics.Count;
+    }
+
+    private static bool CanPaste()
+    {
+      return Clipboard.ContainsData("Comic");
+    }
 
     #endregion
 

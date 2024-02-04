@@ -232,11 +232,29 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy.
+        /// </summary>
+        public static string Copy {
+            get {
+                return ResourceManager.GetString("Copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to When adding a new comic, copy data from selected comic..
         /// </summary>
         public static string CopyDataFromSelectedComic {
             get {
                 return ResourceManager.GetString("CopyDataFromSelectedComic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copies the current comic..
+        /// </summary>
+        public static string CopyTooltip {
+            get {
+                return ResourceManager.GetString("CopyTooltip", resourceCulture);
             }
         }
         
@@ -282,6 +300,24 @@ namespace ComicLibrary.Properties {
         public static string CurrentLibrary {
             get {
                 return ResourceManager.GetString("CurrentLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cut.
+        /// </summary>
+        public static string Cut {
+            get {
+                return ResourceManager.GetString("Cut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cuts the current comic..
+        /// </summary>
+        public static string CutTooltip {
+            get {
+                return ResourceManager.GetString("CutTooltip", resourceCulture);
             }
         }
         
@@ -651,6 +687,24 @@ namespace ComicLibrary.Properties {
         public static string Options {
             get {
                 return ResourceManager.GetString("Options", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paste.
+        /// </summary>
+        public static string Paste {
+            get {
+                return ResourceManager.GetString("Paste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pastes a comic from the clipboard..
+        /// </summary>
+        public static string PasteTooltip {
+            get {
+                return ResourceManager.GetString("PasteTooltip", resourceCulture);
             }
         }
         

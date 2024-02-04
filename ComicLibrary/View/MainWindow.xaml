@@ -209,6 +209,30 @@
                 <fluent:ScreenTip Title="{x:Static properties:Resources.MoveToLibrary}" Text="{x:Static properties:Resources.MoveToLibraryTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
+            <fluent:Button Command="{Binding CutCommand}"
+                           Header="{x:Static properties:Resources.Cut}"
+                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/CutSmall.png"
+                           SizeDefinition="Middle Middle Small">
+              <fluent:Button.ToolTip>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.Cut}" Text="{x:Static properties:Resources.CutTooltip}" />
+              </fluent:Button.ToolTip>
+            </fluent:Button>
+            <fluent:Button Command="{Binding CopyCommand}"
+                           Header="{x:Static properties:Resources.Copy}"
+                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/CopySmall.png"
+                           SizeDefinition="Middle Middle Small">
+              <fluent:Button.ToolTip>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.Copy}" Text="{x:Static properties:Resources.CopyTooltip}" />
+              </fluent:Button.ToolTip>
+            </fluent:Button>
+            <fluent:Button Command="{Binding PasteCommand}"
+                           Header="{x:Static properties:Resources.Paste}"
+                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/PasteSmall.png"
+                           SizeDefinition="Middle Middle Small">
+              <fluent:Button.ToolTip>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.Paste}" Text="{x:Static properties:Resources.PasteTooltip}" />
+              </fluent:Button.ToolTip>
+            </fluent:Button>
           </fluent:RibbonGroupBox>
           <fluent:RibbonGroupBox Name="Print"
                                  DataContext="{Binding SelectedLibrary}"

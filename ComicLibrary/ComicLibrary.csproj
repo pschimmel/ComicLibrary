@@ -17,7 +17,9 @@
     <None Remove="Images\CancelSmall.png" />
     <None Remove="Images\Close.png" />
     <None Remove="Images\Comic.png" />
+    <None Remove="Images\CopySmall.png" />
     <None Remove="Images\CurrentFolder.png" />
+    <None Remove="Images\CutSmall.png" />
     <None Remove="Images\Edit.png" />
     <None Remove="Images\ExportPhoto.png" />
     <None Remove="Images\Folder.png" />
@@ -26,6 +28,7 @@
     <None Remove="Images\Logo.png" />
     <None Remove="Images\MoveToFolder.png" />
     <None Remove="Images\Options.png" />
+    <None Remove="Images\PasteSmall.png" />
     <None Remove="Images\Photo.png" />
     <None Remove="Images\Print.png" />
     <None Remove="Images\Remove.png" />
@@ -52,7 +55,10 @@
   <ItemGroup>
     <Resource Include="Images\Add.png" />
     <Resource Include="Images\CancelSmall.png" />
+    <Resource Include="Images\CopySmall.png" />
+    <Resource Include="Images\CutSmall.png" />
     <Resource Include="Images\List.png" />
+    <Resource Include="Images\PasteSmall.png" />
     <Resource Include="Images\Print.png" />
     <Resource Include="Images\Report.png" />
     <Resource Include="Images\Close.png" />
