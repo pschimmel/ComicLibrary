@@ -106,7 +106,9 @@ namespace ComicLibrary.ViewModel
           !Equals(SelectedOption, settingVM.Option))
       {
         var index = Options.IndexOf(SelectedOption);
-        Options.Insert(index, settingVM.Option);
+        var newOption = settingVM.Option;
+        newOption.ModifiedDate = DateTime.Now;
+        Options.Insert(index, newOption);
         Options.Remove(SelectedOption);
       }
     }

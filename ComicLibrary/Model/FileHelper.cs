@@ -80,14 +80,7 @@ namespace ComicLibrary.Model
 
                   foreach (XmlAttribute countryAttribute in countryNode.Attributes)
                   {
-                    if (countryAttribute.Name == IDKey)
-                    {
-                      country.ID = new Guid(countryAttribute.InnerText);
-                    }
-                    else if (countryAttribute.Name == NameKey)
-                    {
-                      country.Name = countryAttribute.InnerText;
-                    }
+                    ReadOptionAttribute(country, countryAttribute);
                   }
 
                   if (!string.IsNullOrWhiteSpace(country.Name) && country.ID != Guid.Empty)
@@ -106,14 +99,7 @@ namespace ComicLibrary.Model
 
                   foreach (XmlAttribute languageAttribute in languageNode.Attributes)
                   {
-                    if (languageAttribute.Name == IDKey)
-                    {
-                      language.ID = new Guid(languageAttribute.InnerText);
-                    }
-                    else if (languageAttribute.Name == NameKey)
-                    {
-                      language.Name = languageAttribute.InnerText;
-                    }
+                    ReadOptionAttribute(language, languageAttribute);
                   }
 
                   if (!string.IsNullOrWhiteSpace(language.Name) && language.ID != Guid.Empty)
@@ -132,14 +118,7 @@ namespace ComicLibrary.Model
 
                   foreach (XmlAttribute publisherAttribute in publisherNode.Attributes)
                   {
-                    if (publisherAttribute.Name == IDKey)
-                    {
-                      publisher.ID = new Guid(publisherAttribute.InnerText);
-                    }
-                    else if (publisherAttribute.Name == NameKey)
-                    {
-                      publisher.Name = publisherAttribute.InnerText;
-                    }
+                    ReadOptionAttribute(publisher, publisherAttribute);
                   }
 
                   if (!string.IsNullOrWhiteSpace(publisher.Name) && publisher.ID != Guid.Empty)
@@ -156,6 +135,31 @@ namespace ComicLibrary.Model
       }
 
       return globals;
+    }
+
+    private static void ReadOptionAttribute(IOption option, XmlAttribute optionAttribute)
+    {
+      if (optionAttribute.Name == NameKey)
+      {
+        option.Name = optionAttribute.InnerText;
+      }
+      else ReadEntityAttribute(option, optionAttribute);
+    }
+
+    private static void ReadEntityAttribute(IEntity entity, XmlAttribute entityAttribute)
+    {
+      if (entityAttribute.Name == IDKey)
+      {
+        entity.ID = new Guid(entityAttribute.InnerText);
+      }
+      else if (entityAttribute.Name == CreatedKey && DateTime.TryParse(entityAttribute.Value, out DateTime created))
+      {
+        entity.CreatedDate = created;
+      }
+      else if (entityAttribute.Name == ModifiedKey && DateTime.TryParse(entityAttribute.Value, out DateTime modified))
+      {
+        entity.ModifiedDate = modified;
+      }
     }
 
     public static IEnumerable<Library> LoadLibraries(string filePath = null)
@@ -271,23 +275,12 @@ namespace ComicLibrary.Model
 
             foreach (XmlAttribute comicAttribute in comicNode.Attributes)
             {
-              if (comicAttribute.Name == CreatedKey && DateTime.TryParse(comicAttribute.Value, out DateTime created))
-              {
-                comic.CreatedDate = created;
-              }
-              else if (comicAttribute.Name == ModifiedKey && DateTime.TryParse(comicAttribute.Value, out DateTime modified))
-              {
-                comic.ModifiedDate = modified;
-              }
+              ReadEntityAttribute(comic, comicAttribute);
             }
 
             foreach (XmlNode comicChildNode in comicNode.ChildNodes)
             {
-              if (comicChildNode.Name == IDKey)
-              {
-                comic.ID = new Guid(comicChildNode.InnerText);
-              }
-              else if (comicChildNode.Name == SeriesKey)
+              if (comicChildNode.Name == SeriesKey)
               {
                 comic.Series = comicChildNode.InnerText;
               }
@@ -412,7 +405,9 @@ namespace ComicLibrary.Model
             AppendChildWithAttributes(countriesNode,
                                       CountryKey,
                                       (IDKey, country.ID.ToString()),
-                                      (NameKey, country.Name));
+                                      (NameKey, country.Name),
+                                      (CreatedKey, country.CreatedDate.ToString("s")),
+                                      (ModifiedKey, country.ModifiedDate.ToString("s")));
           }
         }
 
@@ -426,7 +421,9 @@ namespace ComicLibrary.Model
             AppendChildWithAttributes(languegesNode,
                                       LanguageKey,
                                       (IDKey, language.ID.ToString()),
-                                      (NameKey, language.Name));
+                                      (NameKey, language.Name),
+                                      (CreatedKey, language.CreatedDate.ToString("s")),
+                                      (ModifiedKey, language.ModifiedDate.ToString("s")));
           }
         }
 
@@ -440,7 +437,9 @@ namespace ComicLibrary.Model
             AppendChildWithAttributes(publishersNode,
                                       PublisherKey,
                                       (IDKey, publisher.ID.ToString()),
-                                      (NameKey, publisher.Name));
+                                      (NameKey, publisher.Name),
+                                      (CreatedKey, publisher.CreatedDate.ToString("s")),
+                                      (ModifiedKey, publisher.ModifiedDate.ToString("s")));
           }
         }
 
@@ -532,7 +531,6 @@ namespace ComicLibrary.Model
         {
           var comicNode = AppendChildWithChildren(comicsNode,
                                                   ComicKey,
-                                                  (IDKey, comic.ID.ToString()),
                                                   (SeriesKey, comic.Series),
                                                   (TitleKey, comic.Title),
                                                   (YearKey, comic.Year?.ToString(CultureInfo.InvariantCulture)),
@@ -546,7 +544,8 @@ namespace ComicLibrary.Model
                                                   (PurchasePriceKey, comic.PurchasePrice.HasValue ? string.Format(CultureInfo.InvariantCulture, "{0:F2}", comic.PurchasePrice.Value) : null),
                                                   (EstimatedValueKey, comic.EstimatedValue.HasValue ? string.Format(CultureInfo.InvariantCulture, "{0:F2}", comic.EstimatedValue.Value) : null));
 
-          comicNode.AppendAttributes((CreatedKey, comic.CreatedDate.ToString("s")),
+          comicNode.AppendAttributes((IDKey, comic.ID.ToString()),
+                                     (CreatedKey, comic.CreatedDate.ToString("s")),
                                      (ModifiedKey, comic.ModifiedDate.ToString("s")));
 
           var gradingNode = xml.CreateElement(ConditionKey);

@@ -66,10 +66,6 @@ namespace ComicLibrary.Model.Entities
 
     public double? EstimatedValue { get; set; }
 
-    public DateTime ModifiedDate { get; set; }
-
-    public DateTime CreatedDate { get; set; }
-
     public Comic Copy()
     {
       return new Comic(this, true);

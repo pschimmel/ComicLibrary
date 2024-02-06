@@ -1,7 +1,7 @@
 ﻿namespace ComicLibrary.Model.Entities
 {
-  public interface IOption
+  public interface IOption : IEntity
   {
-    string Name { get; }
+    string Name { get; set; }
   }
 }
