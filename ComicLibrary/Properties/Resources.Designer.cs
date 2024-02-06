@@ -295,15 +295,6 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current Library.
-        /// </summary>
-        public static string CurrentLibrary {
-            get {
-                return ResourceManager.GetString("CurrentLibrary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cut.
         /// </summary>
         public static string Cut {

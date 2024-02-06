@@ -18,7 +18,6 @@
     <None Remove="Images\Close.png" />
     <None Remove="Images\Comic.png" />
     <None Remove="Images\CopySmall.png" />
-    <None Remove="Images\CurrentFolder.png" />
     <None Remove="Images\CutSmall.png" />
     <None Remove="Images\Edit.png" />
     <None Remove="Images\ExportPhoto.png" />
@@ -64,7 +63,6 @@
     <Resource Include="Images\Close.png" />
     <Resource Include="Images\Comic.png" />
     <Resource Include="Images\Edit.png" />
-    <Resource Include="Images\CurrentFolder.png" />
     <Resource Include="Images\MoveToFolder.png" />
     <Resource Include="Images\Folder.png" />
     <Resource Include="Images\Icon.png" />

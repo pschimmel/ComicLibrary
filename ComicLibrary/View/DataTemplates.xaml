@@ -129,7 +129,7 @@
         <RowDefinition Height="Auto" />
         <RowDefinition />
       </Grid.RowDefinitions>
-      <DockPanel Grid.Row="1">
+      <DockPanel Margin="0,0,0,2">
         <Image Width="12"
                Height="12"
                Margin="2"
@@ -144,7 +144,7 @@
         </Image>
         <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=250}" />
       </DockPanel>
-      <DataGrid Grid.Row="2"
+      <DataGrid Grid.Row="1"
                 localBehaviors:ScrollIntoViewBehavior.SelectingItem="{Binding SelectedComic}"
                 AutoGenerateColumns="False"
                 CanUserAddRows="False"

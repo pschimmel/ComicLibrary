@@ -195,9 +195,6 @@
   <data name="Currency" xml:space="preserve">
     <value>Währung</value>
   </data>
-  <data name="CurrentLibrary" xml:space="preserve">
-    <value>Aktuelle Bibliothek</value>
-  </data>
   <data name="Cut" xml:space="preserve">
     <value>Ausschneiden</value>
   </data>
