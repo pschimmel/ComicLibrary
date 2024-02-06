@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
 using ComicLibrary.Model.Entities;
 using ES.Tools.Core.MVVM;
@@ -174,6 +173,12 @@ namespace ComicLibrary.ViewModel
       get => _isDirty;
       set
       {
+        if (value == true)
+        {
+          // Whenever we try to set the IsDirty flag, we know that a change happened and we can update the change date
+          _comic.ModifiedDate = DateTime.Now;
+        }
+
         if (_isDirty != value)
         {
           _isDirty = value;

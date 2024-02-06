@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using ComicLibrary.Model;
@@ -211,6 +210,7 @@ namespace ComicLibrary.ViewModel
       _comic.EstimatedValue = EstimatedValue;
       _comic.CollectorsEdition = CollectorsEdition;
       _comic.LimitedEdition = LimitedEdition;
+      _comic.ModifiedDate = DateTime.Now;
 
       _comic.ImagesAsString.Clear();
       foreach (var image in ComicImages)

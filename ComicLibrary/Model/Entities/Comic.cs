@@ -33,6 +33,8 @@ namespace ComicLibrary.Model.Entities
         EstimatedValue = selectedComic.EstimatedValue;
         Comment = selectedComic.Comment;
         ImagesAsString = new List<string>(selectedComic.ImagesAsString);
+        CreatedDate = DateTime.Now;
+        ModifiedDate = DateTime.Now;
       }
     }
 
@@ -63,6 +65,10 @@ namespace ComicLibrary.Model.Entities
     public double? PurchasePrice { get; set; }
 
     public double? EstimatedValue { get; set; }
+
+    public DateTime ModifiedDate { get; set; }
+
+    public DateTime CreatedDate { get; set; }
 
     public Comic Copy()
     {
