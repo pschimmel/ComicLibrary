@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -15,12 +16,12 @@ namespace ComicLibrary.Model.Config
 
     private Settings()
     {
-      LibrariesPath = ApplicationPath;
-      if (!Directory.Exists(ApplicationPath))
-        Directory.CreateDirectory(ApplicationPath);
+      LibrariesPath = LibrariesPathDefault;
     }
 
-    private static string ApplicationPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ApplicationName);
+    private static string LibrariesPathDefault => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), ApplicationName);
+
+    private static string SettingsPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ApplicationName);
 
     public static Settings Instance => _lazyConfiguration.Value;
 
@@ -38,7 +39,7 @@ namespace ComicLibrary.Model.Config
 
     public static Settings Load()
     {
-      string configFilePath = Path.Combine(ApplicationPath, _configFileName);
+      string configFilePath = Path.Combine(SettingsPath, _configFileName);
 
       if (File.Exists(configFilePath))
       {
@@ -58,7 +59,8 @@ namespace ComicLibrary.Model.Config
 
     public static void Save()
     {
-      string configFilePath = Path.Combine(ApplicationPath, _configFileName);
+      EnsureSettingsPathExists();
+      string configFilePath = Path.Combine(SettingsPath, _configFileName);
 
       try
       {
@@ -68,6 +70,36 @@ namespace ComicLibrary.Model.Config
       catch (Exception ex)
       {
         MessageBox.Show(string.Format(Properties.Resources.CannotSaveFileMessage, configFilePath) + Environment.NewLine + ex.Message);
+      }
+    }
+
+    private static void EnsureSettingsPathExists()
+    {
+      if (!Directory.Exists(SettingsPath))
+      {
+        try
+        {
+          Directory.CreateDirectory(SettingsPath);
+        }
+        catch (Exception ex)
+        {
+          Debug.Fail(ex.Message);
+        }
+      }
+    }
+
+    internal void EnsureLibrariesPathExists()
+    {
+      if (!Directory.Exists(LibrariesPath))
+      {
+        try
+        {
+          Directory.CreateDirectory(LibrariesPath);
+        }
+        catch (Exception ex)
+        {
+          Debug.Fail(ex.Message);
+        }
       }
     }
   }

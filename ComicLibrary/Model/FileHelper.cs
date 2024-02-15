@@ -368,6 +368,7 @@ namespace ComicLibrary.Model
 
     public static void SaveGlobals(Globals globals, string filePath = null)
     {
+      Settings.Instance.EnsureLibrariesPathExists();
       filePath ??= Settings.Instance.GlobalsFilePath;
 
       if (File.Exists(filePath) && Settings.Instance.CreateBackupWhenSaving)
@@ -453,6 +454,7 @@ namespace ComicLibrary.Model
 
     public static void SaveLibraries(IEnumerable<Library> libraries, string filePath = null)
     {
+      Settings.Instance.EnsureLibrariesPathExists();
       filePath ??= Settings.Instance.LibrariesFilePath;
 
       if (File.Exists(filePath) && Settings.Instance.CreateBackupWhenSaving)
@@ -482,6 +484,7 @@ namespace ComicLibrary.Model
 
     public static void SaveActiveLibrary(ActiveLibrary library, string filePath)
     {
+      Settings.Instance.EnsureLibrariesPathExists();
       if (File.Exists(filePath) && Settings.Instance.CreateBackupWhenSaving)
       {
         string backupPath = filePath + ".bak";
