@@ -44,3 +44,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixed export of images.
 - Fixed deleting of optional values (issue number, year) while editing.
+
+## [1.1.1] - 2024-02-15
+
+### Added
+
+- Added option to print a list of issues.
+- Added command in ribbon to close current library.
+
+### Fixed
+
+- Fixed editing of comic language in detail window.
+- Fixed creating new libraries .
+
+### Changed 
+
+- Now using AvalonDock for comic tabs.
