@@ -508,12 +508,12 @@ namespace ComicLibrary.ViewModel
 
     private void ActiveLibraries_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
     {
-      foreach (var newLibrary in e.NewItems?.OfType<ActiveLibraryViewModel>() ?? Enumerable.Empty<ActiveLibraryViewModel>())
+      foreach (var newLibrary in e.NewItems?.OfType<ActiveLibraryViewModel>() ?? [])
       {
         newLibrary.ClosingRequested += Library_ClosingRequested;
       }
 
-      foreach (var oldLibrary in e.OldItems?.OfType<ActiveLibraryViewModel>() ?? Enumerable.Empty<ActiveLibraryViewModel>())
+      foreach (var oldLibrary in e.OldItems?.OfType<ActiveLibraryViewModel>() ?? [])
       {
         oldLibrary.ClosingRequested -= Library_ClosingRequested;
       }

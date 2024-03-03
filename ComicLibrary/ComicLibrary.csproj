@@ -15,6 +15,7 @@
   <ItemGroup>
     <None Remove="Images\Add.png" />
     <None Remove="Images\CancelSmall.png" />
+    <None Remove="Images\Chart.png" />
     <None Remove="Images\Close.png" />
     <None Remove="Images\Comic.png" />
     <None Remove="Images\CopySmall.png" />
@@ -54,6 +55,7 @@
   <ItemGroup>
     <Resource Include="Images\Add.png" />
     <Resource Include="Images\CancelSmall.png" />
+    <Resource Include="Images\Chart.png" />
     <Resource Include="Images\CopySmall.png" />
     <Resource Include="Images\CutSmall.png" />
     <Resource Include="Images\List.png" />
@@ -89,6 +91,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="View\ChartDialog.xaml.cs">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\PrintActiveLibraryDialog.xaml.cs">
       <SubType>Code</SubType>

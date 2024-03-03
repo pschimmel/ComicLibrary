@@ -167,6 +167,13 @@
                 <fluent:ScreenTip Title="{x:Static properties:Resources.CloseLibrary}" Text="{x:Static properties:Resources.CloseLibraryTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
+            <fluent:Button Command="{Binding SelectedLibrary.ShowChartCommand}"
+                           Header="{x:Static properties:Resources.ShowChart}"
+                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Chart.png">
+              <fluent:Button.ToolTip>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.ShowChart}" Text="{x:Static properties:Resources.ShowChartTooltip}" />
+              </fluent:Button.ToolTip>
+            </fluent:Button>
           </fluent:RibbonGroupBox>
           <fluent:RibbonGroupBox Name="Comic"
                                  DataContext="{Binding SelectedLibrary}"

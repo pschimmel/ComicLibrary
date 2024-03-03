@@ -37,6 +37,7 @@ namespace ComicLibrary.ViewModel
     private ActionCommand _cutCommand;
     private ActionCommand _copyCommand;
     private ActionCommand _pasteCommand;
+    private ActionCommand _showChartCommand;
     private bool _isDirty;
 
     #endregion
@@ -445,6 +446,24 @@ namespace ComicLibrary.ViewModel
     private static bool CanPaste()
     {
       return Clipboard.ContainsData("Comic");
+    }
+
+    #endregion
+
+    #region Show Chart
+
+    public ICommand ShowChartCommand => _showChartCommand ??= new ActionCommand(ShowChart, CanShowChart);
+
+    private void ShowChart()
+    {
+      var vm = new ChartViewModel(ToModel());
+      var view = ViewFactory.Instance.CreateView(vm);
+      view.ShowDialog();
+    }
+
+    private bool CanShowChart()
+    {
+      return Comics.Count > 0;
     }
 
     #endregion

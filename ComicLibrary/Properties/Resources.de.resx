@@ -363,6 +363,9 @@
   <data name="Question" xml:space="preserve">
     <value>Frage</value>
   </data>
+  <data name="Relative" xml:space="preserve">
+    <value>Relativ</value>
+  </data>
   <data name="Remove" xml:space="preserve">
     <value>Entfernen</value>
   </data>
@@ -419,6 +422,15 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Einstellungen</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Zeige</value>
+  </data>
+  <data name="ShowChart" xml:space="preserve">
+    <value>Zeige Diagramm</value>
+  </data>
+  <data name="ShowChartTooltip" xml:space="preserve">
+    <value>Zeigt ein Übersichtsdiagramm der aktuellen Bibliothek.</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>Start</value>

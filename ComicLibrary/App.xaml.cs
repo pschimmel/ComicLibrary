@@ -26,6 +26,7 @@ namespace ComicLibrary
       ViewFactory.Instance.Register<GradePickerViewModel, GradePickerDialog>();
       ViewFactory.Instance.Register<MoveToLibraryViewModel, MoveToLibraryDialog>();
       ViewFactory.Instance.Register<PrintActiveLibraryViewModel, PrintActiveLibraryDialog>();
+      ViewFactory.Instance.Register<ChartViewModel, ChartDialog>();
     }
 
     private void TextBox_GotFocus(object sender, RoutedEventArgs e)
