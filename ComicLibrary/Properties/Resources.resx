@@ -141,6 +141,9 @@
   <data name="CannotSaveFileMessage" xml:space="preserve">
     <value>Cannot save file '{0}'.</value>
   </data>
+  <data name="Certified" xml:space="preserve">
+    <value>Certified</value>
+  </data>
   <data name="ChangeImage" xml:space="preserve">
     <value>Change Image</value>
   </data>
@@ -363,6 +366,9 @@
   <data name="Question" xml:space="preserve">
     <value>Question</value>
   </data>
+  <data name="Relative" xml:space="preserve">
+    <value>Relative</value>
+  </data>
   <data name="Remove" xml:space="preserve">
     <value>Remove</value>
   </data>
@@ -428,9 +434,6 @@
   </data>
   <data name="ShowChartTooltip" xml:space="preserve">
     <value>Shows an overview chart of the current library.</value>
-  </data>
-  <data name="Relative" xml:space="preserve">
-    <value>Relative</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>Start</value>

@@ -159,6 +159,7 @@
         </DataGrid.Resources>
         <DataGrid.RowStyle>
           <Style TargetType="{x:Type DataGridRow}">
+            <Setter Property="ToolTip" Value="{Binding Comment}" />
             <Style.Triggers>
               <DataTrigger Binding="{Binding CollectorsEdition}" Value="True">
                 <Setter Property="Background" Value="Yellow" />
@@ -206,7 +207,19 @@
           <DataGridTemplateColumn Header="{x:Static properties:Resources.Condition}">
             <DataGridTemplateColumn.CellTemplate>
               <DataTemplate>
-                <ContentControl Content="{Binding Condition}" ContentTemplate="{StaticResource ConditionTemplate}" />
+                <Grid>
+                  <Grid.Style>
+                    <Style TargetType="{x:Type Grid}">
+                      <Setter Property="Background" Value="Transparent" />
+                      <Style.Triggers>
+                        <DataTrigger Binding="{Binding GradingCertified}" Value="True">
+                          <Setter Property="Background" Value="YellowGreen" />
+                        </DataTrigger>
+                      </Style.Triggers>
+                    </Style>
+                  </Grid.Style>
+                  <ContentControl Content="{Binding Condition}" ContentTemplate="{StaticResource ConditionTemplate}" />
+                </Grid>
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
             <DataGridTemplateColumn.CellEditingTemplate>

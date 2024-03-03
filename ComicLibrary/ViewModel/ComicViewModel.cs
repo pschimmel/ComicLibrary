@@ -116,6 +116,8 @@ namespace ComicLibrary.ViewModel
       }
     }
 
+    public bool GradingCertified => _comic.GradingCertified;
+
     public bool CollectorsEdition => _comic.CollectorsEdition;
 
     public bool LimitedEdition => _comic.LimitedEdition;
@@ -123,6 +125,8 @@ namespace ComicLibrary.ViewModel
     public double? PurchasePrice => _comic.PurchasePrice;
 
     public double? EstimatedValue => _comic.EstimatedValue;
+
+    public string Comment => _comic.Comment;
 
     public IOptionItemViewModel<Publisher> Publisher
     {
@@ -228,8 +232,10 @@ namespace ComicLibrary.ViewModel
       OnPropertyChanged(nameof(IssueNumber));
       OnPropertyChanged(nameof(Title));
       OnPropertyChanged(nameof(Condition));
+      OnPropertyChanged(nameof(GradingCertified));
       OnPropertyChanged(nameof(Publisher));
       OnPropertyChanged(nameof(Country));
+      OnPropertyChanged(nameof(Comment));
       OnPropertyChanged(nameof(CollectorsEdition));
       OnPropertyChanged(nameof(LimitedEdition));
       OnPropertyChanged(nameof(ImagesCount));

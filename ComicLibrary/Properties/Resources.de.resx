@@ -141,6 +141,9 @@
   <data name="CannotSaveFileMessage" xml:space="preserve">
     <value>Datei '{0}' konnte nicht gespeichert werden.</value>
   </data>
+  <data name="Certified" xml:space="preserve">
+    <value>Zertifiziert</value>
+  </data>
   <data name="ChangeImage" xml:space="preserve">
     <value>Bild ändern</value>
   </data>

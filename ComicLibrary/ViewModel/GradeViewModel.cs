@@ -10,7 +10,6 @@ namespace ComicLibrary.ViewModel
     public GradeViewModel(Grade grade, bool selected)
     {
       _grade = grade;
-      IsMainGrade = grade.IsMainGrade;
       Name = grade.Name;
       Description = grade.Description;
       Number = grade.Number > 0 ? grade.Number : null;
@@ -22,8 +21,6 @@ namespace ComicLibrary.ViewModel
     public string Description { get; }
 
     public double? Number { get; }
-
-    public bool IsMainGrade { get; }
 
     public bool IsSelected
     {

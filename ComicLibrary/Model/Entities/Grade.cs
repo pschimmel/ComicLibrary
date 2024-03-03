@@ -8,12 +8,11 @@ namespace ComicLibrary.Model.Entities
   /// </summary>
   public class Grade : IComparable, IComparable<Grade>
   {
-    private Grade(double number, string name, string description, bool isMain = false)
+    private Grade(double number, string name, string description)
     {
       Number = number;
       Name = name;
       Description = description;
-      IsMainGrade = isMain;
     }
 
     public double Number { get; }
@@ -21,8 +20,6 @@ namespace ComicLibrary.Model.Entities
     public string Name { get; }
 
     public string Description { get; }
-
-    public bool IsMainGrade { get; }
 
     public override bool Equals(object obj)
     {
@@ -61,7 +58,7 @@ namespace ComicLibrary.Model.Entities
 
     public static Grade NearMintPlus => new(9.6, "Near Mint+", Properties.Resources.NearMintPlusDescription);
 
-    public static Grade NearMint => new(9.4, "Near Mint", Properties.Resources.NearMintDescription, true);
+    public static Grade NearMint => new(9.4, "Near Mint", Properties.Resources.NearMintDescription);
 
     public static Grade NearMintMinus => new(9.2, "Near Mint-", Properties.Resources.NearMintMinusDescription);
 
@@ -69,7 +66,7 @@ namespace ComicLibrary.Model.Entities
 
     public static Grade VeryFinePlus => new(8.5, "Very Fine+", Properties.Resources.VeryFinePlusDescription);
 
-    public static Grade VeryFine => new(8.0, "Very Fine", Properties.Resources.VeryFineDescription, true);
+    public static Grade VeryFine => new(8.0, "Very Fine", Properties.Resources.VeryFineDescription);
 
     public static Grade VeryFineMinus => new(7.5, "Very Fine-", Properties.Resources.VeryFineMinusDescription);
 
@@ -77,7 +74,7 @@ namespace ComicLibrary.Model.Entities
 
     public static Grade FinePlus => new(6.5, "Fine+", Properties.Resources.FinePlusDescription);
 
-    public static Grade Fine => new(6.0, "Fine", Properties.Resources.FineDescription, true);
+    public static Grade Fine => new(6.0, "Fine", Properties.Resources.FineDescription);
 
     public static Grade FineMinus => new(5.5, "Fine-", Properties.Resources.FineMinusDescription);
 
@@ -85,7 +82,7 @@ namespace ComicLibrary.Model.Entities
 
     public static Grade VeryGoodPlus => new(4.5, "Very Good+", Properties.Resources.VeryGoodPlusDescription);
 
-    public static Grade VeryGood => new(4.0, "Very Good", Properties.Resources.VeryGoodDescription, true);
+    public static Grade VeryGood => new(4.0, "Very Good", Properties.Resources.VeryGoodDescription);
 
     public static Grade VeryGoodMinus => new(3.5, "Very Good-", Properties.Resources.VeryGoodMinusDescription);
 
@@ -93,14 +90,14 @@ namespace ComicLibrary.Model.Entities
 
     public static Grade GoodPlus => new(2.5, "Good+", Properties.Resources.GoodPlusDescription);
 
-    public static Grade Good => new(2.0, "Good", Properties.Resources.GoodDescription, true);
+    public static Grade Good => new(2.0, "Good", Properties.Resources.GoodDescription);
 
     public static Grade GoodMinus => new(1.8, "Good-", Properties.Resources.GoodMinusDescription);
 
     public static Grade FairGood => new(1.5, "Fair/Good", Properties.Resources.FairGoodDescription);
 
-    public static Grade Fair => new(1.0, "Fair", Properties.Resources.FairDescription, true);
+    public static Grade Fair => new(1.0, "Fair", Properties.Resources.FairDescription);
 
-    public static Grade Poor => new(0.5, "Poor", Properties.Resources.PoorDescription, true);
+    public static Grade Poor => new(0.5, "Poor", Properties.Resources.PoorDescription);
   }
 }

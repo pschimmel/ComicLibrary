@@ -51,6 +51,7 @@ namespace ComicLibrary.ViewModel
       IssueNumber = comic.IssueNumber;
       Title = comic.Title;
       Condition = comic.Condition;
+      GradingCertified = comic.GradingCertified;
       Publisher = Publishers.FirstOrDefault(x => x.Option == comic.Publisher) ?? Publishers.First();
       Country = Countries.FirstOrDefault(x => x.Option == comic.Country) ?? Countries.First();
       Language = Languages.FirstOrDefault(x => x.Option == comic.Language) ?? Languages.First();
@@ -90,6 +91,8 @@ namespace ComicLibrary.ViewModel
     public static string Currency => Settings.Instance.CurrencySymbol;
 
     public Grade Condition { get; set; }
+
+    public bool GradingCertified { get; set; }
 
     public IOptionItemViewModel<Publisher> Publisher { get; set; }
 
@@ -203,6 +206,7 @@ namespace ComicLibrary.ViewModel
       _comic.Title = Title;
       _comic.Publisher = Publisher.Option;
       _comic.Condition = Condition;
+      _comic.GradingCertified = GradingCertified;
       _comic.Country = Country.Option;
       _comic.Language = Language.Option;
       _comic.Comment = Comment;

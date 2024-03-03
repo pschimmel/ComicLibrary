@@ -25,6 +25,7 @@ namespace ComicLibrary.Model.Entities
         Publisher = selectedComic.Publisher;
         Year = selectedComic.Year;
         Condition = selectedComic.Condition;
+        GradingCertified = selectedComic.GradingCertified;
         Country = selectedComic.Country;
         Language = selectedComic.Language;
         IssueNumber = selectedComic.IssueNumber;
@@ -47,6 +48,7 @@ namespace ComicLibrary.Model.Entities
     public string Title { get; set; }
 
     public Grade Condition { get; set; }
+    public bool GradingCertified { get; set; }
 
     public int? Year { get; set; }
 

@@ -32,6 +32,7 @@ namespace ComicLibrary.Model
     private const string ImagesKey = "Images";
     private const string ImageKey = "Image";
     private const string ConditionKey = "Condition";
+    private const string CertifiedGradingKey = "CertifiedGrading";
     private const string IssueNumberKey = "IssueNumber";
     private const string LimitedEditionKey = "LimitedEdition";
     private const string CollectorsEditionKey = "CollectorsEdition";
@@ -290,6 +291,14 @@ namespace ComicLibrary.Model
               }
               else if (comicChildNode.Name == ConditionKey && double.TryParse(comicChildNode.InnerText, CultureInfo.InvariantCulture, out double gradingNumber))
               {
+                foreach (XmlAttribute gradeAttribute in comicChildNode.Attributes)
+                {
+                  if (gradeAttribute.Name == CertifiedGradingKey && bool.TryParse(gradeAttribute.InnerText, out bool certified))
+                  {
+                    comic.GradingCertified = certified;
+                  }
+                }
+
                 // CGC is currently the only grading service supported 
                 // If we ever want to add something else, it must be added here
                 var grading = Grade.Grades.FirstOrDefault(x => x.Number == gradingNumber);
@@ -553,7 +562,8 @@ namespace ComicLibrary.Model
 
           var gradingNode = xml.CreateElement(ConditionKey);
           gradingNode.InnerText = comic.Condition.Number.ToString(CultureInfo.InvariantCulture);
-          gradingNode.AppendAttributes((GradingTypeKey, "CGC")); // CGC is currently the only grading supported
+          gradingNode.AppendAttributes((GradingTypeKey, "CGC"), // CGC is currently the only grading supported
+                                       (CertifiedGradingKey, comic.GradingCertified.ToString()));
           comicNode.AppendChild(gradingNode);
 
           if (comic.ImagesAsString.Count > 0)

@@ -133,6 +133,15 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Certified.
+        /// </summary>
+        public static string Certified {
+            get {
+                return ResourceManager.GetString("Certified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change Image.
         /// </summary>
         public static string ChangeImage {

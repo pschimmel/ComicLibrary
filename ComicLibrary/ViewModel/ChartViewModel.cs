@@ -74,8 +74,8 @@ namespace ComicLibrary.ViewModel
       {
         ChartType.Year => comic.Year.ToString(),
         ChartType.Grading => comic.Condition?.Number.ToString("F1", CultureInfo.InvariantCulture),
-        ChartType.Price => (comic.PurchasePrice ?? 0.0).ToString("F2", CultureInfo.InvariantCulture),
-        ChartType.Value => (comic.EstimatedValue ?? 0.0).ToString("F2", CultureInfo.InvariantCulture),
+        ChartType.Price => Math.Round(comic.PurchasePrice ?? 0.0).ToString("F2", CultureInfo.InvariantCulture),
+        ChartType.Value => Math.Round(comic.EstimatedValue ?? 0.0).ToString("F2", CultureInfo.InvariantCulture),
         _ => throw new NotImplementedException()
       };
     }
