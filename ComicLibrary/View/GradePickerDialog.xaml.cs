@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Threading;
 using ComicLibrary.View.Helpers;
+using ComicLibrary.ViewModel;
 using ES.Tools.Core.MVVM;
 
 namespace ComicLibrary.View
@@ -22,6 +23,15 @@ namespace ComicLibrary.View
 
       Dispatcher.BeginInvoke(() =>
       {
+        for (int i = 0; i < gradesControl.Items.Count; i++)
+        {
+          if (gradesControl.Items[i] is GradeViewModel vm && vm.IsSelected)
+          {
+            FrameworkElement uiElement = (FrameworkElement)gradesControl.ItemContainerGenerator.ContainerFromIndex(i);
+            uiElement.BringIntoView();
+          }
+        }
+
         var firstFocusableChild = (Content as FrameworkElement)?.FindFirstVisualChild<FrameworkElement>(x => x.Focusable);
         firstFocusableChild?.Focus();
       }, DispatcherPriority.ContextIdle);

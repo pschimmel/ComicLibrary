@@ -35,7 +35,9 @@
           <RadioButton Margin="5" Visibility="Hidden" />
           <Border Grid.Column="1" Background="Yellow" />
 
-          <ItemsControl Grid.ColumnSpan="4" ItemsSource="{Binding Grades}">
+          <ItemsControl x:Name="gradesControl"
+                        Grid.ColumnSpan="4"
+                        ItemsSource="{Binding Grades}">
             <ItemsControl.ItemTemplate>
               <DataTemplate>
                 <RadioButton Margin="5"
