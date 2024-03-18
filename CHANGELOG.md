@@ -60,3 +60,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed 
 
 - Now using AvalonDock for comic tabs.
+
+## [1.1.2] - 
+
+### Added
+
+- Added simple charts for year, grading, price, and value.
+- Added option for certified grades.

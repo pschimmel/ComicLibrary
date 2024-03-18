@@ -33,6 +33,8 @@ namespace ComicLibrary.Model.Entities
         PurchasePrice = selectedComic.PurchasePrice;
         EstimatedValue = selectedComic.EstimatedValue;
         Comment = selectedComic.Comment;
+        CollectorsEdition = selectedComic.CollectorsEdition;
+        LimitedEdition = selectedComic.LimitedEdition;
         ImagesAsString = new List<string>(selectedComic.ImagesAsString);
         CreatedDate = DateTime.Now;
         ModifiedDate = DateTime.Now;

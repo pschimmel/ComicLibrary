@@ -23,6 +23,7 @@ namespace ComicLibrary.View.Behaviors
       base.OnDetaching();
       AssociatedObject.CellStyle = null;
     }
+
     private void DataGridCell_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
       DataGridCell cell = sender as DataGridCell;
