@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.IO.Packaging;
-using System.Linq;
 using System.Printing;
 using System.Windows;
 using System.Windows.Documents;
@@ -77,9 +76,44 @@ namespace ComicLibrary.ViewModel
         document.AddHeader2(serie);
         var listOfIssues = library.Comics.Where(x => x.IssueNumber.HasValue && x.Series == serie)
                                          .Select(x => x.IssueNumber.Value)
-                                         .Order();
-        var issues = string.Join(", ", listOfIssues);
-        document.AddParagraph(issues);
+                                         .Order()
+                                         .ToList();
+        int? lastIssue = null;
+        string text = "";
+
+        for (int i = 0; i < listOfIssues.Count; i++)
+        {
+          var issue = listOfIssues[i];
+
+          if (issue != lastIssue) // In case there are duplicates
+          {
+            if (lastIssue.HasValue && lastIssue + 1 == issue)
+            {
+              if (!text.EndsWith('-'))
+                text += "-";
+
+              if (i == listOfIssues.Count - 1)
+                text += issue;
+            }
+            else
+            {
+              if (text.EndsWith('-'))
+                text += lastIssue;
+
+              if (text != "")
+                text += ", ";
+
+              text += issue;
+            }
+          }
+
+          lastIssue = issue;
+        }
+
+        if (text.EndsWith('-'))
+          text += lastIssue;
+
+        document.AddParagraph(text);
       }
 
       return document;

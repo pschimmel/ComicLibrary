@@ -1,5 +1,5 @@
 #define ApplicationName 'Comic Library'
-#define ApplicationVersion '1.1.1'
+#define ApplicationVersion '1.1.2'
 #define ApplicationCompany 'Engineering Solutions'
 
 [Setup]

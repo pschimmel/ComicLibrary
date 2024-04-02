@@ -55,7 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fixed editing of comic language in detail window.
-- Fixed creating new libraries .
+- Fixed creating new libraries.
 
 ### Changed 
 
@@ -67,3 +67,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added simple charts for year, grading, price, and value.
 - Added option for certified grades.
+- Runs are now grouped in list report. 
