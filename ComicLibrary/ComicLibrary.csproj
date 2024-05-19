@@ -23,11 +23,12 @@
     <None Remove="Images\CutSmall.png" />
     <None Remove="Images\Edit.png" />
     <None Remove="Images\ExportPhoto.png" />
-    <None Remove="Images\Folder.png" />
     <None Remove="Images\Icon.png" />
+    <None Remove="Images\Library.png" />
     <None Remove="Images\List.png" />
     <None Remove="Images\Logo.png" />
-    <None Remove="Images\MoveToFolder.png" />
+    <None Remove="Images\ManageLibraries.png" />
+    <None Remove="Images\MoveToLibrary.png" />
     <None Remove="Images\Options.png" />
     <None Remove="Images\PasteSmall.png" />
     <None Remove="Images\Photo.png" />
@@ -58,6 +59,7 @@
     <Resource Include="Images\Add.png" />
     <Resource Include="Images\CancelSmall.png" />
     <Resource Include="Images\Chart.png" />
+    <Resource Include="Images\ManageLibraries.png" />
     <Resource Include="Images\Series.png" />
     <Resource Include="Images\CopySmall.png" />
     <Resource Include="Images\CutSmall.png" />
@@ -68,8 +70,8 @@
     <Resource Include="Images\Close.png" />
     <Resource Include="Images\Comic.png" />
     <Resource Include="Images\Edit.png" />
-    <Resource Include="Images\MoveToFolder.png" />
-    <Resource Include="Images\Folder.png" />
+    <Resource Include="Images\MoveToLibrary.png" />
+    <Resource Include="Images\Library.png" />
     <Resource Include="Images\Icon.png" />
     <Resource Include="Images\Options.png" />
     <Resource Include="Images\ExportPhoto.png" />

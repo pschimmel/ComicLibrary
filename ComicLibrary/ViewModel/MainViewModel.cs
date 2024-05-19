@@ -72,6 +72,8 @@ namespace ComicLibrary.ViewModel
 
           if (_showLibrariesOverlay)
             LoadLibraries();
+
+          OnPropertyChanged(nameof(HasActiveLibrary));
         }
       }
     }
@@ -89,6 +91,8 @@ namespace ComicLibrary.ViewModel
     public ObservableCollection<ILibraryViewModel> Libraries { get; }
 
     public ObservableCollection<ActiveLibraryViewModel> ActiveLibraries { get; }
+
+    public bool HasActiveLibrary => SelectedLibrary != null;
 
     public ActiveLibraryViewModel SelectedLibrary
     {

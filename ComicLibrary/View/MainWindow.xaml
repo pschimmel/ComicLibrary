@@ -38,7 +38,7 @@
         <RowDefinition />
         <RowDefinition Height="Auto" />
       </Grid.RowDefinitions>
-      <fluent:Ribbon>
+      <fluent:Ribbon CanUseSimplified="True">
         <fluent:Ribbon.Menu>
           <fluent:Backstage>
             <fluent:BackstageTabControl>
@@ -134,18 +134,23 @@
             </fluent:BackstageTabControl>
           </fluent:Backstage>
         </fluent:Ribbon.Menu>
-        <fluent:RibbonTabItem Header="{x:Static properties:Resources.Start}" ReduceOrder="Library, Library, Library, Comic, Comic, Comic, Print, Print, Print, Library, Comic, Print">
-          <fluent:RibbonGroupBox Name="Library"
-                                 Header="{x:Static properties:Resources.Library}"
-                                 Icon="pack://application:,,,/ComicLibrary;component/Images/Folder.png">
+        <fluent:RibbonTabItem Header="{x:Static properties:Resources.Start}" ReduceOrder="Manage, Manage, Manage, Library, Library, Library, Comic, Comic, Comic, Print, Print, Print, Manage, Library, Comic, Print">
+          <fluent:RibbonGroupBox Name="Manage"
+                                 Header="{x:Static properties:Resources.Manage}"
+                                 Icon="pack://application:,,,/ComicLibrary;component/Images/ManageLibraries.png">
             <fluent:ToggleButton Header="{x:Static properties:Resources.Manage}"
                                  IsChecked="{Binding ShowLibrariesOverlay}"
-                                 LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Folder.png"
+                                 LargeIcon="pack://application:,,,/ComicLibrary;component/Images/ManageLibraries.png"
                                  SizeDefinition="Large">
               <fluent:ToggleButton.ToolTip>
                 <fluent:ScreenTip Title="{x:Static properties:Resources.ManageLibraries}" Text="{x:Static properties:Resources.ManageLibrariesTooltip}" />
               </fluent:ToggleButton.ToolTip>
             </fluent:ToggleButton>
+          </fluent:RibbonGroupBox>
+          <fluent:RibbonGroupBox Name="Library"
+                                 Header="{x:Static properties:Resources.Library}"
+                                 Icon="pack://application:,,,/ComicLibrary;component/Images/Library.png"
+                                 IsEnabled="{Binding HasActiveLibrary}">
             <fluent:Button Command="{Binding SelectedLibrary.SaveLibraryCommand}"
                            Header="{x:Static properties:Resources.Save}"
                            LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Save.png">
@@ -176,24 +181,24 @@
             </fluent:Button>
           </fluent:RibbonGroupBox>
           <fluent:RibbonGroupBox Name="Comic"
-                                 DataContext="{Binding SelectedLibrary}"
                                  Header="{x:Static properties:Resources.Comic}"
-                                 Icon="pack://application:,,,/ComicLibrary;component/Images/Comic.png">
-            <fluent:Button Command="{Binding AddComicCommand}"
+                                 Icon="pack://application:,,,/ComicLibrary;component/Images/Comic.png"
+                                 IsEnabled="{Binding HasActiveLibrary}">
+            <fluent:Button Command="{Binding SelectedLibrary.AddComicCommand}"
                            Header="{x:Static properties:Resources.Add}"
                            LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Add.png">
               <fluent:Button.ToolTip>
                 <fluent:ScreenTip Title="{x:Static properties:Resources.AddComic}" Text="{x:Static properties:Resources.AddComicTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
-            <fluent:Button Command="{Binding RemoveComicCommand}"
+            <fluent:Button Command="{Binding SelectedLibrary.RemoveComicCommand}"
                            Header="{x:Static properties:Resources.Remove}"
                            LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Remove.png">
               <fluent:Button.ToolTip>
                 <fluent:ScreenTip Title="{x:Static properties:Resources.RemoveComic}" Text="{x:Static properties:Resources.RemoveComicTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
-            <fluent:Button Command="{Binding CutCommand}"
+            <fluent:Button Command="{Binding SelectedLibrary.CutCommand}"
                            Header="{x:Static properties:Resources.Cut}"
                            LargeIcon="pack://application:,,,/ComicLibrary;component/Images/CutSmall.png"
                            SizeDefinition="Middle Middle Small">
@@ -201,7 +206,7 @@
                 <fluent:ScreenTip Title="{x:Static properties:Resources.Cut}" Text="{x:Static properties:Resources.CutTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
-            <fluent:Button Command="{Binding CopyCommand}"
+            <fluent:Button Command="{Binding SelectedLibrary.CopyCommand}"
                            Header="{x:Static properties:Resources.Copy}"
                            LargeIcon="pack://application:,,,/ComicLibrary;component/Images/CopySmall.png"
                            SizeDefinition="Middle Middle Small">
@@ -209,7 +214,7 @@
                 <fluent:ScreenTip Title="{x:Static properties:Resources.Copy}" Text="{x:Static properties:Resources.CopyTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
-            <fluent:Button Command="{Binding PasteCommand}"
+            <fluent:Button Command="{Binding SelectedLibrary.PasteCommand}"
                            Header="{x:Static properties:Resources.Paste}"
                            LargeIcon="pack://application:,,,/ComicLibrary;component/Images/PasteSmall.png"
                            SizeDefinition="Middle Middle Small">
@@ -217,30 +222,30 @@
                 <fluent:ScreenTip Title="{x:Static properties:Resources.Paste}" Text="{x:Static properties:Resources.PasteTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
-            <fluent:DropDownButton Header="{x:Static properties:Resources.MoveToLibrary}" LargeIcon="pack://application:,,,/ComicLibrary;component/Images/MoveToFolder.png">
+            <fluent:DropDownButton Header="{x:Static properties:Resources.MoveToLibrary}" LargeIcon="pack://application:,,,/ComicLibrary;component/Images/MoveToLibrary.png">
               <fluent:DropDownButton.ToolTip>
                 <fluent:ScreenTip Title="{x:Static properties:Resources.MoveToLibrary}" Text="{x:Static properties:Resources.MoveToLibraryTooltip}" />
               </fluent:DropDownButton.ToolTip>
-              <fluent:MenuItem Command="{Binding MoveComicToLibraryCommand}"
+              <fluent:MenuItem Command="{Binding SelectedLibrary.MoveComicToLibraryCommand}"
                                Header="{x:Static properties:Resources.Comic}"
                                Icon="pack://application:,,,/ComicLibrary;component/Images/Comic.png" />
-              <fluent:MenuItem Command="{Binding MoveSeriesToLibraryCommand}"
+              <fluent:MenuItem Command="{Binding SelectedLibrary.MoveSeriesToLibraryCommand}"
                                Header="{x:Static properties:Resources.Series}"
                                Icon="pack://application:,,,/ComicLibrary;component/Images/Series.png" />
             </fluent:DropDownButton>
           </fluent:RibbonGroupBox>
           <fluent:RibbonGroupBox Name="Print"
-                                 DataContext="{Binding SelectedLibrary}"
                                  Header="{x:Static properties:Resources.Print}"
-                                 Icon="pack://application:,,,/ComicLibrary;component/Images/Print.png">
-            <fluent:Button Command="{Binding PrintReportCommand}"
+                                 Icon="pack://application:,,,/ComicLibrary;component/Images/Print.png"
+                                 IsEnabled="{Binding HasActiveLibrary}">
+            <fluent:Button Command="{Binding SelectedLibrary.PrintReportCommand}"
                            Header="{x:Static properties:Resources.PrintReport}"
                            LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Report.png">
               <fluent:Button.ToolTip>
                 <fluent:ScreenTip Title="{x:Static properties:Resources.PrintReport}" Text="{x:Static properties:Resources.PrintReportTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
-            <fluent:Button Command="{Binding PrintListCommand}"
+            <fluent:Button Command="{Binding SelectedLibrary.PrintListCommand}"
                            Header="{x:Static properties:Resources.PrintList}"
                            LargeIcon="pack://application:,,,/ComicLibrary;component/Images/List.png">
               <fluent:Button.ToolTip>
