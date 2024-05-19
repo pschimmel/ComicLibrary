@@ -37,6 +37,7 @@
     <None Remove="Images\Rename.png" />
     <None Remove="Images\Report.png" />
     <None Remove="Images\Save.png" />
+    <None Remove="Images\Series.png" />
     <None Remove="Images\Settings.png" />
   </ItemGroup>
 
@@ -57,6 +58,7 @@
     <Resource Include="Images\Add.png" />
     <Resource Include="Images\CancelSmall.png" />
     <Resource Include="Images\Chart.png" />
+    <Resource Include="Images\Series.png" />
     <Resource Include="Images\CopySmall.png" />
     <Resource Include="Images\CutSmall.png" />
     <Resource Include="Images\List.png" />

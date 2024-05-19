@@ -29,7 +29,8 @@ namespace ComicLibrary.ViewModel
     private ActionCommand _removeComicCommand;
     private ActionCommand _saveLibraryCommand;
     private ActionCommand _clearSearchTextCommand;
-    private ActionCommand _moveToLibraryCommand;
+    private ActionCommand _moveComicToLibraryCommand;
+    private ActionCommand _moveSeriesToLibraryCommand;
     private ActionCommand _renameSeriesCommand;
     private ActionCommand _printReportCommand;
     private ActionCommand _printListCommand;
@@ -245,11 +246,11 @@ namespace ComicLibrary.ViewModel
 
     #endregion
 
-    #region Move to Library
+    #region Move Comic to Library
 
-    public ICommand MoveToLibraryCommand => _moveToLibraryCommand ??= new ActionCommand(MoveToLibrary, CanMoveToLibrary);
+    public ICommand MoveComicToLibraryCommand => _moveComicToLibraryCommand ??= new ActionCommand(MoveComicToLibrary, CanMoveComicToLibrary);
 
-    private void MoveToLibrary()
+    private void MoveComicToLibrary()
     {
       var libraries = FileHelper.LoadLibraries();
       var vm = new MoveToLibraryViewModel(libraries.Where(x => x.Name != _libraryTemplate.Name));
@@ -257,18 +258,52 @@ namespace ComicLibrary.ViewModel
       if (view.ShowDialog() == true && vm.SelectedLibrary != null)
       {
         var targetLibrary = FileHelper.LoadActiveLibrary(System.IO.Path.Combine(Settings.Instance.LibrariesPath, vm.SelectedLibrary.FileName));
-        var newComic = SelectedComic.ToModel().Copy();
-        targetLibrary.Comics.Add(newComic);
-        vm.SelectedLibrary.ComicCount++;
-        Comics.Remove(SelectedComic);
+        MoveComic(SelectedComic, vm.SelectedLibrary, targetLibrary);
         SelectedComic = null;
-        _libraryTemplate.ComicCount--;
         FileHelper.SaveActiveLibrary(targetLibrary, System.IO.Path.Combine(Settings.Instance.LibrariesPath, vm.SelectedLibrary.FileName));
         FileHelper.SaveLibraries(libraries); // This is to update the comic count
       }
     }
 
-    private bool CanMoveToLibrary()
+    private void MoveComic(ComicViewModel comic, Library selectedLibrary, ActiveLibrary targetLibrary)
+    {
+      var newComic = comic.ToModel().Copy();
+      targetLibrary.Comics.Add(newComic);
+      selectedLibrary.ComicCount++;
+      Comics.Remove(SelectedComic);
+      _libraryTemplate.ComicCount--;
+    }
+
+    private bool CanMoveComicToLibrary()
+    {
+      return SelectedComic != null;
+    }
+
+    #endregion
+
+    #region Move Series to Library
+
+    public ICommand MoveSeriesToLibraryCommand => _moveSeriesToLibraryCommand ??= new ActionCommand(MoveSeriesToLibrary, CanMoveSeriesToLibrary);
+
+    private void MoveSeriesToLibrary()
+    {
+      var libraries = FileHelper.LoadLibraries();
+      var vm = new MoveToLibraryViewModel(libraries.Where(x => x.Name != _libraryTemplate.Name));
+      var view = ViewFactory.Instance.CreateView(vm);
+      if (view.ShowDialog() == true && vm.SelectedLibrary != null)
+      {
+        var targetLibrary = FileHelper.LoadActiveLibrary(System.IO.Path.Combine(Settings.Instance.LibrariesPath, vm.SelectedLibrary.FileName));
+        foreach (var comic in Comics.Where(x => string.Equals(SelectedComic.Series, x.Series, StringComparison.InvariantCultureIgnoreCase)))
+        {
+          MoveComic(comic, vm.SelectedLibrary, targetLibrary);
+        }
+        SelectedComic = null;
+        FileHelper.SaveActiveLibrary(targetLibrary, System.IO.Path.Combine(Settings.Instance.LibrariesPath, vm.SelectedLibrary.FileName));
+        FileHelper.SaveLibraries(libraries); // This is to update the comic count
+      }
+    }
+
+    private bool CanMoveSeriesToLibrary()
     {
       return SelectedComic != null;
     }

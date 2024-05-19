@@ -124,7 +124,7 @@
     <value>Comic hinzufügen</value>
   </data>
   <data name="AddComicTooltip" xml:space="preserve">
-    <value>Fügt ein neues Comic hinzu.</value>
+    <value>Fügt einen neuen Comic hinzu.</value>
   </data>
   <data name="AddImage" xml:space="preserve">
     <value>Bild hinzufügen</value>
@@ -181,10 +181,10 @@
     <value>Kopieren</value>
   </data>
   <data name="CopyDataFromSelectedComic" xml:space="preserve">
-    <value>Kopiere Daten von ausgewähltem Comic in neues Comic.</value>
+    <value>Kopiere Daten vom ausgewählten Comic in einen neuen Comic.</value>
   </data>
   <data name="CopyTooltip" xml:space="preserve">
-    <value>Kopiert das aktuelle Comic.</value>
+    <value>Kopiert den aktuellen Comic.</value>
   </data>
   <data name="Countries" xml:space="preserve">
     <value>Länder</value>
@@ -202,7 +202,7 @@
     <value>Ausschneiden</value>
   </data>
   <data name="CutTooltip" xml:space="preserve">
-    <value>Schneidet das aktuelle Comic aus.</value>
+    <value>Schneidet den aktuellen Comic aus.</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Bearbeiten</value>
@@ -301,7 +301,7 @@
     <value>In Bibliothek verschieben</value>
   </data>
   <data name="MoveToLibraryTooltip" xml:space="preserve">
-    <value>Verschiebt das ausgewählte Comics in eine andere Bibliothek.</value>
+    <value>Verschiebt den ausgewählten Comics in eine andere Bibliothek.</value>
   </data>
   <data name="MoveXMLFilesQuestion" xml:space="preserve">
     <value>Möchten sie alle XML-Dateien an den neuen Ort verschieben?</value>
@@ -331,7 +331,7 @@
     <value>Einfügen</value>
   </data>
   <data name="PasteTooltip" xml:space="preserve">
-    <value>Fügt ein Comic vom Clipboard hinzu.</value>
+    <value>Fügt einen Comic vom Clipboard ein.</value>
   </data>
   <data name="PngFiles" xml:space="preserve">
     <value>Portable Network Graphics-Dateien (*.png)</value>
@@ -376,10 +376,10 @@
     <value>Comic entfernen</value>
   </data>
   <data name="RemoveComicQuestion" xml:space="preserve">
-    <value>Möchten Sie wirklich das ausgewählte Comic löschen?</value>
+    <value>Möchten Sie wirklich den ausgewählten Comic löschen?</value>
   </data>
   <data name="RemoveComicTooltip" xml:space="preserve">
-    <value>Entfernt das ausgewählte Comic.</value>
+    <value>Entfernt den ausgewählten Comic.</value>
   </data>
   <data name="RemoveImage" xml:space="preserve">
     <value>Bild entfernen</value>
@@ -394,7 +394,7 @@
     <value>Option entfernen</value>
   </data>
   <data name="RemoveOptionQuestion" xml:space="preserve">
-    <value>Möchten Sie wirklich die ausgewählte Option entfernen? Dies kann nicht rückgängig gemacht werden und wird die Zuordnung in allen zugeordneten Comics entfernen.</value>
+    <value>Möchten Sie wirklich die ausgewählte Option entfernen? Dies kann nicht rückgängig gemacht werden und die Zuordnung wird in allen Comics entfernen.</value>
   </data>
   <data name="RenameSeries" xml:space="preserve">
     <value>Reihe umbenennen</value>
@@ -418,7 +418,7 @@
     <value>Speichert die aktuelle Bibliothek.</value>
   </data>
   <data name="SelectAFolderMessage" xml:space="preserve">
-    <value>Bitte wählen Sie einen Order.</value>
+    <value>Bitte wählen Sie einen Ordner.</value>
   </data>
   <data name="Series" xml:space="preserve">
     <value>Reihe</value>

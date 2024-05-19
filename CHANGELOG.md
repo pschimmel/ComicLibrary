@@ -8,13 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2023-12-29
 
 ### Added
-
 - First initial release.
 
 ## [1.0.1] - 2024-01-01
 
 ### Fixed
-
 - Fixed exception at startup.
 - Fixed editing of years in table view.
 - Fixed dirty flag not being reset when a library is saved.
@@ -22,7 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed searching for comics.
 
 ### Changed
-
 - Changed Libraries popup to use a wrap panel.
 - Added changelog.
 - Changed way how new libraries are created.
@@ -30,7 +27,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.0] - 2024-01-20
 
 ### Added
-
 - Added command for moving a comic to another library.
 - Added option to copy properties of selected comic when adding a new one.
 - Added option to automatically create a backup when saving files.
@@ -41,30 +37,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added language as field.
 
 ### Fixed
-
 - Fixed export of images.
 - Fixed deleting of optional values (issue number, year) while editing.
 
 ## [1.1.1] - 2024-02-15
 
 ### Added
-
 - Added option to print a list of issues.
 - Added command in ribbon to close current library.
 
 ### Fixed
-
 - Fixed editing of comic language in detail window.
 - Fixed creating new libraries.
 
 ### Changed 
-
 - Now using AvalonDock for comic tabs.
 
-## [1.1.2] - 
+## [1.1.2] - 24-04-02
 
 ### Added
-
 - Added simple charts for year, grading, price, and value.
 - Added option for certified grades.
 - Runs are now grouped in list report. 
+
+## [1.1.3] - 
+
+### Added
+- Move comic or complete series to another library.
+
+### Fixed
+- Fixed German translation (Comic is male).

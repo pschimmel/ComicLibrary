@@ -217,13 +217,17 @@
                 <fluent:ScreenTip Title="{x:Static properties:Resources.Paste}" Text="{x:Static properties:Resources.PasteTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
-            <fluent:Button Command="{Binding MoveToLibraryCommand}"
-                           Header="{x:Static properties:Resources.MoveToLibrary}"
-                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/MoveToFolder.png">
-              <fluent:Button.ToolTip>
+            <fluent:DropDownButton Header="{x:Static properties:Resources.MoveToLibrary}" LargeIcon="pack://application:,,,/ComicLibrary;component/Images/MoveToFolder.png">
+              <fluent:DropDownButton.ToolTip>
                 <fluent:ScreenTip Title="{x:Static properties:Resources.MoveToLibrary}" Text="{x:Static properties:Resources.MoveToLibraryTooltip}" />
-              </fluent:Button.ToolTip>
-            </fluent:Button>
+              </fluent:DropDownButton.ToolTip>
+              <fluent:MenuItem Command="{Binding MoveComicToLibraryCommand}"
+                               Header="{x:Static properties:Resources.Comic}"
+                               Icon="pack://application:,,,/ComicLibrary;component/Images/Comic.png" />
+              <fluent:MenuItem Command="{Binding MoveSeriesToLibraryCommand}"
+                               Header="{x:Static properties:Resources.Series}"
+                               Icon="pack://application:,,,/ComicLibrary;component/Images/Series.png" />
+            </fluent:DropDownButton>
           </fluent:RibbonGroupBox>
           <fluent:RibbonGroupBox Name="Print"
                                  DataContext="{Binding SelectedLibrary}"

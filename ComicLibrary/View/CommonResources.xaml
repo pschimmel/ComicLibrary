@@ -23,8 +23,7 @@
       </TextBlock>
       <TextBlock Grid.Column="1"
                  Margin="2,0"
-                 Text="{Binding Name}">
-      </TextBlock>
+                 Text="{Binding Name}" />
     </Grid>
   </DataTemplate>
 
