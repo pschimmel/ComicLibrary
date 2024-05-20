@@ -66,4 +66,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Move comic or complete series to another library.
 
 ### Fixed
-- Fixed German translation (Comic is male).
+- Fixed German translation.
+- Fixed ribbon controls being active if no library is opened.
