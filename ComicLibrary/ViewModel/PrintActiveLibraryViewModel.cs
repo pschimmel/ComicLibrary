@@ -4,120 +4,23 @@ using System.Printing;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Xps.Packaging;
-using ComicLibrary.Model.Config;
-using ComicLibrary.ViewModel.Helpers;
 
 namespace ComicLibrary.ViewModel
 {
-  public class PrintActiveLibraryViewModel : ES.Tools.Core.MVVM.ViewModel
+  public abstract class PrintActiveLibraryViewModel : ES.Tools.Core.MVVM.ViewModel
   {
-    public enum ReportType { Report, List }
+    public PrintActiveLibraryViewModel()
+    { }
 
-    public PrintActiveLibraryViewModel(ActiveLibraryViewModel library, ReportType type)
+    public void PrepareReport(ActiveLibraryViewModel library)
     {
-      FlowDocument flowDocument = type == ReportType.Report ? CreateReport(library) : CreateList(library);
+      FlowDocument flowDocument = CreateReport(library);
       Document = PrepareReport(flowDocument);
     }
 
-    public IDocumentPaginatorSource Document { get; }
+    public IDocumentPaginatorSource Document { get; private set; }
 
-    private static FlowDocument CreateReport(ActiveLibraryViewModel library)
-    {
-      var document = new FlowDocument();
-
-      // Add header
-      document.AddHeader1(library.Name);
-
-      // Add comics as table
-      var table = document.AddTable(
-        new GridLength(3, GridUnitType.Star), // Series
-        new GridLength(1, GridUnitType.Star), // Year
-        new GridLength(1, GridUnitType.Star), // IssueNumber
-        new GridLength(3, GridUnitType.Star), // Title
-        new GridLength(2, GridUnitType.Star), // Condition
-        new GridLength(1, GridUnitType.Star)  // Price
-      );
-
-      table.AddHeaderRow(Properties.Resources.Series,
-                         Properties.Resources.Year,
-                         Properties.Resources.IssueNumber,
-                         Properties.Resources.Title,
-                         Properties.Resources.Condition,
-                         Properties.Resources.PurchasePrice);
-
-      foreach (var comic in library.Comics)
-      {
-        table.AddRow(new CellContent(comic.Series),
-                     new CellContent(comic.Year?.ToString(), TextAlignment.Right),
-                     new CellContent(comic.IssueNumber?.ToString(), TextAlignment.Right),
-                     new CellContent(comic.Title),
-                     new CellContent(comic.Condition.Name),
-                     new CellContent(comic.PurchasePrice.HasValue ? $"{Settings.Instance.CurrencySymbol} {comic.PurchasePrice.Value:F2}" : null, TextAlignment.Right));
-      }
-
-      return document;
-    }
-
-    private static FlowDocument CreateList(ActiveLibraryViewModel library)
-    {
-      var document = new FlowDocument();
-
-      // Add header
-      document.AddHeader1(library.Name);
-
-      // Add series 
-      var series = library.Comics.Where(x => x.IssueNumber.HasValue && !string.IsNullOrWhiteSpace(x.Series))
-                                 .Select(x => x.Series)
-                                 .Distinct()
-                                 .Order();
-
-      foreach (var serie in series)
-      {
-        document.AddHeader2(serie);
-        var listOfIssues = library.Comics.Where(x => x.IssueNumber.HasValue && x.Series == serie)
-                                         .Select(x => x.IssueNumber.Value)
-                                         .Order()
-                                         .ToList();
-        int? lastIssue = null;
-        string text = "";
-
-        for (int i = 0; i < listOfIssues.Count; i++)
-        {
-          var issue = listOfIssues[i];
-
-          if (issue != lastIssue) // In case there are duplicates
-          {
-            if (lastIssue.HasValue && lastIssue + 1 == issue)
-            {
-              if (!text.EndsWith('-'))
-                text += "-";
-
-              if (i == listOfIssues.Count - 1)
-                text += issue;
-            }
-            else
-            {
-              if (text.EndsWith('-'))
-                text += lastIssue;
-
-              if (text != "")
-                text += ", ";
-
-              text += issue;
-            }
-          }
-
-          lastIssue = issue;
-        }
-
-        if (text.EndsWith('-'))
-          text += lastIssue;
-
-        document.AddParagraph(text);
-      }
-
-      return document;
-    }
+    protected abstract FlowDocument CreateReport(ActiveLibraryViewModel library);
 
     private static FixedDocumentSequence PrepareReport(FlowDocument document)
     {

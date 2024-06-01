@@ -219,6 +219,9 @@
   <data name="EstimatedValue" xml:space="preserve">
     <value>Estimated value</value>
   </data>
+  <data name="ExcludeLowGrades" xml:space="preserve">
+    <value>Exclude low grades</value>
+  </data>
   <data name="ExportImage" xml:space="preserve">
     <value>Export Image</value>
   </data>
@@ -284,6 +287,9 @@
   </data>
   <data name="LimitedEdition" xml:space="preserve">
     <value>Limited Edition</value>
+  </data>
+  <data name="LowerThan" xml:space="preserve">
+    <value>Lower than</value>
   </data>
   <data name="Manage" xml:space="preserve">
     <value>Manage</value>
@@ -366,6 +372,9 @@
   <data name="Question" xml:space="preserve">
     <value>Question</value>
   </data>
+  <data name="ReduceIssues" xml:space="preserve">
+    <value>Reduce issues</value>
+  </data>
   <data name="Relative" xml:space="preserve">
     <value>Relative</value>
   </data>
@@ -404,6 +413,9 @@
   </data>
   <data name="Report" xml:space="preserve">
     <value>Report</value>
+  </data>
+  <data name="Reports" xml:space="preserve">
+    <value>Reports</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>

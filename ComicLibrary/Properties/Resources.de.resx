@@ -219,6 +219,9 @@
   <data name="EstimatedValue" xml:space="preserve">
     <value>Schätzwert</value>
   </data>
+  <data name="ExcludeLowGrades" xml:space="preserve">
+    <value>Niedrige Bewertungen ausschließen</value>
+  </data>
   <data name="ExportImage" xml:space="preserve">
     <value>Bild exportieren</value>
   </data>
@@ -284,6 +287,9 @@
   </data>
   <data name="LimitedEdition" xml:space="preserve">
     <value>Limitierte Ausgabe</value>
+  </data>
+  <data name="LowerThan" xml:space="preserve">
+    <value>Geringer als</value>
   </data>
   <data name="Manage" xml:space="preserve">
     <value>Manage</value>
@@ -366,6 +372,9 @@
   <data name="Question" xml:space="preserve">
     <value>Frage</value>
   </data>
+  <data name="ReduceIssues" xml:space="preserve">
+    <value>Ausgaben reduzieren</value>
+  </data>
   <data name="Relative" xml:space="preserve">
     <value>Relativ</value>
   </data>
@@ -404,6 +413,9 @@
   </data>
   <data name="Report" xml:space="preserve">
     <value>Bericht</value>
+  </data>
+  <data name="Reports" xml:space="preserve">
+    <value>Berichte</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Speichern</value>

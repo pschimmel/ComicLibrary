@@ -134,7 +134,7 @@
             </fluent:BackstageTabControl>
           </fluent:Backstage>
         </fluent:Ribbon.Menu>
-        <fluent:RibbonTabItem Header="{x:Static properties:Resources.Start}" ReduceOrder="Manage, Manage, Manage, Library, Library, Library, Comic, Comic, Comic, Print, Print, Print, Manage, Library, Comic, Print">
+        <fluent:RibbonTabItem Header="{x:Static properties:Resources.Start}" ReduceOrder="Manage, Manage, Manage, Library, Library, Library, Comic, Comic, Comic, Manage, Library, Comic">
           <fluent:RibbonGroupBox Name="Manage"
                                  Header="{x:Static properties:Resources.Manage}"
                                  Icon="pack://application:,,,/ComicLibrary;component/Images/ManageLibraries.png">
@@ -234,8 +234,10 @@
                                Icon="pack://application:,,,/ComicLibrary;component/Images/Series.png" />
             </fluent:DropDownButton>
           </fluent:RibbonGroupBox>
-          <fluent:RibbonGroupBox Name="Print"
-                                 Header="{x:Static properties:Resources.Print}"
+        </fluent:RibbonTabItem>
+        <fluent:RibbonTabItem Header="{x:Static properties:Resources.Reports}" ReduceOrder="Report, Report, Report, List, List, List, Report, List">
+          <fluent:RibbonGroupBox Name="Report"
+                                 Header="{x:Static properties:Resources.PrintReport}"
                                  Icon="pack://application:,,,/ComicLibrary;component/Images/Print.png"
                                  IsEnabled="{Binding HasActiveLibrary}">
             <fluent:Button Command="{Binding SelectedLibrary.PrintReportCommand}"
@@ -245,13 +247,31 @@
                 <fluent:ScreenTip Title="{x:Static properties:Resources.PrintReport}" Text="{x:Static properties:Resources.PrintReportTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
+            <fluent:CheckBox Header="{x:Static properties:Resources.Series}" IsChecked="{Binding SelectedLibrary.PrintSeries}"/>
+            <fluent:CheckBox Header="{x:Static properties:Resources.Year}" IsChecked="{Binding SelectedLibrary.PrintYear}"/>
+            <fluent:CheckBox Header="{x:Static properties:Resources.IssueNumber}" IsChecked="{Binding SelectedLibrary.PrintIssueNumber}"/>
+            <fluent:CheckBox Header="{x:Static properties:Resources.Title}" IsChecked="{Binding SelectedLibrary.PrintTitle}"/>
+            <fluent:CheckBox Header="{x:Static properties:Resources.Condition}" IsChecked="{Binding SelectedLibrary.PrintCondition}"/>
+            <fluent:CheckBox Header="{x:Static properties:Resources.PurchasePrice}" IsChecked="{Binding SelectedLibrary.PrintPurchasePrice}"/>
+          </fluent:RibbonGroupBox>
+          <fluent:RibbonGroupBox Name="List"
+                                 Header="{x:Static properties:Resources.PrintList}"
+                                 Icon="pack://application:,,,/ComicLibrary;component/Images/Print.png"
+                                 IsEnabled="{Binding HasActiveLibrary}">
             <fluent:Button Command="{Binding SelectedLibrary.PrintListCommand}"
-                           Header="{x:Static properties:Resources.PrintList}"
+                           Header="{x:Static properties:Resources.Print}"
                            LargeIcon="pack://application:,,,/ComicLibrary;component/Images/List.png">
               <fluent:Button.ToolTip>
                 <fluent:ScreenTip Title="{x:Static properties:Resources.PrintList}" Text="{x:Static properties:Resources.PrintListTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
+            <fluent:CheckBox Header="{x:Static properties:Resources.ReduceIssues}" IsChecked="{Binding SelectedLibrary.ReduceIssues}" />
+            <fluent:CheckBox Header="{x:Static properties:Resources.ExcludeLowGrades}" IsChecked="{Binding SelectedLibrary.ExcludeLowGrades}" />
+            <fluent:ComboBox Header="{x:Static properties:Resources.LowerThan}"
+                             IsEnabled="{Binding SelectedLibrary.ExcludeLowGrades}"
+                             ItemsSource="{Binding SelectedLibrary.LowGrades}"
+                             SelectedItem="{Binding SelectedLibrary.ExcludedGradeThreshold}">
+            </fluent:ComboBox>
           </fluent:RibbonGroupBox>
         </fluent:RibbonTabItem>
       </fluent:Ribbon>

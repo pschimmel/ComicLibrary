@@ -367,6 +367,15 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exclude low grades.
+        /// </summary>
+        public static string ExcludeLowGrades {
+            get {
+                return ResourceManager.GetString("ExcludeLowGrades", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export Image.
         /// </summary>
         public static string ExportImage {
@@ -561,6 +570,15 @@ namespace ComicLibrary.Properties {
         public static string LimitedEdition {
             get {
                 return ResourceManager.GetString("LimitedEdition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lower than.
+        /// </summary>
+        public static string LowerThan {
+            get {
+                return ResourceManager.GetString("LowerThan", resourceCulture);
             }
         }
         
@@ -808,6 +826,15 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reduce issues.
+        /// </summary>
+        public static string ReduceIssues {
+            get {
+                return ResourceManager.GetString("ReduceIssues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Relative.
         /// </summary>
         public static string Relative {
@@ -921,6 +948,15 @@ namespace ComicLibrary.Properties {
         public static string Report {
             get {
                 return ResourceManager.GetString("Report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reports.
+        /// </summary>
+        public static string Reports {
+            get {
+                return ResourceManager.GetString("Reports", resourceCulture);
             }
         }
         

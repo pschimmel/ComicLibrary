@@ -40,6 +40,8 @@ namespace ComicLibrary.ViewModel
     private ActionCommand _pasteCommand;
     private ActionCommand _showChartCommand;
     private bool _isDirty;
+    private bool excludeLowGrades = false;
+    private PrintReportViewModel.PrintColumns _printColumns = PrintReportViewModel.PrintColumns.Default;
 
     #endregion
 
@@ -344,9 +346,54 @@ namespace ComicLibrary.ViewModel
 
     public ICommand PrintReportCommand => _printReportCommand ??= new ActionCommand(PrintReport);
 
+    public bool PrintSeries
+    {
+      get => _printColumns.HasFlag(PrintReportViewModel.PrintColumns.Series);
+      set => ActivateColumn(PrintReportViewModel.PrintColumns.Series, value);
+    }
+
+    public bool PrintYear
+    {
+      get => _printColumns.HasFlag(PrintReportViewModel.PrintColumns.Year);
+      set => ActivateColumn(PrintReportViewModel.PrintColumns.Year, value);
+    }
+
+    public bool PrintIssueNumber
+    {
+      get => _printColumns.HasFlag(PrintReportViewModel.PrintColumns.IssueNumber);
+      set => ActivateColumn(PrintReportViewModel.PrintColumns.IssueNumber, value);
+    }
+
+    public bool PrintTitle
+    {
+      get => _printColumns.HasFlag(PrintReportViewModel.PrintColumns.Title);
+      set => ActivateColumn(PrintReportViewModel.PrintColumns.Title, value);
+    }
+
+    public bool PrintCondition
+    {
+      get => _printColumns.HasFlag(PrintReportViewModel.PrintColumns.Condition);
+      set => ActivateColumn(PrintReportViewModel.PrintColumns.Condition, value);
+    }
+
+    public bool PrintPurchasePrice
+    {
+      get => _printColumns.HasFlag(PrintReportViewModel.PrintColumns.PurchasePrice);
+      set => ActivateColumn(PrintReportViewModel.PrintColumns.PurchasePrice, value);
+    }
+
+    private void ActivateColumn(PrintReportViewModel.PrintColumns column, bool isActive)
+    {
+      if (isActive)
+        _printColumns |= column;
+      else
+        _printColumns &= ~column;
+    }
+
     private void PrintReport()
     {
-      var vm = new PrintActiveLibraryViewModel(this, PrintActiveLibraryViewModel.ReportType.Report);
+      var vm = new PrintReportViewModel(_printColumns);
+      vm.PrepareReport(this);
       var view = ViewFactory.Instance.CreateView(vm);
       view.ShowDialog();
     }
@@ -357,9 +404,26 @@ namespace ComicLibrary.ViewModel
 
     public ICommand PrintListCommand => _printListCommand ??= new ActionCommand(PrintList);
 
+    public bool ReduceIssues { get; set; } = true;
+
+    public bool ExcludeLowGrades
+    {
+      get => excludeLowGrades;
+      set
+      {
+        excludeLowGrades = value;
+        OnPropertyChanged(nameof(ExcludeLowGrades));
+      }
+    }
+
+    public IEnumerable<Grade> LowGrades { get; } = Grade.Grades.Where(x => x.Number <= 5);
+
+    public Grade ExcludedGradeThreshold { get; set; } = Grade.VeryGood;
+
     private void PrintList()
     {
-      var vm = new PrintActiveLibraryViewModel(this, PrintActiveLibraryViewModel.ReportType.List);
+      var vm = new PrintListViewModel(ReduceIssues, ExcludeLowGrades, ExcludedGradeThreshold);
+      vm.PrepareReport(this);
       var view = ViewFactory.Instance.CreateView(vm);
       view.ShowDialog();
     }

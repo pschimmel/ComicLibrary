@@ -64,7 +64,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Move comic or complete series to another library.
+- Added options for reports.
 
 ### Fixed
 - Fixed German translation.
 - Fixed ribbon controls being active if no library is opened.
+
+### Changed 
+- Moved reports to separate ribbon tab.
