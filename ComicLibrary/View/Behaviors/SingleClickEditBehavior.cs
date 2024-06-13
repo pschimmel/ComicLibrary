@@ -14,7 +14,6 @@ namespace ComicLibrary.View.Behaviors
       base.OnAttached();
       var style = new Style(typeof(DataGridCell));
       style.Setters.Add(new EventSetter(UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(DataGridCell_PreviewMouseLeftButtonDown)));
-      style.Setters.Add(new EventSetter(UIElement.PreviewTextInputEvent, new TextCompositionEventHandler(DataGridCell_PreviewTextInput)));
       AssociatedObject.CellStyle = style;
     }
 
@@ -28,12 +27,6 @@ namespace ComicLibrary.View.Behaviors
     {
       DataGridCell cell = sender as DataGridCell;
       AssociatedObject.SelectedItem = cell.DataContext;
-      GridColumnFastEdit(cell, e);
-    }
-
-    private void DataGridCell_PreviewTextInput(object sender, TextCompositionEventArgs e)
-    {
-      DataGridCell cell = sender as DataGridCell;
       GridColumnFastEdit(cell, e);
     }
 

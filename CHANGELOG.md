@@ -69,6 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fixed German translation.
 - Fixed ribbon controls being active if no library is opened.
+- Fixed grid cell editing.
 
 ### Changed 
 - Moved reports to separate ribbon tab.

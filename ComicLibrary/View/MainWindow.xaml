@@ -241,7 +241,7 @@
                                  Icon="pack://application:,,,/ComicLibrary;component/Images/Print.png"
                                  IsEnabled="{Binding HasActiveLibrary}">
             <fluent:Button Command="{Binding SelectedLibrary.PrintReportCommand}"
-                           Header="{x:Static properties:Resources.PrintReport}"
+                           Header="{x:Static properties:Resources.Print}"
                            LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Report.png">
               <fluent:Button.ToolTip>
                 <fluent:ScreenTip Title="{x:Static properties:Resources.PrintReport}" Text="{x:Static properties:Resources.PrintReportTooltip}" />
