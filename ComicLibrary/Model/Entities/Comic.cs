@@ -45,7 +45,7 @@ namespace ComicLibrary.Model.Entities
 
     public string Series { get; set; }
 
-    public int? IssueNumber { get; set; }
+    public string IssueNumber { get; set; }
 
     public string Title { get; set; }
 

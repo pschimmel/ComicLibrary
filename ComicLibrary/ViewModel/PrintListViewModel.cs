@@ -1,5 +1,6 @@
 ﻿using System.Windows.Documents;
 using ComicLibrary.Model.Entities;
+using ComicLibrary.View.Comparers;
 using ComicLibrary.ViewModel.Helpers;
 
 namespace ComicLibrary.ViewModel
@@ -26,7 +27,7 @@ namespace ComicLibrary.ViewModel
       document.AddHeader1(library.Name);
 
       // Add series 
-      var series = library.Comics.Where(x => x.IssueNumber.HasValue && !string.IsNullOrWhiteSpace(x.Series))
+      var series = library.Comics.Where(x => !string.IsNullOrWhiteSpace(x.IssueNumber) && !string.IsNullOrWhiteSpace(x.Series))
                                  .Select(x => x.Series)
                                  .Distinct()
                                  .Order();
@@ -34,8 +35,8 @@ namespace ComicLibrary.ViewModel
       foreach (var serie in series)
       {
         document.AddHeader2(serie);
-        var listOfIssues = library.Comics.Where(x => x.IssueNumber.HasValue && x.Series == serie)
-                                         .OrderBy(x => x.IssueNumber)
+        var listOfIssues = library.Comics.Where(x => !string.IsNullOrWhiteSpace(x.IssueNumber) && x.Series == serie)
+                                         .OrderBy(x => x.IssueNumber, new StringAsNumberComparer())
                                          .ToList();
         int? lastIssue = null;
         string text = "";
@@ -47,18 +48,18 @@ namespace ComicLibrary.ViewModel
           if (_excludeLowGrades && issue.Condition.Number < _excludedGradeThreshold)
             continue;
 
-          if (_reduceIssues)
+          if (_reduceIssues && int.TryParse(issue.IssueNumber, out int currentIssueNumber))
           {
             // Reduce a run of issues into a range
-            if (issue.IssueNumber != lastIssue) // In case there are duplicates
+            if (currentIssueNumber != lastIssue) // In case there are duplicates
             {
-              if (lastIssue.HasValue && lastIssue + 1 == issue.IssueNumber)
+              if (lastIssue.HasValue && lastIssue + 1 == currentIssueNumber)
               {
                 if (!text.EndsWith('-'))
                   text += "-";
 
                 if (i == listOfIssues.Count - 1)
-                  text += issue.IssueNumber;
+                  text += currentIssueNumber;
               }
               else
               {
@@ -68,11 +69,11 @@ namespace ComicLibrary.ViewModel
                 if (text.Length != 0)
                   text += ", ";
 
-                text += issue.IssueNumber;
+                text += currentIssueNumber;
               }
             }
 
-            lastIssue = issue.IssueNumber;
+            lastIssue = currentIssueNumber;
           }
           else
           {

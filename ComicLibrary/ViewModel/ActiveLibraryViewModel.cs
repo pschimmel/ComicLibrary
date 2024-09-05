@@ -272,7 +272,7 @@ namespace ComicLibrary.ViewModel
       var newComic = comic.ToModel().Copy();
       targetLibrary.Comics.Add(newComic);
       selectedLibrary.ComicCount++;
-      Comics.Remove(SelectedComic);
+      Comics.Remove(comic);
       _libraryTemplate.ComicCount--;
     }
 
@@ -295,7 +295,7 @@ namespace ComicLibrary.ViewModel
       if (view.ShowDialog() == true && vm.SelectedLibrary != null)
       {
         var targetLibrary = FileHelper.LoadActiveLibrary(System.IO.Path.Combine(Settings.Instance.LibrariesPath, vm.SelectedLibrary.FileName));
-        foreach (var comic in Comics.Where(x => string.Equals(SelectedComic.Series, x.Series, StringComparison.InvariantCultureIgnoreCase)))
+        foreach (var comic in Comics.Where(x => string.Equals(SelectedComic.Series, x.Series, StringComparison.InvariantCultureIgnoreCase)).ToList())
         {
           MoveComic(comic, vm.SelectedLibrary, targetLibrary);
         }

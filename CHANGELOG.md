@@ -60,7 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added option for certified grades.
 - Runs are now grouped in list report. 
 
-## [1.1.3] - 
+## [1.2.0] - 
 
 ### Added
 - Move comic or complete series to another library.
@@ -70,6 +70,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed German translation.
 - Fixed ribbon controls being active if no library is opened.
 - Fixed grid cell editing.
+- Fixed moving of a series into a new library
 
 ### Changed 
 - Moved reports to separate ribbon tab.
+- Breaking change: The issue number is now a text field. This is to allow entering issue numbers like 23.3 or 1A.

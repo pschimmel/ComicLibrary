@@ -80,7 +80,7 @@ namespace ComicLibrary.ViewModel
 
     public string Title { get; set; }
 
-    public int? IssueNumber { get; set; }
+    public string IssueNumber { get; set; }
 
     public string Comment { get; set; }
 

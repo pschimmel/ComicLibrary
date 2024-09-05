@@ -5,6 +5,7 @@ using System.Windows;
 using System.Xml;
 using ComicLibrary.Model.Config;
 using ComicLibrary.Model.Entities;
+using ComicLibrary.View.Comparers;
 
 namespace ComicLibrary.Model
 {
@@ -310,9 +311,9 @@ namespace ComicLibrary.Model
               {
                 comic.Title = comicChildNode.InnerText;
               }
-              else if (comicChildNode.Name == IssueNumberKey && int.TryParse(comicChildNode.InnerText, CultureInfo.InvariantCulture, out int issueNumber))
+              else if (comicChildNode.Name == IssueNumberKey)
               {
-                comic.IssueNumber = issueNumber;
+                comic.IssueNumber = comicChildNode.InnerText;
               }
               else if (comicChildNode.Name == CommentKey)
               {
@@ -539,7 +540,7 @@ namespace ComicLibrary.Model
         var comicsNode = xml.CreateElement(ComicsKey);
         libraryNode.AppendChild(comicsNode);
 
-        foreach (var comic in library.Comics.Where(x => !string.IsNullOrWhiteSpace(x.Series) && x.ID != Guid.Empty).OrderBy(x => x.Series).ThenBy(x => x.IssueNumber))
+        foreach (var comic in library.Comics.Where(x => !string.IsNullOrWhiteSpace(x.Series) && x.ID != Guid.Empty).OrderBy(x => x.Series).ThenBy<Comic, string>(x => x.IssueNumber, new StringAsNumberComparer()))
         {
           var comicNode = AppendChildWithChildren(comicsNode,
                                                   ComicKey,

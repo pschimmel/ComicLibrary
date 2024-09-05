@@ -32,13 +32,6 @@ namespace ComicLibrary.ViewModel
       _publishers = publishers;
       _countries = countries;
       _languages = languages;
-      Series = comic.Series;
-      Year = comic.Year;
-      IssueNumber = comic.IssueNumber;
-      Title = comic.Title;
-      Condition = comic.Condition;
-      Publisher = _publishers.FirstOrDefault(x => x.Option == comic.Publisher);
-      Country = _countries.FirstOrDefault(x => x.Option == comic.Country);
       _isDirty = false;
     }
 
@@ -74,7 +67,7 @@ namespace ComicLibrary.ViewModel
       }
     }
 
-    public int? IssueNumber
+    public string IssueNumber
     {
       get => _comic.IssueNumber;
       set
