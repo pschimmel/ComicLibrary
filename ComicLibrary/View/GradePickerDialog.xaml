@@ -11,9 +11,6 @@
         d:DataContext="{d:DesignInstance Type=viewmodel:GradePickerViewModel}"
         WindowStartupLocation="CenterOwner"
         mc:Ignorable="d">
-  <Window.Resources>
-    <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-  </Window.Resources>
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition />
@@ -54,8 +51,7 @@
                     <Border Grid.ColumnSpan="3"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
-                            Background="#30000000"
-                            Visibility="{Binding IsMainGrade, Converter={StaticResource VisibilityConverter}}" />
+                            Background="#30000000" />
                     <TextBlock Margin="5,0"
                                HorizontalAlignment="Right"
                                FontWeight="Black"

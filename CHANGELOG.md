@@ -53,14 +53,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed 
 - Now using AvalonDock for comic tabs.
 
-## [1.1.2] - 24-04-02
+## [1.1.2] - 2024-04-02
 
 ### Added
 - Added simple charts for year, grading, price, and value.
 - Added option for certified grades.
 - Runs are now grouped in list report. 
 
-## [1.2.0] - 
+## [1.2.0] - 2024-09-05
 
 ### Added
 - Move comic or complete series to another library.
@@ -75,3 +75,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed 
 - Moved reports to separate ribbon tab.
 - Breaking change: The issue number is now a text field. This is to allow entering issue numbers like 23.3 or 1A.
+
+## [1.2.1] - 
+
+### Added
+- Added NG as CGC grade.

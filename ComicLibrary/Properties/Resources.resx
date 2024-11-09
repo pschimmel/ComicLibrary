@@ -327,6 +327,9 @@
   <data name="NearMintPlusDescription" xml:space="preserve">
     <value>A very well-preserved collectible with several minor manufacturing or handling defects.</value>
   </data>
+  <data name="NoGradeDescription" xml:space="preserve">
+    <value>An incomplete comic with missing cover or more than half of the interior pages missing.</value>
+  </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>

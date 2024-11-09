@@ -33,7 +33,7 @@ namespace ComicLibrary.Model.Entities
 
     public override string ToString()
     {
-      return Number > 0 ? $"{Number.ToString("0.0", CultureInfo.InvariantCulture)} - {Name}" : Name;
+      return GradeHasNumber ? $"{Number.ToString("0.0", CultureInfo.InvariantCulture)} - {Name}" : Name;
     }
 
     public int CompareTo(Grade other)
@@ -46,7 +46,9 @@ namespace ComicLibrary.Model.Entities
       return obj is not Grade other ? 1 : CompareTo(other);
     }
 
-    public static Grade[] Grades { get; } = [Unrated, GemMint, Mint, NearMintMint, NearMintPlus, NearMint, NearMintMinus, VeryFineNearMint, VeryFinePlus, VeryFine, VeryFineMinus, FineVeryFine, FinePlus, Fine, FineMinus, VeryGoodFine, VeryGoodPlus, VeryGood, VeryGoodMinus, GoodVeryGood, GoodPlus, Good, GoodMinus, FairGood, Fair, Poor];
+    public bool GradeHasNumber => Number > 0;
+
+    public static Grade[] Grades { get; } = [Unrated, GemMint, Mint, NearMintMint, NearMintPlus, NearMint, NearMintMinus, VeryFineNearMint, VeryFinePlus, VeryFine, VeryFineMinus, FineVeryFine, FinePlus, Fine, FineMinus, VeryGoodFine, VeryGoodPlus, VeryGood, VeryGoodMinus, GoodVeryGood, GoodPlus, Good, GoodMinus, FairGood, Fair, Poor, NoGrade];
 
     public static Grade Unrated => new(-1.0, "(Unrated)", Properties.Resources.UnratedDescription);
 
@@ -99,5 +101,7 @@ namespace ComicLibrary.Model.Entities
     public static Grade Fair => new(1.0, "Fair", Properties.Resources.FairDescription);
 
     public static Grade Poor => new(0.5, "Poor", Properties.Resources.PoorDescription);
+
+    public static Grade NoGrade => new(0.0, "No Grade", Properties.Resources.NoGradeDescription);
   }
 }

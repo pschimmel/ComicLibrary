@@ -691,6 +691,15 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An incomplete comic with missing cover or more than half of the interior pages missing..
+        /// </summary>
+        public static string NoGradeDescription {
+            get {
+                return ResourceManager.GetString("NoGradeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         public static string OK {

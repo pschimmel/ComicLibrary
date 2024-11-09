@@ -14,7 +14,7 @@
           <Style TargetType="TextBlock">
             <Setter Property="Visibility" Value="Visible" />
             <Style.Triggers>
-              <DataTrigger Binding="{Binding Number}" Value="-1.0">
+              <DataTrigger Binding="{Binding GradeHasNumber}" Value="False">
                 <Setter Property="Visibility" Value="Collapsed" />
               </DataTrigger>
             </Style.Triggers>
