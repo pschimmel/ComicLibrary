@@ -95,6 +95,15 @@ namespace ComicLibrary.ViewModel
       }
     }
 
+    public IEnumerable<Grade> Conditions
+    {
+      get
+      {
+        var scale = ScaleHelper.Scales.FirstOrDefault(x => x.Name == _comic.Condition.Scale) ?? ScaleHelper.DefaultScale;
+        return scale != null ? scale.Grades.OrderBy(x => x.Number) : (IEnumerable<Grade>)null;
+      }
+    }
+
     public Grade Condition
     {
       get => _comic.Condition;

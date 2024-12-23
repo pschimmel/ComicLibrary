@@ -292,17 +292,23 @@ namespace ComicLibrary.Model
               }
               else if (comicChildNode.Name == ConditionKey && double.TryParse(comicChildNode.InnerText, CultureInfo.InvariantCulture, out double gradingNumber))
               {
+                var scale = ScaleHelper.DefaultScale;
+
                 foreach (XmlAttribute gradeAttribute in comicChildNode.Attributes)
                 {
                   if (gradeAttribute.Name == CertifiedGradingKey && bool.TryParse(gradeAttribute.InnerText, out bool certified))
                   {
                     comic.GradingCertified = certified;
                   }
+                  else if (gradeAttribute.Name == GradingTypeKey)
+                  {
+                    var foundScale = ScaleHelper.Scales.FirstOrDefault(x => x.Name == gradeAttribute.InnerText);
+                    if (foundScale != null)
+                      scale = foundScale;
+                  }
                 }
 
-                // CGC is currently the only grading service supported 
-                // If we ever want to add something else, it must be added here
-                var grading = Grade.Grades.FirstOrDefault(x => x.Number == gradingNumber);
+                var grading = scale.Grades.FirstOrDefault(x => x.Number == gradingNumber);
 
                 if (grading != null)
                   comic.Condition = grading;
@@ -563,7 +569,7 @@ namespace ComicLibrary.Model
 
           var gradingNode = xml.CreateElement(ConditionKey);
           gradingNode.InnerText = comic.Condition.Number.ToString(CultureInfo.InvariantCulture);
-          gradingNode.AppendAttributes((GradingTypeKey, "CGC"), // CGC is currently the only grading supported
+          gradingNode.AppendAttributes((GradingTypeKey, comic.Condition.Scale),
                                        (CertifiedGradingKey, comic.GradingCertified.ToString()));
           comicNode.AppendChild(gradingNode);
 

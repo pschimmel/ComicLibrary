@@ -1,5 +1,5 @@
 #define ApplicationName 'Comic Library'
-#define ApplicationVersion '1.2.1'
+#define ApplicationVersion '1.3.0'
 #define ApplicationCompany 'Engineering Solutions'
 
 [Setup]
@@ -47,6 +47,7 @@ Source: "..\ComicLibrary\bin\Release\net8.0-windows\*.dll"; DestDir: "{app}"; Fl
 Source: "..\ComicLibrary\bin\Release\net8.0-windows\de\*.dll"; DestDir: "{app}\de"; Flags: IgnoreVersion sortfilesbyextension replacesameversion; 
 Source: "..\ComicLibrary\bin\Release\net8.0-windows\*.json"; DestDir: "{app}"; Flags: IgnoreVersion sortfilesbyextension replacesameversion; 
 Source: "..\ComicLibrary\bin\Release\net8.0-windows\*.config"; DestDir: "{app}"; Flags: IgnoreVersion sortfilesbyextension replacesameversion; 
+Source: "..\ComicLibrary\bin\Release\net8.0-windows\Grading Scales\*.*"; DestDir: "{app}\Grading Scales"; Flags: IgnoreVersion sortfilesbyextension replacesameversion; 
 Source: "..\License.txt"; DestDir: "{app}"; Flags: IgnoreVersion replacesameversion; 
 
 [Tasks]

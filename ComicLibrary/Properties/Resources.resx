@@ -225,41 +225,11 @@
   <data name="ExportImage" xml:space="preserve">
     <value>Export Image</value>
   </data>
-  <data name="FairDescription" xml:space="preserve">
-    <value>A very poorly handled collectible with a heavy accumulation of major defects.</value>
-  </data>
-  <data name="FairGoodDescription" xml:space="preserve">
-    <value>A collectible that shows extensive evidence of handling with a heavy accumulation of major defects.</value>
-  </data>
-  <data name="FineDescription" xml:space="preserve">
-    <value>A slightly above-average collectible with a major defect and some smaller defects, or a significant accumulation of small defects.</value>
-  </data>
-  <data name="FineMinusDescription" xml:space="preserve">
-    <value>A slightly above-average collectible with several moderate defects.</value>
-  </data>
-  <data name="FinePlusDescription" xml:space="preserve">
-    <value>An above-average collectible with a major defect and some smaller defects, or a significant accumulation of small defects.</value>
-  </data>
-  <data name="FineVeryFineDescription" xml:space="preserve">
-    <value>An above-average collectible with a major defect or an accumulation of small defects.</value>
-  </data>
-  <data name="GemMintDescription" xml:space="preserve">
-    <value>The highest grade assigned. The collectible must have no evidence of any manufacturing or handling defects.</value>
-  </data>
-  <data name="GoodDescription" xml:space="preserve">
-    <value>A collectible that shows extensive evidence of handling with numerous moderate-to-major defects.</value>
-  </data>
-  <data name="GoodMinusDescription" xml:space="preserve">
-    <value>A collectible that shows extensive evidence of handling with numerous major defects.</value>
-  </data>
-  <data name="GoodPlusDescription" xml:space="preserve">
-    <value>A collectible that shows extensive evidence of handling with multiple moderate-to-major defects.</value>
-  </data>
-  <data name="GoodVeryGoodDescription" xml:space="preserve">
-    <value>A collectible that shows significant evidence of handling with several moderate-to-major defects.</value>
-  </data>
   <data name="Grading" xml:space="preserve">
     <value>Grading</value>
+  </data>
+  <data name="GradingScale" xml:space="preserve">
+    <value>Grading scale</value>
   </data>
   <data name="Images" xml:space="preserve">
     <value>Images</value>
@@ -300,9 +270,6 @@
   <data name="ManageLibrariesTooltip" xml:space="preserve">
     <value>Shows the popup to manage the libraries.</value>
   </data>
-  <data name="MintDescription" xml:space="preserve">
-    <value>The collectible is nearly indistinguishable from a 10.0 but will have a very minor manufacturing defect. It will not have any evidence of handling defects.</value>
-  </data>
   <data name="MoveToLibrary" xml:space="preserve">
     <value>Move to Library</value>
   </data>
@@ -314,21 +281,6 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
-  </data>
-  <data name="NearMintDescription" xml:space="preserve">
-    <value>A very well-preserved collectible with minor wear and small manufacturing or handling defects.</value>
-  </data>
-  <data name="NearMintMintDescription" xml:space="preserve">
-    <value>A nearly perfect collectible with negligible handling or manufacturing defects.</value>
-  </data>
-  <data name="NearMintMinusDescription" xml:space="preserve">
-    <value>A very well-preserved collectible with some wear and small manufacturing or handling defects.</value>
-  </data>
-  <data name="NearMintPlusDescription" xml:space="preserve">
-    <value>A very well-preserved collectible with several minor manufacturing or handling defects.</value>
-  </data>
-  <data name="NoGradeDescription" xml:space="preserve">
-    <value>An incomplete comic with missing cover or more than half of the interior pages missing.</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
@@ -344,9 +296,6 @@
   </data>
   <data name="PngFiles" xml:space="preserve">
     <value>Portable Network Graphics Files (*.png)</value>
-  </data>
-  <data name="PoorDescription" xml:space="preserve">
-    <value>A heavily defaced collectible with a number major defects. Some pieces will also be missing.</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Print</value>
@@ -437,6 +386,8 @@
   </data>
   <data name="Series" xml:space="preserve">
     <value>Series</value>
+    <comment>Description
+</comment>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
@@ -461,33 +412,6 @@
   </data>
   <data name="TotalValue" xml:space="preserve">
     <value>Total Value</value>
-  </data>
-  <data name="UnratedDescription" xml:space="preserve">
-    <value>Not rated yet.</value>
-  </data>
-  <data name="VeryFineDescription" xml:space="preserve">
-    <value>An attractive collectible with a moderate defect or an accumulation of small defects.</value>
-  </data>
-  <data name="VeryFineMinusDescription" xml:space="preserve">
-    <value>An above-average collectible with a moderate defect or an accumulation of small defects.</value>
-  </data>
-  <data name="VeryFineNearMintDescription" xml:space="preserve">
-    <value>A very well-preserved collectible with good eye appeal. There will be a number of minor handling and/or manufacturing defects.</value>
-  </data>
-  <data name="VeryFinePlusDescription" xml:space="preserve">
-    <value>An attractive collectible with a moderate defect or a number of small defects.</value>
-  </data>
-  <data name="VeryGoodDescription" xml:space="preserve">
-    <value>A below-average collectible with multiple moderate defects.</value>
-  </data>
-  <data name="VeryGoodFineDescription" xml:space="preserve">
-    <value>An average collectible with several moderate defects.</value>
-  </data>
-  <data name="VeryGoodMinusDescription" xml:space="preserve">
-    <value>A below-average collectible with several major defects or an accumulation of multiple moderate defects.</value>
-  </data>
-  <data name="VeryGoodPlusDescription" xml:space="preserve">
-    <value>A slightly below-average collectible with multiple moderate defects.</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>

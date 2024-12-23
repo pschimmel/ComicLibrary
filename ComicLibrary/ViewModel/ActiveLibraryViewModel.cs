@@ -50,7 +50,6 @@ namespace ComicLibrary.ViewModel
     public ActiveLibraryViewModel(ActiveLibrary library, LibraryViewModel libraryTemplate)
     {
       _libraryTemplate = libraryTemplate;
-      Conditions = Grade.Grades;
 
       Publishers =
       [
@@ -95,8 +94,6 @@ namespace ComicLibrary.ViewModel
     public IEnumerable<IOptionItemViewModel<Country>> Countries { get; }
 
     public IEnumerable<IOptionItemViewModel<Language>> Languages { get; }
-
-    public IEnumerable<Grade> Conditions { get; }
 
     public ObservableCollection<ComicViewModel> Comics { get; }
 
@@ -416,9 +413,9 @@ namespace ComicLibrary.ViewModel
       }
     }
 
-    public IEnumerable<Grade> LowGrades { get; } = Grade.Grades.Where(x => x.Number <= 5);
+    public IEnumerable<Grade> LowGrades { get; } = ScaleHelper.DefaultScale.Grades.Where(x => x.Number <= 5);
 
-    public Grade ExcludedGradeThreshold { get; set; } = Grade.VeryGood;
+    public Grade ExcludedGradeThreshold { get; set; } = ScaleHelper.DefaultScale.Grades.FirstOrDefault(x => x.Number == 4.0);
 
     private void PrintList()
     {

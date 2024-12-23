@@ -128,6 +128,15 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Grading Scales\CBCS.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Grading Scales\CGC.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="if $(ConfigurationName) == Release (&#xD;&#xA;  if EXIST ..\postbuild.bat (&#xD;&#xA;    call ..\postbuild.bat $(OutDir)&#xD;&#xA;  )&#xD;&#xA;)" />
   </Target>

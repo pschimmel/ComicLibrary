@@ -225,41 +225,11 @@
   <data name="ExportImage" xml:space="preserve">
     <value>Bild exportieren</value>
   </data>
-  <data name="FairDescription" xml:space="preserve">
-    <value>Ein sehr schlecht behandeltes Exemplar mit einer großen Ansammlung großer Mängel.</value>
-  </data>
-  <data name="FairGoodDescription" xml:space="preserve">
-    <value>Ein Exemplar welches Anzeichen von intensiver Abnutzung zeigt und eine große Ansammlung großer Mängel hat.</value>
-  </data>
-  <data name="FineDescription" xml:space="preserve">
-    <value>Ein leicht überdurchschnittliches Exemplar mit einem großen Mangel und einigen kleinen Mängeln oder  einer erheblichen Zahl kleiner Mängel.</value>
-  </data>
-  <data name="FineMinusDescription" xml:space="preserve">
-    <value>Ein leicht überdurchschnittliches Exemplar mit mehreren mittleren Mängeln.</value>
-  </data>
-  <data name="FinePlusDescription" xml:space="preserve">
-    <value>Ein überdurchschnittliches Exemplar mit einem mittleren Mangel und mehreren kleinen Mängeln oder einer erheblichen Zahl kleiner Mängel.</value>
-  </data>
-  <data name="FineVeryFineDescription" xml:space="preserve">
-    <value>Ein überdurchschnittliches Exemplar mit einem größeren Mangel oder mehreren kleinen Mängeln.</value>
-  </data>
-  <data name="GemMintDescription" xml:space="preserve">
-    <value>Die höchstmögliche Bewertung. Das Exemplar darf keinerlei Anzeichen von Herstellungs- oder Handhabungsmängeln aufweisen.</value>
-  </data>
-  <data name="GoodDescription" xml:space="preserve">
-    <value>Ein Exemplar welches Anzeichen von intensiver Abnutzung zeigt und zahlreiche mittlere bis große Mängel hat.</value>
-  </data>
-  <data name="GoodMinusDescription" xml:space="preserve">
-    <value>Ein Exemplar welches Anzeichen von intensiver Abnutzung zeigt und zahlreiche große Mängel hat.</value>
-  </data>
-  <data name="GoodPlusDescription" xml:space="preserve">
-    <value>Ein Exemplar welches Anzeichen von intensiver Abnutzung zeigt und mehrere mittlere bis große Mängel hat.</value>
-  </data>
-  <data name="GoodVeryGoodDescription" xml:space="preserve">
-    <value>Ein Exemplar welches Anzeichen von Abnutzung zeigt und wenige mittlere bis große Mängeln hat.</value>
-  </data>
   <data name="Grading" xml:space="preserve">
     <value>Einstufung</value>
+  </data>
+  <data name="GradingScale" xml:space="preserve">
+    <value>Graduierungsskala</value>
   </data>
   <data name="Images" xml:space="preserve">
     <value>Bilder</value>
@@ -268,7 +238,7 @@
     <value>Heft Nummer</value>
   </data>
   <data name="JpegFiles" xml:space="preserve">
-    <value>Jpeg Bilddateien (*.jpg)</value>
+    <value>Jpeg-Bilddateien (*.jpg)</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Sprache</value>
@@ -300,9 +270,6 @@
   <data name="ManageLibrariesTooltip" xml:space="preserve">
     <value>Zeigt das Popup um die Bibliotheken zu bearbeiten.</value>
   </data>
-  <data name="MintDescription" xml:space="preserve">
-    <value>Das Exemplar ist fast nicht von einer 10.0 unterscheidbar, hat jedoch sehr geringe Herstellungsmängeln. Es gibt keinerlei Anzeichen von Handhabungsmängeln.</value>
-  </data>
   <data name="MoveToLibrary" xml:space="preserve">
     <value>In Bibliothek verschieben</value>
   </data>
@@ -314,21 +281,6 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
-  </data>
-  <data name="NearMintDescription" xml:space="preserve">
-    <value>Ein sehr gut erhaltenes Exemplar mit geringen Abnutzungs- und kleinen Herstellungs- oder handhabungsmängeln.</value>
-  </data>
-  <data name="NearMintMintDescription" xml:space="preserve">
-    <value>Ein fast perfektes Exemplar mit vernachlässigbaren Handhabungs- oder Herstellungsmängeln.</value>
-  </data>
-  <data name="NearMintMinusDescription" xml:space="preserve">
-    <value>Ein sehr gut erhaltenes Exemplar mit einigen Abnutzungs- und kleinen Herstellungs- oder handhabungsmängeln.</value>
-  </data>
-  <data name="NearMintPlusDescription" xml:space="preserve">
-    <value>Ein sehr gut erhaltenes Exemplar mit mehreren minimalen Herstellungs- oder handhabungsmängeln.</value>
-  </data>
-  <data name="NoGradeDescription" xml:space="preserve">
-    <value>Ein unvollständiger Comic ohne Cover oder mit mehr als die Hälfte der Innenseiten fehlend.</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
@@ -344,9 +296,6 @@
   </data>
   <data name="PngFiles" xml:space="preserve">
     <value>Portable Network Graphics-Dateien (*.png)</value>
-  </data>
-  <data name="PoorDescription" xml:space="preserve">
-    <value>Ein hochgradig mangelhaftes Exemplar mit einer großen Zahl großer Mängel. Einige Teile können fehlen.</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Drucken</value>
@@ -461,33 +410,6 @@
   </data>
   <data name="TotalValue" xml:space="preserve">
     <value>Gesamtwert</value>
-  </data>
-  <data name="UnratedDescription" xml:space="preserve">
-    <value>Noch nicht bewerted.</value>
-  </data>
-  <data name="VeryFineDescription" xml:space="preserve">
-    <value>Ein attraktives Exemplar mit einem mittleren Mangel oder einer Annsammlung kleinen Mängeln.</value>
-  </data>
-  <data name="VeryFineMinusDescription" xml:space="preserve">
-    <value>Ein überdurchschnittliches Exemplar mit einem mittleren Mangel oder mehreren kleinen Mängeln.</value>
-  </data>
-  <data name="VeryFineNearMintDescription" xml:space="preserve">
-    <value>Ein sehr gut erhaltenes Exemplar guter optischer Wirkung. Es gibt eine Zahl geringer, kleiner Herstellungs- oder handhabungsmängeln.</value>
-  </data>
-  <data name="VeryFinePlusDescription" xml:space="preserve">
-    <value>Ein attraktives Exemplar mit einem mittleren Mangel oder mehreren kleinen Mängeln.</value>
-  </data>
-  <data name="VeryGoodDescription" xml:space="preserve">
-    <value>Ein unterdurchschnittliches Exemplar mit mehreren mittleren Mängeln.</value>
-  </data>
-  <data name="VeryGoodFineDescription" xml:space="preserve">
-    <value>Ein durchschnittliches Exemplar mit mehreren mittleren Mängeln.</value>
-  </data>
-  <data name="VeryGoodMinusDescription" xml:space="preserve">
-    <value>Ein unterdurchschnittliches Exemplar mit mehreren größeren Mängeln oder einer Anzahl mittleren Mängeln.</value>
-  </data>
-  <data name="VeryGoodPlusDescription" xml:space="preserve">
-    <value>Ein leicht unterdurchschnittliches Exemplar mit mehreren mittleren Mängeln.</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warnung</value>

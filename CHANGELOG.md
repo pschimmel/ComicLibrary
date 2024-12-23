@@ -76,7 +76,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Moved reports to separate ribbon tab.
 - Breaking change: The issue number is now a text field. This is to allow entering issue numbers like 23.3 or 1A.
 
-## [1.2.1] - 
+## [1.3.0] - 2024-12-23
 
 ### Added
 - Added NG as CGC grade.
+- Allow different grading scales.

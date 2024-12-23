@@ -151,7 +151,7 @@
                 localBehaviors:ScrollIntoViewBehavior.SelectingItem="{Binding SelectedComic}"
                 AutoGenerateColumns="False"
                 CanUserAddRows="False"
-                CanUserDeleteRows="False" 
+                CanUserDeleteRows="False"
                 ItemsSource="{Binding Comics}"
                 SelectedItem="{Binding SelectedComic}">
         <behaviors:Interaction.Behaviors>
@@ -230,7 +230,7 @@
               <DataTemplate>
                 <ComboBox Grid.IsSharedSizeScope="True"
                           ItemTemplate="{StaticResource ConditionTemplate}"
-                          ItemsSource="{Binding Data.Conditions, Source={StaticResource Proxy}}"
+                          ItemsSource="{Binding Conditions}"
                           SelectedItem="{Binding Condition, UpdateSourceTrigger=PropertyChanged}" />
               </DataTemplate>
             </DataGridTemplateColumn.CellEditingTemplate>

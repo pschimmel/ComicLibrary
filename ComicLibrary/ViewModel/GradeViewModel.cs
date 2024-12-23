@@ -11,14 +11,14 @@ namespace ComicLibrary.ViewModel
     {
       _grade = grade;
       Name = grade.Name;
-      Description = grade.Description;
+      ShortName = grade.ShortName;
       Number = grade.Number > 0 ? grade.Number : null;
       IsSelected = selected;
     }
 
     public string Name { get; }
 
-    public string Description { get; }
+    public string ShortName { get; }
 
     public double? Number { get; }
 

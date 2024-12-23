@@ -1,0 +1,30 @@
+﻿<GradingScale Name="CGC">
+  <Grades>
+    <Grade Name="No Grade" Number="0.0" ShortName="NG" />
+    <Grade Name="Poor" Number="0.5" ShortName="PR" />
+    <Grade Name="Fair" Number="1.0" ShortName="FR" />
+    <Grade Name="Fair/Good" Number="1.5" ShortName="FR/GD" />
+    <Grade Name="Good-" Number="1.8" ShortName="GD-" />
+    <Grade Name="Good" Number="2.0" ShortName="GD" />
+    <Grade Name="Good+" Number="2.5" ShortName="GD+" />
+    <Grade Name="Good/Very Good" Number="3.0" ShortName="GD/VG" />
+    <Grade Name="Very Good-" Number="3.5" ShortName="VG-" />
+    <Grade Name="Very Good" Number="4.0" ShortName="VG" />
+    <Grade Name="Very Good+" Number="4.5" ShortName="VG+" />
+    <Grade Name="Very Good/Fine" Number="5.0" ShortName="VG/FN" />
+    <Grade Name="Fine-" Number="5.5" ShortName="FN-" />
+    <Grade Name="Fine" Number="6.0" ShortName="FN" />
+    <Grade Name="Fine+" Number="6.5" ShortName="FN+" />
+    <Grade Name="Fine/Very Fine" Number="7.0" ShortName="FN/VF" />
+    <Grade Name="Very Fine-" Number="7.5" ShortName="VF-" />
+    <Grade Name="Very Fine" Number="8.0" ShortName="VF" />
+    <Grade Name="Very Fine+" Number="8.5" ShortName="VF+" />
+    <Grade Name="Very Fine/Near Mint" Number="9.0" ShortName="VF/NM" />
+    <Grade Name="Near Mint-" Number="9.2" ShortName="NM-" />
+    <Grade Name="Near Mint" Number="9.4" ShortName="NM" />
+    <Grade Name="Near Mint+" Number="9.6" ShortName="NM+" />
+    <Grade Name="Near Mint/Mint" Number="9.8" ShortName="NM/MT" />
+    <Grade Name="Mint" Number="9.9" ShortName="MT" />
+    <Grade Name="Gem Mint" Number="10.0" ShortName="GMT" />
+  </Grades>
+</GradingScale>

@@ -122,7 +122,7 @@ namespace ComicLibrary.ViewModel
 
     private void SelectGrade()
     {
-      var vm = new GradePickerViewModel(Condition);
+      var vm = new GradePickerViewModel(Condition, ScaleHelper.DefaultScale);
       var view = ViewFactory.Instance.CreateView(vm);
       if (view.ShowDialog() == true)
       {

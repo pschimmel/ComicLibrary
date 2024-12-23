@@ -385,110 +385,20 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A very poorly handled collectible with a heavy accumulation of major defects..
-        /// </summary>
-        public static string FairDescription {
-            get {
-                return ResourceManager.GetString("FairDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A collectible that shows extensive evidence of handling with a heavy accumulation of major defects..
-        /// </summary>
-        public static string FairGoodDescription {
-            get {
-                return ResourceManager.GetString("FairGoodDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A slightly above-average collectible with a major defect and some smaller defects, or a significant accumulation of small defects..
-        /// </summary>
-        public static string FineDescription {
-            get {
-                return ResourceManager.GetString("FineDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A slightly above-average collectible with several moderate defects..
-        /// </summary>
-        public static string FineMinusDescription {
-            get {
-                return ResourceManager.GetString("FineMinusDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An above-average collectible with a major defect and some smaller defects, or a significant accumulation of small defects..
-        /// </summary>
-        public static string FinePlusDescription {
-            get {
-                return ResourceManager.GetString("FinePlusDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An above-average collectible with a major defect or an accumulation of small defects..
-        /// </summary>
-        public static string FineVeryFineDescription {
-            get {
-                return ResourceManager.GetString("FineVeryFineDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The highest grade assigned. The collectible must have no evidence of any manufacturing or handling defects..
-        /// </summary>
-        public static string GemMintDescription {
-            get {
-                return ResourceManager.GetString("GemMintDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A collectible that shows extensive evidence of handling with numerous moderate-to-major defects..
-        /// </summary>
-        public static string GoodDescription {
-            get {
-                return ResourceManager.GetString("GoodDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A collectible that shows extensive evidence of handling with numerous major defects..
-        /// </summary>
-        public static string GoodMinusDescription {
-            get {
-                return ResourceManager.GetString("GoodMinusDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A collectible that shows extensive evidence of handling with multiple moderate-to-major defects..
-        /// </summary>
-        public static string GoodPlusDescription {
-            get {
-                return ResourceManager.GetString("GoodPlusDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A collectible that shows significant evidence of handling with several moderate-to-major defects..
-        /// </summary>
-        public static string GoodVeryGoodDescription {
-            get {
-                return ResourceManager.GetString("GoodVeryGoodDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Grading.
         /// </summary>
         public static string Grading {
             get {
                 return ResourceManager.GetString("Grading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grading scale.
+        /// </summary>
+        public static string GradingScale {
+            get {
+                return ResourceManager.GetString("GradingScale", resourceCulture);
             }
         }
         
@@ -610,15 +520,6 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The collectible is nearly indistinguishable from a 10.0 but will have a very minor manufacturing defect. It will not have any evidence of handling defects..
-        /// </summary>
-        public static string MintDescription {
-            get {
-                return ResourceManager.GetString("MintDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Move to Library.
         /// </summary>
         public static string MoveToLibrary {
@@ -651,51 +552,6 @@ namespace ComicLibrary.Properties {
         public static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A very well-preserved collectible with minor wear and small manufacturing or handling defects..
-        /// </summary>
-        public static string NearMintDescription {
-            get {
-                return ResourceManager.GetString("NearMintDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A nearly perfect collectible with negligible handling or manufacturing defects..
-        /// </summary>
-        public static string NearMintMintDescription {
-            get {
-                return ResourceManager.GetString("NearMintMintDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A very well-preserved collectible with some wear and small manufacturing or handling defects..
-        /// </summary>
-        public static string NearMintMinusDescription {
-            get {
-                return ResourceManager.GetString("NearMintMinusDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A very well-preserved collectible with several minor manufacturing or handling defects..
-        /// </summary>
-        public static string NearMintPlusDescription {
-            get {
-                return ResourceManager.GetString("NearMintPlusDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An incomplete comic with missing cover or more than half of the interior pages missing..
-        /// </summary>
-        public static string NoGradeDescription {
-            get {
-                return ResourceManager.GetString("NoGradeDescription", resourceCulture);
             }
         }
         
@@ -741,15 +597,6 @@ namespace ComicLibrary.Properties {
         public static string PngFiles {
             get {
                 return ResourceManager.GetString("PngFiles", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A heavily defaced collectible with a number major defects. Some pieces will also be missing..
-        /// </summary>
-        public static string PoorDescription {
-            get {
-                return ResourceManager.GetString("PoorDescription", resourceCulture);
             }
         }
         
@@ -1092,87 +939,6 @@ namespace ComicLibrary.Properties {
         public static string TotalValue {
             get {
                 return ResourceManager.GetString("TotalValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Not rated yet..
-        /// </summary>
-        public static string UnratedDescription {
-            get {
-                return ResourceManager.GetString("UnratedDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An attractive collectible with a moderate defect or an accumulation of small defects..
-        /// </summary>
-        public static string VeryFineDescription {
-            get {
-                return ResourceManager.GetString("VeryFineDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An above-average collectible with a moderate defect or an accumulation of small defects..
-        /// </summary>
-        public static string VeryFineMinusDescription {
-            get {
-                return ResourceManager.GetString("VeryFineMinusDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A very well-preserved collectible with good eye appeal. There will be a number of minor handling and/or manufacturing defects..
-        /// </summary>
-        public static string VeryFineNearMintDescription {
-            get {
-                return ResourceManager.GetString("VeryFineNearMintDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An attractive collectible with a moderate defect or a number of small defects..
-        /// </summary>
-        public static string VeryFinePlusDescription {
-            get {
-                return ResourceManager.GetString("VeryFinePlusDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A below-average collectible with multiple moderate defects..
-        /// </summary>
-        public static string VeryGoodDescription {
-            get {
-                return ResourceManager.GetString("VeryGoodDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An average collectible with several moderate defects..
-        /// </summary>
-        public static string VeryGoodFineDescription {
-            get {
-                return ResourceManager.GetString("VeryGoodFineDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A below-average collectible with several major defects or an accumulation of multiple moderate defects..
-        /// </summary>
-        public static string VeryGoodMinusDescription {
-            get {
-                return ResourceManager.GetString("VeryGoodMinusDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A slightly below-average collectible with multiple moderate defects..
-        /// </summary>
-        public static string VeryGoodPlusDescription {
-            get {
-                return ResourceManager.GetString("VeryGoodPlusDescription", resourceCulture);
             }
         }
         

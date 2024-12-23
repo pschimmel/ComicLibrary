@@ -14,6 +14,8 @@ namespace ComicLibrary.Model.Entities
 
     public HashSet<Language> Languages { get; set; } = [];
 
+    public string DefaultGradingScale = "CGC";
+
     public static Globals Load()
     {
       return FileHelper.LoadGlobals();
