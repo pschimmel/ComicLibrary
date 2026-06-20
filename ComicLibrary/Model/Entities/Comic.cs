@@ -35,6 +35,7 @@ namespace ComicLibrary.Model.Entities
         CollectorsEdition = selectedComic.CollectorsEdition;
         LimitedEdition = selectedComic.LimitedEdition;
         ImagesAsString = new List<string>(selectedComic.ImagesAsString);
+        StorageLocation = selectedComic.StorageLocation;
         CreatedDate = DateTime.Now;
         ModifiedDate = DateTime.Now;
       }
@@ -43,6 +44,8 @@ namespace ComicLibrary.Model.Entities
     public Publisher Publisher { get; set; }
 
     public string Series { get; set; }
+
+    public string StorageLocation { get; set; }
 
     public string IssueNumber { get; set; }
 

@@ -1,15 +1,15 @@
 ﻿<fluent:RibbonWindow x:Class="ComicLibrary.MainWindow"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:avalonDock="https://github.com/Dirkster99/AvalonDock"
                      xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:esConverters="clr-namespace:ES.Tools.Converters;assembly=ES.Tools"
+                     xmlns:fluent="urn:fluent-ribbon"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:properties="clr-namespace:ComicLibrary.Properties"
-                     xmlns:vm="clr-namespace:ComicLibrary.ViewModel"
-                     xmlns:esConverters="clr-namespace:ES.Tools.Converters;assembly=ES.Tools"
                      xmlns:toolsUI="clr-namespace:ES.Tools.UI;assembly=ES.Tools"
-                     xmlns:avalonDock="https://github.com/Dirkster99/AvalonDock"
-                     xmlns:fluent="urn:fluent-ribbon"
+                     xmlns:vm="clr-namespace:ComicLibrary.ViewModel"
                      Title="Comic Library"
                      d:DesignHeight="450"
                      d:DesignWidth="800"
@@ -26,7 +26,7 @@
 
       <esConverters:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
       <esConverters:NegationConverter x:Key="NegationConverter" />
-     </ResourceDictionary>
+    </ResourceDictionary>
   </Window.Resources>
   <Window.DataContext>
     <vm:MainViewModel />
@@ -44,9 +44,7 @@
             <fluent:BackstageTabControl>
               <fluent:BackstageTabItem Header="{x:Static properties:Resources.Options}" Icon="pack://application:,,,/ComicLibrary;component/Images/Options.png">
                 <StackPanel Margin="10,15,10,10" VerticalAlignment="Top">
-                  <TextBlock Margin="0,0,0,10"
-                             FontSize="20"
-                             Text="{x:Static properties:Resources.Options}" />
+                  <TextBlock Margin="0,0,0,10" FontSize="20" Text="{x:Static properties:Resources.Options}" />
                   <Grid Margin="0,10,0,0" HorizontalAlignment="Left">
                     <Grid.ColumnDefinitions>
                       <ColumnDefinition Width="Auto" />
@@ -58,9 +56,7 @@
                       <RowDefinition Height="Auto" />
                       <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBlock Margin="5"
-                               VerticalAlignment="Center"
-                               Text="{x:Static properties:Resources.Countries}" />
+                    <TextBlock Margin="5" VerticalAlignment="Center" Text="{x:Static properties:Resources.Countries}" />
                     <Button Grid.Column="1"
                             Margin="5"
                             Padding="5,2"
@@ -100,9 +96,7 @@
               </fluent:BackstageTabItem>
               <fluent:BackstageTabItem Header="{x:Static properties:Resources.Settings}" Icon="pack://application:,,,/ComicLibrary;component/Images/Settings.png">
                 <StackPanel Margin="10,15,10,10" VerticalAlignment="Top">
-                  <TextBlock Margin="0,0,0,10"
-                             FontSize="20"
-                             Text="{x:Static properties:Resources.Settings}" />
+                  <TextBlock Margin="0,0,0,10" FontSize="20" Text="{x:Static properties:Resources.Settings}" />
                   <Grid Margin="0,10,0,0">
                     <Grid.ColumnDefinitions>
                       <ColumnDefinition Width="Auto" />
@@ -120,24 +114,16 @@
                             Command="{Binding ChangeLibraryPathCommand}"
                             Content="..." />
                   </Grid>
-                  <CheckBox Margin="0,10,0,0"
-                            Content="{x:Static properties:Resources.CopyDataFromSelectedComic}"
-                            IsChecked="{Binding CopyDataFromSelectedComic, UpdateSourceTrigger=PropertyChanged}" />
-                  <CheckBox Margin="0,10,0,0"
-                            Content="{x:Static properties:Resources.CreateBackupWhenSaving}"
-                            IsChecked="{Binding CreateBackupWhenSaving, UpdateSourceTrigger=PropertyChanged}" />
+                  <CheckBox Margin="0,10,0,0" Content="{x:Static properties:Resources.CopyDataFromSelectedComic}" IsChecked="{Binding CopyDataFromSelectedComic, UpdateSourceTrigger=PropertyChanged}" />
+                  <CheckBox Margin="0,10,0,0" Content="{x:Static properties:Resources.CreateBackupWhenSaving}" IsChecked="{Binding CreateBackupWhenSaving, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
               </fluent:BackstageTabItem>
-              <fluent:Button Command="{Binding CloseCommand}"
-                             Header="{x:Static properties:Resources.Close}"
-                             Icon="pack://application:,,,/ComicLibrary;component/Images/Close.png" />
+              <fluent:Button Command="{Binding CloseCommand}" Header="{x:Static properties:Resources.Close}" Icon="pack://application:,,,/ComicLibrary;component/Images/Close.png" />
             </fluent:BackstageTabControl>
           </fluent:Backstage>
         </fluent:Ribbon.Menu>
-        <fluent:RibbonTabItem Header="{x:Static properties:Resources.Start}" ReduceOrder="Manage, Manage, Manage, Library, Library, Library, Comic, Comic, Comic, Manage, Library, Comic">
-          <fluent:RibbonGroupBox Name="Manage"
-                                 Header="{x:Static properties:Resources.Manage}"
-                                 Icon="pack://application:,,,/ComicLibrary;component/Images/ManageLibraries.png">
+        <fluent:RibbonTabItem Header="{x:Static properties:Resources.Start}" ReduceOrder="Manage, Manage, Manage, Comic, Comic, Comic, Library, Library, Library, Manage, Comic, Library">
+          <fluent:RibbonGroupBox Name="Manage" Header="{x:Static properties:Resources.Manage}" Icon="pack://application:,,,/ComicLibrary;component/Images/ManageLibraries.png">
             <fluent:ToggleButton Header="{x:Static properties:Resources.Manage}"
                                  IsChecked="{Binding ShowLibrariesOverlay}"
                                  LargeIcon="pack://application:,,,/ComicLibrary;component/Images/ManageLibraries.png"
@@ -147,53 +133,16 @@
               </fluent:ToggleButton.ToolTip>
             </fluent:ToggleButton>
           </fluent:RibbonGroupBox>
-          <fluent:RibbonGroupBox Name="Library"
-                                 Header="{x:Static properties:Resources.Library}"
-                                 Icon="pack://application:,,,/ComicLibrary;component/Images/Library.png"
-                                 IsEnabled="{Binding HasActiveLibrary}">
-            <fluent:Button Command="{Binding SelectedLibrary.SaveLibraryCommand}"
-                           Header="{x:Static properties:Resources.Save}"
-                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Save.png">
-              <fluent:Button.ToolTip>
-                <fluent:ScreenTip Title="{x:Static properties:Resources.SaveLibrary}" Text="{x:Static properties:Resources.SaveLibraryTooltip}" />
-              </fluent:Button.ToolTip>
-            </fluent:Button>
-            <fluent:Button Command="{Binding SelectedLibrary.RenameSeriesCommand}"
-                           Header="{x:Static properties:Resources.RenameSeries}"
-                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Rename.png">
-              <fluent:Button.ToolTip>
-                <fluent:ScreenTip Title="{x:Static properties:Resources.RenameSeries}" Text="{x:Static properties:Resources.RenameSeriesTooltip}" />
-              </fluent:Button.ToolTip>
-            </fluent:Button>
-            <fluent:Button Command="{Binding SelectedLibrary.CloseCommand}"
-                           Header="{x:Static properties:Resources.Close}"
-                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Close.png">
-              <fluent:Button.ToolTip>
-                <fluent:ScreenTip Title="{x:Static properties:Resources.CloseLibrary}" Text="{x:Static properties:Resources.CloseLibraryTooltip}" />
-              </fluent:Button.ToolTip>
-            </fluent:Button>
-            <fluent:Button Command="{Binding SelectedLibrary.ShowChartCommand}"
-                           Header="{x:Static properties:Resources.ShowChart}"
-                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Chart.png">
-              <fluent:Button.ToolTip>
-                <fluent:ScreenTip Title="{x:Static properties:Resources.ShowChart}" Text="{x:Static properties:Resources.ShowChartTooltip}" />
-              </fluent:Button.ToolTip>
-            </fluent:Button>
-          </fluent:RibbonGroupBox>
           <fluent:RibbonGroupBox Name="Comic"
                                  Header="{x:Static properties:Resources.Comic}"
                                  Icon="pack://application:,,,/ComicLibrary;component/Images/Comic.png"
                                  IsEnabled="{Binding HasActiveLibrary}">
-            <fluent:Button Command="{Binding SelectedLibrary.AddComicCommand}"
-                           Header="{x:Static properties:Resources.Add}"
-                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Add.png">
+            <fluent:Button Command="{Binding SelectedLibrary.AddComicCommand}" Header="{x:Static properties:Resources.Add}" LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Add.png">
               <fluent:Button.ToolTip>
                 <fluent:ScreenTip Title="{x:Static properties:Resources.AddComic}" Text="{x:Static properties:Resources.AddComicTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
-            <fluent:Button Command="{Binding SelectedLibrary.RemoveComicCommand}"
-                           Header="{x:Static properties:Resources.Remove}"
-                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Remove.png">
+            <fluent:Button Command="{Binding SelectedLibrary.RemoveComicCommand}" Header="{x:Static properties:Resources.Remove}" LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Remove.png">
               <fluent:Button.ToolTip>
                 <fluent:ScreenTip Title="{x:Static properties:Resources.RemoveComic}" Text="{x:Static properties:Resources.RemoveComicTooltip}" />
               </fluent:Button.ToolTip>
@@ -222,17 +171,51 @@
                 <fluent:ScreenTip Title="{x:Static properties:Resources.Paste}" Text="{x:Static properties:Resources.PasteTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
-            <fluent:DropDownButton Header="{x:Static properties:Resources.MoveToLibrary}" LargeIcon="pack://application:,,,/ComicLibrary;component/Images/MoveToLibrary.png">
-              <fluent:DropDownButton.ToolTip>
+            <fluent:Button Command="{Binding SelectedLibrary.MoveComicToLibraryCommand}" Header="{x:Static properties:Resources.MoveToLibrary}" LargeIcon="pack://application:,,,/ComicLibrary;component/Images/MoveToLibrary.png">
+              <fluent:Button.ToolTip>
                 <fluent:ScreenTip Title="{x:Static properties:Resources.MoveToLibrary}" Text="{x:Static properties:Resources.MoveToLibraryTooltip}" />
-              </fluent:DropDownButton.ToolTip>
-              <fluent:MenuItem Command="{Binding SelectedLibrary.MoveComicToLibraryCommand}"
-                               Header="{x:Static properties:Resources.Comic}"
-                               Icon="pack://application:,,,/ComicLibrary;component/Images/Comic.png" />
-              <fluent:MenuItem Command="{Binding SelectedLibrary.MoveSeriesToLibraryCommand}"
-                               Header="{x:Static properties:Resources.Series}"
-                               Icon="pack://application:,,,/ComicLibrary;component/Images/Series.png" />
-            </fluent:DropDownButton>
+              </fluent:Button.ToolTip>
+            </fluent:Button>
+          </fluent:RibbonGroupBox>
+          <fluent:RibbonGroupBox Name="Series"
+                                 Header="{x:Static properties:Resources.Series}"
+                                 Icon="pack://application:,,,/ComicLibrary;component/Images/Series.png"
+                                 IsEnabled="{Binding HasActiveLibrary}">
+            <fluent:Button Command="{Binding SelectedLibrary.ChangeStorageLocationCommand}" Header="{x:Static properties:Resources.ChangeStorageLoccation}" LargeIcon="pack://application:,,,/ComicLibrary;component/Images/StorageContainer.png">
+              <fluent:Button.ToolTip>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.ChangeStorageLoccation}" Text="{x:Static properties:Resources.ChangeStorageLoccationTooltip}" />
+              </fluent:Button.ToolTip>
+            </fluent:Button>
+            <fluent:Button Command="{Binding SelectedLibrary.RenameSeriesCommand}" Header="{x:Static properties:Resources.RenameSeries}" LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Rename.png">
+              <fluent:Button.ToolTip>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.RenameSeries}" Text="{x:Static properties:Resources.RenameSeriesTooltip}" />
+              </fluent:Button.ToolTip>
+            </fluent:Button>
+            <fluent:Button Command="{Binding SelectedLibrary.MoveSeriesToLibraryCommand}" Header="{x:Static properties:Resources.MoveToLibrary}" LargeIcon="pack://application:,,,/ComicLibrary;component/Images/MoveToLibrary.png">
+              <fluent:Button.ToolTip>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.MoveToLibrary}" Text="{x:Static properties:Resources.MoveToLibraryTooltip}" />
+              </fluent:Button.ToolTip>
+            </fluent:Button>
+          </fluent:RibbonGroupBox>
+          <fluent:RibbonGroupBox Name="Library"
+                                 Header="{x:Static properties:Resources.Library}"
+                                 Icon="pack://application:,,,/ComicLibrary;component/Images/Library.png"
+                                 IsEnabled="{Binding HasActiveLibrary}">
+            <fluent:Button Command="{Binding SelectedLibrary.SaveLibraryCommand}" Header="{x:Static properties:Resources.Save}" LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Save.png">
+              <fluent:Button.ToolTip>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.SaveLibrary}" Text="{x:Static properties:Resources.SaveLibraryTooltip}" />
+              </fluent:Button.ToolTip>
+            </fluent:Button>
+            <fluent:Button Command="{Binding SelectedLibrary.CloseCommand}" Header="{x:Static properties:Resources.Close}" LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Close.png">
+              <fluent:Button.ToolTip>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.CloseLibrary}" Text="{x:Static properties:Resources.CloseLibraryTooltip}" />
+              </fluent:Button.ToolTip>
+            </fluent:Button>
+            <fluent:Button Command="{Binding SelectedLibrary.ShowChartCommand}" Header="{x:Static properties:Resources.ShowChart}" LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Chart.png">
+              <fluent:Button.ToolTip>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.ShowChart}" Text="{x:Static properties:Resources.ShowChartTooltip}" />
+              </fluent:Button.ToolTip>
+            </fluent:Button>
           </fluent:RibbonGroupBox>
         </fluent:RibbonTabItem>
         <fluent:RibbonTabItem Header="{x:Static properties:Resources.Reports}" ReduceOrder="Report, Report, Report, List, List, List, Report, List">
@@ -240,27 +223,23 @@
                                  Header="{x:Static properties:Resources.PrintReport}"
                                  Icon="pack://application:,,,/ComicLibrary;component/Images/Print.png"
                                  IsEnabled="{Binding HasActiveLibrary}">
-            <fluent:Button Command="{Binding SelectedLibrary.PrintReportCommand}"
-                           Header="{x:Static properties:Resources.Print}"
-                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Report.png">
+            <fluent:Button Command="{Binding SelectedLibrary.PrintReportCommand}" Header="{x:Static properties:Resources.Print}" LargeIcon="pack://application:,,,/ComicLibrary;component/Images/Report.png">
               <fluent:Button.ToolTip>
                 <fluent:ScreenTip Title="{x:Static properties:Resources.PrintReport}" Text="{x:Static properties:Resources.PrintReportTooltip}" />
               </fluent:Button.ToolTip>
             </fluent:Button>
-            <fluent:CheckBox Header="{x:Static properties:Resources.Series}" IsChecked="{Binding SelectedLibrary.PrintSeries}"/>
-            <fluent:CheckBox Header="{x:Static properties:Resources.Year}" IsChecked="{Binding SelectedLibrary.PrintYear}"/>
-            <fluent:CheckBox Header="{x:Static properties:Resources.IssueNumber}" IsChecked="{Binding SelectedLibrary.PrintIssueNumber}"/>
-            <fluent:CheckBox Header="{x:Static properties:Resources.Title}" IsChecked="{Binding SelectedLibrary.PrintTitle}"/>
-            <fluent:CheckBox Header="{x:Static properties:Resources.Condition}" IsChecked="{Binding SelectedLibrary.PrintCondition}"/>
-            <fluent:CheckBox Header="{x:Static properties:Resources.PurchasePrice}" IsChecked="{Binding SelectedLibrary.PrintPurchasePrice}"/>
+            <fluent:CheckBox Header="{x:Static properties:Resources.Series}" IsChecked="{Binding SelectedLibrary.PrintSeries}" />
+            <fluent:CheckBox Header="{x:Static properties:Resources.Year}" IsChecked="{Binding SelectedLibrary.PrintYear}" />
+            <fluent:CheckBox Header="{x:Static properties:Resources.IssueNumber}" IsChecked="{Binding SelectedLibrary.PrintIssueNumber}" />
+            <fluent:CheckBox Header="{x:Static properties:Resources.Title}" IsChecked="{Binding SelectedLibrary.PrintTitle}" />
+            <fluent:CheckBox Header="{x:Static properties:Resources.Condition}" IsChecked="{Binding SelectedLibrary.PrintCondition}" />
+            <fluent:CheckBox Header="{x:Static properties:Resources.PurchasePrice}" IsChecked="{Binding SelectedLibrary.PrintPurchasePrice}" />
           </fluent:RibbonGroupBox>
           <fluent:RibbonGroupBox Name="List"
                                  Header="{x:Static properties:Resources.PrintList}"
                                  Icon="pack://application:,,,/ComicLibrary;component/Images/Print.png"
                                  IsEnabled="{Binding HasActiveLibrary}">
-            <fluent:Button Command="{Binding SelectedLibrary.PrintListCommand}"
-                           Header="{x:Static properties:Resources.Print}"
-                           LargeIcon="pack://application:,,,/ComicLibrary;component/Images/List.png">
+            <fluent:Button Command="{Binding SelectedLibrary.PrintListCommand}" Header="{x:Static properties:Resources.Print}" LargeIcon="pack://application:,,,/ComicLibrary;component/Images/List.png">
               <fluent:Button.ToolTip>
                 <fluent:ScreenTip Title="{x:Static properties:Resources.PrintList}" Text="{x:Static properties:Resources.PrintListTooltip}" />
               </fluent:Button.ToolTip>
@@ -270,8 +249,7 @@
             <fluent:ComboBox Header="{x:Static properties:Resources.LowerThan}"
                              IsEnabled="{Binding SelectedLibrary.ExcludeLowGrades}"
                              ItemsSource="{Binding SelectedLibrary.LowGrades}"
-                             SelectedItem="{Binding SelectedLibrary.ExcludedGradeThreshold}">
-            </fluent:ComboBox>
+                             SelectedItem="{Binding SelectedLibrary.ExcludedGradeThreshold}" />
           </fluent:RibbonGroupBox>
         </fluent:RibbonTabItem>
       </fluent:Ribbon>
@@ -318,9 +296,7 @@
 
         <Separator HorizontalAlignment="Right" />
 
-        <fluent:StatusBarItem Title="{x:Static properties:Resources.Comics}"
-                              Margin="0,0,10,0"
-                              HorizontalAlignment="Right">
+        <fluent:StatusBarItem Title="{x:Static properties:Resources.Comics}" Margin="0,0,10,0" HorizontalAlignment="Right">
           <StackPanel Orientation="Horizontal">
             <TextBlock FontWeight="Bold" Text="{Binding SelectedLibrary.Comics.Count, FallbackValue=0}" />
             <TextBlock Text=" " />
@@ -328,9 +304,7 @@
           </StackPanel>
         </fluent:StatusBarItem>
 
-        <fluent:StatusBarItem Title="{x:Static properties:Resources.PurchasePrice}"
-                              Margin="10,0,0,0"
-                              HorizontalAlignment="Left">
+        <fluent:StatusBarItem Title="{x:Static properties:Resources.PurchasePrice}" Margin="10,0,0,0" HorizontalAlignment="Left">
           <StackPanel Orientation="Horizontal">
             <TextBlock FontWeight="Bold" Text="{Binding SelectedLibrary.SelectedComic.PurchasePrice, TargetNullValue=0, StringFormat=F2, FallbackValue=0}" />
             <TextBlock Text=" " />
@@ -384,14 +358,10 @@
                   </behaviors:EventTrigger>
                 </behaviors:Interaction.Triggers>
               </Image>
-              <TextBlock Margin="1"
-                         VerticalAlignment="Center"
-                         Text="{x:Static properties:Resources.Libraries}" />
+              <TextBlock Margin="1" VerticalAlignment="Center" Text="{x:Static properties:Resources.Libraries}" />
             </DockPanel>
           </Border>
-          <ScrollViewer Grid.Row="1"
-                        HorizontalScrollBarVisibility="Disabled"
-                        VerticalScrollBarVisibility="Auto">
+          <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding Libraries}">
               <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

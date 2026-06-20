@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.IO;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -50,6 +52,7 @@ namespace ComicLibrary.ViewModel
       Year = comic.Year;
       IssueNumber = comic.IssueNumber;
       Title = comic.Title;
+      StorageLocation = comic.StorageLocation;
       CoverVariant = comic.CoverVariant;
       Condition = comic.Condition;
       GradingCertified = comic.GradingCertified;
@@ -86,6 +89,8 @@ namespace ComicLibrary.ViewModel
     public string IssueNumber { get; set; }
 
     public string Comment { get; set; }
+
+    public string StorageLocation { get; set; }
 
     public double? PurchasePrice { get; set; }
 
@@ -207,6 +212,7 @@ namespace ComicLibrary.ViewModel
       _comic.Year = Year;
       _comic.IssueNumber = IssueNumber;
       _comic.Title = Title;
+      _comic.StorageLocation = StorageLocation;
       _comic.CoverVariant = CoverVariant;
       _comic.Publisher = Publisher.Option;
       _comic.Condition = Condition;
@@ -225,6 +231,8 @@ namespace ComicLibrary.ViewModel
       {
         _comic.ImagesAsString.Add(image.ToString());
       }
+
+      // Series-wide changes are handled by ActiveLibraryViewModel (rename-like approach)
     }
 
     #endregion

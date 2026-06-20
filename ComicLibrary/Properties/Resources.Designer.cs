@@ -151,6 +151,24 @@ namespace ComicLibrary.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change Storage Location.
+        /// </summary>
+        public static string ChangeStorageLoccation {
+            get {
+                return ResourceManager.GetString("ChangeStorageLoccation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changes the storage location of all comics of the series..
+        /// </summary>
+        public static string ChangeStorageLoccationTooltip {
+            get {
+                return ResourceManager.GetString("ChangeStorageLoccationTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string Close {
@@ -921,6 +939,15 @@ namespace ComicLibrary.Properties {
         public static string Start {
             get {
                 return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Storage Location.
+        /// </summary>
+        public static string StorageLocation {
+            get {
+                return ResourceManager.GetString("StorageLocation", resourceCulture);
             }
         }
         

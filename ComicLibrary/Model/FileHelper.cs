@@ -33,6 +33,7 @@ namespace ComicLibrary.Model
     private const string YearKey = "Year";
     private const string ImagesKey = "Images";
     private const string ImageKey = "Image";
+    private const string StorageLocationKey = "StorageLocation";
     private const string ConditionKey = "Condition";
     private const string CertifiedGradingKey = "CertifiedGrading";
     private const string IssueNumberKey = "IssueNumber";
@@ -318,6 +319,10 @@ namespace ComicLibrary.Model
               {
                 comic.Title = comicChildNode.InnerText;
               }
+              else if (comicChildNode.Name == StorageLocationKey)
+              {
+                comic.StorageLocation = comicChildNode.InnerText;
+              }
               else if (comicChildNode.Name == CoverVariantKey)
               {
                 comic.CoverVariant = comicChildNode.InnerText;
@@ -557,6 +562,7 @@ namespace ComicLibrary.Model
                                                   ComicKey,
                                                   (SeriesKey, comic.Series),
                                                   (TitleKey, comic.Title),
+                                                  (StorageLocationKey, comic.StorageLocation),
                                                   (CoverVariantKey, comic.CoverVariant),
                                                   (YearKey, comic.Year?.ToString(CultureInfo.InvariantCulture)),
                                                   (IssueNumberKey, comic.IssueNumber?.ToString(CultureInfo.InvariantCulture)),

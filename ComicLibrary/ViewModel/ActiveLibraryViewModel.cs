@@ -32,6 +32,7 @@ namespace ComicLibrary.ViewModel
     private ActionCommand _moveComicToLibraryCommand;
     private ActionCommand _moveSeriesToLibraryCommand;
     private ActionCommand _renameSeriesCommand;
+    private ActionCommand _changeStorageLocationCommand;
     private ActionCommand _printReportCommand;
     private ActionCommand _printListCommand;
     private ActionCommand _closeCommand;
@@ -333,6 +334,37 @@ namespace ComicLibrary.ViewModel
     }
 
     private bool CanRenameSeries()
+    {
+      return SelectedComic != null;
+    }
+
+    #endregion
+
+    #region Change Storage Location
+
+    public ICommand ChangeStorageLocationCommand => _changeStorageLocationCommand ??= new ActionCommand(ChangeStorageLocation, CanChangeStorageLocation);
+
+    private void ChangeStorageLocation()
+    {
+      var vm = new GetNameViewModel(Properties.Resources.ChangeStorageLoccation, Properties.Resources.StorageLocation, SelectedComic.StorageLocation, s => true);
+      var view = ViewFactory.Instance.CreateView(vm);
+
+      if (view.ShowDialog() == true)
+      {
+        var newLocation = vm.Name;
+        var series = SelectedComic.Series;
+        foreach (var c in Comics.ToList())
+        {
+          if (string.Equals(series, c.Series, StringComparison.InvariantCultureIgnoreCase))
+          {
+            c.StorageLocation = newLocation;
+            c.IsDirty = true;
+          }
+        }
+      }
+    }
+
+    private bool CanChangeStorageLocation()
     {
       return SelectedComic != null;
     }

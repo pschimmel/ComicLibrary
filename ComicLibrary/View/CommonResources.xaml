@@ -21,9 +21,7 @@
           </Style>
         </TextBlock.Style>
       </TextBlock>
-      <TextBlock Grid.Column="1"
-                 Margin="2,0"
-                 Text="{Binding Name}" />
+      <TextBlock Grid.Column="1" Margin="2,0" Text="{Binding Name}" />
     </Grid>
   </DataTemplate>
 

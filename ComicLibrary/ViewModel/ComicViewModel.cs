@@ -95,6 +95,20 @@ namespace ComicLibrary.ViewModel
       }
     }
 
+    public string StorageLocation
+    {
+      get => _comic.StorageLocation;
+      set
+      {
+        if (_comic.StorageLocation != value)
+        {
+          _comic.StorageLocation = value;
+          OnPropertyChanged(nameof(StorageLocation));
+          IsDirty = true;
+        }
+      }
+    }
+
     public string CoverVariant
     {
       get => _comic.CoverVariant;
@@ -248,6 +262,7 @@ namespace ComicLibrary.ViewModel
       OnPropertyChanged(nameof(IssueNumber));
       OnPropertyChanged(nameof(CoverVariant));
       OnPropertyChanged(nameof(Title));
+      OnPropertyChanged(nameof(StorageLocation));
       OnPropertyChanged(nameof(Condition));
       OnPropertyChanged(nameof(GradingCertified));
       OnPropertyChanged(nameof(Publisher));

@@ -87,3 +87,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Allow to specify a Cover Variant for a comic.
+- Added field to save a storage locatio of a comic.

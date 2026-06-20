@@ -29,6 +29,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {50AA08DA-11F3-4B6D-837F-B7EFA7EDD859}
-		RESX_SortFileContentOnSave = True
 	EndGlobalSection
 EndGlobal

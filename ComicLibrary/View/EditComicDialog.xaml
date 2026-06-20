@@ -10,7 +10,7 @@
         xmlns:viewmodel="clr-namespace:ComicLibrary.ViewModel"
         Title="{x:Static properties:Resources.Comic}"
         Width="600"
-        Height="450"
+        Height="500"
         d:DataContext="{d:DesignInstance Type=viewmodel:EditComicViewModel}"
         WindowStartupLocation="CenterOwner"
         mc:Ignorable="d">
@@ -43,19 +43,20 @@
       </Style>
     </ResourceDictionary>
   </Window.Resources>
-  <Grid>
+  <Grid Margin="5">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
-      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
       <RowDefinition />
+      <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
@@ -78,9 +79,7 @@
     </Border>
 
     <TextBlock Grid.Row="1" Text="{x:Static properties:Resources.Series}" />
-    <TextBox Grid.Row="1"
-             Grid.Column="1"
-             Text="{Binding Series, UpdateSourceTrigger=PropertyChanged}" />
+    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Series, UpdateSourceTrigger=PropertyChanged}" />
 
     <TextBlock Grid.Row="2" Text="{x:Static properties:Resources.Year}" />
     <TextBox Grid.Row="2"
@@ -95,14 +94,10 @@
              Text="{Binding IssueNumber, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}" />
 
     <TextBlock Grid.Row="4" Text="{x:Static properties:Resources.Title}" />
-    <TextBox Grid.Row="4"
-             Grid.Column="1"
-             Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
+    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
 
     <TextBlock Grid.Row="5" Text="{x:Static properties:Resources.CoverVariant}" />
-    <TextBox Grid.Row="5"
-             Grid.Column="1"
-             Text="{Binding CoverVariant, UpdateSourceTrigger=PropertyChanged}" />
+    <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding CoverVariant, UpdateSourceTrigger=PropertyChanged}" />
 
     <TextBlock Grid.Row="6" Text="{x:Static properties:Resources.Condition}" />
     <DockPanel Grid.Row="6" Grid.Column="1">
@@ -117,9 +112,7 @@
               Content="..."
               DockPanel.Dock="Right"
               ToolTip="{x:Static properties:Resources.Grading}" />
-      <ContentControl Margin="2"
-                      Content="{Binding Condition}"
-                      ContentTemplate="{StaticResource ConditionTemplate}" />
+      <ContentControl Margin="2" Content="{Binding Condition}" ContentTemplate="{StaticResource ConditionTemplate}" />
     </DockPanel>
 
     <TextBlock Grid.Row="7" Text="{x:Static properties:Resources.Publisher}" />
@@ -143,9 +136,7 @@
               ItemsSource="{Binding Languages}"
               SelectedItem="{Binding Language, UpdateSourceTrigger=PropertyChanged}" />
 
-    <TextBlock Grid.Row="10"
-               VerticalAlignment="Top"
-               Text="{x:Static properties:Resources.Comment}" />
+    <TextBlock Grid.Row="10" VerticalAlignment="Top" Text="{x:Static properties:Resources.Comment}" />
     <TextBox Grid.Row="10"
              Grid.Column="1"
              VerticalAlignment="Stretch"
@@ -155,33 +146,28 @@
              TextWrapping="Wrap"
              VerticalScrollBarVisibility="Visible" />
 
-    <TextBlock Grid.Row="11"
-               VerticalAlignment="Top"
-               Text="{x:Static properties:Resources.PurchasePrice}" />
+    <TextBlock Grid.Row="11" VerticalAlignment="Top" Text="{x:Static properties:Resources.PurchasePrice}" />
     <DockPanel Grid.Row="11" Grid.Column="1">
       <TextBlock DockPanel.Dock="Right" Text="{Binding Currency}" />
       <TextBox HorizontalContentAlignment="Right" Text="{Binding PurchasePrice, StringFormat=F2, TargetNullValue=''}" />
     </DockPanel>
 
-    <TextBlock Grid.Row="12"
-               VerticalAlignment="Top"
-               Text="{x:Static properties:Resources.EstimatedValue}" />
+    <TextBlock Grid.Row="12" VerticalAlignment="Top" Text="{x:Static properties:Resources.EstimatedValue}" />
     <DockPanel Grid.Row="12" Grid.Column="1">
       <TextBlock DockPanel.Dock="Right" Text="{Binding Currency}" />
       <TextBox HorizontalContentAlignment="Right" Text="{Binding EstimatedValue, StringFormat=F2, TargetNullValue=''}" />
     </DockPanel>
 
-    <StackPanel Grid.Row="13"
+    <StackPanel Grid.Row="14"
                 Grid.ColumnSpan="3"
                 Margin="2"
                 Orientation="Horizontal">
-      <CheckBox Margin="2"
-                Content="{x:Static properties:Resources.CollectorsEdition}"
-                IsChecked="{Binding CollectorsEdition, UpdateSourceTrigger=PropertyChanged}" />
-      <CheckBox Margin="2"
-                Content="{x:Static properties:Resources.LimitedEdition}"
-                IsChecked="{Binding LimitedEdition, UpdateSourceTrigger=PropertyChanged}" />
+      <CheckBox Margin="2" Content="{x:Static properties:Resources.CollectorsEdition}" IsChecked="{Binding CollectorsEdition, UpdateSourceTrigger=PropertyChanged}" />
+      <CheckBox Margin="2" Content="{x:Static properties:Resources.LimitedEdition}" IsChecked="{Binding LimitedEdition, UpdateSourceTrigger=PropertyChanged}" />
     </StackPanel>
+
+    <TextBlock Grid.Row="13" Text="Storage Location" />
+    <TextBox Grid.Row="13" Grid.Column="1" Text="{Binding StorageLocation, UpdateSourceTrigger=PropertyChanged}" />
 
     <TextBlock Grid.Row="1"
                Grid.Column="2"
@@ -223,16 +209,12 @@
                         <controls:AutoGrayableImage Source="pack://application:,,,/ComicLibrary;component/Images/Add.png" />
                       </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Command="{Binding Data.RemoveImageCommand, Source={StaticResource Proxy}}"
-                              CommandParameter="{Binding}"
-                              Header="{x:Static properties:Resources.RemoveImage}">
+                    <MenuItem Command="{Binding Data.RemoveImageCommand, Source={StaticResource Proxy}}" CommandParameter="{Binding}" Header="{x:Static properties:Resources.RemoveImage}">
                       <MenuItem.Icon>
                         <controls:AutoGrayableImage Source="pack://application:,,,/ComicLibrary;component/Images/Remove.png" />
                       </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Command="{Binding Data.ExportImageCommand, Source={StaticResource Proxy}}"
-                              CommandParameter="{Binding}"
-                              Header="{x:Static properties:Resources.ExportImage}">
+                    <MenuItem Command="{Binding Data.ExportImageCommand, Source={StaticResource Proxy}}" CommandParameter="{Binding}" Header="{x:Static properties:Resources.ExportImage}">
                       <MenuItem.Icon>
                         <controls:AutoGrayableImage Source="pack://application:,,,/ComicLibrary;component/Images/ExportPhoto.png" />
                       </MenuItem.Icon>
@@ -250,7 +232,7 @@
       </ScrollViewer>
     </Border>
 
-    <StackPanel Grid.Row="14"
+    <StackPanel Grid.Row="15"
                 Grid.ColumnSpan="3"
                 Margin="2"
                 HorizontalAlignment="Right"
@@ -267,5 +249,6 @@
               Content="{x:Static properties:Resources.Cancel}"
               IsCancel="True" />
     </StackPanel>
+
   </Grid>
 </Window>

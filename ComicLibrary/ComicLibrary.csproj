@@ -82,6 +82,7 @@
     <Resource Include="Images\Rename.png" />
     <Resource Include="Images\Save.png" />
     <Resource Include="Images\Settings.png" />
+    <Resource Include="Images\StorageContainer.png" />
   </ItemGroup>
 
   <ItemGroup>

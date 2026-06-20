@@ -29,31 +29,23 @@
       </Border.Resources>
       <Border.ContextMenu>
         <ContextMenu>
-          <MenuItem Command="{Binding Data.ChangeLibraryImageCommand, Source={StaticResource Proxy}}"
-                    CommandParameter="{Binding}"
-                    Header="{x:Static properties:Resources.ChangeImage}">
+          <MenuItem Command="{Binding Data.ChangeLibraryImageCommand, Source={StaticResource Proxy}}" CommandParameter="{Binding}" Header="{x:Static properties:Resources.ChangeImage}">
             <MenuItem.Icon>
               <controls:AutoGrayableImage Source="pack://application:,,,/ComicLibrary;component/Images/Photo.png" />
             </MenuItem.Icon>
           </MenuItem>
-          <MenuItem Command="{Binding Data.RemoveLibraryImageCommand, Source={StaticResource Proxy}}"
-                    CommandParameter="{Binding}"
-                    Header="{x:Static properties:Resources.RemoveImage}">
+          <MenuItem Command="{Binding Data.RemoveLibraryImageCommand, Source={StaticResource Proxy}}" CommandParameter="{Binding}" Header="{x:Static properties:Resources.RemoveImage}">
             <MenuItem.Icon>
               <controls:AutoGrayableImage Source="pack://application:,,,/ComicLibrary;component/Images/RemovePhoto.png" />
             </MenuItem.Icon>
           </MenuItem>
-          <MenuItem Command="{Binding Data.ExportLibraryImageCommand, Source={StaticResource Proxy}}"
-                    CommandParameter="{Binding}"
-                    Header="{x:Static properties:Resources.ExportImage}">
+          <MenuItem Command="{Binding Data.ExportLibraryImageCommand, Source={StaticResource Proxy}}" CommandParameter="{Binding}" Header="{x:Static properties:Resources.ExportImage}">
             <MenuItem.Icon>
               <controls:AutoGrayableImage Source="pack://application:,,,/ComicLibrary;component/Images/ExportPhoto.png" />
             </MenuItem.Icon>
           </MenuItem>
           <Separator />
-          <MenuItem Command="{Binding Data.RemoveLibraryCommand, Source={StaticResource Proxy}}"
-                    CommandParameter="{Binding}"
-                    Header="{x:Static properties:Resources.RemoveLibrary}">
+          <MenuItem Command="{Binding Data.RemoveLibraryCommand, Source={StaticResource Proxy}}" CommandParameter="{Binding}" Header="{x:Static properties:Resources.RemoveLibrary}">
             <MenuItem.Icon>
               <controls:AutoGrayableImage Source="pack://application:,,,/ComicLibrary;component/Images/Remove.png" />
             </MenuItem.Icon>
@@ -66,9 +58,7 @@
         </behaviors:EventTrigger>
       </behaviors:Interaction.Triggers>
       <Grid>
-        <Image Margin="2"
-               Source="{Binding ComicImage.Image}"
-               Stretch="Uniform" />
+        <Image Margin="2" Source="{Binding ComicImage.Image}" Stretch="Uniform" />
         <TextBlock Margin="2"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
@@ -278,12 +268,8 @@
         <ColumnDefinition Width="Auto" />
         <ColumnDefinition />
       </Grid.ColumnDefinitions>
-      <TextBlock Margin="2"
-                 VerticalAlignment="Center"
-                 Text="Name" />
-      <TextBox Grid.Column="1"
-               Margin="2"
-               Text="{Binding Name}" />
+      <TextBlock Margin="2" VerticalAlignment="Center" Text="Name" />
+      <TextBox Grid.Column="1" Margin="2" Text="{Binding Name}" />
     </Grid>
   </DataTemplate>
 
@@ -293,12 +279,8 @@
         <ColumnDefinition Width="Auto" />
         <ColumnDefinition />
       </Grid.ColumnDefinitions>
-      <TextBlock Margin="2"
-                 VerticalAlignment="Center"
-                 Text="Name" />
-      <TextBox Grid.Column="1"
-               Margin="2"
-               Text="{Binding Name}" />
+      <TextBlock Margin="2" VerticalAlignment="Center" Text="Name" />
+      <TextBox Grid.Column="1" Margin="2" Text="{Binding Name}" />
     </Grid>
   </DataTemplate>
 
@@ -308,12 +290,8 @@
         <ColumnDefinition Width="Auto" />
         <ColumnDefinition />
       </Grid.ColumnDefinitions>
-      <TextBlock Margin="2"
-                 VerticalAlignment="Center"
-                 Text="Name" />
-      <TextBox Grid.Column="1"
-               Margin="2"
-               Text="{Binding Name}" />
+      <TextBlock Margin="2" VerticalAlignment="Center" Text="Name" />
+      <TextBox Grid.Column="1" Margin="2" Text="{Binding Name}" />
     </Grid>
   </DataTemplate>
 </ResourceDictionary>
