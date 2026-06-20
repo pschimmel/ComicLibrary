@@ -208,6 +208,14 @@
               </Style>
             </DataGridTextColumn.ElementStyle>
           </DataGridTextColumn>
+          <DataGridTextColumn Binding="{Binding CoverVariant, UpdateSourceTrigger=PropertyChanged}" Header="{x:Static properties:Resources.CoverVariant}">
+            <DataGridTextColumn.ElementStyle>
+              <Style TargetType="TextBlock">
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="Margin" Value="2,0" />
+              </Style>
+            </DataGridTextColumn.ElementStyle>
+          </DataGridTextColumn>
           <DataGridTemplateColumn Header="{x:Static properties:Resources.Condition}">
             <DataGridTemplateColumn.CellTemplate>
               <DataTemplate>

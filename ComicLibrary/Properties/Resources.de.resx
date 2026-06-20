@@ -192,6 +192,9 @@
   <data name="Country" xml:space="preserve">
     <value>Land</value>
   </data>
+  <data name="CoverVariant" xml:space="preserve">
+    <value>Cover-Variante</value>
+  </data>
   <data name="CreateBackupWhenSaving" xml:space="preserve">
     <value>Automatisch ein Backup beim Speichern anlegen.</value>
   </data>

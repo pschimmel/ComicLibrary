@@ -81,3 +81,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added NG as CGC grade.
 - Allow different grading scales.
+- Added CBCS grading scale.
+
+## [1.3.1] - {todo}
+
+### Added
+- Allow to specify a Cover Variant for a comic.

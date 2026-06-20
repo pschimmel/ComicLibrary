@@ -50,6 +50,7 @@
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
@@ -98,8 +99,13 @@
              Grid.Column="1"
              Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
 
-    <TextBlock Grid.Row="5" Text="{x:Static properties:Resources.Condition}" />
-    <DockPanel Grid.Row="5" Grid.Column="1">
+    <TextBlock Grid.Row="5" Text="{x:Static properties:Resources.CoverVariant}" />
+    <TextBox Grid.Row="5"
+             Grid.Column="1"
+             Text="{Binding CoverVariant, UpdateSourceTrigger=PropertyChanged}" />
+
+    <TextBlock Grid.Row="6" Text="{x:Static properties:Resources.Condition}" />
+    <DockPanel Grid.Row="6" Grid.Column="1">
       <CheckBox Margin="2"
                 VerticalAlignment="Center"
                 DockPanel.Dock="Right"
@@ -116,31 +122,31 @@
                       ContentTemplate="{StaticResource ConditionTemplate}" />
     </DockPanel>
 
-    <TextBlock Grid.Row="6" Text="{x:Static properties:Resources.Publisher}" />
-    <ComboBox Grid.Row="6"
+    <TextBlock Grid.Row="7" Text="{x:Static properties:Resources.Publisher}" />
+    <ComboBox Grid.Row="7"
               Grid.Column="1"
               DisplayMemberPath="Name"
               ItemsSource="{Binding Publishers}"
               SelectedItem="{Binding Publisher, UpdateSourceTrigger=PropertyChanged}" />
 
-    <TextBlock Grid.Row="7" Text="{x:Static properties:Resources.Country}" />
-    <ComboBox Grid.Row="7"
+    <TextBlock Grid.Row="8" Text="{x:Static properties:Resources.Country}" />
+    <ComboBox Grid.Row="8"
               Grid.Column="1"
               DisplayMemberPath="Name"
               ItemsSource="{Binding Countries}"
               SelectedItem="{Binding Country, UpdateSourceTrigger=PropertyChanged}" />
 
-    <TextBlock Grid.Row="8" Text="{x:Static properties:Resources.Language}" />
-    <ComboBox Grid.Row="8"
+    <TextBlock Grid.Row="9" Text="{x:Static properties:Resources.Language}" />
+    <ComboBox Grid.Row="9"
               Grid.Column="1"
               DisplayMemberPath="Name"
               ItemsSource="{Binding Languages}"
               SelectedItem="{Binding Language, UpdateSourceTrigger=PropertyChanged}" />
 
-    <TextBlock Grid.Row="9"
+    <TextBlock Grid.Row="10"
                VerticalAlignment="Top"
                Text="{x:Static properties:Resources.Comment}" />
-    <TextBox Grid.Row="9"
+    <TextBox Grid.Row="10"
              Grid.Column="1"
              VerticalAlignment="Stretch"
              AcceptsReturn="True"
@@ -149,23 +155,23 @@
              TextWrapping="Wrap"
              VerticalScrollBarVisibility="Visible" />
 
-    <TextBlock Grid.Row="10"
+    <TextBlock Grid.Row="11"
                VerticalAlignment="Top"
                Text="{x:Static properties:Resources.PurchasePrice}" />
-    <DockPanel Grid.Row="10" Grid.Column="1">
+    <DockPanel Grid.Row="11" Grid.Column="1">
       <TextBlock DockPanel.Dock="Right" Text="{Binding Currency}" />
       <TextBox HorizontalContentAlignment="Right" Text="{Binding PurchasePrice, StringFormat=F2, TargetNullValue=''}" />
     </DockPanel>
 
-    <TextBlock Grid.Row="11"
+    <TextBlock Grid.Row="12"
                VerticalAlignment="Top"
                Text="{x:Static properties:Resources.EstimatedValue}" />
-    <DockPanel Grid.Row="11" Grid.Column="1">
+    <DockPanel Grid.Row="12" Grid.Column="1">
       <TextBlock DockPanel.Dock="Right" Text="{Binding Currency}" />
       <TextBox HorizontalContentAlignment="Right" Text="{Binding EstimatedValue, StringFormat=F2, TargetNullValue=''}" />
     </DockPanel>
 
-    <StackPanel Grid.Row="12"
+    <StackPanel Grid.Row="13"
                 Grid.ColumnSpan="3"
                 Margin="2"
                 Orientation="Horizontal">
@@ -244,7 +250,7 @@
       </ScrollViewer>
     </Border>
 
-    <StackPanel Grid.Row="13"
+    <StackPanel Grid.Row="14"
                 Grid.ColumnSpan="3"
                 Margin="2"
                 HorizontalAlignment="Right"

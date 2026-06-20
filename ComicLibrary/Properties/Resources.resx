@@ -192,6 +192,9 @@
   <data name="Country" xml:space="preserve">
     <value>Country</value>
   </data>
+  <data name="CoverVariant" xml:space="preserve">
+    <value>Cover variant</value>
+  </data>
   <data name="CreateBackupWhenSaving" xml:space="preserve">
     <value>Automatically create a backup when saving a file.</value>
   </data>
@@ -386,8 +389,6 @@
   </data>
   <data name="Series" xml:space="preserve">
     <value>Series</value>
-    <comment>Description
-</comment>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>

@@ -95,6 +95,20 @@ namespace ComicLibrary.ViewModel
       }
     }
 
+    public string CoverVariant
+    {
+      get => _comic.CoverVariant;
+      set
+      {
+        if (_comic.CoverVariant != value)
+        {
+          _comic.CoverVariant = value;
+          OnPropertyChanged(nameof(CoverVariant));
+          IsDirty = true;
+        }
+      }
+    }
+
     public IEnumerable<Grade> Conditions
     {
       get
@@ -232,6 +246,7 @@ namespace ComicLibrary.ViewModel
       OnPropertyChanged(nameof(Series));
       OnPropertyChanged(nameof(Year));
       OnPropertyChanged(nameof(IssueNumber));
+      OnPropertyChanged(nameof(CoverVariant));
       OnPropertyChanged(nameof(Title));
       OnPropertyChanged(nameof(Condition));
       OnPropertyChanged(nameof(GradingCertified));

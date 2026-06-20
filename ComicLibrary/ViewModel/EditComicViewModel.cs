@@ -50,6 +50,7 @@ namespace ComicLibrary.ViewModel
       Year = comic.Year;
       IssueNumber = comic.IssueNumber;
       Title = comic.Title;
+      CoverVariant = comic.CoverVariant;
       Condition = comic.Condition;
       GradingCertified = comic.GradingCertified;
       Publisher = Publishers.FirstOrDefault(x => x.Option == comic.Publisher) ?? Publishers.First();
@@ -79,6 +80,8 @@ namespace ComicLibrary.ViewModel
     public int? Year { get; set; }
 
     public string Title { get; set; }
+
+    public string CoverVariant { get; set; }
 
     public string IssueNumber { get; set; }
 
@@ -204,6 +207,7 @@ namespace ComicLibrary.ViewModel
       _comic.Year = Year;
       _comic.IssueNumber = IssueNumber;
       _comic.Title = Title;
+      _comic.CoverVariant = CoverVariant;
       _comic.Publisher = Publisher.Option;
       _comic.Condition = Condition;
       _comic.GradingCertified = GradingCertified;

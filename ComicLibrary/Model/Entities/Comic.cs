@@ -28,6 +28,7 @@ namespace ComicLibrary.Model.Entities
         Language = selectedComic.Language;
         IssueNumber = selectedComic.IssueNumber;
         Title = selectedComic.Title;
+        CoverVariant = selectedComic.CoverVariant;
         PurchasePrice = selectedComic.PurchasePrice;
         EstimatedValue = selectedComic.EstimatedValue;
         Comment = selectedComic.Comment;
@@ -47,7 +48,10 @@ namespace ComicLibrary.Model.Entities
 
     public string Title { get; set; }
 
+    public string CoverVariant { get; set; }
+
     public Grade Condition { get; set; }
+
     public bool GradingCertified { get; set; }
 
     public int? Year { get; set; }

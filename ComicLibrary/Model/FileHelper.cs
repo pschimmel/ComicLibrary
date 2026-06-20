@@ -25,6 +25,7 @@ namespace ComicLibrary.Model
     private const string IDKey = "ID";
     private const string NameKey = "Name";
     private const string TitleKey = "Title";
+    private const string CoverVariantKey = "CoverVariant";
     private const string FileNameKey = "FileName";
     private const string SeriesKey = "Series";
     private const string ComicsKey = "Comics";
@@ -317,6 +318,10 @@ namespace ComicLibrary.Model
               {
                 comic.Title = comicChildNode.InnerText;
               }
+              else if (comicChildNode.Name == CoverVariantKey)
+              {
+                comic.CoverVariant = comicChildNode.InnerText;
+              }
               else if (comicChildNode.Name == IssueNumberKey)
               {
                 comic.IssueNumber = comicChildNode.InnerText;
@@ -552,6 +557,7 @@ namespace ComicLibrary.Model
                                                   ComicKey,
                                                   (SeriesKey, comic.Series),
                                                   (TitleKey, comic.Title),
+                                                  (CoverVariantKey, comic.CoverVariant),
                                                   (YearKey, comic.Year?.ToString(CultureInfo.InvariantCulture)),
                                                   (IssueNumberKey, comic.IssueNumber?.ToString(CultureInfo.InvariantCulture)),
                                                   (CommentKey, comic.Comment),
