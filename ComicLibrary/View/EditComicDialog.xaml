@@ -166,7 +166,7 @@
       <CheckBox Margin="2" Content="{x:Static properties:Resources.LimitedEdition}" IsChecked="{Binding LimitedEdition, UpdateSourceTrigger=PropertyChanged}" />
     </StackPanel>
 
-    <TextBlock Grid.Row="13" Text="Storage Location" />
+    <TextBlock Grid.Row="13" Text="{x:Static properties:Resources.StorageLocation}" />
     <TextBox Grid.Row="13" Grid.Column="1" Text="{Binding StorageLocation, UpdateSourceTrigger=PropertyChanged}" />
 
     <TextBlock Grid.Row="1"

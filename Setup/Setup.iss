@@ -1,5 +1,5 @@
 #define ApplicationName 'Comic Library'
-#define ApplicationVersion '1.3.1'
+#define ApplicationVersion '1.4.0'
 #define ApplicationCompany 'Engineering Solutions'
 
 [Setup]
@@ -10,7 +10,7 @@ VersionInfoVersion={#ApplicationVersion}
 VersionInfoProductVersion={#ApplicationVersion}
 VersionInfoProductTextVersion={#ApplicationName} {#ApplicationVersion}
 VersionInfoCompany={#ApplicationCompany}
-VersionInfoCopyright=Copyright 2024 by {#ApplicationCompany}
+VersionInfoCopyright=Copyright 2024-2026 by {#ApplicationCompany}
 VersionInfoProductName={#ApplicationName}
 AppPublisher={#ApplicationCompany}
 AppPublisherURL=http://engineeringsolutions.de
@@ -42,13 +42,13 @@ ShowTasksTreeLines=True
 WizardStyle=modern
 
 [Files]
-Source: "..\ComicLibrary\bin\Release\net8.0-windows\*.exe"; DestDir: "{app}"; Flags: IgnoreVersion sortfilesbyextension replacesameversion; 
-Source: "..\ComicLibrary\bin\Release\net8.0-windows\*.dll"; DestDir: "{app}"; Flags: IgnoreVersion sortfilesbyextension replacesameversion; 
-Source: "..\ComicLibrary\bin\Release\net8.0-windows\de\*.dll"; DestDir: "{app}\de"; Flags: IgnoreVersion sortfilesbyextension replacesameversion; 
-Source: "..\ComicLibrary\bin\Release\net8.0-windows\*.json"; DestDir: "{app}"; Flags: IgnoreVersion sortfilesbyextension replacesameversion; 
-Source: "..\ComicLibrary\bin\Release\net8.0-windows\*.config"; DestDir: "{app}"; Flags: IgnoreVersion sortfilesbyextension replacesameversion; 
-Source: "..\ComicLibrary\bin\Release\net8.0-windows\Grading Scales\*.*"; DestDir: "{app}\Grading Scales"; Flags: IgnoreVersion sortfilesbyextension replacesameversion; 
-Source: "..\License.txt"; DestDir: "{app}"; Flags: IgnoreVersion replacesameversion; 
+Source: "..\ComicLibrary\bin\Release\net8.0-windows\*.exe"; DestDir: "{app}"; Flags: IgnoreVersion sortfilesbyextension; 
+Source: "..\ComicLibrary\bin\Release\net8.0-windows\*.dll"; DestDir: "{app}"; Flags: IgnoreVersion sortfilesbyextension; 
+Source: "..\ComicLibrary\bin\Release\net8.0-windows\de\*.dll"; DestDir: "{app}\de"; Flags: IgnoreVersion sortfilesbyextension; 
+Source: "..\ComicLibrary\bin\Release\net8.0-windows\*.json"; DestDir: "{app}"; Flags: IgnoreVersion sortfilesbyextension; 
+Source: "..\ComicLibrary\bin\Release\net8.0-windows\*.config"; DestDir: "{app}"; Flags: IgnoreVersion sortfilesbyextension; 
+Source: "..\ComicLibrary\bin\Release\net8.0-windows\Grading Scales\*.*"; DestDir: "{app}\Grading Scales"; Flags: IgnoreVersion sortfilesbyextension; 
+Source: "..\License.txt"; DestDir: "{app}"; Flags: replacesameversion; 
 
 [Tasks]
 Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:AdditionalIcons}; 
