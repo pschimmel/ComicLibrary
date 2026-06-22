@@ -83,7 +83,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow different grading scales.
 - Added CBCS grading scale.
 
-## [1.3.1] - {todo}
+## [1.4.0] - 2026-06-22
 
 ### Added
 - Allow to specify a Cover Variant for a comic.

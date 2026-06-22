@@ -191,17 +191,43 @@ namespace ComicLibrary.ViewModel
 
     private void EditCountries()
     {
-      if (ActiveLibraries.Count > 0)
-      {
-        MessageBox.Show(Properties.Resources.CloseLibrariesToModifyOptionsMessage, Properties.Resources.Error, MessageBoxButton.OK, MessageBoxImage.Error);
-        return;
-      }
-
       var optionsVM = new EditOptionsViewModel(Globals.Instance.Countries.OrderBy(x => x.Name), typeof(Country), Properties.Resources.Countries, Properties.Resources.Country);
       var view = ViewFactory.Instance.CreateView(optionsVM);
       if (view.ShowDialog() == true)
       {
-        Globals.Instance.Countries = new HashSet<Country>(optionsVM.Options.OfType<Country>());
+        var incoming = optionsVM.Options.OfType<Country>().ToList();
+
+        // Compute diffs by ID
+        var existingById = Globals.Instance.Countries.ToDictionary(x => x.ID);
+        var incomingById = incoming.ToDictionary(x => x.ID);
+
+        // Add or update
+        foreach (var inc in incoming)
+        {
+          if (existingById.TryGetValue(inc.ID, out var existing))
+          {
+            // update properties on existing instance to preserve references
+            if (existing.Name != inc.Name)
+              existing.Name = inc.Name;
+            existing.ModifiedDate = inc.ModifiedDate;
+          }
+          else
+          {
+            Globals.Instance.Countries.Add(inc);
+            foreach (var active in ActiveLibraries)
+              active.AddCountry(inc);
+          }
+        }
+
+        // Removed
+        var toRemove = Globals.Instance.Countries.Where(x => !incomingById.ContainsKey(x.ID)).ToList();
+        foreach (var rem in toRemove)
+        {
+          Globals.Instance.Countries.Remove(rem);
+          foreach (var active in ActiveLibraries)
+            active.RemoveCountry(rem.ID);
+        }
+
         Globals.Save();
       }
     }
@@ -214,17 +240,39 @@ namespace ComicLibrary.ViewModel
 
     private void EditLanguages()
     {
-      if (ActiveLibraries.Count > 0)
-      {
-        MessageBox.Show(Properties.Resources.CloseLibrariesToModifyOptionsMessage, Properties.Resources.Error, MessageBoxButton.OK, MessageBoxImage.Error);
-        return;
-      }
-
       var optionsVM = new EditOptionsViewModel(Globals.Instance.Languages.OrderBy(x => x.Name), typeof(Language), Properties.Resources.Languages, Properties.Resources.Language);
       var view = ViewFactory.Instance.CreateView(optionsVM);
       if (view.ShowDialog() == true)
       {
-        Globals.Instance.Languages = new HashSet<Language>(optionsVM.Options.OfType<Language>());
+        var incoming = optionsVM.Options.OfType<Language>().ToList();
+
+        var existingById = Globals.Instance.Languages.ToDictionary(x => x.ID);
+        var incomingById = incoming.ToDictionary(x => x.ID);
+
+        foreach (var inc in incoming)
+        {
+          if (existingById.TryGetValue(inc.ID, out var existing))
+          {
+            if (existing.Name != inc.Name)
+              existing.Name = inc.Name;
+            existing.ModifiedDate = inc.ModifiedDate;
+          }
+          else
+          {
+            Globals.Instance.Languages.Add(inc);
+            foreach (var active in ActiveLibraries)
+              active.AddLanguage(inc);
+          }
+        }
+
+        var toRemove = Globals.Instance.Languages.Where(x => !incomingById.ContainsKey(x.ID)).ToList();
+        foreach (var rem in toRemove)
+        {
+          Globals.Instance.Languages.Remove(rem);
+          foreach (var active in ActiveLibraries)
+            active.RemoveLanguage(rem.ID);
+        }
+
         Globals.Save();
       }
     }
@@ -237,17 +285,39 @@ namespace ComicLibrary.ViewModel
 
     private void EditPublishers()
     {
-      if (ActiveLibraries.Count > 0)
-      {
-        MessageBox.Show(Properties.Resources.CloseLibrariesToModifyOptionsMessage, Properties.Resources.Error, MessageBoxButton.OK, MessageBoxImage.Error);
-        return;
-      }
-
       var optionsVM = new EditOptionsViewModel(Globals.Instance.Publishers.OrderBy(x => x.Name), typeof(Publisher), Properties.Resources.Publishers, Properties.Resources.Publisher);
       var view = ViewFactory.Instance.CreateView(optionsVM);
       if (view.ShowDialog() == true)
       {
-        Globals.Instance.Publishers = new HashSet<Publisher>(optionsVM.Options.OfType<Publisher>());
+        var incoming = optionsVM.Options.OfType<Publisher>().ToList();
+
+        var existingById = Globals.Instance.Publishers.ToDictionary(x => x.ID);
+        var incomingById = incoming.ToDictionary(x => x.ID);
+
+        foreach (var inc in incoming)
+        {
+          if (existingById.TryGetValue(inc.ID, out var existing))
+          {
+            if (existing.Name != inc.Name)
+              existing.Name = inc.Name;
+            existing.ModifiedDate = inc.ModifiedDate;
+          }
+          else
+          {
+            Globals.Instance.Publishers.Add(inc);
+            foreach (var active in ActiveLibraries)
+              active.AddPublisher(inc);
+          }
+        }
+
+        var toRemove = Globals.Instance.Publishers.Where(x => !incomingById.ContainsKey(x.ID)).ToList();
+        foreach (var rem in toRemove)
+        {
+          Globals.Instance.Publishers.Remove(rem);
+          foreach (var active in ActiveLibraries)
+            active.RemovePublisher(rem.ID);
+        }
+
         Globals.Save();
       }
     }

@@ -32,7 +32,7 @@
     <vm:MainViewModel />
   </Window.DataContext>
   <Grid>
-    <Grid IsEnabled="{Binding ShowLibrariesOverlay, Converter={StaticResource NegationConverter}}">
+    <Grid>
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
         <RowDefinition />
@@ -256,6 +256,7 @@
 
       <avalonDock:DockingManager x:Name="dockingManager"
                                  Grid.Row="1"
+                                 IsEnabled="{Binding ShowLibrariesOverlay, Converter={StaticResource NegationConverter}}"
                                  ActiveContent="{Binding SelectedLibrary, Mode=TwoWay}"
                                  Background="White"
                                  DocumentsSource="{Binding ActiveLibraries}">

@@ -107,6 +107,13 @@ namespace ComicLibrary.ViewModel
       {
         var index = Options.IndexOf(SelectedOption);
         var newOption = settingVM.Option;
+        // Preserve the original ID so edits keep identity instead of creating a new option
+        // which would be treated as a remove+add by consumers.
+        if (SelectedOption != null)
+        {
+          newOption.ID = SelectedOption.ID;
+          newOption.CreatedDate = SelectedOption.CreatedDate;
+        }
         newOption.ModifiedDate = DateTime.Now;
         Options.Insert(index, newOption);
         Options.Remove(SelectedOption);

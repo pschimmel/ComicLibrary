@@ -52,25 +52,19 @@ namespace ComicLibrary.ViewModel
     {
       _libraryTemplate = libraryTemplate;
 
-      Publishers =
-      [
-        new EmptyOptionItemViewModel<Publisher>(),
-        .. Globals.Instance.Publishers.OrderBy(x => x.Name).Select(x => new OptionItemViewModel<Publisher>(x))
-      ];
+      Publishers = new IOptionItemViewModel<Publisher>[] { new EmptyOptionItemViewModel<Publisher>() }
+        .Concat(Globals.Instance.Publishers.OrderBy(x => x.Name).Select(x => new OptionItemViewModel<Publisher>(x)))
+        .ToList();
 
-      Countries =
-      [
-        new EmptyOptionItemViewModel<Country>(),
-        .. Globals.Instance.Countries.OrderBy(x => x.Name).Select(x => new OptionItemViewModel<Country>(x))
-      ];
+      Countries = new IOptionItemViewModel<Country>[] { new EmptyOptionItemViewModel<Country>() }
+        .Concat(Globals.Instance.Countries.OrderBy(x => x.Name).Select(x => new OptionItemViewModel<Country>(x)))
+        .ToList();
 
-      Languages =
-      [
-        new EmptyOptionItemViewModel<Language>(),
-        .. Globals.Instance.Languages.OrderBy(x => x.Name).Select(x => new OptionItemViewModel<Language>(x))
-      ];
+      Languages = new IOptionItemViewModel<Language>[] { new EmptyOptionItemViewModel<Language>() }
+        .Concat(Globals.Instance.Languages.OrderBy(x => x.Name).Select(x => new OptionItemViewModel<Language>(x)))
+        .ToList();
 
-      Comics = [];
+      Comics = new ObservableCollection<ComicViewModel>();
       Comics.CollectionChanged += Comics_CollectionChanged;
 
       foreach (var comic in library.Comics)
@@ -90,11 +84,11 @@ namespace ComicLibrary.ViewModel
 
     public ComicImageViewModel ComicImage => _libraryTemplate.ComicImage;
 
-    public IEnumerable<IOptionItemViewModel<Publisher>> Publishers { get; }
+    public IEnumerable<IOptionItemViewModel<Publisher>> Publishers { get; private set; }
 
-    public IEnumerable<IOptionItemViewModel<Country>> Countries { get; }
+    public IEnumerable<IOptionItemViewModel<Country>> Countries { get; private set; }
 
-    public IEnumerable<IOptionItemViewModel<Language>> Languages { get; }
+    public IEnumerable<IOptionItemViewModel<Language>> Languages { get; private set; }
 
     public ObservableCollection<ComicViewModel> Comics { get; }
 
@@ -607,6 +601,195 @@ namespace ComicLibrary.ViewModel
         Comics = new HashSet<Comic>(Comics.Select(x => x.ToModel())),
         SaveDate = DateTime.Now
       };
+    }
+
+    public void RefreshOptions()
+    {
+      Publishers = new IOptionItemViewModel<Publisher>[] { new EmptyOptionItemViewModel<Publisher>() }
+        .Concat(Globals.Instance.Publishers.OrderBy(x => x.Name).Select(x => new OptionItemViewModel<Publisher>(x)))
+        .ToList();
+
+      Countries = new IOptionItemViewModel<Country>[] { new EmptyOptionItemViewModel<Country>() }
+        .Concat(Globals.Instance.Countries.OrderBy(x => x.Name).Select(x => new OptionItemViewModel<Country>(x)))
+        .ToList();
+
+      Languages = new IOptionItemViewModel<Language>[] { new EmptyOptionItemViewModel<Language>() }
+        .Concat(Globals.Instance.Languages.OrderBy(x => x.Name).Select(x => new OptionItemViewModel<Language>(x)))
+        .ToList();
+
+      // Notify UI that option lists changed
+      OnPropertyChanged(nameof(Publishers));
+      OnPropertyChanged(nameof(Countries));
+      OnPropertyChanged(nameof(Languages));
+
+      // Update existing comics to use the new option lists
+      foreach (var comic in Comics)
+      {
+        comic.SetOptionLists(Publishers, Countries, Languages);
+        // Trigger property refresh on each comic so bindings update
+        comic.Refresh();
+      }
+    }
+
+    public void AddPublisher(Publisher p)
+    {
+      var list = Publishers as IList<IOptionItemViewModel<Publisher>>;
+      var vm = new OptionItemViewModel<Publisher>(p);
+      if (list != null)
+      {
+        // insert in sorted order after empty item
+        int insertAt = 1;
+        while (insertAt < list.Count && string.Compare(list[insertAt].Name, vm.Name, StringComparison.InvariantCultureIgnoreCase) < 0)
+          insertAt++;
+        list.Insert(insertAt, vm);
+      }
+      else
+      {
+        Publishers = Publishers.Concat(new[] { vm }).ToList();
+      }
+
+      OnPropertyChanged(nameof(Publishers));
+
+      foreach (var comic in Comics)
+      {
+        comic.SetOptionLists(Publishers, Countries, Languages);
+        comic.Refresh();
+      }
+    }
+
+    public void RemovePublisher(Guid id)
+    {
+      var list = Publishers as IList<IOptionItemViewModel<Publisher>>;
+      if (list != null)
+      {
+        var item = list.FirstOrDefault(x => x.Option != null && x.Option.ID == id);
+        if (item != null) list.Remove(item);
+      }
+      else
+      {
+        Publishers = Publishers.Where(x => x.Option == null || x.Option.ID != id).ToList();
+      }
+
+      // For comics using the removed publisher, clear the model value
+      foreach (var comic in Comics)
+      {
+        var model = comic.ToModel();
+        if (model.Publisher != null && model.Publisher.ID == id)
+        {
+          model.Publisher = null; // set empty option element
+          comic.IsDirty = true;
+        }
+        comic.SetOptionLists(Publishers, Countries, Languages);
+        comic.Refresh();
+      }
+
+      OnPropertyChanged(nameof(Publishers));
+    }
+
+    public void AddCountry(Country c)
+    {
+      var list = Countries as IList<IOptionItemViewModel<Country>>;
+      var vm = new OptionItemViewModel<Country>(c);
+      if (list != null)
+      {
+        int insertAt = 1;
+        while (insertAt < list.Count && string.Compare(list[insertAt].Name, vm.Name, StringComparison.InvariantCultureIgnoreCase) < 0)
+          insertAt++;
+        list.Insert(insertAt, vm);
+      }
+      else
+      {
+        Countries = Countries.Concat(new[] { vm }).ToList();
+      }
+
+      OnPropertyChanged(nameof(Countries));
+
+      foreach (var comic in Comics)
+      {
+        comic.SetOptionLists(Publishers, Countries, Languages);
+        comic.Refresh();
+      }
+    }
+
+    public void RemoveCountry(Guid id)
+    {
+      var list = Countries as IList<IOptionItemViewModel<Country>>;
+      if (list != null)
+      {
+        var item = list.FirstOrDefault(x => x.Option != null && x.Option.ID == id);
+        if (item != null) list.Remove(item);
+      }
+      else
+      {
+        Countries = Countries.Where(x => x.Option == null || x.Option.ID != id).ToList();
+      }
+
+      foreach (var comic in Comics)
+      {
+        var model = comic.ToModel();
+        if (model.Country != null && model.Country.ID == id)
+        {
+          model.Country = null;
+          comic.IsDirty = true;
+        }
+        comic.SetOptionLists(Publishers, Countries, Languages);
+        comic.Refresh();
+      }
+
+      OnPropertyChanged(nameof(Countries));
+    }
+
+    public void AddLanguage(Language l)
+    {
+      var list = Languages as IList<IOptionItemViewModel<Language>>;
+      var vm = new OptionItemViewModel<Language>(l);
+      if (list != null)
+      {
+        int insertAt = 1;
+        while (insertAt < list.Count && string.Compare(list[insertAt].Name, vm.Name, StringComparison.InvariantCultureIgnoreCase) < 0)
+          insertAt++;
+        list.Insert(insertAt, vm);
+      }
+      else
+      {
+        Languages = Languages.Concat(new[] { vm }).ToList();
+      }
+
+      OnPropertyChanged(nameof(Languages));
+
+      foreach (var comic in Comics)
+      {
+        comic.SetOptionLists(Publishers, Countries, Languages);
+        comic.Refresh();
+      }
+    }
+
+    public void RemoveLanguage(Guid id)
+    {
+      var list = Languages as IList<IOptionItemViewModel<Language>>;
+      if (list != null)
+      {
+        var item = list.FirstOrDefault(x => x.Option != null && x.Option.ID == id);
+        if (item != null) list.Remove(item);
+      }
+      else
+      {
+        Languages = Languages.Where(x => x.Option == null || x.Option.ID != id).ToList();
+      }
+
+      foreach (var comic in Comics)
+      {
+        var model = comic.ToModel();
+        if (model.Language != null && model.Language.ID == id)
+        {
+          model.Language = null;
+          comic.IsDirty = true;
+        }
+        comic.SetOptionLists(Publishers, Countries, Languages);
+        comic.Refresh();
+      }
+
+      OnPropertyChanged(nameof(Languages));
     }
 
     #endregion

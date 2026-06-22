@@ -11,9 +11,9 @@ namespace ComicLibrary.ViewModel
 
     private readonly Comic _comic;
     private readonly string _libraryName;
-    private readonly IEnumerable<IOptionItemViewModel<Publisher>> _publishers;
-    private readonly IEnumerable<IOptionItemViewModel<Country>> _countries;
-    private readonly IEnumerable<IOptionItemViewModel<Language>> _languages;
+    private IEnumerable<IOptionItemViewModel<Publisher>> _publishers;
+    private IEnumerable<IOptionItemViewModel<Country>> _countries;
+    private IEnumerable<IOptionItemViewModel<Language>> _languages;
     private ActionCommand _editComicCommand;
     private bool _isDirty;
 
@@ -33,6 +33,71 @@ namespace ComicLibrary.ViewModel
       _countries = countries;
       _languages = languages;
       _isDirty = false;
+    }
+
+    public void SetOptionLists(IEnumerable<IOptionItemViewModel<Publisher>> publishers,
+                               IEnumerable<IOptionItemViewModel<Country>> countries,
+                               IEnumerable<IOptionItemViewModel<Language>> languages)
+    {
+      // Preserve the currently selected options where possible. If the current
+      // model option is no longer present in the new list, clear it so the UI
+      // can fall back to the empty option.
+      var previousPublisher = _comic?.Publisher;
+      var previousCountry = _comic?.Country;
+      var previousLanguage = _comic?.Language;
+
+      _publishers = publishers;
+      _countries = countries;
+      _languages = languages;
+
+      // If the previous selected publisher is not contained in the new list,
+      // clear it so the getter can resolve to the empty option. If it is
+      // contained, leave the model value intact to preserve selection.
+      if (previousPublisher != null)
+      {
+        var found = _publishers?.FirstOrDefault(x => x.Option != null && x.Option.ID == previousPublisher.ID);
+        if (found == null)
+        {
+          _comic.Publisher = null;
+        }
+        else
+        {
+          // Replace the model's Publisher reference with the canonical instance
+          // from the globals/options list so subsequent comparisons work by reference.
+          _comic.Publisher = found.Option;
+        }
+      }
+
+      if (previousCountry != null)
+      {
+        var found = _countries?.FirstOrDefault(x => x.Option != null && x.Option.ID == previousCountry.ID);
+        if (found == null)
+        {
+          _comic.Country = null;
+        }
+        else
+        {
+          _comic.Country = found.Option;
+        }
+      }
+
+      if (previousLanguage != null)
+      {
+        var found = _languages?.FirstOrDefault(x => x.Option != null && x.Option.ID == previousLanguage.ID);
+        if (found == null)
+        {
+          _comic.Language = null;
+        }
+        else
+        {
+          _comic.Language = found.Option;
+        }
+      }
+
+      // Refresh option dependent properties so UI updates to new lists
+      OnPropertyChanged(nameof(Publisher));
+      OnPropertyChanged(nameof(Country));
+      OnPropertyChanged(nameof(Language));
     }
 
     #endregion
@@ -160,12 +225,14 @@ namespace ComicLibrary.ViewModel
 
     public IOptionItemViewModel<Publisher> Publisher
     {
-      get => _publishers.FirstOrDefault(x => x.Option == _comic.Publisher) ?? _publishers.Single(x => x.IsEmpty);
+      get => _publishers?.FirstOrDefault(x => x.Option != null && _comic.Publisher != null && x.Option.ID == _comic.Publisher.ID)
+             ?? _publishers?.SingleOrDefault(x => x.IsEmpty);
       set
       {
-        if (_comic.Publisher != value.Option)
+        var newOption = value?.Option;
+        if (!Equals(_comic.Publisher, newOption))
         {
-          _comic.Publisher = value.Option;
+          _comic.Publisher = newOption;
           OnPropertyChanged(nameof(Publisher));
           IsDirty = true;
         }
@@ -174,12 +241,14 @@ namespace ComicLibrary.ViewModel
 
     public IOptionItemViewModel<Country> Country
     {
-      get => _countries.FirstOrDefault(x => x.Option == _comic.Country) ?? _countries.Single(x => x.IsEmpty);
+      get => _countries?.FirstOrDefault(x => x.Option != null && _comic.Country != null && x.Option.ID == _comic.Country.ID)
+             ?? _countries?.SingleOrDefault(x => x.IsEmpty);
       set
       {
-        if (_comic.Country != value.Option)
+        var newOption = value?.Option;
+        if (!Equals(_comic.Country, newOption))
         {
-          _comic.Country = value.Option;
+          _comic.Country = newOption;
           OnPropertyChanged(nameof(Country));
           IsDirty = true;
         }
@@ -188,12 +257,14 @@ namespace ComicLibrary.ViewModel
 
     public IOptionItemViewModel<Language> Language
     {
-      get => _languages.FirstOrDefault(x => x.Option == _comic.Language) ?? _languages.Single(x => x.IsEmpty);
+      get => _languages?.FirstOrDefault(x => x.Option != null && _comic.Language != null && x.Option.ID == _comic.Language.ID)
+             ?? _languages?.SingleOrDefault(x => x.IsEmpty);
       set
       {
-        if (_comic.Language != value.Option)
+        var newOption = value?.Option;
+        if (!Equals(_comic.Language, newOption))
         {
-          _comic.Language = value.Option;
+          _comic.Language = newOption;
           OnPropertyChanged(nameof(Language));
           IsDirty = true;
         }
@@ -255,7 +326,7 @@ namespace ComicLibrary.ViewModel
 
     #region Private Methods
 
-    private void Refresh()
+    public void Refresh()
     {
       OnPropertyChanged(nameof(Series));
       OnPropertyChanged(nameof(Year));
