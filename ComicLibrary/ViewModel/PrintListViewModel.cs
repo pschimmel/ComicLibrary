@@ -27,12 +27,12 @@ namespace ComicLibrary.ViewModel
       document.AddHeader1(library.Name);
 
       // Add series 
-      var series = library.Comics.Where(x => !string.IsNullOrWhiteSpace(x.IssueNumber) && !string.IsNullOrWhiteSpace(x.Series))
+      IOrderedEnumerable<string> series = library.Comics.Where(x => !string.IsNullOrWhiteSpace(x.IssueNumber) && !string.IsNullOrWhiteSpace(x.Series))
                                  .Select(x => x.Series)
                                  .Distinct()
                                  .Order();
 
-      foreach (var serie in series)
+      foreach (string serie in series)
       {
         document.AddHeader2(serie);
         var listOfIssues = library.Comics.Where(x => !string.IsNullOrWhiteSpace(x.IssueNumber) && x.Series == serie)
@@ -43,7 +43,7 @@ namespace ComicLibrary.ViewModel
 
         for (int i = 0; i < listOfIssues.Count; i++)
         {
-          var issue = listOfIssues[i];
+          ComicViewModel issue = listOfIssues[i];
 
           if (_excludeLowGrades && issue.Condition.Number < _excludedGradeThreshold)
             continue;

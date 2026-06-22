@@ -18,7 +18,7 @@ namespace ComicLibrary.View.Helpers
       for (int i = 0; i < VisualTreeHelper.GetChildrenCount(dependencyObject); i++)
       {
         DependencyObject child = VisualTreeHelper.GetChild(dependencyObject, i);
-        var childItem = FindFirstVisualChild(child, condition);
+        T childItem = FindFirstVisualChild(child, condition);
         if (childItem != default)
           return childItem;
       }

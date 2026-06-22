@@ -143,7 +143,7 @@ namespace ComicLibrary.ViewModel.Helpers
       rowGroup.Rows.Add(row);
 
       // Add the header row with content.
-      foreach (var cellContent in cellContents)
+      foreach (CellContent cellContent in cellContents)
       {
         var p = new Paragraph(new Run(cellContent.Text))
         {

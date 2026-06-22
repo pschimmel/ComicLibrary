@@ -72,7 +72,7 @@ namespace ComicLibrary.ViewModel
       {
         try
         {
-          var imageAsByteArray = ImageHelpers.LoadImage(filePath);
+          byte[] imageAsByteArray = ImageHelpers.LoadImage(filePath);
           if (imageAsByteArray != null)
           {
             ComicImage = new ComicImageViewModel(imageAsByteArray);

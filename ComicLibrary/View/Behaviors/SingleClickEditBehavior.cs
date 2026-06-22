@@ -51,7 +51,7 @@ namespace ComicLibrary.View.Behaviors
       dataGrid.BeginEdit(e);
 
       // Check for CheckBox
-      var checkBox = cell.GetVisualChild<CheckBox>();
+      CheckBox checkBox = cell.GetVisualChild<CheckBox>();
       if (checkBox != null)
       {
         checkBox.IsChecked = !checkBox.IsChecked;
@@ -59,7 +59,7 @@ namespace ComicLibrary.View.Behaviors
       }
 
       // Check for ComboBox
-      var comboBox = cell.GetVisualChild<ComboBox>();
+      ComboBox comboBox = cell.GetVisualChild<ComboBox>();
       if (comboBox != null && !comboBox.IsEditable)
       {
         DispatcherWrapper.Default.InvokeIfRequired(() => comboBox.IsDropDownOpen = true, DispatcherPriority.Background);
@@ -67,7 +67,7 @@ namespace ComicLibrary.View.Behaviors
       }
 
       // Check for Button
-      var button = cell.GetVisualChild<Button>();
+      Button button = cell.GetVisualChild<Button>();
       if (button != null && button.Command is ICommand command)
       {
         command.Execute(null);

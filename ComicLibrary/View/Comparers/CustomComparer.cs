@@ -23,13 +23,13 @@ namespace ComicLibrary.View.Comparers
       if (y == null)
         return 1;
 
-      var type = x.GetType();
+      Type type = x.GetType();
       if (type != y.GetType())
         throw new NotSupportedException("Cannot compare two different types.");
 
-      var property = type.GetProperty(PropertyName);
-      var xValue = property.GetValue(x)?.ToString();
-      var yValue = property.GetValue(y)?.ToString();
+      System.Reflection.PropertyInfo property = type.GetProperty(PropertyName);
+      string xValue = property.GetValue(x)?.ToString();
+      string yValue = property.GetValue(y)?.ToString();
 
       int result = _stringComparer.Compare(xValue, yValue);
       if (SortDirection == ListSortDirection.Descending)

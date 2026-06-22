@@ -62,7 +62,7 @@ namespace ComicLibrary.ViewModel
     private void AddOption()
     {
       using var settingVM = new EditOptionViewModel((IOption)Activator.CreateInstance(_type), _singleItemHeader);
-      var view = ViewFactory.Instance.CreateView(settingVM);
+      IView view = ViewFactory.Instance.CreateView(settingVM);
 
       if (view.ShowDialog() == true && !Options.Contains(settingVM.Option))
       {
@@ -99,14 +99,14 @@ namespace ComicLibrary.ViewModel
     private void EditOption()
     {
       using var settingVM = new EditOptionViewModel(SelectedOption, _singleItemHeader);
-      var view = ViewFactory.Instance.CreateView(settingVM);
+      IView view = ViewFactory.Instance.CreateView(settingVM);
 
       if (view.ShowDialog() == true &&
           !Options.Contains(settingVM.Option) &&
           !Equals(SelectedOption, settingVM.Option))
       {
-        var index = Options.IndexOf(SelectedOption);
-        var newOption = settingVM.Option;
+        int index = Options.IndexOf(SelectedOption);
+        IOption newOption = settingVM.Option;
         // Preserve the original ID so edits keep identity instead of creating a new option
         // which would be treated as a remove+add by consumers.
         if (SelectedOption != null)

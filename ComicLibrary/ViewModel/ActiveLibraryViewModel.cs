@@ -67,7 +67,7 @@ namespace ComicLibrary.ViewModel
       Comics = new ObservableCollection<ComicViewModel>();
       Comics.CollectionChanged += Comics_CollectionChanged;
 
-      foreach (var comic in library.Comics)
+      foreach (Comic comic in library.Comics)
       {
         Comics.Add(new ComicViewModel(comic, Name, Publishers, Countries, Languages));
       }
@@ -130,7 +130,7 @@ namespace ComicLibrary.ViewModel
     {
       get
       {
-        var view = Comics.GetView();
+        System.Windows.Data.CollectionView view = Comics.GetView();
         return view.OfType<ComicViewModel>()
                    .Sum(x => x.PurchasePrice ?? 0);
       }
@@ -140,7 +140,7 @@ namespace ComicLibrary.ViewModel
     {
       get
       {
-        var view = Comics.GetView();
+        System.Windows.Data.CollectionView view = Comics.GetView();
         return view.OfType<ComicViewModel>()
                    .Sum(x => x.EstimatedValue ?? 0);
       }
@@ -161,7 +161,7 @@ namespace ComicLibrary.ViewModel
 
       if (SelectedComic != null)
       {
-        var view = Comics.GetView();
+        System.Windows.Data.CollectionView view = Comics.GetView();
         int index = view.OfType<ComicViewModel>().ToList().IndexOf(SelectedComic);
 
         if (index + 1 < Comics.Count - 1)
@@ -213,7 +213,7 @@ namespace ComicLibrary.ViewModel
     {
       FileHelper.SaveActiveLibrary(ToModel(), Path);
 
-      foreach (var comic in Comics)
+      foreach (ComicViewModel comic in Comics)
       {
         comic.IsDirty = false;
       }
@@ -246,12 +246,12 @@ namespace ComicLibrary.ViewModel
 
     private void MoveComicToLibrary()
     {
-      var libraries = FileHelper.LoadLibraries();
+      IEnumerable<Library> libraries = FileHelper.LoadLibraries();
       var vm = new MoveToLibraryViewModel(libraries.Where(x => x.Name != _libraryTemplate.Name));
-      var view = ViewFactory.Instance.CreateView(vm);
+      IView view = ViewFactory.Instance.CreateView(vm);
       if (view.ShowDialog() == true && vm.SelectedLibrary != null)
       {
-        var targetLibrary = FileHelper.LoadActiveLibrary(System.IO.Path.Combine(Settings.Instance.LibrariesPath, vm.SelectedLibrary.FileName));
+        ActiveLibrary targetLibrary = FileHelper.LoadActiveLibrary(System.IO.Path.Combine(Settings.Instance.LibrariesPath, vm.SelectedLibrary.FileName));
         MoveComic(SelectedComic, vm.SelectedLibrary, targetLibrary);
         SelectedComic = null;
         FileHelper.SaveActiveLibrary(targetLibrary, System.IO.Path.Combine(Settings.Instance.LibrariesPath, vm.SelectedLibrary.FileName));
@@ -261,7 +261,7 @@ namespace ComicLibrary.ViewModel
 
     private void MoveComic(ComicViewModel comic, Library selectedLibrary, ActiveLibrary targetLibrary)
     {
-      var newComic = comic.ToModel().Copy();
+      Comic newComic = comic.ToModel().Copy();
       targetLibrary.Comics.Add(newComic);
       selectedLibrary.ComicCount++;
       Comics.Remove(comic);
@@ -281,13 +281,13 @@ namespace ComicLibrary.ViewModel
 
     private void MoveSeriesToLibrary()
     {
-      var libraries = FileHelper.LoadLibraries();
+      IEnumerable<Library> libraries = FileHelper.LoadLibraries();
       var vm = new MoveToLibraryViewModel(libraries.Where(x => x.Name != _libraryTemplate.Name));
-      var view = ViewFactory.Instance.CreateView(vm);
+      IView view = ViewFactory.Instance.CreateView(vm);
       if (view.ShowDialog() == true && vm.SelectedLibrary != null)
       {
-        var targetLibrary = FileHelper.LoadActiveLibrary(System.IO.Path.Combine(Settings.Instance.LibrariesPath, vm.SelectedLibrary.FileName));
-        foreach (var comic in Comics.Where(x => string.Equals(SelectedComic.Series, x.Series, StringComparison.InvariantCultureIgnoreCase)).ToList())
+        ActiveLibrary targetLibrary = FileHelper.LoadActiveLibrary(System.IO.Path.Combine(Settings.Instance.LibrariesPath, vm.SelectedLibrary.FileName));
+        foreach (ComicViewModel comic in Comics.Where(x => string.Equals(SelectedComic.Series, x.Series, StringComparison.InvariantCultureIgnoreCase)).ToList())
         {
           MoveComic(comic, vm.SelectedLibrary, targetLibrary);
         }
@@ -310,14 +310,14 @@ namespace ComicLibrary.ViewModel
 
     private void RenameSeries()
     {
-      var libraries = FileHelper.LoadLibraries();
+      IEnumerable<Library> libraries = FileHelper.LoadLibraries();
       var vm = new GetNameViewModel(Properties.Resources.RenameSeries, Properties.Resources.Series, SelectedComic.Series, s => !string.IsNullOrWhiteSpace(s));
-      var view = ViewFactory.Instance.CreateView(vm);
+      IView view = ViewFactory.Instance.CreateView(vm);
 
       if (view.ShowDialog() == true && !string.IsNullOrWhiteSpace(vm.Name))
       {
-        var oldName = SelectedComic.Series;
-        foreach (var c in Comics.ToList())
+        string oldName = SelectedComic.Series;
+        foreach (ComicViewModel c in Comics.ToList())
         {
           if (string.Equals(oldName, c.Series, StringComparison.InvariantCultureIgnoreCase))
           {
@@ -341,13 +341,13 @@ namespace ComicLibrary.ViewModel
     private void ChangeStorageLocation()
     {
       var vm = new GetNameViewModel(Properties.Resources.ChangeStorageLoccation, Properties.Resources.StorageLocation, SelectedComic.StorageLocation, s => true);
-      var view = ViewFactory.Instance.CreateView(vm);
+      IView view = ViewFactory.Instance.CreateView(vm);
 
       if (view.ShowDialog() == true)
       {
-        var newLocation = vm.Name;
-        var series = SelectedComic.Series;
-        foreach (var c in Comics.ToList())
+        string newLocation = vm.Name;
+        string series = SelectedComic.Series;
+        foreach (ComicViewModel c in Comics.ToList())
         {
           if (string.Equals(series, c.Series, StringComparison.InvariantCultureIgnoreCase))
           {
@@ -417,7 +417,7 @@ namespace ComicLibrary.ViewModel
     {
       var vm = new PrintReportViewModel(_printColumns);
       vm.PrepareReport(this);
-      var view = ViewFactory.Instance.CreateView(vm);
+      IView view = ViewFactory.Instance.CreateView(vm);
       view.ShowDialog();
     }
 
@@ -447,7 +447,7 @@ namespace ComicLibrary.ViewModel
     {
       var vm = new PrintListViewModel(ReduceIssues, ExcludeLowGrades, ExcludedGradeThreshold);
       vm.PrepareReport(this);
-      var view = ViewFactory.Instance.CreateView(vm);
+      IView view = ViewFactory.Instance.CreateView(vm);
       view.ShowDialog();
     }
 
@@ -461,14 +461,14 @@ namespace ComicLibrary.ViewModel
     {
       if (IsDirty)
       {
-        var result = MessageBox.Show(Properties.Resources.SaveChangesQuestion, Properties.Resources.Question, MessageBoxButton.YesNoCancel);
+        MessageBoxResult result = MessageBox.Show(Properties.Resources.SaveChangesQuestion, Properties.Resources.Question, MessageBoxButton.YesNoCancel);
 
         if (result == MessageBoxResult.Cancel)
           return;
 
         if (result == MessageBoxResult.Yes)
         {
-          var model = ToModel();
+          ActiveLibrary model = ToModel();
           FileHelper.SaveActiveLibrary(model, Path);
         }
       }
@@ -529,7 +529,7 @@ namespace ComicLibrary.ViewModel
 
       try
       {
-        var clipboardString = (string)Clipboard.GetData("Comic");
+        string clipboardString = (string)Clipboard.GetData("Comic");
         comic = Comic.FromClipboardString(clipboardString);
       }
       catch (Exception ex)
@@ -544,7 +544,7 @@ namespace ComicLibrary.ViewModel
 
       if (SelectedComic != null)
       {
-        var view = Comics.GetView();
+        System.Windows.Data.CollectionView view = Comics.GetView();
         int index = view.OfType<ComicViewModel>().ToList().IndexOf(SelectedComic);
 
         if (index + 1 < Comics.Count - 1)
@@ -579,7 +579,7 @@ namespace ComicLibrary.ViewModel
     private void ShowChart()
     {
       var vm = new ChartViewModel(ToModel());
-      var view = ViewFactory.Instance.CreateView(vm);
+      IView view = ViewFactory.Instance.CreateView(vm);
       view.ShowDialog();
     }
 
@@ -623,7 +623,7 @@ namespace ComicLibrary.ViewModel
       OnPropertyChanged(nameof(Languages));
 
       // Update existing comics to use the new option lists
-      foreach (var comic in Comics)
+      foreach (ComicViewModel comic in Comics)
       {
         comic.SetOptionLists(Publishers, Countries, Languages);
         // Trigger property refresh on each comic so bindings update
@@ -633,9 +633,8 @@ namespace ComicLibrary.ViewModel
 
     public void AddPublisher(Publisher p)
     {
-      var list = Publishers as IList<IOptionItemViewModel<Publisher>>;
       var vm = new OptionItemViewModel<Publisher>(p);
-      if (list != null)
+      if (Publishers is IList<IOptionItemViewModel<Publisher>> list)
       {
         // insert in sorted order after empty item
         int insertAt = 1;
@@ -650,7 +649,7 @@ namespace ComicLibrary.ViewModel
 
       OnPropertyChanged(nameof(Publishers));
 
-      foreach (var comic in Comics)
+      foreach (ComicViewModel comic in Comics)
       {
         comic.SetOptionLists(Publishers, Countries, Languages);
         comic.Refresh();
@@ -659,10 +658,9 @@ namespace ComicLibrary.ViewModel
 
     public void RemovePublisher(Guid id)
     {
-      var list = Publishers as IList<IOptionItemViewModel<Publisher>>;
-      if (list != null)
+      if (Publishers is IList<IOptionItemViewModel<Publisher>> list)
       {
-        var item = list.FirstOrDefault(x => x.Option != null && x.Option.ID == id);
+        IOptionItemViewModel<Publisher> item = list.FirstOrDefault(x => x.Option != null && x.Option.ID == id);
         if (item != null) list.Remove(item);
       }
       else
@@ -671,9 +669,9 @@ namespace ComicLibrary.ViewModel
       }
 
       // For comics using the removed publisher, clear the model value
-      foreach (var comic in Comics)
+      foreach (ComicViewModel comic in Comics)
       {
-        var model = comic.ToModel();
+        Comic model = comic.ToModel();
         if (model.Publisher != null && model.Publisher.ID == id)
         {
           model.Publisher = null; // set empty option element
@@ -688,9 +686,8 @@ namespace ComicLibrary.ViewModel
 
     public void AddCountry(Country c)
     {
-      var list = Countries as IList<IOptionItemViewModel<Country>>;
       var vm = new OptionItemViewModel<Country>(c);
-      if (list != null)
+      if (Countries is IList<IOptionItemViewModel<Country>> list)
       {
         int insertAt = 1;
         while (insertAt < list.Count && string.Compare(list[insertAt].Name, vm.Name, StringComparison.InvariantCultureIgnoreCase) < 0)
@@ -704,7 +701,7 @@ namespace ComicLibrary.ViewModel
 
       OnPropertyChanged(nameof(Countries));
 
-      foreach (var comic in Comics)
+      foreach (ComicViewModel comic in Comics)
       {
         comic.SetOptionLists(Publishers, Countries, Languages);
         comic.Refresh();
@@ -713,10 +710,9 @@ namespace ComicLibrary.ViewModel
 
     public void RemoveCountry(Guid id)
     {
-      var list = Countries as IList<IOptionItemViewModel<Country>>;
-      if (list != null)
+      if (Countries is IList<IOptionItemViewModel<Country>> list)
       {
-        var item = list.FirstOrDefault(x => x.Option != null && x.Option.ID == id);
+        IOptionItemViewModel<Country> item = list.FirstOrDefault(x => x.Option != null && x.Option.ID == id);
         if (item != null) list.Remove(item);
       }
       else
@@ -724,9 +720,9 @@ namespace ComicLibrary.ViewModel
         Countries = Countries.Where(x => x.Option == null || x.Option.ID != id).ToList();
       }
 
-      foreach (var comic in Comics)
+      foreach (ComicViewModel comic in Comics)
       {
-        var model = comic.ToModel();
+        Comic model = comic.ToModel();
         if (model.Country != null && model.Country.ID == id)
         {
           model.Country = null;
@@ -741,9 +737,8 @@ namespace ComicLibrary.ViewModel
 
     public void AddLanguage(Language l)
     {
-      var list = Languages as IList<IOptionItemViewModel<Language>>;
       var vm = new OptionItemViewModel<Language>(l);
-      if (list != null)
+      if (Languages is IList<IOptionItemViewModel<Language>> list)
       {
         int insertAt = 1;
         while (insertAt < list.Count && string.Compare(list[insertAt].Name, vm.Name, StringComparison.InvariantCultureIgnoreCase) < 0)
@@ -757,7 +752,7 @@ namespace ComicLibrary.ViewModel
 
       OnPropertyChanged(nameof(Languages));
 
-      foreach (var comic in Comics)
+      foreach (ComicViewModel comic in Comics)
       {
         comic.SetOptionLists(Publishers, Countries, Languages);
         comic.Refresh();
@@ -766,10 +761,9 @@ namespace ComicLibrary.ViewModel
 
     public void RemoveLanguage(Guid id)
     {
-      var list = Languages as IList<IOptionItemViewModel<Language>>;
-      if (list != null)
+      if (Languages is IList<IOptionItemViewModel<Language>> list)
       {
-        var item = list.FirstOrDefault(x => x.Option != null && x.Option.ID == id);
+        IOptionItemViewModel<Language> item = list.FirstOrDefault(x => x.Option != null && x.Option.ID == id);
         if (item != null) list.Remove(item);
       }
       else
@@ -777,9 +771,9 @@ namespace ComicLibrary.ViewModel
         Languages = Languages.Where(x => x.Option == null || x.Option.ID != id).ToList();
       }
 
-      foreach (var comic in Comics)
+      foreach (ComicViewModel comic in Comics)
       {
-        var model = comic.ToModel();
+        Comic model = comic.ToModel();
         if (model.Language != null && model.Language.ID == id)
         {
           model.Language = null;
@@ -800,7 +794,7 @@ namespace ComicLibrary.ViewModel
     {
       if (e.Action == NotifyCollectionChangedAction.Reset)
       {
-        foreach (var oldItem in Comics)
+        foreach (ComicViewModel oldItem in Comics)
         {
           oldItem.PropertyChanged += Comic_PropertyChanged;
         }
@@ -809,14 +803,14 @@ namespace ComicLibrary.ViewModel
       {
         if (e.NewItems != null)
         {
-          foreach (var newItem in e.NewItems.OfType<ComicViewModel>())
+          foreach (ComicViewModel newItem in e.NewItems.OfType<ComicViewModel>())
           {
             newItem.PropertyChanged += Comic_PropertyChanged;
           }
         }
         if (e.OldItems != null)
         {
-          foreach (var oldItem in e.OldItems.OfType<ComicViewModel>())
+          foreach (ComicViewModel oldItem in e.OldItems.OfType<ComicViewModel>())
           {
             oldItem.PropertyChanged -= Comic_PropertyChanged;
           }
@@ -847,7 +841,7 @@ namespace ComicLibrary.ViewModel
 
     private void ApplyFilter()
     {
-      var view = Comics.GetView();
+      System.Windows.Data.CollectionView view = Comics.GetView();
       view.Filter = string.IsNullOrWhiteSpace(SearchText) || SearchText.Length < 3
                     ? null
                     : x => x is ComicViewModel c && MatchesFilter(c, SearchText);

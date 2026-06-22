@@ -23,7 +23,7 @@ namespace ComicLibrary.View
 
       Dispatcher.BeginInvoke(() =>
       {
-        var firstFocusableChild = (Content as FrameworkElement)?.FindFirstVisualChild<FrameworkElement>(x => x.Focusable);
+        FrameworkElement firstFocusableChild = (Content as FrameworkElement)?.FindFirstVisualChild<FrameworkElement>(x => x.Focusable);
         firstFocusableChild?.Focus();
       }, DispatcherPriority.ContextIdle);
     }

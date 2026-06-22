@@ -85,7 +85,7 @@ namespace ComicLibrary.ViewModel
       Items = [];
       int max = 0;
 
-      foreach (var comic in Selector(_library.Comics))
+      foreach (Comic comic in Selector(_library.Comics))
       {
         string valueAsString = GetValue(comic);
 

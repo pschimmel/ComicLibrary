@@ -161,7 +161,7 @@ namespace ComicLibrary.ViewModel
 
       if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK && dialog.SelectedPath != LibrariesPath)
       {
-        var result = MessageBox.Show(Properties.Resources.MoveXMLFilesQuestion, Properties.Resources.Question, MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+        MessageBoxResult result = MessageBox.Show(Properties.Resources.MoveXMLFilesQuestion, Properties.Resources.Question, MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
         if (result == MessageBoxResult.Cancel)
           return;
 
@@ -171,7 +171,7 @@ namespace ComicLibrary.ViewModel
 
           if (directory.Exists)
           {
-            foreach (var file in directory.GetFiles("*.xml"))
+            foreach (FileInfo file in directory.GetFiles("*.xml"))
             {
               file.MoveTo(Path.Combine(dialog.SelectedPath, file.Name));
             }
@@ -192,7 +192,7 @@ namespace ComicLibrary.ViewModel
     private void EditCountries()
     {
       var optionsVM = new EditOptionsViewModel(Globals.Instance.Countries.OrderBy(x => x.Name), typeof(Country), Properties.Resources.Countries, Properties.Resources.Country);
-      var view = ViewFactory.Instance.CreateView(optionsVM);
+      IView view = ViewFactory.Instance.CreateView(optionsVM);
       if (view.ShowDialog() == true)
       {
         var incoming = optionsVM.Options.OfType<Country>().ToList();
@@ -202,9 +202,9 @@ namespace ComicLibrary.ViewModel
         var incomingById = incoming.ToDictionary(x => x.ID);
 
         // Add or update
-        foreach (var inc in incoming)
+        foreach (Country inc in incoming)
         {
-          if (existingById.TryGetValue(inc.ID, out var existing))
+          if (existingById.TryGetValue(inc.ID, out Country existing))
           {
             // update properties on existing instance to preserve references
             if (existing.Name != inc.Name)
@@ -214,17 +214,17 @@ namespace ComicLibrary.ViewModel
           else
           {
             Globals.Instance.Countries.Add(inc);
-            foreach (var active in ActiveLibraries)
+            foreach (ActiveLibraryViewModel active in ActiveLibraries)
               active.AddCountry(inc);
           }
         }
 
         // Removed
         var toRemove = Globals.Instance.Countries.Where(x => !incomingById.ContainsKey(x.ID)).ToList();
-        foreach (var rem in toRemove)
+        foreach (Country rem in toRemove)
         {
           Globals.Instance.Countries.Remove(rem);
-          foreach (var active in ActiveLibraries)
+          foreach (ActiveLibraryViewModel active in ActiveLibraries)
             active.RemoveCountry(rem.ID);
         }
 
@@ -241,7 +241,7 @@ namespace ComicLibrary.ViewModel
     private void EditLanguages()
     {
       var optionsVM = new EditOptionsViewModel(Globals.Instance.Languages.OrderBy(x => x.Name), typeof(Language), Properties.Resources.Languages, Properties.Resources.Language);
-      var view = ViewFactory.Instance.CreateView(optionsVM);
+      IView view = ViewFactory.Instance.CreateView(optionsVM);
       if (view.ShowDialog() == true)
       {
         var incoming = optionsVM.Options.OfType<Language>().ToList();
@@ -249,9 +249,9 @@ namespace ComicLibrary.ViewModel
         var existingById = Globals.Instance.Languages.ToDictionary(x => x.ID);
         var incomingById = incoming.ToDictionary(x => x.ID);
 
-        foreach (var inc in incoming)
+        foreach (Language inc in incoming)
         {
-          if (existingById.TryGetValue(inc.ID, out var existing))
+          if (existingById.TryGetValue(inc.ID, out Language existing))
           {
             if (existing.Name != inc.Name)
               existing.Name = inc.Name;
@@ -260,16 +260,16 @@ namespace ComicLibrary.ViewModel
           else
           {
             Globals.Instance.Languages.Add(inc);
-            foreach (var active in ActiveLibraries)
+            foreach (ActiveLibraryViewModel active in ActiveLibraries)
               active.AddLanguage(inc);
           }
         }
 
         var toRemove = Globals.Instance.Languages.Where(x => !incomingById.ContainsKey(x.ID)).ToList();
-        foreach (var rem in toRemove)
+        foreach (Language rem in toRemove)
         {
           Globals.Instance.Languages.Remove(rem);
-          foreach (var active in ActiveLibraries)
+          foreach (ActiveLibraryViewModel active in ActiveLibraries)
             active.RemoveLanguage(rem.ID);
         }
 
@@ -286,7 +286,7 @@ namespace ComicLibrary.ViewModel
     private void EditPublishers()
     {
       var optionsVM = new EditOptionsViewModel(Globals.Instance.Publishers.OrderBy(x => x.Name), typeof(Publisher), Properties.Resources.Publishers, Properties.Resources.Publisher);
-      var view = ViewFactory.Instance.CreateView(optionsVM);
+      IView view = ViewFactory.Instance.CreateView(optionsVM);
       if (view.ShowDialog() == true)
       {
         var incoming = optionsVM.Options.OfType<Publisher>().ToList();
@@ -294,9 +294,9 @@ namespace ComicLibrary.ViewModel
         var existingById = Globals.Instance.Publishers.ToDictionary(x => x.ID);
         var incomingById = incoming.ToDictionary(x => x.ID);
 
-        foreach (var inc in incoming)
+        foreach (Publisher inc in incoming)
         {
-          if (existingById.TryGetValue(inc.ID, out var existing))
+          if (existingById.TryGetValue(inc.ID, out Publisher existing))
           {
             if (existing.Name != inc.Name)
               existing.Name = inc.Name;
@@ -305,16 +305,16 @@ namespace ComicLibrary.ViewModel
           else
           {
             Globals.Instance.Publishers.Add(inc);
-            foreach (var active in ActiveLibraries)
+            foreach (ActiveLibraryViewModel active in ActiveLibraries)
               active.AddPublisher(inc);
           }
         }
 
         var toRemove = Globals.Instance.Publishers.Where(x => !incomingById.ContainsKey(x.ID)).ToList();
-        foreach (var rem in toRemove)
+        foreach (Publisher rem in toRemove)
         {
           Globals.Instance.Publishers.Remove(rem);
-          foreach (var active in ActiveLibraries)
+          foreach (ActiveLibraryViewModel active in ActiveLibraries)
             active.RemovePublisher(rem.ID);
         }
 
@@ -384,7 +384,7 @@ namespace ComicLibrary.ViewModel
     private void LoadLibrary(LibraryViewModel libraryVM)
     {
       // If the library is already open, just switch to it
-      foreach (var activeLibrary in ActiveLibraries)
+      foreach (ActiveLibraryViewModel activeLibrary in ActiveLibraries)
       {
         if (activeLibrary.Name == libraryVM.Name && activeLibrary.Path == libraryVM.GetFilePath())
         {
@@ -394,7 +394,7 @@ namespace ComicLibrary.ViewModel
         }
       }
 
-      var path = libraryVM.GetFilePath();
+      string path = libraryVM.GetFilePath();
       var newLibrary = new ActiveLibraryViewModel(FileHelper.LoadActiveLibrary(path), libraryVM);
       ActiveLibraries.Add(newLibrary);
       SelectedLibrary = newLibrary;
@@ -411,7 +411,7 @@ namespace ComicLibrary.ViewModel
     {
       bool libraryNameOK(string name) => !string.IsNullOrWhiteSpace(name) && !Libraries.Any(x => string.Equals(x.Name, name, StringComparison.InvariantCultureIgnoreCase));
       var vm = new GetNameViewModel(Properties.Resources.EnterNameOfLibrary, Properties.Resources.Name, null, libraryNameOK);
-      var view = ViewFactory.Instance.CreateView(vm);
+      IView view = ViewFactory.Instance.CreateView(vm);
 
       if (view.ShowDialog() == true && !string.IsNullOrWhiteSpace(vm.Name))
       {
@@ -476,7 +476,7 @@ namespace ComicLibrary.ViewModel
 
       if (dialog.ShowDialog() == true)
       {
-        var filePath = Path.Combine(Path.GetDirectoryName(dialog.FileName), FileHelper.GetValidFileName(Path.GetFileName(dialog.FileName)));
+        string filePath = Path.Combine(Path.GetDirectoryName(dialog.FileName), FileHelper.GetValidFileName(Path.GetFileName(dialog.FileName)));
         ImageHelpers.SaveImage((BitmapSource)vm.ComicImage.Image, filePath, Path.GetExtension(dialog.FileName) == ".png");
       }
     }
@@ -497,14 +497,14 @@ namespace ComicLibrary.ViewModel
       if (MessageBox.Show(Properties.Resources.RemoveLibraryQuestion, Properties.Resources.Warning, MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
       {
         Libraries.Remove(vm);
-        var activeLibrary = ActiveLibraries.FirstOrDefault(x => x.Name == vm.Name);
+        ActiveLibraryViewModel activeLibrary = ActiveLibraries.FirstOrDefault(x => x.Name == vm.Name);
 
         if (activeLibrary != null)
         {
           ActiveLibraries.Remove(activeLibrary);
           if (Settings.Instance.CreateBackupWhenSaving)
           {
-            var backupPath = activeLibrary.Path + ".bak";
+            string backupPath = activeLibrary.Path + ".bak";
             File.Move(activeLibrary.Path, backupPath, true);
           }
         }
@@ -521,7 +521,7 @@ namespace ComicLibrary.ViewModel
     {
       if (ActiveLibraries.Any(x => x.IsDirty))
       {
-        var result = MessageBox.Show(Properties.Resources.SaveChangesQuestion, Properties.Resources.Question, MessageBoxButton.YesNoCancel);
+        MessageBoxResult result = MessageBox.Show(Properties.Resources.SaveChangesQuestion, Properties.Resources.Question, MessageBoxButton.YesNoCancel);
 
         if (result == MessageBoxResult.Cancel)
           return false;
@@ -530,7 +530,7 @@ namespace ComicLibrary.ViewModel
         {
           Parallel.ForEach(ActiveLibraries.Where(x => x.IsDirty), library =>
           {
-            var model = library.ToModel();
+            ActiveLibrary model = library.ToModel();
             FileHelper.SaveActiveLibrary(model, library.Path);
           });
         }
@@ -548,10 +548,10 @@ namespace ComicLibrary.ViewModel
 
     private void LoadLibraries()
     {
-      var libraries = FileHelper.LoadLibraries();
+      IEnumerable<Library> libraries = FileHelper.LoadLibraries();
 
       // Add missing libraries
-      foreach (var storedlibrary in libraries)
+      foreach (Library storedlibrary in libraries)
       {
         if (!Libraries.OfType<LibraryViewModel>().Any(x => Equals(x.ToModel(), storedlibrary)))
         {
@@ -560,7 +560,7 @@ namespace ComicLibrary.ViewModel
       }
 
       // Remove libraries not stored anymore
-      foreach (var currentLibrary in Libraries.OfType<LibraryViewModel>().ToArray())
+      foreach (LibraryViewModel currentLibrary in Libraries.OfType<LibraryViewModel>().ToArray())
       {
         if (!libraries.Any(x => Equals(x, currentLibrary.ToModel())))
         {
@@ -568,7 +568,7 @@ namespace ComicLibrary.ViewModel
         }
       }
 
-      var addLibrary = Libraries.OfType<AddLibraryViewModel>().FirstOrDefault() ?? new AddLibraryViewModel();
+      AddLibraryViewModel addLibrary = Libraries.OfType<AddLibraryViewModel>().FirstOrDefault() ?? new AddLibraryViewModel();
 
       // Make the entry to create a library the last entry
       Libraries.Remove(addLibrary);
@@ -582,12 +582,12 @@ namespace ComicLibrary.ViewModel
 
     private void ActiveLibraries_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
     {
-      foreach (var newLibrary in e.NewItems?.OfType<ActiveLibraryViewModel>() ?? [])
+      foreach (ActiveLibraryViewModel newLibrary in e.NewItems?.OfType<ActiveLibraryViewModel>() ?? [])
       {
         newLibrary.ClosingRequested += Library_ClosingRequested;
       }
 
-      foreach (var oldLibrary in e.OldItems?.OfType<ActiveLibraryViewModel>() ?? [])
+      foreach (ActiveLibraryViewModel oldLibrary in e.OldItems?.OfType<ActiveLibraryViewModel>() ?? [])
       {
         oldLibrary.ClosingRequested -= Library_ClosingRequested;
       }

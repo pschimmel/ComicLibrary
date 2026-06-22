@@ -27,24 +27,24 @@ namespace ComicLibrary.ViewModel
       // Use available size of document
       document.ColumnWidth = double.PositiveInfinity;
 
-      var printQueue = LocalPrintServer.GetDefaultPrintQueue();
-      var ticket = printQueue.DefaultPrintTicket;
-      var pageMediaSize = ticket.PageMediaSize;
-      var printableArea = printQueue.GetPrintCapabilities(ticket).PageImageableArea;
+      PrintQueue printQueue = LocalPrintServer.GetDefaultPrintQueue();
+      PrintTicket ticket = printQueue.DefaultPrintTicket;
+      PageMediaSize pageMediaSize = ticket.PageMediaSize;
+      PageImageableArea printableArea = printQueue.GetPrintCapabilities(ticket).PageImageableArea;
 
       // Change the PageSize and PagePadding for the document to match the CanvasSize for the printer device.
-      var leftPadding = printableArea.OriginWidth;
-      var topPadding = printableArea.OriginHeight;
-      var rightPadding = pageMediaSize.Width - leftPadding - printableArea.ExtentWidth ?? 0.0;
-      var bottomPadding = pageMediaSize.Height - topPadding - printableArea.ExtentHeight ?? 0.0;
+      double leftPadding = printableArea.OriginWidth;
+      double topPadding = printableArea.OriginHeight;
+      double rightPadding = pageMediaSize.Width - leftPadding - printableArea.ExtentWidth ?? 0.0;
+      double bottomPadding = pageMediaSize.Height - topPadding - printableArea.ExtentHeight ?? 0.0;
 
-      var minBorderPadding = 50.0;
+      double minBorderPadding = 50.0;
       document.PagePadding = new Thickness(Math.Max(minBorderPadding, topPadding),
                                            Math.Max(minBorderPadding, leftPadding),
                                            Math.Max(minBorderPadding, rightPadding),
                                            Math.Max(minBorderPadding, bottomPadding));
 
-      var paginator = ((IDocumentPaginatorSource)document).DocumentPaginator;
+      DocumentPaginator paginator = ((IDocumentPaginatorSource)document).DocumentPaginator;
       paginator.PageSize = new Size(pageMediaSize.Width ?? 0, pageMediaSize.Height ?? 0);
       using var ms = new MemoryStream();
       var package = Package.Open(ms, FileMode.Create, FileAccess.ReadWrite);

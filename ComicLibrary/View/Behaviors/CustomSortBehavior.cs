@@ -115,7 +115,7 @@ namespace ComicLibrary.View.Behaviors
 
       e.Handled = true;
 
-      var direction = e.Column.SortDirection == ListSortDirection.Ascending
+      ListSortDirection direction = e.Column.SortDirection == ListSortDirection.Ascending
                       ? ListSortDirection.Descending
                       : ListSortDirection.Ascending;
 

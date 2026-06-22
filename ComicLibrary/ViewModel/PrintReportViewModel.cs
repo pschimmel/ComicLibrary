@@ -81,10 +81,10 @@ namespace ComicLibrary.ViewModel
       }
 
       // Add comics as table
-      var table = document.AddTable(columns.ToArray());
+      Table table = document.AddTable(columns.ToArray());
       table.AddHeaderRow(headers.ToArray());
 
-      foreach (var comic in library.Comics)
+      foreach (ComicViewModel comic in library.Comics)
       {
         var content = new List<CellContent>();
 

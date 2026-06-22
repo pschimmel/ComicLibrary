@@ -66,7 +66,7 @@ namespace ComicLibrary.ViewModel
       CollectorsEdition = comic.CollectorsEdition;
       Library = library;
 
-      foreach (var imageAsString in comic.ImagesAsString)
+      foreach (string imageAsString in comic.ImagesAsString)
       {
         ComicImages.Add(new ComicImageViewModel(imageAsString));
       }
@@ -131,7 +131,7 @@ namespace ComicLibrary.ViewModel
     private void SelectGrade()
     {
       var vm = new GradePickerViewModel(Condition, ScaleHelper.DefaultScale);
-      var view = ViewFactory.Instance.CreateView(vm);
+      IView view = ViewFactory.Instance.CreateView(vm);
       if (view.ShowDialog() == true)
       {
         Condition = vm.SelectedGrade;
@@ -155,7 +155,7 @@ namespace ComicLibrary.ViewModel
 
       if (dialog.ShowDialog() == true && File.Exists(dialog.FileName))
       {
-        var imageAsByteArray = ImageHelpers.LoadImage(dialog.FileName);
+        byte[] imageAsByteArray = ImageHelpers.LoadImage(dialog.FileName);
         if (imageAsByteArray != null)
         {
           ComicImages.Add(new ComicImageViewModel(imageAsByteArray));
@@ -190,7 +190,7 @@ namespace ComicLibrary.ViewModel
 
       if (dialog.ShowDialog() == true)
       {
-        var filePath = Path.Combine(Path.GetDirectoryName(dialog.FileName), FileHelper.GetValidFileName(Path.GetFileName(dialog.FileName)));
+        string filePath = Path.Combine(Path.GetDirectoryName(dialog.FileName), FileHelper.GetValidFileName(Path.GetFileName(dialog.FileName)));
         ImageHelpers.SaveImage((BitmapSource)vm.Image, filePath, Path.GetExtension(dialog.FileName) == ".png");
       }
     }
@@ -227,7 +227,7 @@ namespace ComicLibrary.ViewModel
       _comic.ModifiedDate = DateTime.Now;
 
       _comic.ImagesAsString.Clear();
-      foreach (var image in ComicImages)
+      foreach (ComicImageViewModel image in ComicImages)
       {
         _comic.ImagesAsString.Add(image.ToString());
       }

@@ -10,7 +10,7 @@ namespace ComicLibrary.Model.Entities
     private ScaleHelper()
     {
       _scales = GradingScaleFileHelper.GetScales();
-      foreach (var scale in _scales)
+      foreach (GradingScale scale in _scales)
       {
         if (!scale.Grades.Any(x => x.Number == -1.0))
         {

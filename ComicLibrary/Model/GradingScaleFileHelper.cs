@@ -26,14 +26,14 @@ namespace ComicLibrary.Model
 
     public static IEnumerable<GradingScale> GetScales()
     {
-      var location = Assembly.GetEntryAssembly().Location;
-      var dir = Path.GetDirectoryName(location);
-      var path = Path.Combine(dir, GradingScaleFolder);
+      string location = Assembly.GetEntryAssembly().Location;
+      string dir = Path.GetDirectoryName(location);
+      string path = Path.Combine(dir, GradingScaleFolder);
 
-      var files = Directory.GetFiles(path, "*.xml");
+      string[] files = Directory.GetFiles(path, "*.xml");
       List<GradingScale> scales = new(files.Length);
 
-      foreach (var file in files)
+      foreach (string file in files)
       {
         scales.Add(LoadGradingScale(file));
       }
@@ -53,14 +53,14 @@ namespace ComicLibrary.Model
 
         if (xml.FirstChild.Name == GradingScaleKey)
         {
-          var scaleNode = xml.FirstChild;
+          XmlNode scaleNode = xml.FirstChild;
           var scale = new GradingScale(scaleNode.Attributes.GetNamedItem(NameKey).Value);
 
           foreach (XmlNode scaleChildNode in scaleNode.ChildNodes)
           {
             if (scaleChildNode.Name == GradesKey)
             {
-              var gradesNode = scaleChildNode;
+              XmlNode gradesNode = scaleChildNode;
               foreach (XmlNode gradeNode in gradesNode.ChildNodes)
               {
                 if (gradeNode.Name == GradeKey)

@@ -69,13 +69,13 @@ namespace ComicLibrary.Model
 
         if (xml.FirstChild.Name == GlobalsKey)
         {
-          var globalsNode = xml.FirstChild;
+          XmlNode globalsNode = xml.FirstChild;
 
           foreach (XmlNode globalsChildNode in globalsNode.ChildNodes)
           {
             if (globalsChildNode.Name == CountriesKey)
             {
-              var countriesNode = globalsChildNode;
+              XmlNode countriesNode = globalsChildNode;
               foreach (XmlNode countryNode in countriesNode.ChildNodes)
               {
                 if (countryNode.Name == CountryKey)
@@ -94,7 +94,7 @@ namespace ComicLibrary.Model
             }
             else if (globalsChildNode.Name == LanguagesKey)
             {
-              var languagesNode = globalsChildNode;
+              XmlNode languagesNode = globalsChildNode;
               foreach (XmlNode languageNode in languagesNode.ChildNodes)
               {
                 if (languageNode.Name == LanguageKey)
@@ -113,7 +113,7 @@ namespace ComicLibrary.Model
             }
             else if (globalsChildNode.Name == PublishersKey)
             {
-              var publishersNode = globalsChildNode;
+              XmlNode publishersNode = globalsChildNode;
               foreach (XmlNode publisherNode in publishersNode.ChildNodes)
               {
                 if (publisherNode.Name == PublisherKey)
@@ -181,7 +181,7 @@ namespace ComicLibrary.Model
 
         if (xml.FirstChild.Name == LibrariesKey)
         {
-          var librariesNode = xml.FirstChild;
+          XmlNode librariesNode = xml.FirstChild;
 
           foreach (XmlNode libraryNode in librariesNode.ChildNodes)
           {
@@ -251,7 +251,7 @@ namespace ComicLibrary.Model
     {
       if (xml.FirstChild.Name == LibraryKey)
       {
-        var libraryNode = xml.FirstChild;
+        XmlNode libraryNode = xml.FirstChild;
         foreach (XmlAttribute libraryAttribute in libraryNode.Attributes)
         {
           if (libraryAttribute.Name == SaveDateKey)
@@ -268,7 +268,7 @@ namespace ComicLibrary.Model
     {
       if (libraryNode.ChildNodes.Count > 0 && libraryNode.ChildNodes[0].Name == ComicsKey)
       {
-        var comicsNode = libraryNode.ChildNodes[0];
+        XmlNode comicsNode = libraryNode.ChildNodes[0];
         int counter = 0;
 
         foreach (XmlNode comicNode in comicsNode.ChildNodes)
@@ -294,7 +294,7 @@ namespace ComicLibrary.Model
               }
               else if (comicChildNode.Name == ConditionKey && double.TryParse(comicChildNode.InnerText, CultureInfo.InvariantCulture, out double gradingNumber))
               {
-                var scale = ScaleHelper.DefaultScale;
+                GradingScale scale = ScaleHelper.DefaultScale;
 
                 foreach (XmlAttribute gradeAttribute in comicChildNode.Attributes)
                 {
@@ -304,13 +304,13 @@ namespace ComicLibrary.Model
                   }
                   else if (gradeAttribute.Name == GradingTypeKey)
                   {
-                    var foundScale = ScaleHelper.Scales.FirstOrDefault(x => x.Name == gradeAttribute.InnerText);
+                    GradingScale foundScale = ScaleHelper.Scales.FirstOrDefault(x => x.Name == gradeAttribute.InnerText);
                     if (foundScale != null)
                       scale = foundScale;
                   }
                 }
 
-                var grading = scale.Grades.FirstOrDefault(x => x.Number == gradingNumber);
+                Grade grading = scale.Grades.FirstOrDefault(x => x.Number == gradingNumber);
 
                 if (grading != null)
                   comic.Condition = grading;
@@ -416,18 +416,18 @@ namespace ComicLibrary.Model
         var xml = new XmlDocument();
         xml.CreateXmlDeclaration("1.0", "iso-8859-1", "yes");
 
-        var globalsNode = xml.CreateElement(GlobalsKey);
-        var childAttribute = xml.CreateAttribute(SaveDateKey);
+        XmlElement globalsNode = xml.CreateElement(GlobalsKey);
+        XmlAttribute childAttribute = xml.CreateAttribute(SaveDateKey);
         childAttribute.InnerText = DateTime.Now.ToString("o"); // Uses ISO 8601 format
         globalsNode.Attributes.Append(childAttribute);
         xml.AppendChild(globalsNode);
 
         if (globals.Countries.Count != 0)
         {
-          var countriesNode = xml.CreateElement(CountriesKey);
+          XmlElement countriesNode = xml.CreateElement(CountriesKey);
           globalsNode.AppendChild(countriesNode);
 
-          foreach (var country in globals.Countries.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.ID != Guid.Empty).OrderBy(x => x.Name))
+          foreach (Country country in globals.Countries.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.ID != Guid.Empty).OrderBy(x => x.Name))
           {
             AppendChildWithAttributes(countriesNode,
                                       CountryKey,
@@ -440,10 +440,10 @@ namespace ComicLibrary.Model
 
         if (globals.Languages.Count != 0)
         {
-          var languegesNode = xml.CreateElement(LanguagesKey);
+          XmlElement languegesNode = xml.CreateElement(LanguagesKey);
           globalsNode.AppendChild(languegesNode);
 
-          foreach (var language in globals.Languages.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.ID != Guid.Empty).OrderBy(x => x.Name))
+          foreach (Language language in globals.Languages.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.ID != Guid.Empty).OrderBy(x => x.Name))
           {
             AppendChildWithAttributes(languegesNode,
                                       LanguageKey,
@@ -456,10 +456,10 @@ namespace ComicLibrary.Model
 
         if (globals.Publishers.Count != 0)
         {
-          var publishersNode = xml.CreateElement(PublishersKey);
+          XmlElement publishersNode = xml.CreateElement(PublishersKey);
           globalsNode.AppendChild(publishersNode);
 
-          foreach (var publisher in globals.Publishers.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.ID != Guid.Empty).OrderBy(x => x.Name))
+          foreach (Publisher publisher in globals.Publishers.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.ID != Guid.Empty).OrderBy(x => x.Name))
           {
             AppendChildWithAttributes(publishersNode,
                                       PublisherKey,
@@ -492,10 +492,10 @@ namespace ComicLibrary.Model
       var xml = new XmlDocument();
       xml.CreateXmlDeclaration("1.0", "iso-8859-1", "yes");
 
-      var librariesNode = xml.CreateElement(LibrariesKey);
+      XmlElement librariesNode = xml.CreateElement(LibrariesKey);
       xml.AppendChild(librariesNode);
 
-      foreach (var library in libraries.Where(x => !string.IsNullOrWhiteSpace(x.Name)).OrderBy(x => x.Name))
+      foreach (Library library in libraries.Where(x => !string.IsNullOrWhiteSpace(x.Name)).OrderBy(x => x.Name))
       {
         AppendChildWithAttributes(librariesNode,
                                   LibraryKey,
@@ -540,7 +540,7 @@ namespace ComicLibrary.Model
 
     private static void WriteLibrary(ActiveLibrary library, XmlDocument xml)
     {
-      var libraryNode = xml.CreateElement(LibraryKey);
+      XmlElement libraryNode = xml.CreateElement(LibraryKey);
       xml.AppendChild(libraryNode);
 
       AppendAttributes(libraryNode, (SaveDateKey, DateTime.Now.ToString("o")), // Uses ISO 8601 format
@@ -552,13 +552,13 @@ namespace ComicLibrary.Model
     {
       if (library.Comics.Count != 0)
       {
-        var xml = libraryNode.OwnerDocument;
-        var comicsNode = xml.CreateElement(ComicsKey);
+        XmlDocument xml = libraryNode.OwnerDocument;
+        XmlElement comicsNode = xml.CreateElement(ComicsKey);
         libraryNode.AppendChild(comicsNode);
 
-        foreach (var comic in library.Comics.Where(x => !string.IsNullOrWhiteSpace(x.Series) && x.ID != Guid.Empty).OrderBy(x => x.Series).ThenBy<Comic, string>(x => x.IssueNumber, new StringAsNumberComparer()))
+        foreach (Comic comic in library.Comics.Where(x => !string.IsNullOrWhiteSpace(x.Series) && x.ID != Guid.Empty).OrderBy(x => x.Series).ThenBy<Comic, string>(x => x.IssueNumber, new StringAsNumberComparer()))
         {
-          var comicNode = AppendChildWithChildren(comicsNode,
+          XmlNode comicNode = AppendChildWithChildren(comicsNode,
                                                   ComicKey,
                                                   (SeriesKey, comic.Series),
                                                   (TitleKey, comic.Title),
@@ -579,7 +579,7 @@ namespace ComicLibrary.Model
                                      (CreatedKey, comic.CreatedDate.ToString("s")),
                                      (ModifiedKey, comic.ModifiedDate.ToString("s")));
 
-          var gradingNode = xml.CreateElement(ConditionKey);
+          XmlElement gradingNode = xml.CreateElement(ConditionKey);
           gradingNode.InnerText = comic.Condition.Number.ToString(CultureInfo.InvariantCulture);
           gradingNode.AppendAttributes((GradingTypeKey, comic.Condition.Scale),
                                        (CertifiedGradingKey, comic.GradingCertified.ToString()));
@@ -587,12 +587,12 @@ namespace ComicLibrary.Model
 
           if (comic.ImagesAsString.Count > 0)
           {
-            var imagesNode = xml.CreateElement(ImagesKey);
+            XmlElement imagesNode = xml.CreateElement(ImagesKey);
             comicNode.AppendChild(imagesNode);
 
-            foreach (var image in comic.ImagesAsString)
+            foreach (string image in comic.ImagesAsString)
             {
-              var imageNode = xml.CreateElement(ImageKey);
+              XmlElement imageNode = xml.CreateElement(ImageKey);
               imageNode.InnerText = image;
               imagesNode.AppendChild(imageNode);
             }
@@ -605,8 +605,8 @@ namespace ComicLibrary.Model
 
     public static XmlNode AppendChildWithAttributes(this XmlNode parentElement, string name, params (string Key, string Value)[] attributes)
     {
-      var xml = parentElement.OwnerDocument;
-      var child = xml.CreateElement(name);
+      XmlDocument xml = parentElement.OwnerDocument;
+      XmlElement child = xml.CreateElement(name);
 
       child.AppendAttributes(attributes);
 
@@ -617,13 +617,13 @@ namespace ComicLibrary.Model
     {
       if (attributes != null)
       {
-        var xml = element.OwnerDocument;
+        XmlDocument xml = element.OwnerDocument;
 
-        foreach (var (Key, Value) in attributes)
+        foreach ((string Key, string Value) in attributes)
         {
           if (!string.IsNullOrWhiteSpace(Value))
           {
-            var childAttribute = xml.CreateAttribute(Key);
+            XmlAttribute childAttribute = xml.CreateAttribute(Key);
             childAttribute.InnerText = Value;
             element.Attributes.Append(childAttribute);
           }
@@ -633,14 +633,14 @@ namespace ComicLibrary.Model
 
     public static XmlNode AppendChildWithChildren(this XmlElement parentElement, string name, params (string Key, string Value)[] children)
     {
-      var xml = parentElement.OwnerDocument;
-      var child = xml.CreateElement(name);
+      XmlDocument xml = parentElement.OwnerDocument;
+      XmlElement child = xml.CreateElement(name);
 
-      foreach (var (Key, Value) in children)
+      foreach ((string Key, string Value) in children)
       {
         if (!string.IsNullOrWhiteSpace(Value))
         {
-          var childNode = xml.CreateElement(Key);
+          XmlElement childNode = xml.CreateElement(Key);
           childNode.InnerText = Value;
           child.AppendChild(childNode);
         }

@@ -42,9 +42,9 @@ namespace ComicLibrary.ViewModel
       // Preserve the currently selected options where possible. If the current
       // model option is no longer present in the new list, clear it so the UI
       // can fall back to the empty option.
-      var previousPublisher = _comic?.Publisher;
-      var previousCountry = _comic?.Country;
-      var previousLanguage = _comic?.Language;
+      Publisher previousPublisher = _comic?.Publisher;
+      Country previousCountry = _comic?.Country;
+      Language previousLanguage = _comic?.Language;
 
       _publishers = publishers;
       _countries = countries;
@@ -55,7 +55,7 @@ namespace ComicLibrary.ViewModel
       // contained, leave the model value intact to preserve selection.
       if (previousPublisher != null)
       {
-        var found = _publishers?.FirstOrDefault(x => x.Option != null && x.Option.ID == previousPublisher.ID);
+        IOptionItemViewModel<Publisher> found = _publishers?.FirstOrDefault(x => x.Option != null && x.Option.ID == previousPublisher.ID);
         if (found == null)
         {
           _comic.Publisher = null;
@@ -70,28 +70,14 @@ namespace ComicLibrary.ViewModel
 
       if (previousCountry != null)
       {
-        var found = _countries?.FirstOrDefault(x => x.Option != null && x.Option.ID == previousCountry.ID);
-        if (found == null)
-        {
-          _comic.Country = null;
-        }
-        else
-        {
-          _comic.Country = found.Option;
-        }
+        IOptionItemViewModel<Country> found = _countries?.FirstOrDefault(x => x.Option != null && x.Option.ID == previousCountry.ID);
+        _comic.Country = found?.Option;
       }
 
       if (previousLanguage != null)
       {
-        var found = _languages?.FirstOrDefault(x => x.Option != null && x.Option.ID == previousLanguage.ID);
-        if (found == null)
-        {
-          _comic.Language = null;
-        }
-        else
-        {
-          _comic.Language = found.Option;
-        }
+        IOptionItemViewModel<Language> found = _languages?.FirstOrDefault(x => x.Option != null && x.Option.ID == previousLanguage.ID);
+        _comic.Language = found?.Option;
       }
 
       // Refresh option dependent properties so UI updates to new lists
@@ -192,7 +178,7 @@ namespace ComicLibrary.ViewModel
     {
       get
       {
-        var scale = ScaleHelper.Scales.FirstOrDefault(x => x.Name == _comic.Condition.Scale) ?? ScaleHelper.DefaultScale;
+        GradingScale scale = ScaleHelper.Scales.FirstOrDefault(x => x.Name == _comic.Condition.Scale) ?? ScaleHelper.DefaultScale;
         return scale != null ? scale.Grades.OrderBy(x => x.Number) : (IEnumerable<Grade>)null;
       }
     }
@@ -229,7 +215,7 @@ namespace ComicLibrary.ViewModel
              ?? _publishers?.SingleOrDefault(x => x.IsEmpty);
       set
       {
-        var newOption = value?.Option;
+        Publisher newOption = value?.Option;
         if (!Equals(_comic.Publisher, newOption))
         {
           _comic.Publisher = newOption;
@@ -245,7 +231,7 @@ namespace ComicLibrary.ViewModel
              ?? _countries?.SingleOrDefault(x => x.IsEmpty);
       set
       {
-        var newOption = value?.Option;
+        Country newOption = value?.Option;
         if (!Equals(_comic.Country, newOption))
         {
           _comic.Country = newOption;
@@ -261,7 +247,7 @@ namespace ComicLibrary.ViewModel
              ?? _languages?.SingleOrDefault(x => x.IsEmpty);
       set
       {
-        var newOption = value?.Option;
+        Language newOption = value?.Option;
         if (!Equals(_comic.Language, newOption))
         {
           _comic.Language = newOption;
@@ -303,7 +289,7 @@ namespace ComicLibrary.ViewModel
     private void EditComic()
     {
       var vm = new EditComicViewModel(_comic, _libraryName);
-      var view = ViewFactory.Instance.CreateView(vm);
+      IView view = ViewFactory.Instance.CreateView(vm);
       if (view.ShowDialog() == true)
       {
         Refresh();
